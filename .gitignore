@@ -1,0 +1,24 @@
+﻿# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+
+# Firebase
+.firebase/
+firebase-debug.log
+.firebaserc
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store

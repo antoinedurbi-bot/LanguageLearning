@@ -1,0 +1,32 @@
+﻿[
+  {
+    "id": "en-a1-coffee",
+    "title": "Commander un cafe",
+    "language": "en",
+    "level": "A1",
+    "topic": "Cafe",
+    "vocabulary": ["coffee", "please", "I would like", "thank you"],
+    "exercises": [
+      {
+        "type": "translation",
+        "prompt": "Je voudrais un cafe, s'il vous plait.",
+        "answer": "I would like a coffee, please."
+      }
+    ]
+  },
+  {
+    "id": "es-a1-greetings",
+    "title": "Saluer quelqu'un",
+    "language": "es",
+    "level": "A1",
+    "topic": "Salutations",
+    "vocabulary": ["hola", "buenos dias", "gracias", "adios"],
+    "exercises": [
+      {
+        "type": "translation",
+        "prompt": "Bonjour, merci et au revoir.",
+        "answer": "Hola, gracias y adios."
+      }
+    ]
+  }
+]
