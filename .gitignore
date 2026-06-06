@@ -5,7 +5,7 @@
 .packages
 build/
 coverage/
-
+.tools/
 # Firebase
 .firebase/
 firebase-debug.log
