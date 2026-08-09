@@ -1,26 +1,96 @@
-﻿# Learning App
+# LinguaLab
 
-Application d'apprentissage des langues avec :
+Application d'apprentissage des langues (francais → anglais, espagnol, chinois, turc)
+construite autour d'un moteur de repetition espacee et d'un contenu base sur des
+phrases plutot que sur des mots isoles.
 
-- Flutter / Dart pour l'application mobile
-- Firebase Auth + Cloud Firestore pour les comptes, la progression et les lecons
-- Python / FastAPI pour les fonctions IA: generation d'exercices, correction, feedback
+## La methode
+
+Trois choix pedagogiques structurent toute l'application.
+
+**L'unite d'apprentissage est la phrase, pas le mot.** Un mot isole donne une
+etiquette ; une phrase donne le mot, ses collocations, sa grammaire et un contexte
+de rappel. Les phrases sont ordonnees par frequence des mots qu'elles contiennent,
+et chacune n'introduit qu'un seul element nouveau par rapport a la precedente
+(principe du `i+1`).
+
+**Les revisions sont programmees, pas choisies.** Le planificateur
+(`lib/data/srs/scheduler.dart`) est une reimplementation compacte de FSRS-4.5 :
+il modelise la memoire par trois variables — stabilite, difficulte,
+recuperabilite — au lieu de l'unique facteur de facilite de SM-2. Concretement :
+
+- la courbe d'oubli est une loi de puissance, pas une exponentielle ;
+- le gain de stabilite depend du moment de la revision : reviser une carte au
+  moment ou elle est presque oubliee la renforce bien plus que la reviser fraiche ;
+- la difficulte revient vers sa moyenne, ce qui evite l'« ease hell » de SM-2 ou
+  quelques echecs precoces condamnent une carte a revenir indefiniment.
+
+Chaque carte revient quand la probabilite de rappel atteint 90 %.
+
+**L'exercice s'adapte au niveau de consolidation.** Une carte monte l'echelle
+reconnaissance → ecoute → reconstruction → texte a trou → production libre a
+mesure que sa stabilite augmente. Demander la production trop tot ne fabrique que
+de l'echec ; ne jamais la demander ne construit jamais la capacite a parler.
+
+## Fonctionnalites
+
+- 4 langues, ~140 phrases redigees et glosees mot a mot
+- 5 types d'exercices, audio de prononciation (TTS systeme)
+- Objectif quotidien, serie, taux de reussite, carte d'activite sur 12 semaines
+- Atelier de production libre avec correction (API si disponible, locale sinon)
+- Fonctionne entierement hors ligne et sans compte ; Firebase ne sert qu'a la
+  sauvegarde entre appareils
+- Themes sombre et clair, `prefers-reduced-motion` respecte, cibles tactiles
+  >= 44pt, contraste AA verifie sur les deux themes
 
 ## Structure
 
 ```text
-frontend/   App Flutter
-backend/    API Python IA
-firebase/   Regles Firestore et index
-docs/       Notes de configuration
+frontend/
+  lib/core/          Design system : tokens, theme, composants peints
+  lib/data/srs/      Planificateur FSRS, construction des sessions, correction
+  lib/data/content/  Les cours (un fichier par langue)
+  lib/features/      Ecrans
+backend/             API FastAPI de correction
+firebase/            Regles Firestore et index
 ```
 
-## Demarrage rapide
+## Demarrage
 
-1. Installe Flutter et lance `flutter pub get` dans `frontend/`.
-2. Cree un projet Firebase, active Authentication et Firestore.
-3. Dans `frontend/`, lance `flutterfire configure` pour generer `lib/firebase_options.dart`.
-4. Dans `backend/`, cree un environnement Python puis installe les dependances avec `pip install -r requirements.txt`.
-5. Lance l'API IA avec `uvicorn app.main:app --reload`.
+```bash
+# Application
+cd frontend
+flutter pub get
+flutter run            # ou: flutter build web --release
 
-Voir `docs/setup.md` pour les details.
+# Tests (36 tests widget + unitaires)
+flutter test
+flutter analyze
+
+# API de correction (optionnelle)
+cd backend
+python -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+python -m pytest
+```
+
+L'application demarre sans configuration : sans projet Firebase elle bascule en
+stockage local, et sans backend l'atelier corrige localement.
+
+Pour pointer vers une API deployee :
+
+```bash
+flutter build web --dart-define=AI_API_BASE_URL=https://api.exemple.com
+```
+
+Voir `docs/setup.md` pour Firebase.
+
+## Notes
+
+- Les polices (Inter, Plus Jakarta Sans) sont embarquees dans `assets/fonts/`
+  plutot que telechargees a l'execution : l'application doit fonctionner hors
+  ligne des le premier lancement.
+- Le contenu des cours est compile dans l'application. La collection Firestore
+  `lessons` et son index restent definis pour un chargement distant ulterieur,
+  mais ne sont plus lus.

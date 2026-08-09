@@ -1,19 +1,31 @@
-﻿class AppLanguage {
+import 'package:flutter/material.dart';
+import 'package:learning_app/core/theme/tokens.dart';
+
+class AppLanguage {
   const AppLanguage({
     required this.code,
     required this.name,
     required this.nativeName,
-    required this.flag,
+    required this.script,
     required this.description,
-    required this.samplePrompt,
+    required this.difficultyNote,
   });
 
   final String code;
   final String name;
   final String nativeName;
-  final String flag;
+
+  /// A glyph from the language's own writing system, used as its mark. A real
+  /// character beats a flag: languages are not countries.
+  final String script;
+
   final String description;
-  final String samplePrompt;
+
+  /// Honest expectation-setting, based on the US Foreign Service Institute's
+  /// published category ratings for English speakers.
+  final String difficultyNote;
+
+  List<Color> get gradient => LL.gradientFor(code);
 }
 
 const availableLanguages = [
@@ -21,33 +33,40 @@ const availableLanguages = [
     code: 'en',
     name: 'Anglais',
     nativeName: 'English',
-    flag: 'GB',
-    description: 'Voyage, travail et conversations du quotidien.',
-    samplePrompt: 'Traduis: Je voudrais un cafe, s\'il vous plait.',
-  ),
-  AppLanguage(
-    code: 'zh',
-    name: 'Chinois',
-    nativeName: 'Mandarin',
-    flag: 'CN',
-    description: 'Bases utiles, tons simples et phrases courtes.',
-    samplePrompt: 'Traduis: Bonjour, merci beaucoup.',
+    script: 'Aa',
+    description: 'Voyage, travail, et tout le reste.',
+    difficultyNote: 'Proche du francais - environ 600 h pour un bon niveau',
   ),
   AppLanguage(
     code: 'es',
     name: 'Espagnol',
     nativeName: 'Español',
-    flag: 'ES',
-    description: 'Salutations, cafe, voyage et vie quotidienne.',
-    samplePrompt: 'Traduis: Bonjour, comment vas-tu ?',
+    script: 'Ñ',
+    description: 'La langue la plus rentable pour un francophone.',
+    difficultyNote: 'Tres proche du francais - environ 600 h',
+  ),
+  AppLanguage(
+    code: 'zh',
+    name: 'Chinois',
+    nativeName: '中文',
+    script: '中',
+    description: 'Mandarin: tons, caracteres, grammaire simple.',
+    difficultyNote: 'Distance maximale - environ 2200 h, mais sans conjugaison',
   ),
   AppLanguage(
     code: 'tr',
     name: 'Turc',
     nativeName: 'Türkçe',
-    flag: 'TR',
-    description: 'Premieres phrases, politesse et situations simples.',
-    samplePrompt: 'Traduis: Je veux apprendre le turc.',
+    script: 'Ş',
+    description: 'Agglutinante et d\'une regularite rare.',
+    difficultyNote: 'Structure inhabituelle - environ 1100 h, mais peu d\'exceptions',
   ),
 ];
 
+AppLanguage? languageFor(String? code) {
+  if (code == null) return null;
+  for (final language in availableLanguages) {
+    if (language.code == code) return language;
+  }
+  return null;
+}

@@ -1,3 +1,203 @@
-﻿class AppState {
+import 'package:flutter/material.dart';
+import 'package:learning_app/data/content/courses.dart';
+import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/models/progress.dart';
+import 'package:learning_app/data/repository/progress_repository.dart';
+import 'package:learning_app/data/srs/scheduler.dart';
+import 'package:learning_app/data/srs/session.dart';
+import 'package:learning_app/features/language/app_language.dart';
+
+/// Whether Firebase initialised successfully. When false the app runs fully
+/// locally — every feature still works, progress simply is not backed up.
+class AppState {
   static bool firebaseReady = false;
+}
+
+/// The single source of truth for the learner's session and progress.
+class LearningController extends ChangeNotifier {
+  LearningController({
+    ProgressRepository? repository,
+    SettingsRepository? settings,
+    this.scheduler = const Scheduler(),
+  })  : _repository = repository ?? ProgressRepository(),
+        _settings = settings ?? SettingsRepository();
+
+  final ProgressRepository _repository;
+  final SettingsRepository _settings;
+  final Scheduler scheduler;
+  final SessionBuilder _builder = const SessionBuilder();
+
+  bool _ready = false;
+  AppLanguage? _language;
+  LanguageProgress? _progress;
+  ThemeMode _themeMode = ThemeMode.dark;
+  bool _soundEnabled = true;
+
+  bool get ready => _ready;
+  AppLanguage? get language => _language;
+  LanguageProgress? get progress => _progress;
+  ThemeMode get themeMode => _themeMode;
+  bool get soundEnabled => _soundEnabled;
+
+  Course? get course =>
+      _language == null ? null : courseFor(_language!.code);
+
+  /// Restores the selected language, its progress, and display preferences.
+  Future<void> bootstrap() async {
+    final mode = await _settings.themeMode();
+    _themeMode = switch (mode) {
+      'light' => ThemeMode.light,
+      'system' => ThemeMode.system,
+      _ => ThemeMode.dark,
+    };
+    _soundEnabled = await _settings.soundEnabled();
+
+    final code = await _settings.selectedLanguage();
+    final language = languageFor(code);
+    if (language != null) {
+      _language = language;
+      _progress = await _repository.load(language.code);
+    }
+
+    _ready = true;
+    notifyListeners();
+  }
+
+  Future<void> selectLanguage(AppLanguage language) async {
+    _language = language;
+    _progress = null;
+    notifyListeners();
+
+    await _settings.setSelectedLanguage(language.code);
+    _progress = await _repository.load(language.code);
+    notifyListeners();
+  }
+
+  Future<void> clearLanguage() async {
+    _language = null;
+    _progress = null;
+    await _settings.setSelectedLanguage(null);
+    notifyListeners();
+  }
+
+  Future<void> setThemeMode(ThemeMode mode) async {
+    _themeMode = mode;
+    notifyListeners();
+    await _settings.setThemeMode(switch (mode) {
+      ThemeMode.light => 'light',
+      ThemeMode.system => 'system',
+      ThemeMode.dark => 'dark',
+    });
+  }
+
+  Future<void> setSoundEnabled(bool value) async {
+    _soundEnabled = value;
+    notifyListeners();
+    await _settings.setSoundEnabled(value);
+  }
+
+  Future<void> setDailyGoal(int goal) async {
+    final progress = _progress;
+    if (progress == null) return;
+    progress.dailyGoal = goal.clamp(5, 100);
+    notifyListeners();
+    await _repository.save(progress);
+  }
+
+  // ------------------------------------------------------------- queries
+
+  int get dueCount {
+    final course = this.course;
+    final progress = _progress;
+    if (course == null || progress == null) return 0;
+    return _builder.dueCards(course, progress, DateTime.now()).length;
+  }
+
+  int get newCount {
+    final course = this.course;
+    final progress = _progress;
+    if (course == null || progress == null) return 0;
+    return _builder.newCards(course, progress).length;
+  }
+
+  /// Cards in this unit that the learner has met at least once.
+  int startedInUnit(Unit unit) {
+    final progress = _progress;
+    if (progress == null) return 0;
+    return unit.cards.where((c) => progress.states.containsKey(c.id)).length;
+  }
+
+  /// Cards in this unit consolidated past the three-week mark.
+  int masteredInUnit(Unit unit) {
+    final progress = _progress;
+    if (progress == null) return 0;
+    return unit.cards
+        .where((c) => (progress.states[c.id]?.stability ?? 0) >= 21)
+        .length;
+  }
+
+  /// A unit opens once the previous one is at least half started, so the
+  /// learner is never dropped into material built on things they have not met.
+  bool isUnitUnlocked(Course course, int index) {
+    if (index == 0) return true;
+    final previous = course.units[index - 1];
+    return startedInUnit(previous) >= (previous.cards.length / 2).ceil();
+  }
+
+  List<SessionItem> buildSession({int maxItems = 20, int? seed}) {
+    final course = this.course;
+    final progress = _progress;
+    if (course == null || progress == null) return const [];
+    return _builder.build(
+      course: course,
+      progress: progress,
+      now: DateTime.now(),
+      maxItems: maxItems,
+      seed: seed,
+    );
+  }
+
+  /// A session restricted to one unit, for deliberate practice of a theme.
+  List<SessionItem> buildUnitSession(Unit unit, {int maxItems = 12}) {
+    final progress = _progress;
+    if (progress == null) return const [];
+    final now = DateTime.now();
+
+    final items = [
+      for (final card in unit.cards)
+        SessionItem(
+          card: card,
+          mode: ExerciseMode.recognize,
+          state: progress.states[card.id] ?? MemoryState.fresh(now),
+          isNew: !progress.states.containsKey(card.id),
+        ),
+    ];
+    return items.take(maxItems).toList();
+  }
+
+  // ------------------------------------------------------------- mutation
+
+  /// Applies a grade to a card and persists the result.
+  Future<void> grade(CardItem card, Grade grade) async {
+    final progress = _progress;
+    if (progress == null) return;
+
+    final now = DateTime.now();
+    final current = progress.states[card.id] ?? MemoryState.fresh(now);
+    progress.states[card.id] = scheduler.review(current, grade, now);
+    progress.registerReview(correct: grade != Grade.again, now: now);
+
+    notifyListeners();
+    await _repository.save(progress);
+  }
+
+  /// Wipes progress for the current language.
+  Future<void> resetProgress() async {
+    final language = _language;
+    if (language == null) return;
+    await _repository.clear(language.code);
+    _progress = LanguageProgress(languageCode: language.code);
+    notifyListeners();
+    await _repository.save(_progress!);
+  }
 }
