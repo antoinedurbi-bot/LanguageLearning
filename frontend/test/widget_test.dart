@@ -4,7 +4,9 @@ import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/app_theme.dart';
 import 'package:learning_app/features/language/app_language.dart';
 import 'package:learning_app/features/language/language_picker_screen.dart';
+import 'package:learning_app/data/content/vocabularies.dart';
 import 'package:learning_app/features/session/session_screen.dart';
+import 'package:learning_app/features/vocabulary/vocabulary_screen.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -138,5 +140,39 @@ void main() {
     expect(find.text('100%'), findsOneWidget);
     expect(find.text('de reussite'), findsOneWidget);
     expect(find.text('1 / 1'), findsOneWidget);
+  });
+
+  testWidgets('tapping a vocabulary word explains it and can save it',
+      (tester) async {
+    tester.view.physicalSize = const Size(860, 1864);
+    tester.view.devicePixelRatio = 2;
+    addTearDown(tester.view.reset);
+
+    final controller = LearningController();
+    await controller.bootstrap();
+    await controller.selectLanguage(
+      availableLanguages.firstWhere((l) => l.code == 'es'),
+    );
+
+    final pack = vocabularyFor('es')!;
+    final entry = pack.allEntries.first;
+
+    await tester.pumpWidget(_wrap(
+      VocabularyScreen(pack: pack, ttsLocale: 'es-ES'),
+      controller,
+    ));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(entry.target).first);
+    await tester.pumpAndSettle();
+
+    // The sheet always shows the usage note: that is the whole point of
+    // making the row tappable.
+    expect(find.text(entry.note), findsOneWidget);
+
+    await tester.tap(find.text('Enregistrer'));
+    await tester.pumpAndSettle();
+
+    expect(controller.isSaved(entry.id), isTrue);
   });
 }

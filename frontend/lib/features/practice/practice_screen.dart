@@ -8,6 +8,7 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/srs/session.dart';
+import 'package:learning_app/features/vocabulary/library_section.dart';
 import 'package:learning_app/services/ai_service.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
@@ -198,6 +199,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
         ],
         const SizedBox(height: LL.s16),
         const Reveal(index: 2, child: _ShadowingCard()),
+        const SizedBox(height: LL.s32),
+        const Reveal(index: 3, child: LibrarySection()),
       ],
     );
   }

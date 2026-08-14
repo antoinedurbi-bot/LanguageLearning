@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/data/content/courses.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/progress.dart';
+import 'package:learning_app/data/repository/collection_repository.dart';
 import 'package:learning_app/data/repository/progress_repository.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
 import 'package:learning_app/data/srs/session.dart';
@@ -18,24 +19,29 @@ class LearningController extends ChangeNotifier {
   LearningController({
     ProgressRepository? repository,
     SettingsRepository? settings,
+    CollectionRepository? collections,
     this.scheduler = const Scheduler(),
   })  : _repository = repository ?? ProgressRepository(),
-        _settings = settings ?? SettingsRepository();
+        _settings = settings ?? SettingsRepository(),
+        _collections = collections ?? CollectionRepository();
 
   final ProgressRepository _repository;
   final SettingsRepository _settings;
+  final CollectionRepository _collections;
   final Scheduler scheduler;
   final SessionBuilder _builder = const SessionBuilder();
 
   bool _ready = false;
   AppLanguage? _language;
   LanguageProgress? _progress;
+  LanguageCollection? _collection;
   ThemeMode _themeMode = ThemeMode.dark;
   bool _soundEnabled = true;
 
   bool get ready => _ready;
   AppLanguage? get language => _language;
   LanguageProgress? get progress => _progress;
+  LanguageCollection? get collection => _collection;
   ThemeMode get themeMode => _themeMode;
   bool get soundEnabled => _soundEnabled;
 
@@ -56,6 +62,7 @@ class LearningController extends ChangeNotifier {
     if (language != null) {
       _language = language;
       _progress = await _repository.load(language.code);
+      _collection = await _collections.load(language.code);
     }
 
     _ready = true;
@@ -65,18 +72,62 @@ class LearningController extends ChangeNotifier {
   Future<void> selectLanguage(AppLanguage language) async {
     _language = language;
     _progress = null;
+    _collection = null;
     notifyListeners();
 
     await _settings.setSelectedLanguage(language.code);
     _progress = await _repository.load(language.code);
+    _collection = await _collections.load(language.code);
     notifyListeners();
   }
 
   Future<void> clearLanguage() async {
     _language = null;
     _progress = null;
+    _collection = null;
     await _settings.setSelectedLanguage(null);
     notifyListeners();
+  }
+
+  // ----------------------------------------------------------- collection
+
+  bool isSaved(String id) => _collection?.contains(id) ?? false;
+
+  /// Adds an item, or removes it if it was already saved. Returns the state
+  /// the item ended up in, so the caller can confirm it to the learner.
+  Future<bool> toggleSaved(SavedItem item) async {
+    final collection = _collection;
+    if (collection == null) return false;
+
+    final nowSaved = !collection.saved.containsKey(item.id);
+    if (nowSaved) {
+      collection.saved[item.id] = item;
+    } else {
+      collection.saved.remove(item.id);
+    }
+
+    notifyListeners();
+    await _collections.save(collection);
+    return nowSaved;
+  }
+
+  Future<void> setIslandAnswer(
+    String islandId,
+    String promptId,
+    String answer,
+  ) async {
+    final collection = _collection;
+    if (collection == null) return;
+
+    final key = '\$islandId/\$promptId';
+    if (answer.trim().isEmpty) {
+      collection.islandAnswers.remove(key);
+    } else {
+      collection.islandAnswers[key] = answer;
+    }
+
+    notifyListeners();
+    await _collections.save(collection);
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
@@ -190,7 +241,10 @@ class LearningController extends ChangeNotifier {
     await _repository.save(progress);
   }
 
-  /// Wipes progress for the current language.
+  /// Wipes review progress for the current language.
+  ///
+  /// The saved collection is deliberately left alone: it is material the
+  /// learner chose and wrote, not a schedule the app generated.
   Future<void> resetProgress() async {
     final language = _language;
     if (language == null) return;
