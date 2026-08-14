@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
+import 'package:learning_app/features/chinese/chinese_lab_screen.dart';
 import 'package:learning_app/features/home/home_screen.dart';
 import 'package:learning_app/features/lessons/unit_list_screen.dart';
 import 'package:learning_app/features/practice/practice_screen.dart';
 import 'package:learning_app/features/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 
-/// Top-level navigation: four destinations, labels always visible, current
-/// tab highlighted. Each tab keeps its own scroll position across switches.
+/// Top-level navigation: labels always visible, current tab highlighted, and
+/// each tab keeps its own scroll position across switches.
+///
+/// A fifth destination appears for Mandarin only. Tones, characters and
+/// stroke order have no equivalent in the other three languages, and burying
+/// them inside a generic tab would hide the tools that matter most for the
+/// one language that needs them.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -20,7 +26,7 @@ class HomeShell extends StatefulWidget {
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
 
-  static const _destinations = [
+  static const _baseDestinations = [
     (icon: Icons.bolt_outlined, active: Icons.bolt, label: 'Aujourd\'hui'),
     (
       icon: Icons.auto_stories_outlined,
@@ -31,6 +37,12 @@ class _HomeShellState extends State<HomeShell> {
     (icon: Icons.insights_outlined, active: Icons.insights, label: 'Progres'),
   ];
 
+  static const _chineseDestination = (
+    icon: Icons.translate_outlined,
+    active: Icons.translate,
+    label: '中文',
+  );
+
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
@@ -38,6 +50,15 @@ class _HomeShellState extends State<HomeShell> {
       (controller) => controller.language?.code,
     );
     final ramp = language == null ? null : LL.gradientFor(language);
+    final isChinese = language == 'zh';
+
+    final destinations = [
+      ..._baseDestinations,
+      if (isChinese) _chineseDestination,
+    ];
+    // Switching away from Mandarin removes a tab, so an index pointing at it
+    // would fall off the end.
+    final index = _index.clamp(0, destinations.length - 1);
 
     return Scaffold(
       extendBody: true,
@@ -46,19 +67,20 @@ class _HomeShellState extends State<HomeShell> {
         child: SafeArea(
           bottom: false,
           child: IndexedStack(
-            index: _index,
-            children: const [
-              HomeScreen(),
-              UnitListScreen(),
-              PracticeScreen(),
-              ProfileScreen(),
+            index: index,
+            children: [
+              const HomeScreen(),
+              const UnitListScreen(),
+              const PracticeScreen(),
+              const ProfileScreen(),
+              if (isChinese) const ChineseLabScreen(),
             ],
           ),
         ),
       ),
       bottomNavigationBar: _GlassNavBar(
-        index: _index,
-        destinations: _destinations,
+        index: index,
+        destinations: destinations,
         onChanged: (value) => setState(() => _index = value),
       ),
     );

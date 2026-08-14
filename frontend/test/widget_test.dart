@@ -56,6 +56,12 @@ void main() {
 
   testWidgets('a session presents a card and records the answer',
       (tester) async {
+    // A phone-sized surface: on the default 800x600 test view an option can
+    // sit under the sticky footer and the tap silently misses.
+    tester.view.physicalSize = const Size(860, 1864);
+    tester.view.devicePixelRatio = 2;
+    addTearDown(tester.view.reset);
+
     final controller = LearningController();
     await controller.bootstrap();
     await controller.selectLanguage(availableLanguages.first);

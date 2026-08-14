@@ -41,6 +41,15 @@ de l'echec ; ne jamais la demander ne construit jamais la capacite a parler.
   mots classificateurs) plutot que le format explication/exemple des deux
   autres langues
 - 5 types d'exercices, audio de prononciation (TTS systeme)
+- **Atelier chinois** (onglet 中文, visible uniquement en mandarin) :
+  - ordre des traits anime pour 615 caracteres, a partir des vrais trajets de
+    traits, avec ecriture au doigt notee trait par trait sur un 田字格
+  - entrainement a l'oreille : identifier le ton d'une syllabe, puis des deux
+    syllabes d'un mot (les 20 combinaisons de tons)
+  - table des ~400 syllabes du mandarin, chaque syllabe ecoutable dans chacun
+    de ses tons
+  - dictionnaire de 615 caracteres et 1256 mots HSK 1-2 : cle, composition,
+    niveau, mots derives, recherche par pinyin sans les tons
 - Objectif quotidien, serie, taux de reussite, carte d'activite sur 12 semaines
 - Atelier de production libre avec correction : par LLM via OpenRouter si une
   cle est configuree (tolerant les paraphrases), deterministe sinon
@@ -55,10 +64,13 @@ de l'echec ; ne jamais la demander ne construit jamais la capacite a parler.
 frontend/
   lib/core/          Design system : tokens, theme, composants peints
   lib/data/srs/      Planificateur FSRS, construction des sessions, correction
+  lib/data/hanzi/    Caracteres chinois : parseur SVG, notation des traits
   lib/data/content/  Les cours (un fichier par langue)
-  lib/features/      Ecrans
+  lib/features/      Ecrans (dont features/chinese/ pour l'atelier mandarin)
+  assets/data/       Donnees chinoises generees (voir tools/)
 backend/             API FastAPI de correction
 firebase/            Regles Firestore et index
+tools/               Generation des donnees chinoises
 ```
 
 ## Demarrage
@@ -91,6 +103,27 @@ flutter build web --dart-define=AI_API_BASE_URL=https://api.exemple.com
 ```
 
 Voir `docs/setup.md` pour Firebase.
+
+## Donnees chinoises
+
+Les trois fichiers de `frontend/assets/data/` sont **generes**, jamais edites a
+la main :
+
+```bash
+python3 tools/build_hanzi_assets.py
+```
+
+Le script combine deux sources ouvertes :
+
+- **Make Me a Hanzi** — pour chaque caractere, le contour de chaque trait dans
+  l'ordre d'ecriture et la « mediane » qui parcourt son axe. C'est ce qui rend
+  possible une vraie animation : le contour sert de masque, et l'encre est
+  revelee en avancant le long de la mediane.
+- **complete-hsk-vocabulary** — niveaux HSK 3.0, frequences, pinyin, sens.
+
+Le perimetre est volontairement borne a HSK 1-2 plus tous les caracteres du
+cours de l'app : 615 caracteres, environ 1,5 Mo. L'elargir se fait en changeant
+`LEVELS` dans le script et en le relancant.
 
 ## Notes
 
