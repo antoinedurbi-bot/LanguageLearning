@@ -66,10 +66,31 @@ Endpoints :
 compare la reponse au modele et renvoie les differences mot a mot dans `notes` ;
 absent, il repond qu'il ne peut pas corriger plutot que d'inventer un verdict.
 
-La correction est deterministe (diff normalise, sans accents ni ponctuation).
-Pour brancher un modele de langue, il suffit de remplacer `AiService.check_answer`
-dans `app/services/ai_service.py` : les schemas de requete et de reponse portent
-deja tout ce qu'un modele aurait besoin de recevoir et de renvoyer.
+### Correction par LLM (OpenRouter, optionnel)
+
+Par defaut la correction est deterministe (diff normalise, sans accents ni
+ponctuation) : fiable, gratuite, mais elle rejette les paraphrases correctes
+("I'd like a coffee" face a la reference "I would like a coffee, please.").
+
+Pour une correction qui tolere les paraphrases, copie `.env.example` en `.env`
+dans `backend/` et renseigne une cle OpenRouter :
+
+```bash
+cp .env.example .env
+# puis edite .env :
+# OPENROUTER_API_KEY=sk-or-...
+```
+
+Sans cle, rien ne change : `check-answer` retombe silencieusement sur le
+correcteur deterministe. Avec une cle, chaque reponse qui ne correspond pas
+mot pour mot au modele est d'abord soumise a un LLM (modele par defaut :
+`anthropic/claude-3.5-haiku`, configurable via `OPENROUTER_MODEL`) qui juge le
+sens et la grammaire plutot que l'egalite de chaine ; le correcteur
+deterministe ne sert plus que de filet de securite si l'appel echoue ou
+timeout (8 secondes). Une reponse identique au modele de reference n'appelle
+jamais le LLM : ce cas est deja tranche sans avoir besoin d'un avis.
+
+Voir `app/services/llm_grader.py` pour le prompt exact envoye au modele.
 
 ### Pointer l'application vers l'API
 

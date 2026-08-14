@@ -35,9 +35,15 @@ de l'echec ; ne jamais la demander ne construit jamais la capacite a parler.
 ## Fonctionnalites
 
 - 4 langues, ~140 phrases redigees et glosees mot a mot
+- 17 lecons de grammaire (anglais, espagnol, chinois — turc a venir), une par
+  unite, accessibles avant les phrases de l'unite. Le chinois a ses propres
+  types de contenu (tons avec contour visuel, decomposition caractere/radical,
+  mots classificateurs) plutot que le format explication/exemple des deux
+  autres langues
 - 5 types d'exercices, audio de prononciation (TTS systeme)
 - Objectif quotidien, serie, taux de reussite, carte d'activite sur 12 semaines
-- Atelier de production libre avec correction (API si disponible, locale sinon)
+- Atelier de production libre avec correction : par LLM via OpenRouter si une
+  cle est configuree (tolerant les paraphrases), deterministe sinon
 - Fonctionne entierement hors ligne et sans compte ; Firebase ne sert qu'a la
   sauvegarde entre appareils
 - Themes sombre et clair, `prefers-reduced-motion` respecte, cibles tactiles

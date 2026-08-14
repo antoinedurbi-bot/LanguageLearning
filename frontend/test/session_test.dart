@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:learning_app/data/content/courses.dart';
 import 'package:learning_app/data/models/progress.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
+import 'package:learning_app/data/models/grammar_lesson.dart';
 import 'package:learning_app/data/srs/session.dart';
 
 void main() {
@@ -150,17 +151,22 @@ void main() {
         );
         expect(options, contains(card.native));
         expect(options.length, 4);
-        expect(options.toSet().length, 4, reason: 'duplicate option for ${card.id}');
+        expect(options.toSet().length, 4,
+            reason: 'duplicate option for ${card.id}');
       }
     });
   });
 
   group('answer checking', () {
     test('ignores accents, case and punctuation', () {
-      expect(checker.isCorrect('me gusta mucho este barrio',
-          'Me gusta mucho este barrio.'), isTrue);
+      expect(
+          checker.isCorrect(
+              'me gusta mucho este barrio', 'Me gusta mucho este barrio.'),
+          isTrue);
       expect(checker.isCorrect('¿CUANTO CUESTA?', '¿Cuánto cuesta?'), isTrue);
-      expect(checker.isCorrect('  hola,   me llamo marco ', 'Hola, me llamo Marco.'),
+      expect(
+          checker.isCorrect(
+              '  hola,   me llamo marco ', 'Hola, me llamo Marco.'),
           isTrue);
     });
 
@@ -170,10 +176,10 @@ void main() {
     });
 
     test('similarity separates near-misses from unrelated answers', () {
-      final near = checker.similarity('I would like a coffe please',
-          'I would like a coffee, please.');
-      final far = checker.similarity('bonjour tout le monde',
-          'I would like a coffee, please.');
+      final near = checker.similarity(
+          'I would like a coffe please', 'I would like a coffee, please.');
+      final far = checker.similarity(
+          'bonjour tout le monde', 'I would like a coffee, please.');
 
       expect(near, greaterThan(0.85));
       expect(far, lessThan(0.5));
@@ -187,7 +193,8 @@ void main() {
       final day = DateTime(2026, 5, 4, 10);
 
       progress.registerReview(correct: true, now: day);
-      progress.registerReview(correct: true, now: day.add(const Duration(hours: 2)));
+      progress.registerReview(
+          correct: true, now: day.add(const Duration(hours: 2)));
 
       expect(progress.streak, 1);
       expect(progress.reviewsPerDay[LanguageProgress.dayKey(day)], 2);
@@ -237,10 +244,10 @@ void main() {
     test('pruning drops history older than a year', () {
       final progress = LanguageProgress(languageCode: 'en');
       final now = DateTime(2026, 6, 1);
-      progress.reviewsPerDay[LanguageProgress.dayKey(
-          now.subtract(const Duration(days: 400)))] = 5;
-      progress.reviewsPerDay[LanguageProgress.dayKey(
-          now.subtract(const Duration(days: 10)))] = 7;
+      progress.reviewsPerDay[
+          LanguageProgress.dayKey(now.subtract(const Duration(days: 400)))] = 5;
+      progress.reviewsPerDay[
+          LanguageProgress.dayKey(now.subtract(const Duration(days: 10)))] = 7;
 
       progress.prune(now);
 
@@ -266,6 +273,77 @@ void main() {
         restored.states['es-1-1']!.stability,
         closeTo(progress.states['es-1-1']!.stability, 1e-9),
       );
+    });
+  });
+
+  group('grammar lessons', () {
+    test('every unit in EN, ES and ZH has a grammar lesson', () {
+      for (final code in ['en', 'es', 'zh']) {
+        final course = courses[code]!;
+        for (final unit in course.units) {
+          expect(unit.grammarLesson, isNotNull,
+              reason: '$code ${unit.id} has no grammar lesson');
+          expect(unit.grammarLesson!.title.trim(), isNotEmpty);
+          expect(unit.grammarLesson!.hook.trim(), isNotEmpty);
+          expect(unit.grammarLesson!.blocks, isNotEmpty);
+        }
+      }
+    });
+
+    test('Turkish units have no grammar lesson yet, and that is fine', () {
+      for (final unit in courses['tr']!.units) {
+        expect(unit.grammarLesson, isNull);
+      }
+    });
+
+    test('every tone entry uses a valid tone number', () {
+      for (final unit in courses['zh']!.units) {
+        final lesson = unit.grammarLesson;
+        if (lesson == null) continue;
+        for (final block in lesson.blocks) {
+          if (block is ToneBlock) {
+            for (final entry in block.entries) {
+              expect(entry.tone, inInclusiveRange(0, 4));
+              expect(entry.pinyin.trim(), isNotEmpty);
+            }
+          }
+        }
+      }
+    });
+
+    test('mistake blocks always pair a wrong form with a fix and a reason', () {
+      for (final code in ['en', 'es', 'zh']) {
+        for (final unit in courses[code]!.units) {
+          final lesson = unit.grammarLesson;
+          if (lesson == null) continue;
+          for (final block in lesson.blocks) {
+            if (block is MistakeBlock) {
+              expect(block.wrong.trim(), isNotEmpty);
+              expect(block.right.trim(), isNotEmpty);
+              expect(block.why.trim(), isNotEmpty);
+              expect(block.wrong, isNot(equals(block.right)));
+            }
+          }
+        }
+      }
+    });
+
+    test('table blocks are rectangular (every row matches the header count)',
+        () {
+      for (final code in ['en', 'es', 'zh']) {
+        for (final unit in courses[code]!.units) {
+          final lesson = unit.grammarLesson;
+          if (lesson == null) continue;
+          for (final block in lesson.blocks) {
+            if (block is TableBlock) {
+              for (final row in block.rows) {
+                expect(row.length, block.headers.length,
+                    reason: '${unit.id}: row/header length mismatch');
+              }
+            }
+          }
+        }
+      }
     });
   });
 }

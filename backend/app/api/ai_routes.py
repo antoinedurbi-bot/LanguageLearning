@@ -13,5 +13,5 @@ def generate_exercise(request: ExerciseRequest) -> ExerciseResponse:
 
 
 @router.post("/check-answer", response_model=AnswerCheckResponse)
-def check_answer(request: AnswerCheckRequest) -> AnswerCheckResponse:
-    return ai_service.check_answer(request)
+async def check_answer(request: AnswerCheckRequest) -> AnswerCheckResponse:
+    return await ai_service.check_answer(request)

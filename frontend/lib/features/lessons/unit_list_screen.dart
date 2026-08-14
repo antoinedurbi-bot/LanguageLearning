@@ -147,7 +147,8 @@ class _UnitCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: LL.s8),
-                      LLChip(label: unit.level, color: colors.first, filled: true),
+                      LLChip(
+                          label: unit.level, color: colors.first, filled: true),
                     ],
                   ),
                   const SizedBox(height: LL.s4),

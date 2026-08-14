@@ -1,10 +1,14 @@
 """Answer grading.
 
-This is a deterministic grader, not a language model. It compares the learner's
-sentence to the expected one and reports the specific differences, which is
-both cheap and reliable for the translation exercises the app actually asks.
-Swapping in an LLM later means replacing `check_answer` alone; the request and
-response shapes already carry everything a model-backed version would need.
+Two graders exist. The deterministic one compares the learner's sentence to
+the expected one and reports the specific differences: cheap, reliable, and
+right whenever the answer matches the reference closely. Its blind spot is a
+correct paraphrase — "I'd like a coffee" marked wrong against "I would like a
+coffee, please." When `OPENROUTER_API_KEY` is set, `check_answer` asks an LLM
+(via `llm_grader`) to judge meaning and grammar first, and only falls back to
+the deterministic grader if that call is unavailable or fails — an exact
+match is still handled without calling the LLM at all, since there is nothing
+for a model to add there.
 """
 
 from __future__ import annotations
@@ -19,6 +23,7 @@ from app.models.ai_models import (
     ExerciseRequest,
     ExerciseResponse,
 )
+from app.services import llm_grader
 
 # Punctuation and marks that carry no meaning for grading purposes.
 _PUNCTUATION = re.compile(r"[.,!?;:¿¡\"'“”’()\[\]\-–—]")
@@ -56,7 +61,7 @@ class AiService:
             hint="Commence par le sujet, puis le verbe.",
         )
 
-    def check_answer(self, request: AnswerCheckRequest) -> AnswerCheckResponse:
+    async def check_answer(self, request: AnswerCheckRequest) -> AnswerCheckResponse:
         answer = request.answer.strip()
         expected = (request.expected_answer or "").strip()
 
@@ -84,6 +89,27 @@ class AiService:
                 feedback="Exact. La phrase correspond au modele attendu.",
             )
 
+        llm_result = await llm_grader.grade(
+            prompt=request.prompt,
+            answer=answer,
+            expected_answer=expected,
+            target_language=request.target_language,
+        )
+        if llm_result is not None:
+            return AnswerCheckResponse(
+                is_correct=llm_result.is_correct,
+                feedback=llm_result.feedback,
+                corrected_answer=llm_result.corrected_answer,
+                notes=llm_result.notes,
+            )
+
+        return self._check_deterministic(answer, expected)
+
+    def _check_deterministic(
+        self, answer: str, expected: str
+    ) -> AnswerCheckResponse:
+        """Diff-based fallback, used when no LLM grader is configured or
+        reachable. Assumes the exact-match case was already ruled out."""
         notes = self._diff_notes(answer, expected)
         ratio = difflib.SequenceMatcher(
             None, normalize(answer), normalize(expected)

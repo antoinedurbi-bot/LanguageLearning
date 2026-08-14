@@ -117,7 +117,8 @@ class _FloatingState extends State<Floating>
 
   @override
   Widget build(BuildContext context) {
-    final curved = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    final curved =
+        CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     return AnimatedBuilder(
       animation: curved,
       builder: (context, child) => Transform.translate(
@@ -203,7 +204,8 @@ class _CelebrationState extends State<Celebration>
   late List<_Particle> _particles = _spawn();
 
   List<_Particle> _spawn() => List.generate(64, (_) {
-        final angle = -math.pi / 2 + (_random.nextDouble() - 0.5) * math.pi * 1.1;
+        final angle =
+            -math.pi / 2 + (_random.nextDouble() - 0.5) * math.pi * 1.1;
         final speed = 0.55 + _random.nextDouble() * 0.85;
         return _Particle(
           origin: Offset(0.5 + (_random.nextDouble() - 0.5) * 0.35, 0.55),

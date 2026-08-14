@@ -1,3 +1,5 @@
+import 'package:learning_app/data/models/grammar_lesson.dart';
+
 /// A single thing to be learned.
 ///
 /// The unit of study is a **sentence**, not an isolated word. This is the
@@ -58,6 +60,7 @@ class Unit {
     required this.subtitle,
     required this.level,
     required this.cards,
+    this.grammarLesson,
   });
 
   final String id;
@@ -67,6 +70,11 @@ class Unit {
   /// CEFR band.
   final String level;
   final List<CardItem> cards;
+
+  /// Explicit grammar teaching for this unit. Null for units that only have
+  /// the one-line `focus` notes on individual cards — the practice screens
+  /// degrade gracefully rather than assuming every unit has a full lesson.
+  final GrammarLesson? grammarLesson;
 }
 
 /// Everything available for one language.

@@ -231,7 +231,8 @@ class _GrainPainter extends CustomPainter {
     final count = (size.width * size.height / 900).clamp(0, 2600).toInt();
     final points = <Offset>[
       for (var i = 0; i < count; i++)
-        Offset(random.nextDouble() * size.width, random.nextDouble() * size.height),
+        Offset(random.nextDouble() * size.width,
+            random.nextDouble() * size.height),
     ];
     canvas.drawPoints(ui.PointMode.points, points, paint);
   }

@@ -6,6 +6,8 @@ import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/models/grammar_lesson.dart';
+import 'package:learning_app/features/lessons/grammar_lesson_screen.dart';
 import 'package:learning_app/features/session/session_screen.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +27,8 @@ class UnitDetailScreen extends StatelessWidget {
     final controller = context.watch<LearningController>();
     final language = controller.language;
     final course = controller.course;
-    final ramp = language?.gradient ??
-        [context.ll.accent, context.ll.accentAlt];
+    final ramp =
+        language?.gradient ?? [context.ll.accent, context.ll.accentAlt];
 
     return Scaffold(
       body: AuroraBackground(
@@ -37,14 +39,34 @@ class UnitDetailScreen extends StatelessWidget {
               _Header(unit: unit),
               Expanded(
                 child: ListView(
-                  padding: const EdgeInsets.fromLTRB(
-                      LL.s20, LL.s8, LL.s20, LL.s24),
+                  padding:
+                      const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s24),
                   children: [
+                    if (unit.grammarLesson != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: LL.s16),
+                        child: Reveal(
+                          child: _GrammarEntry(
+                            lesson: unit.grammarLesson!,
+                            colors: ramp,
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => GrammarLessonScreen(
+                                  unit: unit,
+                                  lesson: unit.grammarLesson!,
+                                  ttsLocale: course?.ttsLocale ?? 'en-US',
+                                  colors: ramp,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     for (var i = 0; i < unit.cards.length; i++)
                       Padding(
                         padding: const EdgeInsets.only(bottom: LL.s12),
                         child: Reveal(
-                          index: i,
+                          index: i + 1,
                           child: _SentenceCard(
                             card: unit.cards[i],
                             locale: course?.ttsLocale ?? 'en-US',
@@ -122,6 +144,68 @@ class _Header extends StatelessWidget {
   }
 }
 
+/// Entry point into the unit's grammar lesson, shown above the sentence list.
+///
+/// It comes first on purpose: understanding the rule before drilling the
+/// sentences that use it is what makes the drill mean something, rather than
+/// training pattern-matching without comprehension.
+class _GrammarEntry extends StatelessWidget {
+  const _GrammarEntry({
+    required this.lesson,
+    required this.colors,
+    required this.onTap,
+  });
+
+  final GrammarLesson lesson;
+  final List<Color> colors;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+    return Pressable(
+      onPressed: onTap,
+      semanticLabel: 'Lecon de grammaire : ${lesson.title}',
+      child: GlassCard(
+        glow: colors.first,
+        gradient: LinearGradient(
+          colors: [
+            colors.first.withValues(alpha: c.isDark ? 0.22 : 0.12),
+            colors.last.withValues(alpha: c.isDark ? 0.08 : 0.05),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: colors),
+                borderRadius: BorderRadius.circular(LL.rSm + 4),
+              ),
+              child: const Icon(Icons.school_rounded,
+                  color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: LL.s16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Grammaire', style: context.type.labelSmall),
+                  const SizedBox(height: LL.s2),
+                  Text(lesson.title, style: context.type.titleMedium),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _SentenceCard extends StatefulWidget {
   const _SentenceCard({
     required this.card,
@@ -176,9 +260,7 @@ class _SentenceCardState extends State<_SentenceCard> {
               Pressable(
                 onPressed: () {
                   if (!context.read<LearningController>().soundEnabled) return;
-                  context
-                      .read<TtsService>()
-                      .speak(card.target, widget.locale);
+                  context.read<TtsService>().speak(card.target, widget.locale);
                 },
                 semanticLabel: 'Ecouter',
                 child: Container(
@@ -188,8 +270,8 @@ class _SentenceCardState extends State<_SentenceCard> {
                     color: c.accentAlt.withValues(alpha: 0.14),
                     shape: BoxShape.circle,
                   ),
-                  child:
-                      Icon(Icons.volume_up_rounded, size: 20, color: c.accentAlt),
+                  child: Icon(Icons.volume_up_rounded,
+                      size: 20, color: c.accentAlt),
                 ),
               ),
             ],

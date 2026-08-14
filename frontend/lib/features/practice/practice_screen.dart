@@ -330,7 +330,8 @@ class _ShadowingCardState extends State<_ShadowingCard> {
     final c = context.ll;
     if (course == null) return const SizedBox.shrink();
 
-    final card = _card ??= course.allCards[_random.nextInt(course.allCards.length)];
+    final card =
+        _card ??= course.allCards[_random.nextInt(course.allCards.length)];
 
     return GlassCard(
       child: Column(

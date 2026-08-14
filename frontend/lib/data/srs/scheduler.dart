@@ -80,8 +80,9 @@ class MemoryState {
       stability: number(json['stability']),
       difficulty: number(json['difficulty']),
       due: parse(json['due'], fallback),
-      lastReview:
-          json['lastReview'] == null ? null : parse(json['lastReview'], fallback),
+      lastReview: json['lastReview'] == null
+          ? null
+          : parse(json['lastReview'], fallback),
       reps: count(json['reps']),
       lapses: count(json['lapses']),
     );
@@ -126,13 +127,12 @@ class Scheduler {
   /// Days until recall probability falls to [requestedRetention].
   int intervalFor(double stability) {
     if (stability <= 0) return 0;
-    final raw = (stability / _factor) *
-        (math.pow(requestedRetention, 1 / _decay) - 1);
+    final raw =
+        (stability / _factor) * (math.pow(requestedRetention, 1 / _decay) - 1);
     return raw.round().clamp(1, 3650);
   }
 
-  double _initialStability(Grade grade) =>
-      math.max(_w[grade.value - 1], 0.1);
+  double _initialStability(Grade grade) => math.max(_w[grade.value - 1], 0.1);
 
   double _initialDifficulty(Grade grade) =>
       (_w[4] - math.exp(_w[5] * (grade.value - 1)) + 1).clamp(1.0, 10.0);

@@ -47,7 +47,8 @@ class ProgressRepository {
     await prefs.remove('$_prefix$languageCode');
   }
 
-  Future<LanguageProgress?> _loadLocal(String languageCode, DateTime now) async {
+  Future<LanguageProgress?> _loadLocal(
+      String languageCode, DateTime now) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final raw = prefs.getString('$_prefix$languageCode');
@@ -77,7 +78,8 @@ class ProgressRepository {
         .doc(languageCode);
   }
 
-  Future<LanguageProgress?> _loadRemote(String languageCode, DateTime now) async {
+  Future<LanguageProgress?> _loadRemote(
+      String languageCode, DateTime now) async {
     final doc = _doc(languageCode);
     if (doc == null) return null;
     try {

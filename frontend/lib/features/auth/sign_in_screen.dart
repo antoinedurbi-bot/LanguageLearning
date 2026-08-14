@@ -75,7 +75,9 @@ class _SignInScreenState extends State<SignInScreen> {
           password: password,
         );
       }
-      if (mounted && Navigator.of(context).canPop()) Navigator.of(context).pop();
+      if (mounted && Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
     } on FirebaseAuthException catch (error) {
       if (mounted) setState(() => _error = _messageFor(error));
     } catch (_) {

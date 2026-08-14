@@ -165,7 +165,8 @@ void main() {
     test('reads as minutes for a lapse and days for a success', () {
       final state = MemoryState.fresh(now);
 
-      expect(scheduler.previewInterval(state, Grade.again, now), contains('min'));
+      expect(
+          scheduler.previewInterval(state, Grade.again, now), contains('min'));
       expect(scheduler.previewInterval(state, Grade.easy, now), contains('j'));
     });
   });

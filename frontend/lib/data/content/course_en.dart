@@ -1,4 +1,313 @@
 import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/models/grammar_lesson.dart';
+
+const _en1Grammar = GrammarLesson(
+  title: 'Be, et comment poser une question',
+  hook: 'Le verbe "be" et l\'ordre des mots dans une question sont les deux '
+      'choses qui reviennent dans presque toutes les phrases anglaises.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'To be : am / is / are',
+      body: 'Contrairement au francais, l\'anglais n\'a pas de forme unique '
+          '"suis/es/est" : chaque personne a sa propre forme. On ne peut '
+          'jamais l\'omettre, meme quand le francais le sous-entend '
+          '("Enchante" reste une formule figee, mais "Je suis francais" '
+          'devient bien "I am French").',
+    ),
+    TableBlock(
+      caption: 'Le verbe be au present',
+      headers: ['Sujet', 'Forme', 'Exemple'],
+      rows: [
+        ['I', 'am', 'I am from France.'],
+        ['You', 'are', 'You are tired.'],
+        ['He / She / It', 'is', 'It is on the left.'],
+        ['We / You / They', 'are', 'They are here.'],
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Question : le mot interrogatif passe devant',
+      body: 'Pour poser une question, l\'auxiliaire (be, do, can) passe '
+          'avant le sujet. Avec un mot interrogatif (where, what, how), '
+          'celui-ci se place tout devant, suivi de l\'auxiliaire puis du '
+          'sujet : Where + are + you + from ?',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'Where are you from?',
+          native: 'D\'ou viens-tu ?',
+          note: 'where + are (auxiliaire) + you (sujet)',
+        ),
+        GrammarExample(
+          target: 'Can you speak more slowly, please?',
+          native: 'Peux-tu parler plus lentement ?',
+          note: 'can passe avant you, comme are',
+        ),
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Negation : do not devant les autres verbes',
+      body: 'Be se nie tout seul (I am not, it is not). Tous les autres '
+          'verbes ont besoin de l\'auxiliaire "do" pour se nier : on ne dit '
+          'jamais "I understand not", il faut "I do not understand".',
+    ),
+    MistakeBlock(
+      wrong: 'I not understand.',
+      right: 'I do not understand.',
+      why: 'L\'anglais ne nie jamais un verbe ordinaire seul avec "not" : '
+          'il faut l\'auxiliaire "do" (ou "does" a la 3e personne) devant.',
+    ),
+  ],
+);
+
+const _en2Grammar = GrammarLesson(
+  title: 'Politesse et petits mots qui changent tout',
+  hook: 'En anglais, la politesse et la precision passent par le choix du '
+      'bon petit mot, pas par une conjugaison speciale.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'Want vs would like',
+      body: '"Want" est direct et peut sembler brusque. "Would like" est la '
+          'version polie utilisee au restaurant, dans un magasin, partout '
+          'ou le francais dirait "je voudrais" plutot que "je veux".',
+    ),
+    TableBlock(
+      headers: ['Direct', 'Poli'],
+      rows: [
+        ['I want a coffee.', 'I would like a coffee, please.'],
+        ['I want to pay.', 'I would like to pay, please.'],
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'How much vs how many',
+      body: '"How much" interroge sur une quantite qu\'on ne compte pas '
+          '(un prix, de l\'argent, du temps). "How many" interroge sur un '
+          'nombre d\'objets qu\'on peut compter un par un.',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'How much is it?',
+          native: 'Combien ca coute ?',
+          note: 'un prix ne se compte pas : how much',
+        ),
+        GrammarExample(
+          target: 'How many coffees do you want?',
+          native: 'Combien de cafes veux-tu ?',
+          note: 'des cafes se comptent un par un : how many',
+        ),
+      ],
+    ),
+    MistakeBlock(
+      wrong: 'How many is it?',
+      right: 'How much is it?',
+      why: 'Un prix est une quantite continue, pas un nombre d\'objets : '
+          'seul "how much" fonctionne ici.',
+    ),
+  ],
+);
+
+const _en3Grammar = GrammarLesson(
+  title: 'Les prepositions qui ne se traduisent pas',
+  hook: 'La plupart des erreurs de debutant en anglais viennent d\'une '
+      'preposition traduite mot a mot depuis le francais.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'On, at, in : trois "a" differents',
+      body: 'Le francais dit "a" pour a peu pres tout. L\'anglais distingue '
+          'la position sur une surface ou un cote (on), un point precis '
+          '(at) et l\'interieur d\'un lieu (in).',
+    ),
+    TableBlock(
+      headers: ['Preposition', 'Usage', 'Exemple'],
+      rows: [
+        ['on', 'sur une surface, un cote', 'on the left'],
+        ['at', 'un point precis', 'at the station'],
+        ['in', 'a l\'interieur d\'un lieu', 'in the city'],
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Les verbes a particule : get to, look for',
+      body: 'Certains verbes anglais changent de sens completement selon la '
+          'particule qui les suit, et cette particule est obligatoire. '
+          '"Look" seul veut dire regarder ; "look for" veut dire chercher.',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'How do I get to the airport?',
+          native: 'Comment aller a l\'aeroport ?',
+          note: 'get to = rejoindre un lieu (pas "arrive to")',
+        ),
+        GrammarExample(
+          target: 'I am looking for this address.',
+          native: 'Je cherche cette adresse.',
+          note: 'look FOR : le "for" est obligatoire, jamais "look this"',
+        ),
+      ],
+    ),
+    MistakeBlock(
+      wrong: 'I am looking this address.',
+      right: 'I am looking for this address.',
+      why: '"Look" sans particule veut dire "regarder" : sans "for", la '
+          'phrase ne veut plus dire "chercher".',
+    ),
+  ],
+);
+
+const _en4Grammar = GrammarLesson(
+  title: 'Present simple vs present continuous',
+  hook: 'L\'anglais a deux presents qui ne s\'emploient jamais l\'un pour '
+      'l\'autre : l\'habitude, et l\'action en train de se passer.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'Simple : habitudes et verites generales',
+      body: 'Le present simple decrit ce qui se repete ou reste vrai dans '
+          'la duree : un metier, un horaire, une routine. A la 3e personne '
+          'du singulier (he/she/it), le verbe prend un -s.',
+    ),
+    TableBlock(
+      caption: 'Le -s de la 3e personne',
+      headers: ['Sujet', 'Verbe'],
+      rows: [
+        ['I / you / we / they', 'work'],
+        ['he / she / it', 'works'],
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Continuous : l\'action se deroule maintenant',
+      body: 'Le present continuous (be + verbe-ing) decrit une action en '
+          'cours au moment ou l\'on parle, pas une habitude. On ne peut pas '
+          'l\'utiliser pour dire ce qu\'on fait "d\'habitude".',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'She works in a hospital.',
+          native: 'Elle travaille dans un hopital.',
+          note: 'un fait durable : present simple + -s',
+        ),
+        GrammarExample(
+          target: 'He is watching a film right now.',
+          native: 'Il regarde un film en ce moment.',
+          note: 'action en cours : is + watching',
+        ),
+      ],
+    ),
+    MistakeBlock(
+      wrong: 'He watch television every day.',
+      right: 'He watches television every day.',
+      why: 'A la 3e personne du singulier, le present simple prend '
+          'toujours un -s : he/she/it + verbe-s.',
+    ),
+  ],
+);
+
+const _en5Grammar = GrammarLesson(
+  title: 'Parler du passe : trois outils, trois usages',
+  hook: 'Le passe simple, le present perfect et le passe en -ing ne '
+      'racontent pas la meme chose, meme quand le francais utiliserait le '
+      'meme temps pour les trois.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'Past simple : un fait termine, a un moment precis',
+      body: 'Utilise pour un evenement fini, souvent avec une date ou un '
+          'marqueur temporel (last year, yesterday). Beaucoup de verbes '
+          'sont irreguliers et changent de forme.',
+    ),
+    TableBlock(
+      caption: 'Verbes irreguliers frequents',
+      headers: ['Base', 'Passe', 'Participe passe'],
+      rows: [
+        ['go', 'went', 'gone'],
+        ['see', 'saw', 'seen'],
+        ['have', 'had', 'had'],
+        ['be', 'was / were', 'been'],
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Present perfect : une experience de vie, sans date',
+      body: '"Have + participe passe" repond a "est-ce que ca t\'est deja '
+          'arrive ?", sans preciser quand. Des qu\'une date ou un moment '
+          'precis apparait, il faut repasser au past simple.',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'I went to London last year.',
+          native: 'Je suis alle a Londres l\'annee derniere.',
+          note: 'date precisee (last year) : past simple',
+        ),
+        GrammarExample(
+          target: 'Have you ever been to Japan?',
+          native: 'Es-tu deja alle au Japon ?',
+          note: 'experience sans date : have + been',
+        ),
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Past continuous : le decor de l\'histoire',
+      body: '"Was/were + verbe-ing" plante le decor autour d\'un evenement '
+          'ponctuel : "It was raining" installe l\'ambiance dans laquelle '
+          'autre chose s\'est produit.',
+    ),
+    MistakeBlock(
+      wrong: 'I have went to London last year.',
+      right: 'I went to London last year.',
+      why: 'Une date precise (last year) exige le past simple ; le present '
+          'perfect ne se combine jamais avec un moment precis du passe.',
+    ),
+  ],
+);
+
+const _en6Grammar = GrammarLesson(
+  title: 'Hypotheses, projets et prepositions figees',
+  hook: 'Nuancer en anglais demande des structures que le francais n\'a '
+      'pas telles quelles : le conditionnel irreel et be going to.',
+  blocks: [
+    ExplanationBlock(
+      heading: 'If + passe, would + base : l\'hypothese irreelle',
+      body: 'Pour une situation imaginaire au present ("si j\'avais..."), '
+          'l\'anglais met le verbe apres "if" au passe simple, et "would" '
+          'devant le verbe de la consequence. Le passe ici n\'indique pas '
+          'le temps, il marque l\'irrealite.',
+    ),
+    ExampleBlock(
+      examples: [
+        GrammarExample(
+          target: 'If I had more time, I would travel.',
+          native: 'Si j\'avais plus de temps, je voyagerais.',
+          note: 'if + had (passe) ..., + would + travel (base)',
+        ),
+        GrammarExample(
+          target: 'I am going to look for a new job.',
+          native: 'Je vais chercher un nouveau travail.',
+          note: 'be going to = intention deja decidee, pas "will"',
+        ),
+      ],
+    ),
+    ExplanationBlock(
+      heading: 'Be going to vs will',
+      body: '"Be going to" annonce une decision deja prise avant l\'instant '
+          'de parole. "Will" sert plutot a une decision prise sur le '
+          'moment, ou a une prediction.',
+    ),
+    ExplanationBlock(
+      heading: 'Prepositions figees : depend ON, used TO',
+      body: 'Certains verbes exigent toujours la meme preposition, sans '
+          'lien avec le francais : "depend" se construit avec "on" (jamais '
+          '"of"), et "be used to" est suivi d\'un verbe en -ing, pas de '
+          'l\'infinitif.',
+    ),
+    MistakeBlock(
+      wrong: 'I am used to work late.',
+      right: 'I am used to working late.',
+      why: 'Ici "to" fait partie de l\'expression "be used to" (etre '
+          'habitue a) et se comporte comme une preposition : il est suivi '
+          'd\'un verbe en -ing, pas de l\'infinitif.',
+    ),
+  ],
+);
 
 /// English course for French speakers.
 ///
@@ -15,6 +324,7 @@ const courseEn = Course(
       title: 'Premiers mots',
       subtitle: 'Se presenter et repondre',
       level: 'A1',
+      grammarLesson: _en1Grammar,
       cards: [
         CardItem(
           id: 'en-1-1',
@@ -77,6 +387,7 @@ const courseEn = Course(
       title: 'Commander',
       subtitle: 'Cafe, restaurant, boutique',
       level: 'A1',
+      grammarLesson: _en2Grammar,
       cards: [
         CardItem(
           id: 'en-2-1',
@@ -139,6 +450,7 @@ const courseEn = Course(
       title: 'S\'orienter',
       subtitle: 'Demander son chemin, les transports',
       level: 'A1',
+      grammarLesson: _en3Grammar,
       cards: [
         CardItem(
           id: 'en-3-1',
@@ -201,6 +513,7 @@ const courseEn = Course(
       title: 'Le quotidien',
       subtitle: 'Habitudes et present simple',
       level: 'A2',
+      grammarLesson: _en4Grammar,
       cards: [
         CardItem(
           id: 'en-4-1',
@@ -263,6 +576,7 @@ const courseEn = Course(
       title: 'Raconter',
       subtitle: 'Le passe et les recits',
       level: 'A2',
+      grammarLesson: _en5Grammar,
       cards: [
         CardItem(
           id: 'en-5-1',
@@ -325,6 +639,7 @@ const courseEn = Course(
       title: 'Nuancer',
       subtitle: 'Opinions, projets, hypotheses',
       level: 'B1',
+      grammarLesson: _en6Grammar,
       cards: [
         CardItem(
           id: 'en-6-1',

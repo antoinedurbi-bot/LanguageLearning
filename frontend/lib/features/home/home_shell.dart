@@ -22,7 +22,11 @@ class _HomeShellState extends State<HomeShell> {
 
   static const _destinations = [
     (icon: Icons.bolt_outlined, active: Icons.bolt, label: 'Aujourd\'hui'),
-    (icon: Icons.auto_stories_outlined, active: Icons.auto_stories, label: 'Parcours'),
+    (
+      icon: Icons.auto_stories_outlined,
+      active: Icons.auto_stories,
+      label: 'Parcours'
+    ),
     (icon: Icons.mic_none_outlined, active: Icons.mic, label: 'Atelier'),
     (icon: Icons.insights_outlined, active: Icons.insights, label: 'Progres'),
   ];

@@ -59,7 +59,8 @@ const availableLanguages = [
     nativeName: 'Türkçe',
     script: 'Ş',
     description: 'Agglutinante et d\'une regularite rare.',
-    difficultyNote: 'Structure inhabituelle - environ 1100 h, mais peu d\'exceptions',
+    difficultyNote:
+        'Structure inhabituelle - environ 1100 h, mais peu d\'exceptions',
   ),
 ];
 

@@ -52,7 +52,8 @@ class SessionBuilder {
   final Scheduler scheduler;
 
   /// Cards whose due date has passed.
-  List<CardItem> dueCards(Course course, LanguageProgress progress, DateTime now) {
+  List<CardItem> dueCards(
+      Course course, LanguageProgress progress, DateTime now) {
     final due = <CardItem>[];
     for (final card in course.allCards) {
       final state = progress.states[card.id];
@@ -173,12 +174,34 @@ class AnswerChecker {
   String normalize(String input) {
     var text = input.toLowerCase().trim();
     const accents = {
-      'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a',
-      'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-      'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ı': 'i',
-      'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o',
-      'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
-      'ñ': 'n', 'ç': 'c', 'ş': 's', 'ğ': 'g',
+      'á': 'a',
+      'à': 'a',
+      'â': 'a',
+      'ä': 'a',
+      'ã': 'a',
+      'å': 'a',
+      'é': 'e',
+      'è': 'e',
+      'ê': 'e',
+      'ë': 'e',
+      'í': 'i',
+      'ì': 'i',
+      'î': 'i',
+      'ï': 'i',
+      'ı': 'i',
+      'ó': 'o',
+      'ò': 'o',
+      'ô': 'o',
+      'ö': 'o',
+      'õ': 'o',
+      'ú': 'u',
+      'ù': 'u',
+      'û': 'u',
+      'ü': 'u',
+      'ñ': 'n',
+      'ç': 'c',
+      'ş': 's',
+      'ğ': 'g',
     };
     final buffer = StringBuffer();
     for (final rune in text.runes) {

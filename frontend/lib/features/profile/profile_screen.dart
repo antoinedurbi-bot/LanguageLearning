@@ -194,7 +194,8 @@ class _Number extends StatelessWidget {
             ),
           ),
           const SizedBox(height: LL.s2),
-          Text(label, style: context.type.labelSmall, textAlign: TextAlign.center),
+          Text(label,
+              style: context.type.labelSmall, textAlign: TextAlign.center),
         ],
       ),
     );
@@ -487,9 +488,8 @@ class _AccountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.ll;
     final controller = context.read<LearningController>();
-    final user = AppState.firebaseReady
-        ? FirebaseAuth.instance.currentUser
-        : null;
+    final user =
+        AppState.firebaseReady ? FirebaseAuth.instance.currentUser : null;
 
     return GlassCard(
       padding: const EdgeInsets.symmetric(vertical: LL.s8, horizontal: LL.s8),

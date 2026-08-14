@@ -35,13 +35,11 @@ class LanguageProgress {
   int totalReviews;
   int correctReviews;
 
-  double get accuracy =>
-      totalReviews == 0 ? 0 : correctReviews / totalReviews;
+  double get accuracy => totalReviews == 0 ? 0 : correctReviews / totalReviews;
 
   int get reviewsToday => reviewsPerDay[dayKey(DateTime.now())] ?? 0;
 
-  int get learnedCount =>
-      states.values.where((s) => s.stability >= 21).length;
+  int get learnedCount => states.values.where((s) => s.stability >= 21).length;
 
   int get seenCount => states.length;
 

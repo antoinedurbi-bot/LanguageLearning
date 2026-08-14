@@ -1,20 +1,26 @@
+import asyncio
+
 from fastapi.testclient import TestClient
 
 from app.main import app
 from app.models.ai_models import AnswerCheckRequest
+from app.services import ai_service as ai_service_module
 from app.services.ai_service import AiService, normalize, tokenize
+from app.services.llm_grader import LlmGradingResult
 
 client = TestClient(app)
 service = AiService()
 
 
 def check(answer: str, expected: str | None):
-    return service.check_answer(
-        AnswerCheckRequest(
-            prompt="Je voudrais un cafe, s'il vous plait.",
-            answer=answer,
-            target_language="en",
-            expected_answer=expected,
+    return asyncio.run(
+        service.check_answer(
+            AnswerCheckRequest(
+                prompt="Je voudrais un cafe, s'il vous plait.",
+                answer=answer,
+                target_language="en",
+                expected_answer=expected,
+            )
         )
     )
 
@@ -66,6 +72,59 @@ class TestCheckAnswer:
         result = check("anything at all", None)
         assert not result.is_correct
         assert "reference" in result.feedback
+
+
+class TestLlmIntegration:
+    """Verifies AiService defers to the LLM grader when it returns a result,
+    and falls back to the deterministic grader when it doesn't — without
+    making a real network call in either case."""
+
+    def test_uses_the_llm_verdict_when_available(self, monkeypatch):
+        async def fake_grade(**kwargs):
+            return LlmGradingResult(
+                is_correct=True,
+                feedback="Paraphrase correcte, bien joue.",
+                corrected_answer=None,
+                notes=[],
+            )
+
+        monkeypatch.setattr(ai_service_module.llm_grader, "grade", fake_grade)
+
+        # A paraphrase the deterministic grader would reject outright.
+        result = check("I'd like a coffee", "I would like a coffee, please.")
+
+        assert result.is_correct
+        assert result.feedback == "Paraphrase correcte, bien joue."
+
+    def test_falls_back_to_deterministic_when_llm_returns_none(
+        self, monkeypatch
+    ):
+        async def fake_grade(**kwargs):
+            return None
+
+        monkeypatch.setattr(ai_service_module.llm_grader, "grade", fake_grade)
+
+        result = check("I want coffee", "I would like a coffee, please.")
+
+        assert not result.is_correct
+        assert result.corrected_answer == "I would like a coffee, please."
+
+    def test_exact_match_short_circuits_before_calling_the_llm(
+        self, monkeypatch
+    ):
+        called = False
+
+        async def fake_grade(**kwargs):
+            nonlocal called
+            called = True
+            return None
+
+        monkeypatch.setattr(ai_service_module.llm_grader, "grade", fake_grade)
+
+        result = check("Hello!", "Hello!")
+
+        assert result.is_correct
+        assert not called
 
 
 class TestRoutes:

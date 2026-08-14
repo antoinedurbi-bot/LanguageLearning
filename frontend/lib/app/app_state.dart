@@ -39,8 +39,7 @@ class LearningController extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   bool get soundEnabled => _soundEnabled;
 
-  Course? get course =>
-      _language == null ? null : courseFor(_language!.code);
+  Course? get course => _language == null ? null : courseFor(_language!.code);
 
   /// Restores the selected language, its progress, and display preferences.
   Future<void> bootstrap() async {
