@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/features/memory/memory_card.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
@@ -42,15 +43,17 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: LL.s16),
-        Reveal(index: 2, child: _NumbersCard(progress: progress)),
+        const Reveal(index: 2, child: MemoryCard()),
         const SizedBox(height: LL.s16),
-        Reveal(index: 3, child: _HeatmapCard(progress: progress, colors: ramp)),
+        Reveal(index: 3, child: _NumbersCard(progress: progress)),
         const SizedBox(height: LL.s16),
-        Reveal(index: 4, child: _GoalCard(progress: progress)),
+        Reveal(index: 4, child: _HeatmapCard(progress: progress, colors: ramp)),
         const SizedBox(height: LL.s16),
-        const Reveal(index: 5, child: _SettingsCard()),
+        Reveal(index: 5, child: _GoalCard(progress: progress)),
         const SizedBox(height: LL.s16),
-        const Reveal(index: 6, child: _AccountCard()),
+        const Reveal(index: 6, child: _SettingsCard()),
+        const SizedBox(height: LL.s16),
+        const Reveal(index: 7, child: _AccountCard()),
       ],
     );
   }
