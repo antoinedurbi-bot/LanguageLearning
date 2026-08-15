@@ -133,4 +133,16 @@ class SettingsRepository {
 
   Future<void> setSoundEnabled(bool value) async =>
       (await SharedPreferences.getInstance()).setBool(_sound, value);
+
+  /// Personal best for the fluency sprint, per language.
+  ///
+  /// Kept out of LanguageProgress on purpose: a sprint score is not learning
+  /// data, and resetting a course should not erase a record the learner set.
+  Future<int> sprintBest(String languageCode) async =>
+      (await SharedPreferences.getInstance()).getInt('sprint_best_$languageCode') ??
+          0;
+
+  Future<void> setSprintBest(String languageCode, int value) async =>
+      (await SharedPreferences.getInstance())
+          .setInt('sprint_best_$languageCode', value);
 }

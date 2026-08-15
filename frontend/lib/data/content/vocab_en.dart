@@ -286,18 +286,18 @@ const vocabEn = VocabularyPack(
           example: 'I have lived here since 2020.',
           exampleNative: 'J\'habite ici depuis 2020.',
           note: 'Since introduit un MOMENT précis (since Monday, since I was '
-              'ten). Pour une duree, c\'est "for". Le français utilise "depuis" '
+              'ten). Pour une durée, c\'est "for". Le français utilise "depuis" '
               'pour les deux, d\'ou l\'erreur.',
         ),
         VocabEntry(
           id: 'en-v-for',
           target: 'for',
-          native: 'pendant (une duree)',
+          native: 'pendant (une durée)',
           pos: 'preposition',
           example: 'We stayed there for a week.',
           exampleNative: 'Nous y sommes restes une semaine.',
-          note: 'For introduit une DUREE (for two hours, for a week). Ne jamais '
-              'utiliser "during" pour une duree chiffree : during sert a situer '
+          note: 'For introduit une DURÉE (for two hours, for a week). Ne jamais '
+              'utiliser "during" pour une durée chiffree : during sert a situer '
               'dans un evenement (during the meeting).',
         ),
         VocabEntry(
@@ -307,8 +307,8 @@ const vocabEn = VocabularyPack(
           pos: 'adverbe',
           example: 'I saw her two days ago.',
           exampleNative: 'Je l\'ai vue il y a deux jours.',
-          note: 'Se place APRÈS la duree, jamais avant : "two days ago", jamais '
-              '"ago two days". Impose le passé simple, jamais le present perfect.',
+          note: 'Se place APRÈS la durée, jamais avant : "two days ago", jamais '
+              '"ago two days". Impose le passé simple, jamais le présent perfect.',
         ),
         VocabEntry(
           id: 'en-v-yet',

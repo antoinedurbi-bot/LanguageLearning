@@ -58,7 +58,7 @@ const vocabZh = VocabularyPack(
           example: '我在找这个地址。',
           exampleNative: 'Je cherche cette adresse.',
           note: 'Deux emplois : localiser (在家 = à la maison) et marquer '
-              'l\'action en cours devant un verbe. Le complement de lieu se '
+              'l\'action en cours devant un verbe. Le complément de lieu se '
               'place toujours AVANT le verbe.',
         ),
         VocabEntry(
@@ -127,7 +127,7 @@ const vocabZh = VocabularyPack(
           romanization: 'bù / méi',
           example: '我没吃过。',
           exampleNative: 'Je n\'ai jamais mange ca.',
-          note: '不 nie une habitude, un present ou une intention. 没 nie '
+          note: '不 nie une habitude, un présent ou une intention. 没 nie '
               'exclusivement le passe accompli et 有. Se tromper de negation '
               'est l\'erreur la plus reperable.',
         ),
@@ -247,7 +247,7 @@ const vocabZh = VocabularyPack(
           romanization: 'diǎn',
           example: '六点半',
           exampleNative: 'six heures et demie',
-          note: 'Pour l\'heure qu\'il est. Une duree en heures, c\'est '
+          note: 'Pour l\'heure qu\'il est. Une durée en heures, c\'est '
               '小时 (xiǎoshí) : deux mots differents la ou le français dit '
               '"heure" pour les deux.',
         ),

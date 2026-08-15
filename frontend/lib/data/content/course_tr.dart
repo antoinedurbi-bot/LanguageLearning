@@ -185,7 +185,7 @@ const courseTr = Course(
           gloss: 'Cette adresse-la cherche-je.',
           tokens: ['Bu', 'adresi', 'arıyorum.'],
           distractors: ['adres', 'ararım', 'Şu'],
-          focus: '-i marque un complement d\'objet defini',
+          focus: '-i marque un complément d\'objet defini',
         ),
         CardItem(
           id: 'tr-3-6',
@@ -201,7 +201,7 @@ const courseTr = Course(
     Unit(
       id: 'tr-u4',
       title: 'Her gün',
-      subtitle: 'Habitudes et present',
+      subtitle: 'Habitudes et présent',
       level: 'A2',
       cards: [
         CardItem(
@@ -211,7 +211,7 @@ const courseTr = Course(
           gloss: 'Chaque jour sept-a leve-je.',
           tokens: ['Her', 'gün', 'yedide', 'kalkıyorum.'],
           distractors: ['günler', 'yedi', 'kalkarım'],
-          focus: 'Le present progressif -iyor pour une routine actuelle',
+          focus: 'Le présent progressif -iyor pour une routine actuelle',
         ),
         CardItem(
           id: 'tr-4-2',
@@ -282,7 +282,7 @@ const courseTr = Course(
           gloss: 'La-bas un semaine restames-nous.',
           tokens: ['Orada', 'bir', 'hafta', 'kaldık.'],
           distractors: ['Oraya', 'haftada', 'kalıyoruz'],
-          focus: 'La duree ne prend aucun suffixe de cas',
+          focus: 'La durée ne prend aucun suffixe de cas',
         ),
         CardItem(
           id: 'tr-5-3',

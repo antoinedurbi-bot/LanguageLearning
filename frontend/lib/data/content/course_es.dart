@@ -5,7 +5,7 @@ const _es1Grammar = GrammarLesson(
   title: 'Ser et estar : deux verbes pour "etre"',
   hook: 'C\'est la première vraie difficulté de l\'espagnol pour un '
       'francophone : la ou le français dit toujours "être", l\'espagnol '
-      'choisit entre deux verbes selon la nature de ce qu\'on decrit.',
+      'choisit entre deux verbes selon la nature de ce qu\'on décrit.',
   blocks: [
     ExplanationBlock(
       heading: 'Ser : identite et caracteristiques durables',
@@ -98,7 +98,7 @@ const _es3Grammar = GrammarLesson(
       body: 'En français, "j\'aime ce quartier" a "je" pour sujet. En '
           'espagnol, "me gusta este barrio" fonctionne comme "ce quartier '
           'me plait" : c\'est le quartier (este barrio) qui est le sujet du '
-          'verbe, et "me" est un complement.',
+          'verbe, et "me" est un complément.',
     ),
     ExplanationBlock(
       heading: 'Accord au singulier ou au pluriel',
@@ -132,7 +132,7 @@ const _es3Grammar = GrammarLesson(
       wrong: 'Yo gusto las peliculas.',
       right: 'Me gustan las peliculas.',
       why: 'La personne qui aime n\'est jamais le sujet de gustar : elle '
-          'devient un pronom complement (me, te, le...) devant le verbe.',
+          'devient un pronom complément (me, te, le...) devant le verbe.',
     ),
   ],
 );
@@ -166,7 +166,7 @@ const _es4Grammar = GrammarLesson(
     ExplanationBlock(
       heading: 'Hace... que : depuis combien de temps',
       body: 'Pour dire depuis combien de temps une action dure encore, '
-          'l\'espagnol utilise "hace" + duree + "que" + verbe au present — '
+          'l\'espagnol utilise "hace" + durée + "que" + verbe au présent — '
           'la ou le français dirait "cela fait... que" ou "depuis".',
     ),
     ExampleBlock(
@@ -174,7 +174,7 @@ const _es4Grammar = GrammarLesson(
         GrammarExample(
           target: 'Hace dos anos que vivo aqui.',
           native: 'Cela fait deux ans que j\'habite ici.',
-          note: 'hace + duree + que + present',
+          note: 'hace + durée + que + présent',
         ),
       ],
     ),
@@ -200,7 +200,7 @@ const _es5Grammar = GrammarLesson(
     ),
     ExplanationBlock(
       heading: 'Imparfait : le decor, l\'habitude, ce qui durait',
-      body: 'L\'imparfait (era, vivía) decrit ce qui servait de toile de '
+      body: 'L\'imparfait (era, vivía) décrit ce qui servait de toile de '
           'fond — un état, une habitude, une description — sans marquer de '
           'début ni de fin précis.',
     ),
@@ -265,7 +265,7 @@ const _es6Grammar = GrammarLesson(
     ),
     ExplanationBlock(
       heading: 'Hypothese irreelle : si + subjonctif imparfait + conditionnel',
-      body: 'Pour une situation imaginaire au present ("si j\'avais..."), '
+      body: 'Pour une situation imaginaire au présent ("si j\'avais..."), '
           'l\'espagnol met le verbe après "si" au subjonctif imparfait '
           '(tuviera), et le conditionnel dans la consequence (viajaria).',
     ),
@@ -281,8 +281,8 @@ const _es6Grammar = GrammarLesson(
     MistakeBlock(
       wrong: 'Si tengo tiempo, viajaria mas.',
       right: 'Si tuviera tiempo, viajaria mas.',
-      why: 'Pour une hypothese irreelle au present, "si" est suivi du '
-          'subjonctif imparfait (tuviera), jamais du present de l\'indicatif '
+      why: 'Pour une hypothese irreelle au présent, "si" est suivi du '
+          'subjonctif imparfait (tuviera), jamais du présent de l\'indicatif '
           '(tengo).',
     ),
   ],
@@ -536,7 +536,7 @@ const courseEs = Course(
           gloss: 'Fait deux ans que vis ici.',
           tokens: ['Hace', 'dos', 'años', 'que', 'vivo', 'aquí.'],
           distractors: ['Hay', 'año', 'viví'],
-          focus: 'hace + duree + que + present',
+          focus: 'hace + durée + que + présent',
         ),
         CardItem(
           id: 'es-4-6',

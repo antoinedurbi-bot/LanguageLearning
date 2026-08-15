@@ -200,7 +200,7 @@ const _zh3Grammar = GrammarLesson(
     ExplanationBlock(
       heading: 'La règle : temps, puis lieu, puis verbe',
       body: 'Une phrase chinoise s\'organise dans cet ordre : sujet, puis '
-          'complement de temps, puis complement de lieu (introduit par 在), '
+          'complément de temps, puis complément de lieu (introduit par 在), '
           'puis enfin le verbe et son objet. Le français fait l\'inverse '
           '("Le train part A SIX HEURES"), ce qui rend cette règle '
           'contre-intuitive au début.',
@@ -256,7 +256,7 @@ const _zh4Grammar = GrammarLesson(
     ExplanationBlock(
       heading: '不 pour une habitude ou un état, 没 pour le passe',
       body: '不 (bù) nie une action habituelle, une intention ou un état '
-          'present : "nous ne travaillons pas le dimanche" (habitude). 没 '
+          'présent : "nous ne travaillons pas le dimanche" (habitude). 没 '
           '(méi) nie exclusivement une action passée ou un fait accompli : '
           'il n\'existe pas de "没" au futur ou pour une habitude.',
     ),
@@ -308,7 +308,7 @@ const _zh5Grammar = GrammarLesson(
       heading: '过 : au moins une fois dans sa vie',
       body: '过 (guo) place après le verbe marque une experience deja vecue, '
           'sans se soucier du moment : "去过" (deja allé) repond a "est-ce '
-          'que cela t\'est deja arrive ?", exactement comme le present '
+          'que cela t\'est deja arrive ?", exactement comme le présent '
           'perfect anglais (have been).',
     ),
     ExampleBlock(
@@ -559,7 +559,7 @@ const courseZh = Course(
           romanization: 'Huǒchē liù diǎn bàn kāi.',
           tokens: ['火车', '六点', '半', '开', '。'],
           distractors: ['汽车', '点半六', '走'],
-          focus: 'Le complement de temps precede toujours le verbe',
+          focus: 'Le complément de temps precede toujours le verbe',
         ),
       ],
     ),
@@ -657,7 +657,7 @@ const courseZh = Course(
           romanization: 'Wǒmen zài nàr dāile yí ge xīngqī.',
           tokens: ['我们', '在', '那儿', '待', '了', '一个', '星期', '。'],
           distractors: ['这儿', '过', '个一'],
-          focus: 'La duree se place après le verbe',
+          focus: 'La durée se place après le verbe',
         ),
         CardItem(
           id: 'zh-5-3',
@@ -697,7 +697,7 @@ const courseZh = Course(
           romanization: 'Xià yǔ xiàle yì tiān.',
           tokens: ['下雨', '下', '了', '一天', '。'],
           distractors: ['雨下', '过', '全天'],
-          focus: 'Le verbe se repete avant un complement de duree',
+          focus: 'Le verbe se répète avant un complément de durée',
         ),
       ],
     ),

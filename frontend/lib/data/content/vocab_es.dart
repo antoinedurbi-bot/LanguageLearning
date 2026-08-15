@@ -211,7 +211,7 @@ const vocabEs = VocabularyPack(
           pos: 'verbe',
           example: 'No entiendo, lo siento.',
           exampleNative: 'Je ne comprends pas, désolé.',
-          note: 'Ne veut pas dire "entendre" (= oir). Diphtongue au present : '
+          note: 'Ne veut pas dire "entendre" (= oir). Diphtongue au présent : '
               'entiendo, entiendes, entiende.',
         ),
         VocabEntry(
@@ -352,7 +352,7 @@ const vocabEs = VocabularyPack(
           pos: 'verbe',
           example: 'Llevo dos años aquí.',
           exampleNative: 'Cela fait deux ans que je suis ici.',
-          note: 'Sert aussi a exprimer la duree ecoulee : "llevo + duree" est '
+          note: 'Sert aussi a exprimer la durée ecoulee : "llevo + durée" est '
               'une alternative tres courante a "hace... que".',
         ),
         VocabEntry(

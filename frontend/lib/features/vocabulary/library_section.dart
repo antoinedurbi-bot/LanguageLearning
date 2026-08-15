@@ -38,7 +38,7 @@ class LibrarySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('TA BIBLIOTHEQUE', style: context.type.labelSmall),
+        Text('TA BIBLIOTHÈQUE', style: context.type.labelSmall),
         const SizedBox(height: LL.s4),
         Text(
           'Le matériel de référence, consultable à tout moment. Chaque élément '
@@ -73,7 +73,7 @@ class LibrarySection extends StatelessWidget {
             icon: Icons.menu_book_rounded,
             tint: c.accent,
             title: 'Vocabulaire',
-            subtitle: '${pack.allEntries.length} mots, par theme',
+            subtitle: '${pack.allEntries.length} mots, par thème',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => VocabularyScreen(
@@ -88,7 +88,7 @@ class LibrarySection extends StatelessWidget {
             icon: Icons.forum_rounded,
             tint: c.accentAlt,
             title: 'Phrases clés',
-            subtitle: '${pack.phrases.length} phrases a connaître par coeur',
+            subtitle: '${pack.phrases.length} phrases à connaître par cœur',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => PhrasesScreen(

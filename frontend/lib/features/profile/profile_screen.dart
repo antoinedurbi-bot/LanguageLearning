@@ -441,7 +441,7 @@ class _SettingsCard extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.dark_mode_rounded),
-            title: const Text('Theme'),
+            title: const Text('Thème'),
             subtitle: Text(switch (controller.themeMode) {
               ThemeMode.dark => 'Sombre',
               ThemeMode.light => 'Clair',

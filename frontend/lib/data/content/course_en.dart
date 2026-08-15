@@ -15,7 +15,7 @@ const _en1Grammar = GrammarLesson(
           'devient bien "I am French").',
     ),
     TableBlock(
-      caption: 'Le verbe be au present',
+      caption: 'Le verbe be au présent',
       headers: ['Sujet', 'Forme', 'Exemple'],
       rows: [
         ['I', 'am', 'I am from France.'],
@@ -162,8 +162,8 @@ const _en4Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'Simple : habitudes et verites generales',
-      body: 'Le present simple decrit ce qui se repete ou reste vrai dans '
-          'la duree : un metier, un horaire, une routine. A la 3e personne '
+      body: 'Le présent simple décrit ce qui se répète ou reste vrai dans '
+          'la durée : un metier, un horaire, une routine. A la 3e personne '
           'du singulier (he/she/it), le verbe prend un -s.',
     ),
     TableBlock(
@@ -176,7 +176,7 @@ const _en4Grammar = GrammarLesson(
     ),
     ExplanationBlock(
       heading: 'Continuous : l\'action se deroule maintenant',
-      body: 'Le present continuous (be + verbe-ing) decrit une action en '
+      body: 'Le présent continuous (be + verbe-ing) décrit une action en '
           'cours au moment ou l\'on parle, pas une habitude. On ne peut pas '
           'l\'utiliser pour dire ce qu\'on fait "d\'habitude".',
     ),
@@ -185,7 +185,7 @@ const _en4Grammar = GrammarLesson(
         GrammarExample(
           target: 'She works in a hospital.',
           native: 'Elle travaille dans un hopital.',
-          note: 'un fait durable : present simple + -s',
+          note: 'un fait durable : présent simple + -s',
         ),
         GrammarExample(
           target: 'He is watching a film right now.',
@@ -197,7 +197,7 @@ const _en4Grammar = GrammarLesson(
     MistakeBlock(
       wrong: 'He watch television every day.',
       right: 'He watches television every day.',
-      why: 'A la 3e personne du singulier, le present simple prend '
+      why: 'A la 3e personne du singulier, le présent simple prend '
           'toujours un -s : he/she/it + verbe-s.',
     ),
   ],
@@ -205,7 +205,7 @@ const _en4Grammar = GrammarLesson(
 
 const _en5Grammar = GrammarLesson(
   title: 'Parler du passe : trois outils, trois usages',
-  hook: 'Le passé simple, le present perfect et le passe en -ing ne '
+  hook: 'Le passé simple, le présent perfect et le passe en -ing ne '
       'racontent pas la meme chose, meme quand le français utiliserait le '
       'meme temps pour les trois.',
   blocks: [
@@ -226,7 +226,7 @@ const _en5Grammar = GrammarLesson(
       ],
     ),
     ExplanationBlock(
-      heading: 'Present perfect : une experience de vie, sans date',
+      heading: 'Présent perfect : une experience de vie, sans date',
       body: '"Have + participe passe" repond a "est-ce que ca t\'est deja '
           'arrive ?", sans preciser quand. Des qu\'une date ou un moment '
           'précis apparaît, il faut repasser au past simple.',
@@ -254,7 +254,7 @@ const _en5Grammar = GrammarLesson(
     MistakeBlock(
       wrong: 'I have went to London last year.',
       right: 'I went to London last year.',
-      why: 'Une date precise (last year) exige le past simple ; le present '
+      why: 'Une date precise (last year) exige le past simple ; le présent '
           'perfect ne se combine jamais avec un moment précis du passe.',
     ),
   ],
@@ -267,7 +267,7 @@ const _en6Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'If + passe, would + base : l\'hypothese irreelle',
-      body: 'Pour une situation imaginaire au present ("si j\'avais..."), '
+      body: 'Pour une situation imaginaire au présent ("si j\'avais..."), '
           'l\'anglais met le verbe après "if" au passé simple, et "would" '
           'devant le verbe de la consequence. Le passe ici n\'indique pas '
           'le temps, il marque l\'irrealite.',
@@ -511,7 +511,7 @@ const courseEn = Course(
     Unit(
       id: 'en-u4',
       title: 'Le quotidien',
-      subtitle: 'Habitudes et present simple',
+      subtitle: 'Habitudes et présent simple',
       level: 'A2',
       grammarLesson: _en4Grammar,
       cards: [
@@ -594,7 +594,7 @@ const courseEn = Course(
           gloss: 'Nous restames la pour une semaine.',
           tokens: ['We', 'stayed', 'there', 'for', 'a', 'week.'],
           distractors: ['stay', 'during', 'one'],
-          focus: 'for + duree (jamais "during")',
+          focus: 'for + durée (jamais "during")',
         ),
         CardItem(
           id: 'en-5-3',

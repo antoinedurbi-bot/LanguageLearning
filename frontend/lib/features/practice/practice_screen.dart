@@ -8,6 +8,7 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/srs/session.dart';
+import 'package:learning_app/features/fluency/sprint_screen.dart';
 import 'package:learning_app/features/vocabulary/library_section.dart';
 import 'package:learning_app/services/ai_service.dart';
 import 'package:learning_app/services/tts_service.dart';
@@ -198,9 +199,11 @@ class _PracticeScreenState extends State<PracticeScreen> {
           Reveal(child: _FeedbackCard(feedback: feedback, card: card)),
         ],
         const SizedBox(height: LL.s16),
-        const Reveal(index: 2, child: _ShadowingCard()),
+        Reveal(index: 2, child: _SprintCard(colors: ramp)),
+        const SizedBox(height: LL.s16),
+        const Reveal(index: 3, child: _ShadowingCard()),
         const SizedBox(height: LL.s32),
-        const Reveal(index: 3, child: LibrarySection()),
+        const Reveal(index: 4, child: LibrarySection()),
       ],
     );
   }
@@ -312,6 +315,52 @@ class _FeedbackCard extends StatelessWidget {
   }
 }
 
+/// Entry point to the fluency drill.
+///
+/// It sits in the workshop rather than the daily flow because it is optional
+/// by design: fluency work is the one strand that must never feel like a debt.
+class _SprintCard extends StatelessWidget {
+  const _SprintCard({required this.colors});
+
+  final List<Color> colors;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+
+    return Pressable(
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const SprintScreen()),
+      ),
+      semanticLabel: 'Sprint, soixante secondes de phrases connues',
+      child: GlassCard(
+        glow: colors.last,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.bolt_rounded, size: 18, color: c.warning),
+                const SizedBox(width: LL.s8),
+                Text('Sprint', style: context.type.labelLarge),
+                const Spacer(),
+                Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+              ],
+            ),
+            const SizedBox(height: LL.s12),
+            Text(
+              'Soixante secondes sur des phrases que tu connais déjà. On ne '
+              'travaille pas la mémoire ici, mais la vitesse : le délai entre '
+              'voir et comprendre. Rien n\'est enregistré.',
+              style: context.type.bodyMedium,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// Shadowing: repeating a sentence aloud immediately after hearing it. It is
 /// the cheapest way to work on pronunciation and prosody without a partner,
 /// and the app can drive it with the sentences already being learned.
@@ -350,7 +399,7 @@ class _ShadowingCardState extends State<_ShadowingCard> {
           ),
           const SizedBox(height: LL.s12),
           Text(
-            'Écoute la phrase, puis repete-la à voix haute en même temps que '
+            'Écoute la phrase, puis répète-la à voix haute en même temps que '
             'l\'audio. Trois fois de suite, sans lire.',
             style: context.type.bodyMedium,
           ),

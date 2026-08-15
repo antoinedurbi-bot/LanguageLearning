@@ -17,7 +17,7 @@ const _prompts = <String, List<IslandPrompt>>{
     IslandPrompt(
       id: 'live',
       question: 'Ou habites-tu maintenant, et depuis quand ?',
-      hint: 'C\'est l\'occasion de placer une duree. Prepare le chiffre : '
+      hint: 'C\'est l\'occasion de placer une durée. Prepare le chiffre : '
           'hesiter sur "depuis trois ans" casse le rythme.',
     ),
     IslandPrompt(
@@ -42,7 +42,7 @@ const _prompts = <String, List<IslandPrompt>>{
     IslandPrompt(
       id: 'daily',
       question: 'A quoi ressemble une journée typique ?',
-      hint: 'Trois ou quatre actions au present suffisent. C\'est aussi un '
+      hint: 'Trois ou quatre actions au présent suffisent. C\'est aussi un '
           'excellent entrainement aux verbes du quotidien.',
     ),
     IslandPrompt(
@@ -55,7 +55,7 @@ const _prompts = <String, List<IslandPrompt>>{
       id: 'before',
       question: 'Que faisais-tu avant ?',
       hint: 'Force a utiliser le passe. Meme une seule phrase te fait '
-          'travailler le temps le plus utile après le present.',
+          'travailler le temps le plus utile après le présent.',
     ),
   ],
   'language': [
@@ -68,7 +68,7 @@ const _prompts = <String, List<IslandPrompt>>{
     IslandPrompt(
       id: 'howlong',
       question: 'Depuis combien de temps ? Comment apprends-tu ?',
-      hint: 'Occasion de placer une duree et une frequence : "tous les jours", '
+      hint: 'Occasion de placer une durée et une frequence : "tous les jours", '
           '"depuis six mois".',
     ),
     IslandPrompt(
