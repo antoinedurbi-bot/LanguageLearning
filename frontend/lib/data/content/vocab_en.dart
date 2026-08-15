@@ -20,7 +20,7 @@ const vocabEn = VocabularyPack(
           native: 'obtenir, devenir, arriver',
           pos: 'verbe',
           example: 'How do I get to the station?',
-          exampleNative: 'Comment aller a la gare ?',
+          exampleNative: 'Comment aller à la gare ?',
           note: 'Le verbe le plus polyvalent de l\'anglais. Seul il veut dire '
               '"obtenir" ; suivi d\'une preposition il change de sens : get up '
               '(se lever), get to (rejoindre), get on (monter dans).',
@@ -32,9 +32,9 @@ const vocabEn = VocabularyPack(
           pos: 'verbe',
           example: 'I made a mistake.',
           exampleNative: 'J\'ai fait une erreur.',
-          note: 'Le francais a un seul "faire", l\'anglais deux. "Make" = '
-              'produire un resultat (make a cake, make a decision). "Do" = '
-              'accomplir une activite (do the dishes, do your homework).',
+          note: 'Le français à un seul "faire", l\'anglais deux. "Make" = '
+              'produire un résultat (make a cake, make a decision). "Do" = '
+              'accomplir une activité (do the dishes, do your homework).',
         ),
         VocabEntry(
           id: 'en-v-do',
@@ -60,20 +60,20 @@ const vocabEn = VocabularyPack(
         VocabEntry(
           id: 'en-v-eventually',
           target: 'eventually',
-          native: 'finalement, a la fin',
+          native: 'finalement, à la fin',
           pos: 'adverbe',
           example: 'He eventually agreed.',
           exampleNative: 'Il a fini par accepter.',
           note: 'Autre faux ami : ne veut pas dire "eventuellement". Pour '
-              '"eventuellement" (= peut-etre) on dit "possibly".',
+              '"eventuellement" (= peut-être) on dit "possibly".',
         ),
         VocabEntry(
           id: 'en-v-quite',
           target: 'quite',
-          native: 'assez, plutot',
+          native: 'assez, plutôt',
           pos: 'adverbe',
           example: 'It is quite good.',
-          exampleNative: 'C\'est plutot bien.',
+          exampleNative: 'C\'est plutôt bien.',
           note: 'Attenue en anglais britannique ("assez bien"), mais renforce '
               'en anglais americain ("vraiment bien"). Le meme mot peut donc '
               'affaiblir ou renforcer selon l\'interlocuteur.',
@@ -105,8 +105,8 @@ const vocabEn = VocabularyPack(
           pos: 'adverbe',
           example: 'It is not good enough.',
           exampleNative: 'Ce n\'est pas assez bien.',
-          note: 'Se place APRES l\'adjectif ("good enough"), mais AVANT le nom '
-              '("enough time"). L\'ordre inverse du francais pour l\'adjectif.',
+          note: 'Se place APRÈS l\'adjectif ("good enough"), mais AVANT le nom '
+              '("enough time"). L\'ordre inverse du français pour l\'adjectif.',
         ),
         VocabEntry(
           id: 'en-v-still',
@@ -138,7 +138,7 @@ const vocabEn = VocabularyPack(
           example: 'It is expensive. I like it, though.',
           exampleNative: 'C\'est cher. Ca me plait quand meme.',
           note: 'Tres frequent a l\'oral, place en fin de phrase, ou il '
-              'adoucit ce qui vient d\'etre dit. C\'est un des marqueurs qui '
+              'adoucit ce qui vient d\'être dit. C\'est un des marqueurs qui '
               'fait le plus "anglais naturel".',
         ),
       ],
@@ -151,7 +151,7 @@ const vocabEn = VocabularyPack(
         VocabEntry(
           id: 'en-v-nice',
           target: 'nice',
-          native: 'sympa, agreable',
+          native: 'sympa, agréable',
           pos: 'adjectif',
           example: 'She is really nice.',
           exampleNative: 'Elle est vraiment sympa.',
@@ -177,7 +177,7 @@ const vocabEn = VocabularyPack(
           example: 'I am tired because I did not sleep.',
           exampleNative: 'Je suis fatigue parce que je n\'ai pas dormi.',
           note: '"Tired of something" change le sens : cela veut dire "en avoir '
-              'assez de quelque chose", pas etre fatigue par elle.',
+              'assez de quelque chose", pas être fatigue par elle.',
         ),
         VocabEntry(
           id: 'en-v-friend',
@@ -217,7 +217,7 @@ const vocabEn = VocabularyPack(
           pos: 'verbe',
           example: 'Nice to meet you.',
           exampleNative: 'Enchante.',
-          note: 'Pour une premiere rencontre. Revoir quelqu\'un qu\'on connait '
+          note: 'Pour une première rencontre. Revoir quelqu\'un qu\'on connait '
               'deja se dit "meet up with" ou simplement "see".',
         ),
         VocabEntry(
@@ -227,8 +227,8 @@ const vocabEn = VocabularyPack(
           pos: 'verbe',
           example: 'Do you mind if I sit here?',
           exampleNative: 'Ca vous derange si je m\'assois ici ?',
-          note: 'Piege de la reponse : "No, I don\'t mind" veut dire OUI, vas-y. '
-              'Repondre "yes" a "do you mind" est un refus.',
+          note: 'Piege de la réponse : "No, I don\'t mind" veut dire OUI, vas-y. '
+              'Répondre "yes" a "do you mind" est un refus.',
         ),
         VocabEntry(
           id: 'en-v-look-like',
@@ -236,19 +236,19 @@ const vocabEn = VocabularyPack(
           native: 'ressembler a',
           pos: 'verbe',
           example: 'She looks like her mother.',
-          exampleNative: 'Elle ressemble a sa mere.',
+          exampleNative: 'Elle ressemble a sa mère.',
           note: 'Attention au trio : "look like" (ressembler physiquement), '
               '"look" seul + adjectif (avoir l\'air), "like" seul (aimer).',
         ),
         VocabEntry(
           id: 'en-v-used-to',
           target: 'used to',
-          native: 'avant, autrefois (habitude passee)',
+          native: 'avant, autrefois (habitude passée)',
           pos: 'expression',
           example: 'I used to live in Paris.',
           exampleNative: 'J\'habitais a Paris avant.',
           note: 'Suivi de l\'infinitif, pour une habitude qui n\'existe plus. '
-              'A ne pas confondre avec "to be used to + -ing" (etre habitue a), '
+              'A ne pas confondre avec "to be used to + -ing" (être habitue a), '
               'qui est une autre structure.',
         ),
         VocabEntry(
@@ -259,7 +259,7 @@ const vocabEn = VocabularyPack(
           example: 'I cannot afford it.',
           exampleNative: 'Je n\'en ai pas les moyens.',
           note: 'Presque toujours avec "can" ou "cannot". Il n\'y a pas de '
-              'verbe francais equivalent en un mot, d\'ou son utilite.',
+              'verbe français equivalent en un mot, d\'ou son utilite.',
         ),
         VocabEntry(
           id: 'en-v-worth',
@@ -285,8 +285,8 @@ const vocabEn = VocabularyPack(
           pos: 'preposition',
           example: 'I have lived here since 2020.',
           exampleNative: 'J\'habite ici depuis 2020.',
-          note: 'Since introduit un MOMENT precis (since Monday, since I was '
-              'ten). Pour une duree, c\'est "for". Le francais utilise "depuis" '
+          note: 'Since introduit un MOMENT précis (since Monday, since I was '
+              'ten). Pour une duree, c\'est "for". Le français utilise "depuis" '
               'pour les deux, d\'ou l\'erreur.',
         ),
         VocabEntry(
@@ -307,8 +307,8 @@ const vocabEn = VocabularyPack(
           pos: 'adverbe',
           example: 'I saw her two days ago.',
           exampleNative: 'Je l\'ai vue il y a deux jours.',
-          note: 'Se place APRES la duree, jamais avant : "two days ago", jamais '
-              '"ago two days". Impose le passe simple, jamais le present perfect.',
+          note: 'Se place APRÈS la duree, jamais avant : "two days ago", jamais '
+              '"ago two days". Impose le passé simple, jamais le present perfect.',
         ),
         VocabEntry(
           id: 'en-v-yet',
@@ -336,7 +336,7 @@ const vocabEn = VocabularyPack(
           native: 'tot, en avance',
           pos: 'adverbe',
           example: 'We should leave earlier.',
-          exampleNative: 'Nous devrions partir plus tot.',
+          exampleNative: 'Nous devrions partir plus tôt.',
           note: 'Comparatif irregulier : "earlier", jamais "more early". Meme '
               'chose pour "late" qui donne "later".',
         ),
@@ -347,18 +347,18 @@ const vocabEn = VocabularyPack(
           pos: 'adverbe',
           example: 'I hardly know him.',
           exampleNative: 'Je le connais a peine.',
-          note: 'Ne veut PAS dire "durement" (= "hard"). Hardly a un sens '
+          note: 'Ne veut PAS dire "durement" (= "hard"). Hardly à un sens '
               'negatif : la phrase est deja negative sans "not".',
         ),
         VocabEntry(
           id: 'en-v-usually',
           target: 'usually',
-          native: 'generalement, d\'habitude',
+          native: 'généralement, d\'habitude',
           pos: 'adverbe',
           example: 'I usually wake up at seven.',
-          exampleNative: 'Je me reveille generalement a sept heures.',
+          exampleNative: 'Je me reveille généralement a sept heures.',
           note: 'Les adverbes de frequence se placent avant le verbe principal '
-              'mais apres "be" : "I usually go", mais "I am usually late".',
+              'mais après "be" : "I usually go", mais "I am usually late".',
         ),
         VocabEntry(
           id: 'en-v-once',
@@ -409,7 +409,7 @@ const vocabEn = VocabularyPack(
     KeyPhrase(
       id: 'en-p-repeat',
       target: 'Sorry, could you say that again?',
-      native: 'Desole, pouvez-vous repeter ?',
+      native: 'Désolé, pouvez-vous repeter ?',
       whenToUse: 'La phrase la plus utile de toutes : elle relance une '
           'conversation au lieu de la laisser mourir. A memoriser avant '
           'n\'importe quel vocabulaire.',
@@ -435,7 +435,7 @@ const vocabEn = VocabularyPack(
       id: 'en-p-mean',
       target: 'What does that mean?',
       native: 'Qu\'est-ce que ca veut dire ?',
-      whenToUse: 'Sur un mot precis que tu viens d\'entendre. Plus cible que '
+      whenToUse: 'Sur un mot précis que tu viens d\'entendre. Plus cible que '
           '"I don\'t understand", qui bloque toute la conversation.',
       category: 'reparation',
     ),
@@ -452,7 +452,7 @@ const vocabEn = VocabularyPack(
       target: 'Could I have ..., please?',
       native: 'Pourrais-je avoir ..., s\'il vous plait ?',
       whenToUse: 'La formule polie standard pour commander ou demander. '
-          '"I want" passe pour brusque en anglais, bien plus qu\'en francais.',
+          '"I want" passe pour brusque en anglais, bien plus qu\'en français.',
       category: 'politesse',
     ),
     KeyPhrase(
@@ -475,7 +475,7 @@ const vocabEn = VocabularyPack(
       id: 'en-p-help',
       target: 'Could you help me, please?',
       native: 'Pourriez-vous m\'aider ?',
-      whenToUse: 'Fonctionne partout, du guichet a la rue. Se retient en bloc.',
+      whenToUse: 'Fonctionne partout, du guichet à la rue. Se retient en bloc.',
       category: 'survie',
     ),
     KeyPhrase(
@@ -489,15 +489,15 @@ const vocabEn = VocabularyPack(
     KeyPhrase(
       id: 'en-p-howmuch',
       target: 'How much does it cost?',
-      native: 'Combien ca coute ?',
-      whenToUse: 'Partout ou l\'on achete. Retenir aussi la reponse type : '
+      native: 'Combien ca coûte ?',
+      whenToUse: 'Partout ou l\'on achete. Retenir aussi la réponse type : '
           '"It is ten pounds fifty".',
       category: 'survie',
     ),
     KeyPhrase(
       id: 'en-p-english',
       target: 'Do you speak French, by any chance?',
-      native: 'Parlez-vous francais, par hasard ?',
+      native: 'Parlez-vous français, par hasard ?',
       whenToUse: 'Le filet de secours. "By any chance" adoucit la demande et '
           'evite de donner l\'impression d\'abandonner l\'anglais.',
       category: 'survie',

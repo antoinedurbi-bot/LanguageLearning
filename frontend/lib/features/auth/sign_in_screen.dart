@@ -43,11 +43,11 @@ class _SignInScreenState extends State<SignInScreen> {
         'invalid-credential' =>
           'Email ou mot de passe incorrect. Verifie les deux, ou cree un compte.',
         'email-already-in-use' =>
-          'Un compte existe deja avec cet email. Passe en mode connexion.',
+          'Un compte existe déjà avec cet email. Passe en mode connexion.',
         'weak-password' =>
-          'Mot de passe trop court : il faut au moins 6 caracteres.',
+          'Mot de passe trop court : il faut au moins 6 caractères.',
         'network-request-failed' =>
-          'Pas de connexion. La progression reste enregistree localement.',
+          'Pas de connexion. La progression reste enregistrée localement.',
         'too-many-requests' =>
           'Trop de tentatives. Reessaie dans quelques minutes.',
         _ => error.message ?? 'Connexion impossible pour le moment.',
@@ -123,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       const SizedBox(height: LL.s8),
                       Text(
                         'Des phrases entieres, programmees pour revenir juste '
-                        'avant que tu les oublies.',
+                        'avant que tu les oubliés.',
                         style: context.type.bodyLarge,
                       ),
                       const SizedBox(height: LL.s32),
@@ -169,7 +169,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 decoration: InputDecoration(
                                   labelText: 'Mot de passe',
                                   helperText: _createAccount
-                                      ? 'Au moins 6 caracteres'
+                                      ? 'Au moins 6 caractères'
                                       : null,
                                   prefixIcon:
                                       const Icon(Icons.lock_outline_rounded),
@@ -191,7 +191,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     return 'Mot de passe requis';
                                   }
                                   if (_createAccount && text.length < 6) {
-                                    return 'Au moins 6 caracteres';
+                                    return 'Au moins 6 caractères';
                                   }
                                   return null;
                                 },
@@ -203,7 +203,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               const SizedBox(height: LL.s24),
                               GradientButton(
                                 label: _createAccount
-                                    ? 'Creer mon compte'
+                                    ? 'Créer mon compte'
                                     : 'Se connecter',
                                 loading: _loading,
                                 onPressed: _loading ? null : _submit,
@@ -218,8 +218,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         }),
                                 child: Text(
                                   _createAccount
-                                      ? 'J\'ai deja un compte'
-                                      : 'Creer un compte',
+                                      ? 'J\'ai déjà un compte'
+                                      : 'Créer un compte',
                                 ),
                               ),
                             ],

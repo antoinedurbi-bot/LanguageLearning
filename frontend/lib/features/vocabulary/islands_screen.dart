@@ -49,7 +49,7 @@ class IslandsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('ILES LINGUISTIQUES',
+                          Text('ÎLES LINGUISTIQUES',
                               style: context.type.labelSmall),
                           Text('Tes monologues prets',
                               style: context.type.headlineSmall),
@@ -74,25 +74,25 @@ class IslandsScreen extends StatelessWidget {
                                 Icon(Icons.landscape_rounded,
                                     size: 18, color: c.accent),
                                 const SizedBox(width: LL.s8),
-                                Text('Pourquoi des iles',
+                                Text('Pourquoi des îles',
                                     style: context.type.labelLarge),
                               ],
                             ),
                             const SizedBox(height: LL.s12),
                             Text(
-                              'Les deux premieres minutes d\'une conversation '
-                              'sont presque toujours les memes. En preparant '
+                              'Les deux premières minutes d\'une conversation '
+                              'sont presque toujours les mêmes. En preparant '
                               'quelques monologues courts sur ces sujets, puis '
-                              'en les repetant jusqu\'a ce qu\'ils sortent '
+                              'en les répétant jusqu\'a ce qu\'ils sortent '
                               'sans effort, tu parais bien plus a l\'aise que '
-                              'ton niveau reel — et tu gagnes le calme '
-                              'necessaire pour affronter la suite, qui elle '
+                              'ton niveau réel — et tu gagnes le calme '
+                              'nécessaire pour affronter la suite, qui elle '
                               'n\'est pas preparee.',
                               style: context.type.bodyMedium,
                             ),
                             const SizedBox(height: LL.s12),
                             Text(
-                              'Le contenu doit etre le tien. Une ile copiee '
+                              'Le contenu doit être le tien. Une ile copiee '
                               'reste un script.',
                               style: context.type.bodyMedium
                                   ?.copyWith(color: c.accent),
@@ -273,7 +273,7 @@ class _IslandDetailScreenState extends State<IslandDetailScreen> {
                       onPressed: () =>
                           setState(() => _rehearsing = !_rehearsing),
                       semanticLabel:
-                          _rehearsing ? 'Modifier' : 'Repeter a voix haute',
+                          _rehearsing ? 'Modifier' : 'Repeter à voix haute',
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: LL.s12, vertical: LL.s8),
@@ -445,7 +445,7 @@ class _PromptField extends StatelessWidget {
           maxLines: 5,
           autocorrect: false,
           decoration: const InputDecoration(
-            hintText: 'Ecris ta reponse dans la langue cible',
+            hintText: 'Écris ta réponse dans la langue cible',
           ),
         ),
       ],
@@ -470,7 +470,7 @@ class _Rehearsal extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(LL.s32),
           child: Text(
-            'Ecris d\'abord tes reponses, puis reviens ici pour les repeter '
+            'Écris d\'abord tes réponses, puis reviens ici pour les repeter '
             'a voix haute.',
             textAlign: TextAlign.center,
             style: context.type.bodyLarge,
@@ -484,9 +484,9 @@ class _Rehearsal extends StatelessWidget {
       children: [
         GlassCard(
           child: Text(
-            'Lis-le a voix haute, plusieurs fois, jusqu\'a ne plus avoir '
+            'Lis-le à voix haute, plusieurs fois, jusqu\'a ne plus avoir '
             'besoin de regarder. Une ile n\'est prete que quand elle sort '
-            'sans reflechir.',
+            'sans réfléchir.',
             style: context.type.bodyMedium,
           ),
         ),
@@ -513,7 +513,7 @@ class _Rehearsal extends StatelessWidget {
               context.read<TtsService>().speak(lines.join(' '), ttsLocale);
             },
             icon: const Icon(Icons.volume_up_rounded, size: 18),
-            label: const Text('Ecouter tout'),
+            label: const Text('Écouter tout'),
           ),
         ),
       ],

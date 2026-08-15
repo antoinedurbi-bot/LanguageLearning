@@ -42,7 +42,7 @@ const vocabTr = VocabularyPack(
           pos: 'connecteur',
           example: 'Güzel ama pahalı.',
           exampleNative: 'C\'est joli mais cher.',
-          note: 'Se place entre les deux idees, comme en francais — ce qui est '
+          note: 'Se place entre les deux idées, comme en français — ce qui est '
               'rare en turc, ou la plupart des liens se font par suffixe.',
         ),
         VocabEntry(
@@ -72,8 +72,8 @@ const vocabTr = VocabularyPack(
           pos: 'postposition',
           example: 'Senin için.',
           exampleNative: 'Pour toi.',
-          note: 'Postposition : elle se place APRES le mot, contrairement aux '
-              'prepositions francaises. Le turc met presque tout apres.',
+          note: 'Postposition : elle se place APRÈS le mot, contrairement aux '
+              'prepositions francaises. Le turc met presque tout après.',
         ),
         VocabEntry(
           id: 'tr-v-ile',
@@ -83,7 +83,7 @@ const vocabTr = VocabularyPack(
           example: 'Kartla ödeyebilir miyim?',
           exampleNative: 'Puis-je payer par carte ?',
           note: 'Souvent contracte en suffixe : kart + la = kartla. La voyelle '
-              'choisie (-la ou -le) depend de la derniere voyelle du mot.',
+              'choisie (-la ou -le) depend de la dernière voyelle du mot.',
         ),
         VocabEntry(
           id: 'tr-v-gibi',
@@ -98,7 +98,7 @@ const vocabTr = VocabularyPack(
         VocabEntry(
           id: 'tr-v-lazim',
           target: 'lazım',
-          native: 'il faut, necessaire',
+          native: 'il faut, nécessaire',
           pos: 'adjectif',
           example: 'Bana yardım lazım.',
           exampleNative: 'J\'ai besoin d\'aide.',
@@ -113,7 +113,7 @@ const vocabTr = VocabularyPack(
           example: 'Buradan uzak mı?',
           exampleNative: 'Est-ce loin d\'ici ?',
           note: 'Quatre formes de la meme particule : on choisit celle qui '
-              'harmonise avec la derniere voyelle du mot precedent. Elle '
+              'harmonise avec la dernière voyelle du mot precedent. Elle '
               's\'ecrit separement mais se prononce collee.',
         ),
         VocabEntry(
@@ -134,8 +134,8 @@ const vocabTr = VocabularyPack(
           example: 'Buyurun, oturun.',
           exampleNative: 'Je vous en prie, asseyez-vous.',
           note: 'Mot d\'accueil omnipresent : en tendant quelque chose, en '
-              'invitant a entrer, ou pour dire "je vous ecoute". Aucun '
-              'equivalent unique en francais.',
+              'invitant a entrer, ou pour dire "je vous écoute". Aucun '
+              'equivalent unique en français.',
         ),
       ],
     ),
@@ -151,7 +151,7 @@ const vocabTr = VocabularyPack(
           pos: 'suffixe',
           example: 'Solda.',
           exampleNative: 'C\'est a gauche.',
-          note: 'Locatif. Devient -te/-ta apres une consonne sourde : '
+          note: 'Locatif. Devient -te/-ta après une consonne sourde : '
               '"Paris\'te", pas "Paris\'de".',
         ),
         VocabEntry(
@@ -161,7 +161,7 @@ const vocabTr = VocabularyPack(
           pos: 'suffixe',
           example: 'Havaalanına nasıl giderim?',
           exampleNative: 'Comment aller a l\'aeroport ?',
-          note: 'Directif : la ou l\'on va. Le francais utilise "a" pour la '
+          note: 'Directif : la ou l\'on va. Le français utilise "a" pour la '
               'direction ET la position ; le turc distingue les deux.',
         ),
         VocabEntry(
@@ -190,7 +190,7 @@ const vocabTr = VocabularyPack(
           native: 'avec, originaire de',
           pos: 'suffixe',
           example: 'Fransızım, Parisliyim.',
-          exampleNative: 'Je suis francais, je suis parisien.',
+          exampleNative: 'Je suis français, je suis parisien.',
           note: 'Deux usages : "avec" (sütlü = avec du lait) et "originaire '
               'de" (Parisli = parisien).',
         ),
@@ -212,7 +212,7 @@ const vocabTr = VocabularyPack(
           example: 'Konuşabilir misiniz?',
           exampleNative: 'Pouvez-vous parler ?',
           note: 'S\'insere DANS le verbe, entre le radical et la terminaison. '
-              'Le francais met un verbe separe ; le turc empile.',
+              'Le français met un verbe separe ; le turc empile.',
         ),
         VocabEntry(
           id: 'tr-v-me',
@@ -221,7 +221,7 @@ const vocabTr = VocabularyPack(
           pos: 'suffixe',
           example: 'Anlamıyorum.',
           exampleNative: 'Je ne comprends pas.',
-          note: 'S\'insere apres le radical : anla (comprendre) + m + ıyorum. '
+          note: 'S\'insere après le radical : anla (comprendre) + m + ıyorum. '
               'Il n\'y a jamais de mot separe pour "ne... pas" avec un verbe.',
         ),
       ],
@@ -232,7 +232,7 @@ const vocabTr = VocabularyPack(
       id: 'tr-p-repeat',
       target: 'Tekrar eder misiniz?',
       native: 'Pouvez-vous repeter ?',
-      whenToUse: 'La phrase a connaitre avant toutes les autres : elle garde '
+      whenToUse: 'La phrase a connaître avant toutes les autres : elle garde '
           'la conversation ouverte.',
       category: 'reparation',
     ),
@@ -241,7 +241,7 @@ const vocabTr = VocabularyPack(
       target: 'Daha yavaş konuşabilir misiniz?',
       native: 'Pouvez-vous parler plus lentement ?',
       whenToUse: 'Le turc s\'enchaine en longues chaines de suffixes, tres '
-          'dur a decouper au debut.',
+          'dur a decouper au début.',
       category: 'reparation',
     ),
     KeyPhrase(
@@ -255,7 +255,7 @@ const vocabTr = VocabularyPack(
     KeyPhrase(
       id: 'tr-p-nounderstand',
       target: 'Anlamıyorum, özür dilerim.',
-      native: 'Je ne comprends pas, desole.',
+      native: 'Je ne comprends pas, désolé.',
       whenToUse: 'Honnete et poli. Mieux vaut le dire que de hocher la tete '
           'dans le vide.',
       category: 'reparation',
@@ -264,7 +264,7 @@ const vocabTr = VocabularyPack(
       id: 'tr-p-beginner',
       target: 'Türkçem çok iyi değil.',
       native: 'Mon turc n\'est pas tres bon.',
-      whenToUse: 'Desamorce d\'entree. L\'interlocuteur ralentit et simplifie '
+      whenToUse: 'Désamorce d\'entrée. L\'interlocuteur ralentit et simplifie '
           'spontanement ensuite.',
       category: 'reparation',
     ),
@@ -279,7 +279,7 @@ const vocabTr = VocabularyPack(
     KeyPhrase(
       id: 'tr-p-howmuch',
       target: 'Ne kadar?',
-      native: 'Combien ca coute ?',
+      native: 'Combien ca coûte ?',
       whenToUse: 'Court et universel. "Kaç para?" est l\'equivalent plus '
           'familier.',
       category: 'survie',
@@ -310,17 +310,17 @@ const vocabTr = VocabularyPack(
     KeyPhrase(
       id: 'tr-p-thanks',
       target: 'Çok teşekkür ederim, elinize sağlık.',
-      native: 'Merci beaucoup, c\'etait delicieux.',
-      whenToUse: 'Apres un repas : "elinize sağlık" (sante a vos mains) se '
+      native: 'Merci beaucoup, c\'était delicieux.',
+      whenToUse: 'Après un repas : "elinize sağlık" (sante a vos mains) se '
           'dit a qui a cuisine. Formule tres appreciee et intraduisible.',
       category: 'politesse',
     ),
     KeyPhrase(
       id: 'tr-p-welcome',
       target: 'Hoş bulduk.',
-      native: '(reponse a la bienvenue)',
-      whenToUse: 'La reponse rituelle a "hoş geldiniz" (bienvenue). Ne pas '
-          'repondre marque immediatement l\'etranger ; repondre fait '
+      native: '(réponse à la bienvenue)',
+      whenToUse: 'La réponse rituelle a "hoş geldiniz" (bienvenue). Ne pas '
+          'répondre marque immediatement l\'etranger ; répondre fait '
           'excellente impression.',
       category: 'politesse',
     ),

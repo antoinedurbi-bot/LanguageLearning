@@ -81,7 +81,7 @@ class _PinyinChartScreenState extends State<PinyinChartScreen> {
                     GlassCard(
                       child: Text(
                         'Le mandarin n\'utilise qu\'environ 400 syllabes '
-                        'differentes. Choisis une initiale, puis touche une '
+                        'différentes. Choisis une initiale, puis touche une '
                         'syllabe pour l\'entendre dans chacun de ses tons.',
                         style: context.type.bodyMedium,
                       ),

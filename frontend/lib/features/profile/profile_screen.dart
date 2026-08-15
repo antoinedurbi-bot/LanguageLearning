@@ -67,9 +67,9 @@ class _Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('PROGRES', style: context.type.labelSmall),
+        Text('PROGRÈS', style: context.type.labelSmall),
         const SizedBox(height: LL.s4),
-        Text('Ou tu en es', style: context.type.displayMedium),
+        Text('Où tu en es', style: context.type.displayMedium),
       ],
     );
   }
@@ -115,13 +115,13 @@ class _MasteryCard extends StatelessWidget {
                 Text('Phrases acquises', style: context.type.titleMedium),
                 const SizedBox(height: LL.s8),
                 Text(
-                  '$learned sur $total, et $seen rencontrees au moins une fois.',
+                  '$learned sur $total, et $seen rencontrées au moins une fois.',
                   style: context.type.bodyMedium,
                 ),
                 const SizedBox(height: LL.s8),
                 Text(
                   'Une phrase compte comme acquise quand son intervalle de '
-                  'revision depasse trois semaines.',
+                  'révision dépasse trois semaines.',
                   style: context.type.labelSmall
                       ?.copyWith(color: c.textTertiary, letterSpacing: 0.1),
                 ),
@@ -148,7 +148,7 @@ class _NumbersCard extends StatelessWidget {
         children: [
           _Number(
             value: '${progress.streak}',
-            label: 'serie',
+            label: 'série',
             tint: LL.amber,
           ),
           _Divider(color: c.divider),
@@ -160,7 +160,7 @@ class _NumbersCard extends StatelessWidget {
           _Divider(color: c.divider),
           _Number(
             value: '${progress.totalReviews}',
-            label: 'revisions',
+            label: 'révisions',
             tint: c.accent,
           ),
           _Divider(color: c.divider),
@@ -168,7 +168,7 @@ class _NumbersCard extends StatelessWidget {
             value: progress.totalReviews == 0
                 ? '-'
                 : '${(progress.accuracy * 100).round()}%',
-            label: 'reussite',
+            label: 'réussite',
             tint: c.success,
           ),
         ],
@@ -245,16 +245,16 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Activite', style: context.type.titleMedium),
+          Text('Activité', style: context.type.titleMedium),
           const SizedBox(height: LL.s4),
-          Text('Les 12 dernieres semaines', style: context.type.labelSmall),
+          Text('Les 12 dernières semaines', style: context.type.labelSmall),
           const SizedBox(height: LL.s16),
           if (progress.totalReviews == 0)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: LL.s20),
               child: Text(
-                'Aucune revision pour l\'instant. La grille se remplira des '
-                'la premiere session.',
+                'Aucune révision pour l\'instant. La grille se remplira des '
+                'la première session.',
                 style: context.type.bodyMedium,
               ),
             )
@@ -310,7 +310,7 @@ class _Cell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final intensity = count == 0 ? 0.0 : (count / maxCount).clamp(0.18, 1.0);
-    final label = '${LanguageProgress.dayKey(date)}: $count revision'
+    final label = '${LanguageProgress.dayKey(date)}: $count révision'
         '${count > 1 ? 's' : ''}';
 
     return Tooltip(
@@ -445,7 +445,7 @@ class _SettingsCard extends StatelessWidget {
             subtitle: Text(switch (controller.themeMode) {
               ThemeMode.dark => 'Sombre',
               ThemeMode.light => 'Clair',
-              ThemeMode.system => 'Systeme',
+              ThemeMode.system => 'Système',
             }),
             trailing: SegmentedButton<ThemeMode>(
               showSelectedIcon: false,
@@ -463,7 +463,7 @@ class _SettingsCard extends StatelessWidget {
                 ButtonSegment(
                   value: ThemeMode.system,
                   icon: Icon(Icons.smartphone_rounded, size: 18),
-                  tooltip: 'Systeme',
+                  tooltip: 'Système',
                 ),
               ],
               selected: {controller.themeMode},
@@ -548,8 +548,8 @@ class _AccountCard extends StatelessWidget {
                 builder: (context) => AlertDialog(
                   title: const Text('Tout effacer ?'),
                   content: const Text(
-                    'Les intervalles de revision, la serie et l\'historique de '
-                    'cette langue seront perdus. Cette action est definitive.',
+                    'Les intervalles de révision, la série et l\'historique de '
+                    'cette langue seront perdus. Cette action est définitive.',
                   ),
                   actions: [
                     TextButton(

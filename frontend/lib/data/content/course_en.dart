@@ -8,10 +8,10 @@ const _en1Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'To be : am / is / are',
-      body: 'Contrairement au francais, l\'anglais n\'a pas de forme unique '
+      body: 'Contrairement au français, l\'anglais n\'a pas de forme unique '
           '"suis/es/est" : chaque personne a sa propre forme. On ne peut '
-          'jamais l\'omettre, meme quand le francais le sous-entend '
-          '("Enchante" reste une formule figee, mais "Je suis francais" '
+          'jamais l\'omettre, meme quand le français le sous-entend '
+          '("Enchante" reste une formule figee, mais "Je suis français" '
           'devient bien "I am French").',
     ),
     TableBlock(
@@ -55,7 +55,7 @@ const _en1Grammar = GrammarLesson(
       wrong: 'I not understand.',
       right: 'I do not understand.',
       why: 'L\'anglais ne nie jamais un verbe ordinaire seul avec "not" : '
-          'il faut l\'auxiliaire "do" (ou "does" a la 3e personne) devant.',
+          'il faut l\'auxiliaire "do" (ou "does" à la 3e personne) devant.',
     ),
   ],
 );
@@ -68,8 +68,8 @@ const _en2Grammar = GrammarLesson(
     ExplanationBlock(
       heading: 'Want vs would like',
       body: '"Want" est direct et peut sembler brusque. "Would like" est la '
-          'version polie utilisee au restaurant, dans un magasin, partout '
-          'ou le francais dirait "je voudrais" plutot que "je veux".',
+          'version polie utilisée au restaurant, dans un magasin, partout '
+          'ou le français dirait "je voudrais" plutôt que "je veux".',
     ),
     TableBlock(
       headers: ['Direct', 'Poli'],
@@ -88,7 +88,7 @@ const _en2Grammar = GrammarLesson(
       examples: [
         GrammarExample(
           target: 'How much is it?',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           note: 'un prix ne se compte pas : how much',
         ),
         GrammarExample(
@@ -110,12 +110,12 @@ const _en2Grammar = GrammarLesson(
 const _en3Grammar = GrammarLesson(
   title: 'Les prepositions qui ne se traduisent pas',
   hook: 'La plupart des erreurs de debutant en anglais viennent d\'une '
-      'preposition traduite mot a mot depuis le francais.',
+      'preposition traduite mot a mot depuis le français.',
   blocks: [
     ExplanationBlock(
       heading: 'On, at, in : trois "a" differents',
-      body: 'Le francais dit "a" pour a peu pres tout. L\'anglais distingue '
-          'la position sur une surface ou un cote (on), un point precis '
+      body: 'Le français dit "a" pour à peu près tout. L\'anglais distingue '
+          'la position sur une surface ou un côté (on), un point précis '
           '(at) et l\'interieur d\'un lieu (in).',
     ),
     TableBlock(
@@ -205,12 +205,12 @@ const _en4Grammar = GrammarLesson(
 
 const _en5Grammar = GrammarLesson(
   title: 'Parler du passe : trois outils, trois usages',
-  hook: 'Le passe simple, le present perfect et le passe en -ing ne '
-      'racontent pas la meme chose, meme quand le francais utiliserait le '
+  hook: 'Le passé simple, le present perfect et le passe en -ing ne '
+      'racontent pas la meme chose, meme quand le français utiliserait le '
       'meme temps pour les trois.',
   blocks: [
     ExplanationBlock(
-      heading: 'Past simple : un fait termine, a un moment precis',
+      heading: 'Past simple : un fait termine, à un moment précis',
       body: 'Utilise pour un evenement fini, souvent avec une date ou un '
           'marqueur temporel (last year, yesterday). Beaucoup de verbes '
           'sont irreguliers et changent de forme.',
@@ -229,18 +229,18 @@ const _en5Grammar = GrammarLesson(
       heading: 'Present perfect : une experience de vie, sans date',
       body: '"Have + participe passe" repond a "est-ce que ca t\'est deja '
           'arrive ?", sans preciser quand. Des qu\'une date ou un moment '
-          'precis apparait, il faut repasser au past simple.',
+          'précis apparaît, il faut repasser au past simple.',
     ),
     ExampleBlock(
       examples: [
         GrammarExample(
           target: 'I went to London last year.',
-          native: 'Je suis alle a Londres l\'annee derniere.',
+          native: 'Je suis allé a Londres l\'année dernière.',
           note: 'date precisee (last year) : past simple',
         ),
         GrammarExample(
           target: 'Have you ever been to Japan?',
-          native: 'Es-tu deja alle au Japon ?',
+          native: 'Es-tu deja allé au Japon ?',
           note: 'experience sans date : have + been',
         ),
       ],
@@ -255,20 +255,20 @@ const _en5Grammar = GrammarLesson(
       wrong: 'I have went to London last year.',
       right: 'I went to London last year.',
       why: 'Une date precise (last year) exige le past simple ; le present '
-          'perfect ne se combine jamais avec un moment precis du passe.',
+          'perfect ne se combine jamais avec un moment précis du passe.',
     ),
   ],
 );
 
 const _en6Grammar = GrammarLesson(
   title: 'Hypotheses, projets et prepositions figees',
-  hook: 'Nuancer en anglais demande des structures que le francais n\'a '
+  hook: 'Nuancer en anglais demande des structures que le français n\'a '
       'pas telles quelles : le conditionnel irreel et be going to.',
   blocks: [
     ExplanationBlock(
       heading: 'If + passe, would + base : l\'hypothese irreelle',
       body: 'Pour une situation imaginaire au present ("si j\'avais..."), '
-          'l\'anglais met le verbe apres "if" au passe simple, et "would" '
+          'l\'anglais met le verbe après "if" au passé simple, et "would" '
           'devant le verbe de la consequence. Le passe ici n\'indique pas '
           'le temps, il marque l\'irrealite.',
     ),
@@ -289,20 +289,20 @@ const _en6Grammar = GrammarLesson(
     ExplanationBlock(
       heading: 'Be going to vs will',
       body: '"Be going to" annonce une decision deja prise avant l\'instant '
-          'de parole. "Will" sert plutot a une decision prise sur le '
-          'moment, ou a une prediction.',
+          'de parole. "Will" sert plutôt à une decision prise sur le '
+          'moment, ou à une prediction.',
     ),
     ExplanationBlock(
       heading: 'Prepositions figees : depend ON, used TO',
       body: 'Certains verbes exigent toujours la meme preposition, sans '
-          'lien avec le francais : "depend" se construit avec "on" (jamais '
+          'lien avec le français : "depend" se construit avec "on" (jamais '
           '"of"), et "be used to" est suivi d\'un verbe en -ing, pas de '
           'l\'infinitif.',
     ),
     MistakeBlock(
       wrong: 'I am used to work late.',
       right: 'I am used to working late.',
-      why: 'Ici "to" fait partie de l\'expression "be used to" (etre '
+      why: 'Ici "to" fait partie de l\'expression "be used to" (être '
           'habitue a) et se comporte comme une preposition : il est suivi '
           'd\'un verbe en -ing, pas de l\'infinitif.',
     ),
@@ -322,7 +322,7 @@ const courseEn = Course(
     Unit(
       id: 'en-u1',
       title: 'Premiers mots',
-      subtitle: 'Se presenter et repondre',
+      subtitle: 'Se presenter et répondre',
       level: 'A1',
       grammarLesson: _en1Grammar,
       cards: [
@@ -365,7 +365,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-1-5',
           target: 'Sorry, I do not understand.',
-          native: 'Desole, je ne comprends pas.',
+          native: 'Désolé, je ne comprends pas.',
           gloss: 'Desole, je fais pas comprendre.',
           tokens: ['Sorry,', 'I', 'do', 'not', 'understand.'],
           distractors: ['am', 'no', 'understanding'],
@@ -401,7 +401,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-2-2',
           target: 'How much is it?',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           gloss: 'Combien beaucoup est il ?',
           tokens: ['How', 'much', 'is', 'it?'],
           distractors: ['many', 'cost', 'does'],
@@ -437,7 +437,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-2-6',
           target: 'It was delicious, thank you.',
-          native: 'C\'etait delicieux, merci.',
+          native: 'C\'était delicieux, merci.',
           gloss: 'Il etait delicieux, merci toi.',
           tokens: ['It', 'was', 'delicious,', 'thank', 'you.'],
           distractors: ['is', 'were', 'thanks to'],
@@ -518,7 +518,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-4-1',
           target: 'I usually wake up at seven.',
-          native: 'Je me reveille generalement a sept heures.',
+          native: 'Je me reveille généralement a sept heures.',
           gloss: 'Je habituellement reveille haut a sept.',
           tokens: ['I', 'usually', 'wake', 'up', 'at', 'seven.'],
           distractors: ['am waking', 'in', 'the seven'],
@@ -558,7 +558,7 @@ const courseEn = Course(
           gloss: 'Je suis fatigue parce-que je fis pas dormir.',
           tokens: ['I', 'am', 'tired', 'because', 'I', 'did', 'not', 'sleep.'],
           distractors: ['have', 'slept', 'why'],
-          focus: 'Apres "did not", le verbe reste a la base',
+          focus: 'Après "did not", le verbe reste à la base',
         ),
         CardItem(
           id: 'en-4-6',
@@ -581,7 +581,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-5-1',
           target: 'I went to London last year.',
-          native: 'Je suis alle a Londres l\'annee derniere.',
+          native: 'Je suis allé a Londres l\'année dernière.',
           gloss: 'Je allai a Londres derniere annee.',
           tokens: ['I', 'went', 'to', 'London', 'last', 'year.'],
           distractors: ['goed', 'in', 'the last'],
@@ -599,7 +599,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-5-3',
           target: 'It was raining all day.',
-          native: 'Il a plu toute la journee.',
+          native: 'Il a plu toute la journée.',
           gloss: 'Il etait pleuvant tout jour.',
           tokens: ['It', 'was', 'raining', 'all', 'day.'],
           distractors: ['rained', 'every', 'the all'],
@@ -608,7 +608,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-5-4',
           target: 'Have you ever been to Japan?',
-          native: 'Es-tu deja alle au Japon ?',
+          native: 'Es-tu deja allé au Japon ?',
           gloss: 'As tu jamais ete a Japon ?',
           tokens: ['Have', 'you', 'ever', 'been', 'to', 'Japan?'],
           distractors: ['Did', 'already', 'gone'],
@@ -626,7 +626,7 @@ const courseEn = Course(
         CardItem(
           id: 'en-5-6',
           target: 'The food was better than I expected.',
-          native: 'La nourriture etait meilleure que ce que j\'attendais.',
+          native: 'La nourriture était meilleure que ce que j\'attendais.',
           gloss: 'La nourriture etait meilleure que je attendais.',
           tokens: ['The', 'food', 'was', 'better', 'than', 'I', 'expected.'],
           distractors: ['more good', 'that', 'as'],
@@ -644,11 +644,11 @@ const courseEn = Course(
         CardItem(
           id: 'en-6-1',
           target: 'I think we should leave earlier.',
-          native: 'Je pense que nous devrions partir plus tot.',
+          native: 'Je pense que nous devrions partir plus tôt.',
           gloss: 'Je pense nous devrions partir plus-tot.',
           tokens: ['I', 'think', 'we', 'should', 'leave', 'earlier.'],
           distractors: ['that we', 'would', 'more early'],
-          focus: '"that" s\'omet apres think en anglais courant',
+          focus: '"that" s\'omet après think en anglais courant',
         ),
         CardItem(
           id: 'en-6-2',

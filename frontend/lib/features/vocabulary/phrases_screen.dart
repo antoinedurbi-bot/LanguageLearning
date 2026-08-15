@@ -28,16 +28,16 @@ class PhrasesScreen extends StatelessWidget {
   final String ttsLocale;
 
   static const _categoryTitles = {
-    'reparation': 'Reparer la conversation',
+    'réparation': 'Reparer la conversation',
     'politesse': 'Politesse',
     'survie': 'Survie',
   };
 
   static const _categoryNotes = {
-    'reparation': 'Les plus importantes de toutes. Elles te permettent de '
-        'continuer quand tu n\'as pas compris, au lieu de t\'arreter.',
-    'politesse': 'Ce qui fait la difference entre "comprehensible" et '
-        '"agreable a ecouter".',
+    'réparation': 'Les plus importantes de toutes. Elles te permettent de '
+        'continuer quand tu n\'as pas compris, au lieu de t\'arrêter.',
+    'politesse': 'Ce qui fait la différence entre "compréhensible" et '
+        '"agréable a écouter".',
     'survie': 'Ce dont tu as besoin dans la rue, au guichet, au restaurant.',
   };
 
@@ -67,8 +67,8 @@ class PhrasesScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('PHRASES CLES', style: context.type.labelSmall),
-                          Text('A connaitre par coeur',
+                          Text('PHRASES CLÉS', style: context.type.labelSmall),
+                          Text('A connaître par coeur',
                               style: context.type.headlineSmall),
                         ],
                       ),
@@ -184,7 +184,7 @@ class _PhraseCard extends StatelessWidget {
                             .read<TtsService>()
                             .speak(phrase.target, ttsLocale);
                       },
-                      semanticLabel: 'Ecouter',
+                      semanticLabel: 'Écouter',
                       child: Container(
                         width: 40,
                         height: 40,

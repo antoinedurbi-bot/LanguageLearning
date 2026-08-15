@@ -267,7 +267,7 @@ class _EntryRow extends StatelessWidget {
                 if (!controller.soundEnabled) return;
                 context.read<TtsService>().speak(entry.target, ttsLocale);
               },
-              semanticLabel: 'Ecouter ${entry.target}',
+              semanticLabel: 'Écouter ${entry.target}',
               child: Container(
                 width: 40,
                 height: 40,

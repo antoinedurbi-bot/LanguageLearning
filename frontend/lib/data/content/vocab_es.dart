@@ -17,18 +17,18 @@ const vocabEs = VocabularyPack(
         VocabEntry(
           id: 'es-v-ser',
           target: 'ser',
-          native: 'etre (essence)',
+          native: 'être (essence)',
           pos: 'verbe',
           example: 'Soy de Francia.',
           exampleNative: 'Je viens de France.',
           note: 'Pour ce qui definit : origine, nationalite, metier, '
-              'caractere, heure. Si la qualite fait partie de l\'identite, '
+              'caractère, heure. Si la qualite fait partie de l\'identite, '
               'c\'est ser.',
         ),
         VocabEntry(
           id: 'es-v-estar',
           target: 'estar',
-          native: 'etre (etat, lieu)',
+          native: 'être (état, lieu)',
           pos: 'verbe',
           example: 'Estoy muy cansado hoy.',
           exampleNative: 'Je suis tres fatigue aujourd\'hui.',
@@ -41,7 +41,7 @@ const vocabEs = VocabularyPack(
           native: 'il y a',
           pos: 'verbe',
           example: 'Hay un problema.',
-          exampleNative: 'Il y a un probleme.',
+          exampleNative: 'Il y à un problème.',
           note: 'Forme unique et invariable : "hay un libro" comme "hay muchos '
               'libros". Ne jamais l\'accorder au pluriel.',
         ),
@@ -51,7 +51,7 @@ const vocabEs = VocabularyPack(
           native: 'rester, se trouver',
           pos: 'verbe',
           example: 'Prefiero quedarme en casa.',
-          exampleNative: 'Je prefere rester a la maison.',
+          exampleNative: 'Je préfère rester à la maison.',
           note: 'Sans pronom, il veut dire "se trouver" ou "convenir" '
               '(quedamos a las ocho = on se dit huit heures). Avec pronom, '
               '"rester quelque part".',
@@ -59,7 +59,7 @@ const vocabEs = VocabularyPack(
         VocabEntry(
           id: 'es-v-tener-que',
           target: 'tener que',
-          native: 'devoir, etre oblige de',
+          native: 'devoir, être oblige de',
           pos: 'expression',
           example: 'Tengo que irme.',
           exampleNative: 'Je dois y aller.',
@@ -73,7 +73,7 @@ const vocabEs = VocabularyPack(
           pos: 'expression',
           example: 'Acabo de llegar.',
           exampleNative: 'Je viens d\'arriver.',
-          note: 'Traduit le passe recent francais. Ne jamais traduire "je '
+          note: 'Traduit le passe recent français. Ne jamais traduire "je '
               'viens de" par "vengo de", qui veut dire "je viens de (ce lieu)".',
         ),
         VocabEntry(
@@ -83,8 +83,8 @@ const vocabEs = VocabularyPack(
           pos: 'connecteur',
           example: 'No es caro, sino barato.',
           exampleNative: 'Ce n\'est pas cher, mais bon marche.',
-          note: 'Deux "mais" : pero oppose deux idees ; sino corrige une '
-              'negation qui precede. Apres une negation, c\'est presque '
+          note: 'Deux "mais" : pero oppose deux idées ; sino corrige une '
+              'negation qui precede. Après une negation, c\'est presque '
               'toujours sino.',
         ),
         VocabEntry(
@@ -103,8 +103,8 @@ const vocabEs = VocabularyPack(
           native: 'meme',
           pos: 'adjectif',
           example: 'Es el mismo problema.',
-          exampleNative: 'C\'est le meme probleme.',
-          note: 'Devant le nom : "le meme". Apres le nom ou le pronom, il '
+          exampleNative: 'C\'est le meme problème.',
+          note: 'Devant le nom : "le meme". Après le nom ou le pronom, il '
               'insiste : "yo mismo" = moi-meme.',
         ),
         VocabEntry(
@@ -126,7 +126,7 @@ const vocabEs = VocabularyPack(
           example: 'Vale, nos vemos mañana.',
           exampleNative: 'D\'accord, on se voit demain.',
           note: 'Omnipresent en Espagne, beaucoup moins en Amerique latine ou '
-              'l\'on dira plutot "bueno" ou "dale".',
+              'l\'on dira plutôt "bueno" ou "dale".',
         ),
         VocabEntry(
           id: 'es-v-gustar',
@@ -143,7 +143,7 @@ const vocabEs = VocabularyPack(
     VocabTheme(
       id: 'es-t2',
       title: 'Faux amis',
-      subtitle: 'Les mots qui ressemblent au francais et ne veulent pas dire pareil',
+      subtitle: 'Les mots qui ressemblent au français et ne veulent pas dire pareil',
       entries: [
         VocabEntry(
           id: 'es-v-embarazada',
@@ -162,7 +162,7 @@ const vocabEs = VocabularyPack(
           pos: 'adjectif',
           example: 'Estoy constipado.',
           exampleNative: 'Je suis enrhume.',
-          note: 'Rien a voir avec la constipation. Dire "estoy constipado" a '
+          note: 'Rien à voir avec la constipation. Dire "estoy constipado" a '
               'un pharmacien te vaudra du sirop pour le rhume.',
         ),
         VocabEntry(
@@ -182,7 +182,7 @@ const vocabEs = VocabularyPack(
           example: 'Es una persona muy sensible.',
           exampleNative: 'C\'est une personne tres sensible.',
           note: 'Attention au retour : "sensible" en anglais veut dire '
-              'raisonnable. En espagnol le sens est bien celui du francais.',
+              'raisonnable. En espagnol le sens est bien celui du français.',
         ),
         VocabEntry(
           id: 'es-v-ropa',
@@ -210,7 +210,7 @@ const vocabEs = VocabularyPack(
           native: 'comprendre',
           pos: 'verbe',
           example: 'No entiendo, lo siento.',
-          exampleNative: 'Je ne comprends pas, desole.',
+          exampleNative: 'Je ne comprends pas, désolé.',
           note: 'Ne veut pas dire "entendre" (= oir). Diphtongue au present : '
               'entiendo, entiendes, entiende.',
         ),
@@ -241,7 +241,7 @@ const vocabEs = VocabularyPack(
           pos: 'verbe',
           example: 'No quiero discutir contigo.',
           exampleNative: 'Je ne veux pas me disputer avec toi.',
-          note: 'Plus conflictuel qu\'en francais. Pour "discuter" au sens '
+          note: 'Plus conflictuel qu\'en français. Pour "discuter" au sens '
               'neutre, on dit "hablar" ou "charlar".',
         ),
         VocabEntry(
@@ -251,7 +251,7 @@ const vocabEs = VocabularyPack(
           pos: 'adverbe',
           example: 'Actualmente vivo en Madrid.',
           exampleNative: 'Actuellement j\'habite a Madrid.',
-          note: 'Celui-ci correspond bien au francais — contrairement a '
+          note: 'Celui-ci correspond bien au français — contrairement a '
               'l\'anglais "actually". Utile a noter justement pour ne pas '
               'sur-corriger.',
         ),
@@ -263,7 +263,7 @@ const vocabEs = VocabularyPack(
           example: 'La fiesta fue un éxito.',
           exampleNative: 'La fete a ete un succes.',
           note: 'Ne veut pas dire "sortie" (= salida). Faux ami avec '
-              'l\'anglais "exit" plus qu\'avec le francais.',
+              'l\'anglais "exit" plus qu\'avec le français.',
         ),
       ],
     ),
@@ -279,7 +279,7 @@ const vocabEs = VocabularyPack(
           pos: 'verbe',
           example: 'Siempre desayuno antes de salir.',
           exampleNative: 'Je prends toujours mon petit-dejeuner avant de sortir.',
-          note: 'Un seul verbe la ou le francais a besoin de quatre mots. '
+          note: 'Un seul verbe la ou le français a besoin de quatre mots. '
               'Meme logique pour comer (dejeuner) et cenar (diner).',
         ),
         VocabEntry(
@@ -309,8 +309,8 @@ const vocabEs = VocabularyPack(
           pos: 'nom',
           example: 'La cuenta, por favor.',
           exampleNative: 'L\'addition, s\'il vous plait.',
-          note: 'Au restaurant c\'est l\'addition ; a la banque, le compte. '
-              '"Darse cuenta" = se rendre compte, expression tres frequente.',
+          note: 'Au restaurant c\'est l\'addition ; à la banque, le compte. '
+              '"Darse cuenta" = se rendre compte, expression tres fréquente.',
         ),
         VocabEntry(
           id: 'es-v-barrio',
@@ -330,9 +330,9 @@ const vocabEs = VocabularyPack(
           pos: 'expression',
           example: 'Te echo de menos.',
           exampleNative: 'Tu me manques.',
-          note: 'Construction inverse du francais : le sujet est celui qui '
+          note: 'Construction inverse du français : le sujet est celui qui '
               'ressent le manque. "Te echo de menos" = c\'est moi qui te '
-              'regrette. En Amerique latine on dit plutot "extranar".',
+              'regrette. En Amerique latine on dit plutôt "extranar".',
         ),
         VocabEntry(
           id: 'es-v-pedir',
@@ -342,8 +342,8 @@ const vocabEs = VocabularyPack(
           example: 'Voy a pedir un café.',
           exampleNative: 'Je vais commander un cafe.',
           note: 'Pedir = demander pour obtenir (commander). Preguntar = poser '
-              'une question. Le francais "demander" couvre les deux, d\'ou '
-              'l\'erreur frequente.',
+              'une question. Le français "demander" couvre les deux, d\'ou '
+              'l\'erreur fréquente.',
         ),
         VocabEntry(
           id: 'es-v-llevar',
@@ -362,7 +362,7 @@ const vocabEs = VocabularyPack(
           pos: 'verbe',
           example: 'Tarda veinte minutos.',
           exampleNative: 'Ca prend vingt minutes.',
-          note: 'Pas de rapport avec "tard" au sens d\'etre en retard, qui se '
+          note: 'Pas de rapport avec "tard" au sens d\'être en retard, qui se '
               'dit "llegar tarde".',
         ),
         VocabEntry(
@@ -378,12 +378,12 @@ const vocabEs = VocabularyPack(
         VocabEntry(
           id: 'es-v-parecer',
           target: 'parecer',
-          native: 'sembler, paraitre',
+          native: 'sembler, paraître',
           pos: 'verbe',
           example: '¿Qué te parece?',
           exampleNative: 'Qu\'en penses-tu ?',
           note: '"¿Qué te parece?" est la facon normale de demander un avis, '
-              'bien plus frequente que "¿qué piensas?".',
+              'bien plus fréquente que "¿qué piensas?".',
         ),
         VocabEntry(
           id: 'es-v-hasta',
@@ -404,8 +404,8 @@ const vocabEs = VocabularyPack(
       id: 'es-p-repeat',
       target: '¿Puede repetir, por favor?',
       native: 'Pouvez-vous repeter, s\'il vous plait ?',
-      whenToUse: 'La premiere phrase a connaitre par coeur : elle garde la '
-          'conversation ouverte au lieu de la laisser s\'arreter.',
+      whenToUse: 'La première phrase a connaître par coeur : elle garde la '
+          'conversation ouverte au lieu de la laisser s\'arrêter.',
       category: 'reparation',
     ),
     KeyPhrase(
@@ -428,7 +428,7 @@ const vocabEs = VocabularyPack(
       id: 'es-p-mean',
       target: '¿Qué significa eso?',
       native: 'Qu\'est-ce que ca veut dire ?',
-      whenToUse: 'Cible un mot precis plutot que d\'avouer une incomprehension '
+      whenToUse: 'Cible un mot précis plutôt que d\'avouer une incompréhension '
           'globale, ce qui bloque tout.',
       category: 'reparation',
     ),
@@ -436,7 +436,7 @@ const vocabEs = VocabularyPack(
       id: 'es-p-notsure',
       target: 'No sé cómo se dice, pero...',
       native: 'Je ne sais pas comment on dit, mais...',
-      whenToUse: 'Annonce une phrase maladroite et desamorce le jugement. '
+      whenToUse: 'Annonce une phrase maladroite et désamorce le jugement. '
           'Permet de continuer au lieu de se taire.',
       category: 'reparation',
     ),
@@ -475,7 +475,7 @@ const vocabEs = VocabularyPack(
     KeyPhrase(
       id: 'es-p-howmuch',
       target: '¿Cuánto cuesta?',
-      native: 'Combien ca coute ?',
+      native: 'Combien ca coûte ?',
       whenToUse: 'Partout ou l\'on achete. Retenir aussi "¿cuánto es?" pour '
           'un total.',
       category: 'survie',
@@ -491,8 +491,8 @@ const vocabEs = VocabularyPack(
     KeyPhrase(
       id: 'es-p-french',
       target: '¿Habla francés o inglés?',
-      native: 'Parlez-vous francais ou anglais ?',
-      whenToUse: 'Le filet de secours, a garder pour quand la reparation a '
+      native: 'Parlez-vous français ou anglais ?',
+      whenToUse: 'Le filet de secours, a garder pour quand la réparation a '
           'echoue.',
       category: 'survie',
     ),

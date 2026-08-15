@@ -107,7 +107,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Rien a reviser'), findsOneWidget);
+    expect(find.text('Rien à réviser'), findsOneWidget);
     expect(find.text('Terminer'), findsOneWidget);
   });
 
@@ -138,7 +138,7 @@ void main() {
 
     expect(find.text('Session terminee'), findsOneWidget);
     expect(find.text('100%'), findsOneWidget);
-    expect(find.text('de reussite'), findsOneWidget);
+    expect(find.text('de réussite'), findsOneWidget);
     expect(find.text('1 / 1'), findsOneWidget);
   });
 

@@ -142,7 +142,7 @@ class ExplanationSheet extends StatelessWidget {
                   _RoundButton(
                     icon: Icons.volume_up_rounded,
                     tint: c.accentAlt,
-                    semanticLabel: 'Ecouter',
+                    semanticLabel: 'Écouter',
                     onPressed: () {
                       if (!controller.soundEnabled) return;
                       context.read<TtsService>().speak(target, locale);
@@ -177,7 +177,7 @@ class ExplanationSheet extends StatelessWidget {
               ),
               if (literal != null) ...[
                 const SizedBox(height: LL.s16),
-                Text('MOT A MOT', style: context.type.labelSmall),
+                Text('MOT À MOT', style: context.type.labelSmall),
                 const SizedBox(height: LL.s4),
                 Text(literal!, style: context.type.bodyMedium),
               ],
@@ -190,7 +190,7 @@ class ExplanationSheet extends StatelessWidget {
                     if (!controller.soundEnabled) return;
                     context.read<TtsService>().speak(example!, locale);
                   },
-                  semanticLabel: 'Ecouter l\'exemple',
+                  semanticLabel: 'Écouter l\'exemple',
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(LL.s16),
@@ -244,7 +244,7 @@ class ExplanationSheet extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         nowSaved
-                            ? 'Ajoute a ta collection.'
+                            ? 'Ajoute à ta collection.'
                             : 'Retire de ta collection.',
                       ),
                       duration: const Duration(seconds: 2),

@@ -55,7 +55,7 @@ class PromptCard extends StatelessWidget {
                 const SizedBox(width: LL.s12),
                 Expanded(
                   child: Text(
-                    'Ecoute puis reponds. Le texte apparait apres.',
+                    'Écoute puis réponds. Le texte apparaît après.',
                     style: context.type.bodyMedium,
                   ),
                 ),
@@ -94,10 +94,10 @@ class _SpeakButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Ecouter',
+      message: 'Écouter',
       child: Pressable(
         onPressed: onPressed,
-        semanticLabel: 'Ecouter la phrase',
+        semanticLabel: 'Écouter la phrase',
         child: Container(
           width: 48,
           height: 48,
@@ -376,7 +376,7 @@ class TypeExercise extends StatelessWidget {
       maxLines: 4,
       style: context.type.titleSmall,
       decoration: InputDecoration(
-        labelText: 'Ta reponse',
+        labelText: 'Ta réponse',
         hintText: hint,
         helperText: helper,
         helperMaxLines: 2,
@@ -419,7 +419,7 @@ class ExplanationPanel extends StatelessWidget {
               ),
               const SizedBox(width: LL.s8),
               Text(
-                correct ? 'Correct' : 'La bonne reponse',
+                correct ? 'Correct' : 'La bonne réponse',
                 style: context.type.labelLarge?.copyWith(color: tint),
               ),
               const Spacer(),
@@ -441,7 +441,7 @@ class ExplanationPanel extends StatelessWidget {
           const SizedBox(height: LL.s16),
           Divider(color: c.divider),
           const SizedBox(height: LL.s16),
-          _Detail(label: 'Mot a mot', value: card.gloss),
+          _Detail(label: 'Mot à mot', value: card.gloss),
           const SizedBox(height: LL.s12),
           _Detail(label: 'A retenir', value: card.focus, tint: c.accent),
         ],

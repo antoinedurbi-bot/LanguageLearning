@@ -56,7 +56,7 @@ const _zh1Grammar = GrammarLesson(
       ],
     ),
     CharacterBreakdownBlock(
-      heading: 'Decomposer les premiers caracteres',
+      heading: 'Decomposer les premiers caractères',
       entries: [
         CharacterBreakdown(
           character: '你',
@@ -64,7 +64,7 @@ const _zh1Grammar = GrammarLesson(
           meaning: 'tu / toi',
           radical: '亻',
           radicalMeaning: 'personne (forme debout d\'un humain)',
-          mnemonic: 'Le radical personne a gauche : ce caractere parle '
+          mnemonic: 'Le radical personne a gauche : ce caractère parle '
               'toujours de quelqu\'un, ici la personne a qui l\'on s\'adresse.',
         ),
         CharacterBreakdown(
@@ -73,8 +73,8 @@ const _zh1Grammar = GrammarLesson(
           meaning: 'bien / bon',
           radical: '女',
           radicalMeaning: 'femme',
-          mnemonic: '女 (femme) a cote de 子 (enfant) : une mere avec son '
-              'enfant, image traditionnelle du bien-etre — d\'ou "bon, bien".',
+          mnemonic: '女 (femme) a côté de 子 (enfant) : une mère avec son '
+              'enfant, image traditionnelle du bien-être — d\'ou "bon, bien".',
         ),
         CharacterBreakdown(
           character: '我',
@@ -82,14 +82,14 @@ const _zh1Grammar = GrammarLesson(
           meaning: 'je / moi',
           radical: '戈',
           radicalMeaning: 'lance, arme',
-          mnemonic: 'Forme ancienne d\'une arme tenue a la main : aucun lien '
-              'de sens avec "je" aujourd\'hui, ce caractere se retient par '
-              'sa forme plutot que par son radical.',
+          mnemonic: 'Forme ancienne d\'une arme tenue à la main : aucun lien '
+              'de sens avec "je" aujourd\'hui, ce caractère se retient par '
+              'sa forme plutôt que par son radical.',
         ),
         CharacterBreakdown(
           character: '是',
           pinyin: 'shì',
-          meaning: 'etre (identite)',
+          meaning: 'être (identite)',
           radical: '日',
           radicalMeaning: 'soleil',
           mnemonic: 'Ce qui EST est aussi certain que le soleil qui se leve : '
@@ -100,16 +100,16 @@ const _zh1Grammar = GrammarLesson(
     ExplanationBlock(
       heading: '吗 transforme une phrase en question',
       body: 'Pas d\'inversion sujet-verbe en chinois : on ajoute simplement '
-          '"吗" (ma) a la fin d\'une phrase affirmative pour en faire une '
-          'question. "你是法国人" (tu es francais) devient "你是法国人吗？" '
-          '(es-tu francais ?) sans rien changer d\'autre.',
+          '"吗" (ma) à la fin d\'une phrase affirmative pour en faire une '
+          'question. "你是法国人" (tu es français) devient "你是法国人吗？" '
+          '(es-tu français ?) sans rien changer d\'autre.',
     ),
     MistakeBlock(
       wrong: '你是那国人？ (confondre 那 et 哪)',
       right: '你是哪国人？',
       why: '哪 (nǎ, 3e ton) veut dire "quel", et sert a poser une question. '
           '那 (nà, 4e ton) veut dire "ce/cela", et ne pose jamais de '
-          'question. Les deux caracteres se ressemblent a l\'ecrit mais ont '
+          'question. Les deux caractères se ressemblent a l\'ecrit mais ont '
           'des tons et des sens differents.',
     ),
   ],
@@ -123,11 +123,11 @@ const _zh2Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'Pourquoi un mot entre le nombre et le nom',
-      body: 'La ou le francais dit "un cafe", le chinois dit litteralement '
+      body: 'La ou le français dit "un cafe", le chinois dit litteralement '
           '"un [classificateur] cafe" : 一杯咖啡 (yì bēi kāfēi), ou 杯 (bēi) '
           'precise qu\'on compte des verres/tasses de quelque chose. Chaque '
           'categorie d\'objet a son propre classificateur, un peu comme '
-          'le francais dit "une feuille de papier" plutot que "un papier".',
+          'le français dit "une feuille de papier" plutôt que "un papier".',
     ),
     MeasureWordBlock(
       heading: 'Classificateurs frequents',
@@ -165,10 +165,10 @@ const _zh2Grammar = GrammarLesson(
     ),
     ExplanationBlock(
       heading: 'Question sans 吗 : verbe-不/没-verbe',
-      body: 'Une autre facon tres frequente de poser une question est de '
+      body: 'Une autre facon tres fréquente de poser une question est de '
           'repeter le verbe avec sa negation entre les deux : 有没有 (yǒu '
           'méiyǒu, litt. "avoir pas-avoir") demande "y en a-t-il ?" sans '
-          'avoir besoin de 吗 a la fin.',
+          'avoir besoin de 吗 à la fin.',
     ),
     ExampleBlock(
       examples: [
@@ -184,7 +184,7 @@ const _zh2Grammar = GrammarLesson(
       wrong: '多少人在这儿？ (pour un petit nombre attendu)',
       right: '几个人在这儿？',
       why: '几 (jǐ) s\'utilise pour un nombre qu\'on imagine petit et '
-          'precis (moins d\'une dizaine), toujours suivi d\'un '
+          'précis (moins d\'une dizaine), toujours suivi d\'un '
           'classificateur. 多少 (duōshao) s\'utilise pour un nombre '
           'indetermine ou potentiellement grand, comme un prix.',
     ),
@@ -194,16 +194,16 @@ const _zh2Grammar = GrammarLesson(
 const _zh3Grammar = GrammarLesson(
   title: 'L\'ordre des mots : le temps et le lieu avant le verbe',
   hook: 'Le chinois place systematiquement le "quand" et le "ou" avant le '
-      'verbe, jamais apres comme en francais — c\'est la regle qui '
-      'structure la moitie des phrases de la langue.',
+      'verbe, jamais après comme en français — c\'est la règle qui '
+      'structure la moitié des phrases de la langue.',
   blocks: [
     ExplanationBlock(
-      heading: 'La regle : temps, puis lieu, puis verbe',
+      heading: 'La règle : temps, puis lieu, puis verbe',
       body: 'Une phrase chinoise s\'organise dans cet ordre : sujet, puis '
           'complement de temps, puis complement de lieu (introduit par 在), '
-          'puis enfin le verbe et son objet. Le francais fait l\'inverse '
-          '("Le train part A SIX HEURES"), ce qui rend cette regle '
-          'contre-intuitive au debut.',
+          'puis enfin le verbe et son objet. Le français fait l\'inverse '
+          '("Le train part A SIX HEURES"), ce qui rend cette règle '
+          'contre-intuitive au début.',
     ),
     ExampleBlock(
       examples: [
@@ -226,14 +226,14 @@ const _zh3Grammar = GrammarLesson(
       heading: '在 (localiser) contre 是 (identifier)',
       body: '在 (zài) situe quelque chose quelque part : "X 在 Y" = X se '
           'trouve a Y. 是 (shì) identifie ou definit : "X 是 Y" = X est Y. '
-          'Les deux se traduisent par "est" en francais, mais ne sont '
+          'Les deux se traduisent par "est" en français, mais ne sont '
           'jamais interchangeables en chinois.',
     ),
     MistakeBlock(
       wrong: '地铁站是哪儿？ (pour demander un emplacement)',
       right: '地铁站在哪儿？',
       why: 'Demander OU se trouve quelque chose utilise toujours 在, jamais '
-          '是 : 是 sert a identifier ce qu\'une chose est, pas a la '
+          '是 : 是 sert a identifier ce qu\'une chose est, pas à la '
           'localiser.',
     ),
   ],
@@ -249,15 +249,15 @@ const _zh4Grammar = GrammarLesson(
       heading: 'Le verbe ne change jamais de forme',
       body: '工作 (travailler) s\'ecrit et se prononce exactement pareil que '
           'le sujet soit "je", "il" ou "ils", et que l\'action soit '
-          'habituelle, passee ou future. Le temps et l\'aspect se marquent '
+          'habituelle, passée ou future. Le temps et l\'aspect se marquent '
           'par d\'autres mots (comme 了 ou 正在), jamais par le verbe '
           'lui-meme.',
     ),
     ExplanationBlock(
-      heading: '不 pour une habitude ou un etat, 没 pour le passe',
-      body: '不 (bù) nie une action habituelle, une intention ou un etat '
+      heading: '不 pour une habitude ou un état, 没 pour le passe',
+      body: '不 (bù) nie une action habituelle, une intention ou un état '
           'present : "nous ne travaillons pas le dimanche" (habitude). 没 '
-          '(méi) nie exclusivement une action passee ou un fait accompli : '
+          '(méi) nie exclusivement une action passée ou un fait accompli : '
           'il n\'existe pas de "没" au futur ou pour une habitude.',
     ),
     ExampleBlock(
@@ -266,7 +266,7 @@ const _zh4Grammar = GrammarLesson(
           target: '我们周末不上班。',
           native: 'Nous ne travaillons pas le week-end.',
           romanization: 'Wǒmen zhōumò bú shàngbān.',
-          note: 'habitude repetee -> 不',
+          note: 'habitude répétée -> 不',
         ),
         GrammarExample(
           target: '昨天没睡好。',
@@ -280,12 +280,12 @@ const _zh4Grammar = GrammarLesson(
       heading: '正在 : insister sur l\'action en cours',
       body: '正在 (zhèngzài) devant un verbe insiste sur le fait qu\'une '
           'action se deroule exactement au moment ou l\'on parle — la '
-          'version renforcee du simple 在 vu dans l\'unite precedente.',
+          'version renforcee du simple 在 vu dans l\'unité precedente.',
     ),
     MistakeBlock(
       wrong: '我们没上班周末。 (pour une habitude)',
       right: '我们周末不上班。',
-      why: '"Ne pas travailler le week-end" est une habitude repetee, pas '
+      why: '"Ne pas travailler le week-end" est une habitude répétée, pas '
           'un fait accompli isole : elle se nie avec 不, jamais avec 没.',
     ),
   ],
@@ -299,15 +299,15 @@ const _zh5Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: '了 : une action terminee',
-      body: '了 (le) place juste apres le verbe marque qu\'une action est '
+      body: '了 (le) place juste après le verbe marque qu\'une action est '
           'achevee : "去了" (allai) signale que l\'action de "aller" est '
-          'terminee, en general dans un contexte precis (une date, un '
+          'terminee, en general dans un contexte précis (une date, un '
           'evenement).',
     ),
     ExplanationBlock(
       heading: '过 : au moins une fois dans sa vie',
-      body: '过 (guo) place apres le verbe marque une experience deja vecue, '
-          'sans se soucier du moment : "去过" (deja alle) repond a "est-ce '
+      body: '过 (guo) place après le verbe marque une experience deja vecue, '
+          'sans se soucier du moment : "去过" (deja allé) repond a "est-ce '
           'que cela t\'est deja arrive ?", exactement comme le present '
           'perfect anglais (have been).',
     ),
@@ -315,13 +315,13 @@ const _zh5Grammar = GrammarLesson(
       examples: [
         GrammarExample(
           target: '我去年去了北京。',
-          native: 'Je suis alle a Pekin l\'annee derniere.',
+          native: 'Je suis allé a Pekin l\'année dernière.',
           romanization: 'Wǒ qùnián qùle Běijīng.',
           note: 'evenement date et acheve -> 了',
         ),
         GrammarExample(
           target: '你去过日本吗？',
-          native: 'Es-tu deja alle au Japon ?',
+          native: 'Es-tu deja allé au Japon ?',
           romanization: 'Nǐ qùguo Rìběn ma?',
           note: 'experience de vie, sans date -> 过',
         ),
@@ -340,7 +340,7 @@ const _zh5Grammar = GrammarLesson(
       right: '我没吃过这个。',
       why: 'La negation de 过 est toujours 没, jamais 不 : 不 nie une '
           'habitude ou une intention, alors que 过 porte justement sur une '
-          'experience passee, qui se nie comme un fait accompli.',
+          'experience passée, qui se nie comme un fait accompli.',
     ),
   ],
 );
@@ -381,7 +381,7 @@ const courseZh = Course(
           romanization: 'Hěn gāoxìng rènshi nǐ.',
           tokens: ['很', '高兴', '认识', '你', '。'],
           distractors: ['太', '知道', '见'],
-          focus: '认识 = connaitre une personne (pas 知道)',
+          focus: '认识 = connaître une personne (pas 知道)',
         ),
         CardItem(
           id: 'zh-1-3',
@@ -396,7 +396,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-1-4',
           target: '我是法国人。',
-          native: 'Je suis francais.',
+          native: 'Je suis français.',
           gloss: 'Je suis France personne.',
           romanization: 'Wǒ shì Fǎguó rén.',
           tokens: ['我', '是', '法国', '人', '。'],
@@ -406,7 +406,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-1-5',
           target: '对不起，我听不懂。',
-          native: 'Desole, je ne comprends pas.',
+          native: 'Désolé, je ne comprends pas.',
           gloss: 'Desole, je ecoute pas comprendre.',
           romanization: 'Duìbuqǐ, wǒ tīng bu dǒng.',
           tokens: ['对不起', '，', '我', '听不懂', '。'],
@@ -445,7 +445,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-2-2',
           target: '多少钱？',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           gloss: 'Combien argent ?',
           romanization: 'Duōshao qián?',
           tokens: ['多少', '钱', '？'],
@@ -485,7 +485,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-2-6',
           target: '很好吃，谢谢。',
-          native: 'C\'etait tres bon, merci.',
+          native: 'C\'était tres bon, merci.',
           gloss: 'Tres bon-manger, merci.',
           romanization: 'Hěn hǎochī, xièxie.',
           tokens: ['很', '好吃', '，', '谢谢', '。'],
@@ -519,7 +519,7 @@ const courseZh = Course(
           romanization: 'Zài zuǒbian.',
           tokens: ['在', '左边', '。'],
           distractors: ['右边', '是', '前面'],
-          focus: '左边 / 右边 : le suffixe 边 marque le cote',
+          focus: '左边 / 右边 : le suffixe 边 marque le côté',
         ),
         CardItem(
           id: 'zh-3-3',
@@ -588,7 +588,7 @@ const courseZh = Course(
           romanization: 'Tā zài yīyuàn gōngzuò.',
           tokens: ['她', '在', '医院', '工作', '。'],
           distractors: ['他', '工作在', '里面'],
-          focus: 'Le lieu se place avant le verbe, pas apres',
+          focus: 'Le lieu se place avant le verbe, pas après',
         ),
         CardItem(
           id: 'zh-4-3',
@@ -642,7 +642,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-5-1',
           target: '我去年去了北京。',
-          native: 'Je suis alle a Pekin l\'annee derniere.',
+          native: 'Je suis allé a Pekin l\'année dernière.',
           gloss: 'Je derniere-annee aller acheve Pekin.',
           romanization: 'Wǒ qùnián qùle Běijīng.',
           tokens: ['我', '去年', '去', '了', '北京', '。'],
@@ -657,12 +657,12 @@ const courseZh = Course(
           romanization: 'Wǒmen zài nàr dāile yí ge xīngqī.',
           tokens: ['我们', '在', '那儿', '待', '了', '一个', '星期', '。'],
           distractors: ['这儿', '过', '个一'],
-          focus: 'La duree se place apres le verbe',
+          focus: 'La duree se place après le verbe',
         ),
         CardItem(
           id: 'zh-5-3',
           target: '你去过日本吗？',
-          native: 'Es-tu deja alle au Japon ?',
+          native: 'Es-tu deja allé au Japon ?',
           gloss: 'Toi aller deja-vecu Japon question ?',
           romanization: 'Nǐ qùguo Rìběn ma?',
           tokens: ['你', '去', '过', '日本', '吗', '？'],
@@ -692,7 +692,7 @@ const courseZh = Course(
         CardItem(
           id: 'zh-5-6',
           target: '下雨下了一天。',
-          native: 'Il a plu toute la journee.',
+          native: 'Il a plu toute la journée.',
           gloss: 'Tomber-pluie tomber acheve un jour.',
           romanization: 'Xià yǔ xiàle yì tiān.',
           tokens: ['下雨', '下', '了', '一天', '。'],

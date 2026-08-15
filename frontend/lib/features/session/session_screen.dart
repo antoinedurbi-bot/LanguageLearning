@@ -218,8 +218,8 @@ class _SessionScreenState extends State<SessionScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Quitter la session ?'),
         content: Text(
-          'Les $_answered carte${_answered > 1 ? 's' : ''} deja repondue'
-          '${_answered > 1 ? 's' : ''} sont enregistrees. Le reste de la file '
+          'Les $_answered carte${_answered > 1 ? 's' : ''} déjà répondue'
+          '${_answered > 1 ? 's' : ''} sont enregistrées. Le reste de la file '
           'restera en attente.',
         ),
         actions: [
@@ -359,7 +359,7 @@ class _SessionScreenState extends State<SessionScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             PromptCard(
-              instruction: 'Ecoute et choisis le sens',
+              instruction: 'Écoute et choisis le sens',
               text: card.target,
               obscured: !_revealed,
               onSpeak: () => _speak(slow: true),
@@ -440,7 +440,7 @@ class _SessionScreenState extends State<SessionScreen> {
               focusNode: _answerFocus,
               revealed: _revealed,
               onSubmit: _submit,
-              hint: 'Ecris la phrase complete',
+              hint: 'Écris la phrase complete',
               helper: 'Les accents et la ponctuation ne sont pas comptes.',
             ),
           ],
@@ -579,7 +579,7 @@ class _Footer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'C\'etait comment ?',
+                      'C\'était comment ?',
                       style: context.type.labelMedium,
                     ),
                     const SizedBox(height: LL.s12),
@@ -684,13 +684,13 @@ class _SummaryScreen extends StatelessWidget {
     // is being wasted; far below means cards are being introduced too fast.
     final String verdict;
     if (answered == 0) {
-      verdict = 'Rien n\'etait du. La file se remplira toute seule.';
+      verdict = 'Rien n\'était du. La file se remplira toute seule.';
     } else if (rate >= 0.95) {
-      verdict = 'Tres haut. Ces cartes pourraient espacer davantage : '
+      verdict = 'Très haut. Ces cartes pourraient espacer davantage : '
           'note-les "Facile" quand elles reviennent sans effort.';
     } else if (rate >= 0.8) {
-      verdict = 'Exactement la zone visee. Autour de 90 % de reussite, '
-          'chaque revision compte au maximum.';
+      verdict = 'Exactement la zone visée. Autour de 90 % de réussite, '
+          'chaque révision compte au maximum.';
     } else {
       verdict = 'En dessous de la cible. Rien d\'anormal : les cartes ratees '
           'reviennent vite, et c\'est la qu\'elles s\'ancrent.';
@@ -721,7 +721,7 @@ class _SummaryScreen extends StatelessWidget {
                                   '${(rate * 100).round()}%',
                                   style: context.type.displayMedium,
                                 ),
-                                Text('de reussite',
+                                Text('de réussite',
                                     style: context.type.labelMedium),
                               ],
                             ),
@@ -732,7 +732,7 @@ class _SummaryScreen extends StatelessWidget {
                       Reveal(
                         index: 1,
                         child: Text(
-                          answered == 0 ? 'Rien a reviser' : 'Session terminee',
+                          answered == 0 ? 'Rien à réviser' : 'Session terminee',
                           textAlign: TextAlign.center,
                           style: context.type.headlineMedium,
                         ),

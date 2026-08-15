@@ -3,20 +3,20 @@ import 'package:learning_app/data/models/grammar_lesson.dart';
 
 const _es1Grammar = GrammarLesson(
   title: 'Ser et estar : deux verbes pour "etre"',
-  hook: 'C\'est la premiere vraie difficulte de l\'espagnol pour un '
-      'francophone : la ou le francais dit toujours "etre", l\'espagnol '
+  hook: 'C\'est la première vraie difficulté de l\'espagnol pour un '
+      'francophone : la ou le français dit toujours "être", l\'espagnol '
       'choisit entre deux verbes selon la nature de ce qu\'on decrit.',
   blocks: [
     ExplanationBlock(
       heading: 'Ser : identite et caracteristiques durables',
       body: 'Ser sert pour l\'origine, la nationalite, le metier, le '
-          'caractere, l\'heure : tout ce qui definit ce qu\'une chose ou une '
+          'caractère, l\'heure : tout ce qui definit ce qu\'une chose ou une '
           'personne EST fondamentalement, independamment du moment.',
     ),
     ExplanationBlock(
-      heading: 'Estar : etat et position, ce qui peut changer',
-      body: 'Estar sert pour la localisation et pour les etats temporaires : '
-          'la fatigue, l\'humeur, la sante. La meme phrase francaise '
+      heading: 'Estar : état et position, ce qui peut changer',
+      body: 'Estar sert pour la localisation et pour les états temporaires : '
+          'la fatigue, l\'humeur, la sante. La meme phrase française '
           '"je suis..." peut donc se traduire par ser OU estar selon si la '
           'qualite dure ou non.',
     ),
@@ -30,14 +30,14 @@ const _es1Grammar = GrammarLesson(
         GrammarExample(
           target: 'Estoy muy cansado hoy.',
           native: 'Je suis tres fatigue aujourd\'hui.',
-          note: '"hoy" (aujourd\'hui) signale un etat passager : estoy (estar)',
+          note: '"hoy" (aujourd\'hui) signale un état passager : estoy (estar)',
         ),
       ],
     ),
     MistakeBlock(
       wrong: 'Soy cansado.',
       right: 'Estoy cansado.',
-      why: 'La fatigue est un etat temporaire, pas une caracteristique '
+      why: 'La fatigue est un état temporaire, pas une caracteristique '
           'permanente de la personne : elle appelle toujours estar, jamais ser.',
     ),
   ],
@@ -53,7 +53,7 @@ const _es2Grammar = GrammarLesson(
       body: '"Quiero" (je veux) est direct. "Quisiera" est une forme du '
           'subjonctif imparfait employee comme formule de politesse : elle '
           'adoucit la demande, exactement comme "je voudrais" adoucit "je '
-          'veux" en francais.',
+          'veux" en français.',
     ),
     TableBlock(
       headers: ['Direct', 'Poli'],
@@ -73,7 +73,7 @@ const _es2Grammar = GrammarLesson(
       examples: [
         GrammarExample(
           target: '¿Cuánto cuesta?',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           note: 'cuanto accentue = mot interrogatif',
         ),
       ],
@@ -95,7 +95,7 @@ const _es3Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'Qui est le sujet ?',
-      body: 'En francais, "j\'aime ce quartier" a "je" pour sujet. En '
+      body: 'En français, "j\'aime ce quartier" a "je" pour sujet. En '
           'espagnol, "me gusta este barrio" fonctionne comme "ce quartier '
           'me plait" : c\'est le quartier (este barrio) qui est le sujet du '
           'verbe, et "me" est un complement.',
@@ -144,9 +144,9 @@ const _es4Grammar = GrammarLesson(
   blocks: [
     ExplanationBlock(
       heading: 'Verbes pronominaux : le pronom colle au verbe',
-      body: 'Comme en francais ("se lever"), l\'espagnol a des verbes '
+      body: 'Comme en français ("se lever"), l\'espagnol a des verbes '
           'reflechis (levantarse, quedarse). Le pronom (me, te, se...) se '
-          'place devant le verbe conjugue, mais se colle a la fin quand le '
+          'place devant le verbe conjugue, mais se colle à la fin quand le '
           'verbe reste a l\'infinitif : quedar + me = quedarme.',
     ),
     ExampleBlock(
@@ -158,7 +158,7 @@ const _es4Grammar = GrammarLesson(
         ),
         GrammarExample(
           target: 'Prefiero quedarme en casa.',
-          native: 'Je prefere rester a la maison.',
+          native: 'Je préfère rester à la maison.',
           note: 'me colle a l\'infinitif : quedar + me',
         ),
       ],
@@ -167,7 +167,7 @@ const _es4Grammar = GrammarLesson(
       heading: 'Hace... que : depuis combien de temps',
       body: 'Pour dire depuis combien de temps une action dure encore, '
           'l\'espagnol utilise "hace" + duree + "que" + verbe au present — '
-          'la ou le francais dirait "cela fait... que" ou "depuis".',
+          'la ou le français dirait "cela fait... que" ou "depuis".',
     ),
     ExampleBlock(
       examples: [
@@ -181,7 +181,7 @@ const _es4Grammar = GrammarLesson(
     MistakeBlock(
       wrong: 'Prefiero quedar me en casa.',
       right: 'Prefiero quedarme en casa.',
-      why: 'Avec un infinitif, le pronom reflechi se soude directement a la '
+      why: 'Avec un infinitif, le pronom reflechi se soude directement à la '
           'fin du verbe : ils forment un seul mot, sans espace.',
     ),
   ],
@@ -189,32 +189,32 @@ const _es4Grammar = GrammarLesson(
 
 const _es5Grammar = GrammarLesson(
   title: 'Le passe : pretérito vs imparfait',
-  hook: 'L\'espagnol distingue deux passes la ou le francais n\'en a '
+  hook: 'L\'espagnol distingue deux passes la ou le français n\'en a '
       'souvent qu\'un a l\'oral : l\'evenement ponctuel, et le decor qui dure.',
   blocks: [
     ExplanationBlock(
       heading: 'Pretérito : l\'evenement, fini et daté',
-      body: 'Le preterit (fui, viví) raconte une action achevee a un moment '
-          'precis du passe : ce qui s\'est passe, un point sur la ligne du '
+      body: 'Le preterit (fui, viví) raconte une action achevee à un moment '
+          'précis du passe : ce qui s\'est passe, un point sur la ligne du '
           'temps.',
     ),
     ExplanationBlock(
       heading: 'Imparfait : le decor, l\'habitude, ce qui durait',
       body: 'L\'imparfait (era, vivía) decrit ce qui servait de toile de '
-          'fond — un etat, une habitude, une description — sans marquer de '
-          'debut ni de fin precis.',
+          'fond — un état, une habitude, une description — sans marquer de '
+          'début ni de fin précis.',
     ),
     ExampleBlock(
       examples: [
         GrammarExample(
           target: 'Ayer fui al mercado.',
-          native: 'Hier je suis alle au marche.',
+          native: 'Hier je suis allé au marche.',
           note: 'evenement ponctuel, date (ayer) : pretérito',
         ),
         GrammarExample(
           target: 'Cuando era pequeno vivia en Sevilla.',
           native: 'Quand j\'etais petit j\'habitais a Seville.',
-          note: 'etat durable de l\'enfance : imparfait',
+          note: 'état durable de l\'enfance : imparfait',
         ),
       ],
     ),
@@ -230,7 +230,7 @@ const _es5Grammar = GrammarLesson(
     MistakeBlock(
       wrong: 'Cuando fui pequeno vivi en Sevilla.',
       right: 'Cuando era pequeno vivia en Sevilla.',
-      why: '"Etre petit" est un etat qui a dure des annees, pas un '
+      why: '"Être petit" est un état qui a dure des années, pas un '
           'evenement ponctuel : il appelle l\'imparfait, pas le pretérito.',
     ),
   ],
@@ -239,21 +239,21 @@ const _es5Grammar = GrammarLesson(
 const _es6Grammar = GrammarLesson(
   title: 'Le subjonctif : douter, souhaiter, hypothese irreelle',
   hook: 'Le subjonctif espagnol s\'utilise bien plus souvent qu\'en '
-      'francais : des qu\'une phrase exprime un souhait, un doute ou une '
+      'français : des qu\'une phrase exprime un souhait, un doute ou une '
       'condition non realisee, il s\'impose.',
   blocks: [
     ExplanationBlock(
       heading: 'Quand le subjonctif est declenche',
       body: 'Trois declencheurs frequents : un souhait ("espero que..."), '
           'un doute ou une negation d\'opinion ("no creo que..."), et une '
-          'action future apres "cuando" (quand + futur se dit au '
+          'action future après "cuando" (quand + futur se dit au '
           'subjonctif en espagnol, jamais a l\'indicatif futur).',
     ),
     ExampleBlock(
       examples: [
         GrammarExample(
           target: 'Espero que puedas venir.',
-          native: 'J\'espere que tu pourras venir.',
+          native: 'J\'espère que tu pourras venir.',
           note: 'souhait -> puedas (subjonctif), pas puedes',
         ),
         GrammarExample(
@@ -266,7 +266,7 @@ const _es6Grammar = GrammarLesson(
     ExplanationBlock(
       heading: 'Hypothese irreelle : si + subjonctif imparfait + conditionnel',
       body: 'Pour une situation imaginaire au present ("si j\'avais..."), '
-          'l\'espagnol met le verbe apres "si" au subjonctif imparfait '
+          'l\'espagnol met le verbe après "si" au subjonctif imparfait '
           '(tuviera), et le conditionnel dans la consequence (viajaria).',
     ),
     ExampleBlock(
@@ -311,7 +311,7 @@ const courseEs = Course(
           gloss: 'Salut, me appelle Marco.',
           tokens: ['Hola,', 'me', 'llamo', 'Marco.'],
           distractors: ['mi', 'llama', 'soy llamado'],
-          focus: 'llamarse est pronominal, comme en francais',
+          focus: 'llamarse est pronominal, comme en français',
         ),
         CardItem(
           id: 'es-1-2',
@@ -338,12 +338,12 @@ const courseEs = Course(
           gloss: 'Suis tres fatigue aujourd-hui.',
           tokens: ['Estoy', 'muy', 'cansado', 'hoy.'],
           distractors: ['Soy', 'mucho', 'hoy dia'],
-          focus: 'Etat passager = estar (contraste avec ser)',
+          focus: 'État passager = estar (contraste avec ser)',
         ),
         CardItem(
           id: 'es-1-5',
           target: 'No entiendo, lo siento.',
-          native: 'Je ne comprends pas, desole.',
+          native: 'Je ne comprends pas, désolé.',
           gloss: 'Ne comprends, le sens.',
           tokens: ['No', 'entiendo,', 'lo', 'siento.'],
           distractors: ['entiendo no', 'me', 'siente'],
@@ -379,7 +379,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-2-2',
           target: '¿Cuánto cuesta?',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           gloss: 'Combien coute ?',
           tokens: ['¿Cuánto', 'cuesta?'],
           distractors: ['¿Cuántos', 'costa', 'es'],
@@ -415,7 +415,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-2-6',
           target: 'Estaba todo muy rico, gracias.',
-          native: 'Tout etait tres bon, merci.',
+          native: 'Tout était tres bon, merci.',
           gloss: 'Etait tout tres savoureux, merci.',
           tokens: ['Estaba', 'todo', 'muy', 'rico,', 'gracias.'],
           distractors: ['Era', 'mucho', 'bueno'],
@@ -469,7 +469,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-3-5',
           target: 'Prefiero quedarme en casa.',
-          native: 'Je prefere rester a la maison.',
+          native: 'Je préfère rester à la maison.',
           gloss: 'Prefere rester-me en maison.',
           tokens: ['Prefiero', 'quedarme', 'en', 'casa.'],
           distractors: ['Prefero', 'quedar me', 'la casa'],
@@ -552,18 +552,18 @@ const courseEs = Course(
     Unit(
       id: 'es-u5',
       title: 'Contar el pasado',
-      subtitle: 'Passe simple et imparfait',
+      subtitle: 'Passé simple et imparfait',
       level: 'A2',
       grammarLesson: _es5Grammar,
       cards: [
         CardItem(
           id: 'es-5-1',
           target: 'Ayer fui al mercado.',
-          native: 'Hier je suis alle au marche.',
+          native: 'Hier je suis allé au marche.',
           gloss: 'Hier allai au marche.',
           tokens: ['Ayer', 'fui', 'al', 'mercado.'],
           distractors: ['iba', 'a el', 'he ido'],
-          focus: 'fui = passe simple de ir (et de ser)',
+          focus: 'fui = passé simple de ir (et de ser)',
         ),
         CardItem(
           id: 'es-5-2',
@@ -572,7 +572,7 @@ const courseEs = Course(
           gloss: 'Quand etais petit vivais en Seville.',
           tokens: ['Cuando', 'era', 'pequeño', 'vivía', 'en', 'Sevilla.'],
           distractors: ['fui', 'viví', 'a'],
-          focus: 'Imparfait pour le decor, passe simple pour l\'evenement',
+          focus: 'Imparfait pour le decor, passé simple pour l\'evenement',
         ),
         CardItem(
           id: 'es-5-3',
@@ -604,7 +604,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-5-6',
           target: 'Fue mejor de lo que esperaba.',
-          native: 'C\'etait mieux que ce que j\'attendais.',
+          native: 'C\'était mieux que ce que j\'attendais.',
           gloss: 'Fut meilleur de ce que attendais.',
           tokens: ['Fue', 'mejor', 'de', 'lo', 'que', 'esperaba.'],
           distractors: ['Era', 'más bueno', 'que'],
@@ -622,7 +622,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-6-1',
           target: 'Espero que puedas venir.',
-          native: 'J\'espere que tu pourras venir.',
+          native: 'J\'espère que tu pourras venir.',
           gloss: 'Espere que puisses venir.',
           tokens: ['Espero', 'que', 'puedas', 'venir.'],
           distractors: ['puedes', 'podras', 'de'],
@@ -631,7 +631,7 @@ const courseEs = Course(
         CardItem(
           id: 'es-6-2',
           target: 'No creo que sea buena idea.',
-          native: 'Je ne crois pas que ce soit une bonne idee.',
+          native: 'Je ne crois pas que ce soit une bonne idée.',
           gloss: 'Ne crois que soit bonne idee.',
           tokens: ['No', 'creo', 'que', 'sea', 'buena', 'idea.'],
           distractors: ['es', 'este', 'una buena'],

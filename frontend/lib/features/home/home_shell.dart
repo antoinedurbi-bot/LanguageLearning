@@ -34,7 +34,7 @@ class _HomeShellState extends State<HomeShell> {
       label: 'Parcours'
     ),
     (icon: Icons.mic_none_outlined, active: Icons.mic, label: 'Atelier'),
-    (icon: Icons.insights_outlined, active: Icons.insights, label: 'Progres'),
+    (icon: Icons.insights_outlined, active: Icons.insights, label: 'Progrès'),
   ];
 
   static const _chineseDestination = (

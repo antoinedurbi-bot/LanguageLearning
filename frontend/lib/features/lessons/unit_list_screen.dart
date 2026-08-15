@@ -58,10 +58,10 @@ class _Header extends StatelessWidget {
       children: [
         Text('PARCOURS', style: context.type.labelSmall),
         const SizedBox(height: LL.s4),
-        Text('Les unites', style: context.type.displayMedium),
+        Text('Les unités', style: context.type.displayMedium),
         const SizedBox(height: LL.s12),
         Text(
-          'Chaque phrase n\'introduit qu\'une seule difficulte nouvelle. '
+          'Chaque phrase n\'introduit qu\'une seule difficulté nouvelle. '
           'C\'est ce qui permet de comprendre sans traduire.',
           style: context.type.bodyLarge,
         ),
@@ -102,8 +102,8 @@ class _UnitCard extends StatelessWidget {
               )
           : null,
       semanticLabel: unlocked
-          ? 'Unite $position, ${unit.title}, $started sur $total commencees'
-          : 'Unite $position verrouillee, terminer l\'unite precedente',
+          ? 'Unité $position, ${unit.title}, $started sur $total commencees'
+          : 'Unité $position verrouillée, terminer l\'unité precedente',
       child: GlassCard(
         glow: unlocked ? colors.first : null,
         child: Row(
@@ -155,7 +155,7 @@ class _UnitCard extends StatelessWidget {
                   Text(
                     unlocked
                         ? unit.subtitle
-                        : 'Se debloque en avancant l\'unite precedente',
+                        : 'Se debloque en avancant l\'unité precedente',
                     style: context.type.bodyMedium,
                   ),
                   if (unlocked) ...[

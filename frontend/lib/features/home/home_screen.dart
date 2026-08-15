@@ -90,7 +90,7 @@ class _Greeting extends StatelessWidget {
         : hour < 12
             ? 'Bonjour'
             : hour < 18
-                ? 'Bon apres-midi'
+                ? 'Bon après-midi'
                 : 'Bonsoir';
 
     return Column(
@@ -129,18 +129,18 @@ class _DailyGoalCard extends StatelessWidget {
     final String headline;
     final String detail;
     if (nothingToDo) {
-      headline = 'Tout est a jour';
+      headline = 'Tout est à jour';
       detail = 'Rien n\'est du aujourd\'hui. Revenir demain vaut mieux que '
-          'reviser une carte encore fraiche : c\'est l\'oubli partiel qui '
-          'consolide la memoire.';
+          'réviser une carte encore fraîche : c\'est l\'oubli partiel qui '
+          'consolide la mémoire.';
     } else if (due > 0) {
-      headline = '$due carte${due > 1 ? 's' : ''} a reviser';
+      headline = '$due carte${due > 1 ? 's' : ''} à réviser';
       detail = fresh > 0
-          ? 'Les revisions passent avant les nouveautes.'
-          : 'Ces cartes arrivent au moment ou tu es sur le point de les oublier.';
+          ? 'Les révisions passent avant les nouveautés.'
+          : 'Ces cartes arrivent au moment où tu es sur le point de les oublier.';
     } else {
       headline = 'Nouvelles phrases';
-      detail = 'Aucune revision en attente : place a $fresh nouvelle'
+      detail = 'Aucune révision en attente : place à $fresh nouvelle'
           '${fresh > 1 ? 's' : ''} phrase${fresh > 1 ? 's' : ''}.';
     }
 
@@ -192,7 +192,7 @@ class _DailyGoalCard extends StatelessWidget {
             )
           else
             GradientButton(
-              label: goalReached ? 'Continuer quand meme' : 'Commencer',
+              label: goalReached ? 'Continuer quand même' : 'Commencer',
               icon: Icons.play_arrow_rounded,
               colors: colors,
               onPressed: () => Navigator.of(context).push(
@@ -263,14 +263,14 @@ class _MethodNote extends StatelessWidget {
             children: [
               Icon(Icons.psychology_alt_rounded, size: 18, color: c.accentAlt),
               const SizedBox(width: LL.s8),
-              Text('La methode', style: context.type.labelLarge),
+              Text('La méthode', style: context.type.labelLarge),
             ],
           ),
           const SizedBox(height: LL.s12),
           Text(
-            'Chaque phrase revient au moment ou tu as environ 90 % de chances '
-            'de t\'en souvenir. Reviser plus tot coute du temps sans rien '
-            'ajouter ; reviser plus tard oblige a tout reapprendre.',
+            'Chaque phrase revient au moment où tu as environ 90 % de chances '
+            'de t\'en souvenir. Réviser plus tôt coûte du temps sans rien '
+            'ajouter ; réviser plus tard oblige à tout réapprendre.',
             style: context.type.bodyMedium,
           ),
           const SizedBox(height: LL.s12),
@@ -285,7 +285,7 @@ class _MethodNote extends StatelessWidget {
                 filled: due > 0,
               ),
               LLChip(
-                label: '$fresh a decouvrir',
+                label: '$fresh à découvrir',
                 icon: Icons.auto_awesome_rounded,
                 color: c.accentAlt,
                 filled: fresh > 0,

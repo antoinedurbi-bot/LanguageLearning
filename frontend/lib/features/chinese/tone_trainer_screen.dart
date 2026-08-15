@@ -236,7 +236,7 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
     final hasItem = _mode == _Mode.isolated ? _single != null : _pair != null;
     if (!hasItem) {
       return GlassCard(
-        child: Text('Aucun element disponible.', style: context.type.bodyLarge),
+        child: Text('Aucun élément disponible.', style: context.type.bodyLarge),
       );
     }
 
@@ -246,8 +246,8 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
         children: [
           Text(
             _mode == _Mode.isolated
-                ? 'ECOUTE ET IDENTIFIE LE TON'
-                : 'ECOUTE ET IDENTIFIE LES DEUX TONS',
+                ? 'ÉCOUTE ET IDENTIFIE LE TON'
+                : 'ÉCOUTE ET IDENTIFIE LES DEUX TONS',
             style: context.type.labelSmall,
             textAlign: TextAlign.center,
           ),
@@ -276,7 +276,7 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
             children: [
               _PlayButton(
                 icon: Icons.volume_up_rounded,
-                label: 'Ecouter',
+                label: 'Écouter',
                 onPressed: () => _speak(),
               ),
               const SizedBox(width: LL.s12),
@@ -516,7 +516,7 @@ class _Answer extends StatelessWidget {
               child: Text(
                 'Attention : deux 3es tons de suite se prononcent 2e + 3e. '
                 'Tu entends donc "${pair!.pinyin}" avec un ton montant sur la '
-                'premiere syllabe, meme si elle s\'ecrit au 3e ton.',
+                'première syllabe, même si elle s\'ecrit au 3e ton.',
                 style: context.type.bodyMedium?.copyWith(color: c.warning),
               ),
             ),

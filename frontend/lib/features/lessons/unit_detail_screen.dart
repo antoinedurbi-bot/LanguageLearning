@@ -89,7 +89,7 @@ class UnitDetailScreen extends StatelessWidget {
                   border: Border(top: BorderSide(color: context.ll.divider)),
                 ),
                 child: GradientButton(
-                  label: 'Travailler cette unite',
+                  label: 'Travailler cette unité',
                   icon: Icons.play_arrow_rounded,
                   colors: ramp,
                   onPressed: () {
@@ -148,7 +148,7 @@ class _Header extends StatelessWidget {
 ///
 /// It comes first on purpose: understanding the rule before drilling the
 /// sentences that use it is what makes the drill mean something, rather than
-/// training pattern-matching without comprehension.
+/// training pattern-matching without compréhension.
 class _GrammarEntry extends StatelessWidget {
   const _GrammarEntry({
     required this.lesson,

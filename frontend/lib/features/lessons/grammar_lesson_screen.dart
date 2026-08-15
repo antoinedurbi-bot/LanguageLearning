@@ -242,7 +242,7 @@ class _ExampleRow extends StatelessWidget {
             if (!context.read<LearningController>().soundEnabled) return;
             context.read<TtsService>().speak(example.target, ttsLocale);
           },
-          semanticLabel: 'Ecouter',
+          semanticLabel: 'Écouter',
           child: Container(
             width: 36,
             height: 36,
@@ -335,7 +335,7 @@ class _Mistake extends StatelessWidget {
             children: [
               Icon(Icons.report_rounded, size: 18, color: c.warning),
               const SizedBox(width: LL.s8),
-              Text('Erreur frequente',
+              Text('Erreur fréquente',
                   style: context.type.labelLarge?.copyWith(color: c.warning)),
             ],
           ),
@@ -466,7 +466,7 @@ class _ToneRow extends StatelessWidget {
                 .read<TtsService>()
                 .speak(entry.syllable, ttsLocale, slow: true);
           },
-          semanticLabel: 'Ecouter',
+          semanticLabel: 'Écouter',
           child: Container(
             width: 36,
             height: 36,

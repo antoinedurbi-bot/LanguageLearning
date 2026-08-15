@@ -41,7 +41,7 @@ class LibrarySection extends StatelessWidget {
         Text('TA BIBLIOTHEQUE', style: context.type.labelSmall),
         const SizedBox(height: LL.s4),
         Text(
-          'Le materiel de reference, consultable a tout moment. Chaque element '
+          'Le matériel de référence, consultable à tout moment. Chaque élément '
           'y est cliquable et s\'explique.',
           style: context.type.bodyMedium,
         ),
@@ -87,8 +87,8 @@ class LibrarySection extends StatelessWidget {
           _Tile(
             icon: Icons.forum_rounded,
             tint: c.accentAlt,
-            title: 'Phrases cles',
-            subtitle: '${pack.phrases.length} phrases a connaitre par coeur',
+            title: 'Phrases clés',
+            subtitle: '${pack.phrases.length} phrases a connaître par coeur',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => PhrasesScreen(
@@ -104,8 +104,8 @@ class LibrarySection extends StatelessWidget {
           _Tile(
             icon: Icons.hub_rounded,
             tint: c.success,
-            title: 'Iles linguistiques',
-            subtitle: 'Tes reponses toutes pretes aux questions inevitables',
+            title: 'Îles linguistiques',
+            subtitle: 'Tes réponses toutes pretes aux questions inévitables',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => IslandsScreen(
@@ -124,7 +124,7 @@ class LibrarySection extends StatelessWidget {
           title: 'Ma collection',
           subtitle: savedCount == 0
               ? 'Rien d\'enregistre pour l\'instant'
-              : '$savedCount element${savedCount > 1 ? 's' : ''} garde'
+              : '$savedCount élément${savedCount > 1 ? 's' : ''} garde'
                   '${savedCount > 1 ? 's' : ''}',
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute<void>(

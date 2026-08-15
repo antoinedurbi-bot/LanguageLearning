@@ -53,7 +53,7 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
           child: _LabCard(
             icon: Icons.hearing_rounded,
             title: 'Entrainement aux tons',
-            subtitle: 'Ecoute et identifie. Une syllabe, puis deux.',
+            subtitle: 'Écoute et identifie. Une syllabe, puis deux.',
             body: 'C\'est le seul exercice qui construit vraiment l\'oreille. '
                 'Sans lui, on lit le pinyin et on invente les tons.',
             colors: ramp,
@@ -82,10 +82,10 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
           index: 3,
           child: _LabCard(
             icon: Icons.draw_rounded,
-            title: 'Ecrire les caracteres',
+            title: 'Écrire les caractères',
             subtitle: 'Trace trait par trait, dans le bon ordre.',
             body: 'L\'ordre des traits decide des proportions, et c\'est lui '
-                'qu\'attendent les claviers a reconnaissance d\'ecriture.',
+                'qu\'attendent les claviers à reconnaissance d\'écriture.',
             colors: ramp,
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
@@ -100,9 +100,9 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
           child: _LabCard(
             icon: Icons.menu_book_rounded,
             title: 'Dictionnaire',
-            subtitle: '615 caracteres, 1256 mots HSK 1-2.',
+            subtitle: '615 caractères, 1256 mots HSK 1-2.',
             body: 'Cle, composition, ordre des traits et mots qui utilisent '
-                'chaque caractere. Recherche par pinyin sans les tons.',
+                'chaque caractère. Recherche par pinyin sans les tons.',
             colors: ramp,
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
@@ -132,7 +132,7 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(LL.s24),
                     child: Text(
-                      'Les donnees de prononciation n\'ont pas pu etre '
+                      'Les données de prononciation n\'ont pas pu être '
                       'chargees.',
                       textAlign: TextAlign.center,
                       style: context.type.bodyLarge,
@@ -168,8 +168,8 @@ class _Header extends StatelessWidget {
         const SizedBox(height: LL.s12),
         Text(
           'Le mandarin demande trois choses que les autres langues de l\'app '
-          'ne demandent pas : entendre les tons, lire une ecriture sans '
-          'alphabet, et l\'ecrire dans le bon ordre.',
+          'ne demandent pas : entendre les tons, lire une écriture sans '
+          'alphabet, et l\'écrire dans le bon ordre.',
           style: context.type.bodyLarge,
         ),
       ],
@@ -257,8 +257,8 @@ class _SourceNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Donnees des traits : Make Me a Hanzi. Niveaux et frequences : HSK 3.0. '
-      'Les definitions de caracteres sont en anglais, telles quelles depuis '
+      'Données des traits : Make Me a Hanzi. Niveaux et fréquences : HSK 3.0. '
+      'Les définitions de caractères sont en anglais, telles quelles depuis '
       'ces sources.',
       style:
           context.type.labelSmall?.copyWith(color: color, letterSpacing: 0.1),

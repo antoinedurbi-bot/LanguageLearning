@@ -48,16 +48,16 @@ const courseTr = Course(
         CardItem(
           id: 'tr-1-4',
           target: 'Ben Fransızım.',
-          native: 'Je suis francais.',
+          native: 'Je suis français.',
           gloss: 'Moi Francais-suis.',
           tokens: ['Ben', 'Fransızım.'],
           distractors: ['Fransızim.', 'Fransızsım.', 'Fransız olurum.'],
-          focus: 'Le verbe etre est un suffixe, pas un mot',
+          focus: 'Le verbe être est un suffixe, pas un mot',
         ),
         CardItem(
           id: 'tr-1-5',
           target: 'Anlamıyorum, özür dilerim.',
-          native: 'Je ne comprends pas, desole.',
+          native: 'Je ne comprends pas, désolé.',
           gloss: 'Comprends-pas-je, excuse demande-je.',
           tokens: ['Anlamıyorum,', 'özür', 'dilerim.'],
           distractors: ['Anlıyorum', 'değil', 'dilerim özür'],
@@ -92,7 +92,7 @@ const courseTr = Course(
         CardItem(
           id: 'tr-2-2',
           target: 'Ne kadar?',
-          native: 'Combien ca coute ?',
+          native: 'Combien ca coûte ?',
           gloss: 'Quoi quantite ?',
           tokens: ['Ne', 'kadar?'],
           distractors: ['Kaç', 'para', 'Nasıl'],
@@ -128,11 +128,11 @@ const courseTr = Course(
         CardItem(
           id: 'tr-2-6',
           target: 'Çok lezzetliydi, teşekkürler.',
-          native: 'C\'etait tres bon, merci.',
+          native: 'C\'était tres bon, merci.',
           gloss: 'Tres delicieux-etait, mercis.',
           tokens: ['Çok', 'lezzetliydi,', 'teşekkürler.'],
           distractors: ['lezzetli', 'Daha', 'sağol'],
-          focus: '-ydi ajoute le passe a un adjectif',
+          focus: '-ydi ajoute le passe à un adjectif',
         ),
       ],
     ),
@@ -269,7 +269,7 @@ const courseTr = Course(
         CardItem(
           id: 'tr-5-1',
           target: 'Geçen yıl İstanbul\'a gittim.',
-          native: 'Je suis alle a Istanbul l\'annee derniere.',
+          native: 'Je suis allé a Istanbul l\'année dernière.',
           gloss: 'Passee annee Istanbul-vers allai-je.',
           tokens: ['Geçen', 'yıl', 'İstanbul\'a', 'gittim.'],
           distractors: ['İstanbul\'da', 'gidiyorum', 'Gelecek'],
@@ -287,7 +287,7 @@ const courseTr = Course(
         CardItem(
           id: 'tr-5-3',
           target: 'Hiç Japonya\'ya gittin mi?',
-          native: 'Es-tu deja alle au Japon ?',
+          native: 'Es-tu deja allé au Japon ?',
           gloss: 'Jamais Japon-vers allas question ?',
           tokens: ['Hiç', 'Japonya\'ya', 'gittin', 'mi?'],
           distractors: ['Japonya\'da', 'gidiyorsun', 'mı'],
@@ -305,7 +305,7 @@ const courseTr = Course(
         CardItem(
           id: 'tr-5-5',
           target: 'Bütün gün yağmur yağdı.',
-          native: 'Il a plu toute la journee.',
+          native: 'Il a plu toute la journée.',
           gloss: 'Tout jour pluie tomba.',
           tokens: ['Bütün', 'gün', 'yağmur', 'yağdı.'],
           distractors: ['Her', 'günü', 'yağıyor'],
@@ -314,7 +314,7 @@ const courseTr = Course(
         CardItem(
           id: 'tr-5-6',
           target: 'Beklediğimden daha iyiydi.',
-          native: 'C\'etait mieux que ce que j\'attendais.',
+          native: 'C\'était mieux que ce que j\'attendais.',
           gloss: 'Attendais-mon-de plus bon-etait.',
           tokens: ['Beklediğimden', 'daha', 'iyiydi.'],
           distractors: ['Beklediğim', 'çok', 'iyi'],

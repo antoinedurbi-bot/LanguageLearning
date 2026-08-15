@@ -62,7 +62,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                                 Expanded(
                                   child: Text(
                                     _writing
-                                        ? 'Ecris le caractere'
+                                        ? 'Écris le caractère'
                                         : 'Ordre des traits',
                                     style: context.type.titleMedium,
                                   ),
@@ -72,7 +72,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                                       setState(() => _writing = !_writing),
                                   semanticLabel: _writing
                                       ? 'Revoir l\'animation'
-                                      : 'S\'entrainer a ecrire',
+                                      : 'S\'entraîner a écrire',
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: LL.s12,
@@ -99,7 +99,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                                         ),
                                         const SizedBox(width: LL.s4 + 2),
                                         Text(
-                                          _writing ? 'Animation' : 'Ecrire',
+                                          _writing ? 'Animation' : 'Écrire',
                                           style: context.type.labelMedium
                                               ?.copyWith(color: c.accent),
                                         ),
@@ -128,8 +128,8 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                               Text(
                                 '${hanzi.strokeCount} traits. L\'ordre n\'est pas '
                                 'decoratif : il decide des proportions, et c\'est '
-                                'lui qu\'attendent les claviers a reconnaissance '
-                                'd\'ecriture.',
+                                'lui qu\'attendent les claviers à reconnaissance '
+                                'd\'écriture.',
                                 style: context.type.bodyMedium,
                               ),
                             ],
@@ -221,7 +221,7 @@ class _HeroCard extends StatelessWidget {
                 if (hanzi.pinyin.length > 1) ...[
                   const SizedBox(height: LL.s2),
                   Text(
-                    'Caractere a plusieurs lectures',
+                    'Caractère à plusieurs lectures',
                     style: context.type.labelSmall,
                   ),
                 ],
@@ -239,7 +239,7 @@ class _HeroCard extends StatelessWidget {
               if (!context.read<LearningController>().soundEnabled) return;
               context.read<TtsService>().speak(hanzi.character, 'zh-CN');
             },
-            semanticLabel: 'Ecouter ${hanzi.character}',
+            semanticLabel: 'Écouter ${hanzi.character}',
             child: Container(
               width: 48,
               height: 48,
@@ -302,7 +302,7 @@ class _CompositionCard extends StatelessWidget {
           ),
           if (hanzi.components.isNotEmpty) ...[
             const SizedBox(height: LL.s16),
-            Text('ELEMENTS', style: context.type.labelSmall),
+            Text('ÉLÉMENTS', style: context.type.labelSmall),
             const SizedBox(height: LL.s8),
             Row(
               children: [
@@ -323,9 +323,9 @@ class _CompositionCard extends StatelessWidget {
             ),
             const SizedBox(height: LL.s12),
             Text(
-              'Reconnaitre les elements est ce qui permet de retenir des '
-              'centaines de caracteres sans les apprendre un par un : la cle '
-              'donne souvent la categorie de sens, l\'autre element souvent '
+              'Reconnaître les éléments est ce qui permet de retenir des '
+              'centaines de caractères sans les apprendre un par un : la cle '
+              'donne souvent la categorie de sens, l\'autre élément souvent '
               'le son.',
               style: context.type.bodyMedium,
             ),
@@ -383,7 +383,7 @@ class _WordsCard extends StatelessWidget {
                     style: context.type.titleMedium),
                 const SizedBox(height: LL.s8),
                 Text(
-                  'Aucun mot de HSK 1-2 ne combine ce caractere avec un autre.',
+                  'Aucun mot de HSK 1-2 ne combine ce caractère avec un autre.',
                   style: context.type.bodyMedium,
                 ),
               ],

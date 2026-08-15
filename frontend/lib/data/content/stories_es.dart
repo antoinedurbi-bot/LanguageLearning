@@ -148,7 +148,7 @@ final storiesEs = <Story>[
         question: 'Que veut dire la dernière ligne ?',
         options: [
           'Qu\'il a raté sa première journée',
-          'Qu\'il a un principe à respecter',
+          'Qu\'il à un principe à respecter',
           'Que c\'est peu, mais que c\'est un commencement',
         ],
         answerIndex: 2,

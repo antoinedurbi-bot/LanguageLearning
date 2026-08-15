@@ -90,10 +90,10 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     final similarity = _checker.similarity(answer, card.target);
     final message = similarity >= 0.8
-        ? 'Tres proche : il reste une petite difference.'
+        ? 'Très proche : il reste une petite différence.'
         : similarity >= 0.45
-            ? 'L\'idee est la, mais la formulation s\'ecarte du modele.'
-            : 'La phrase attendue est assez differente.';
+            ? 'L\'idée est la, mais la formulation s\'écarte du modèle.'
+            : 'La phrase attendue est assez différente.';
 
     return AiFeedback(
       isCorrect: false,
@@ -168,7 +168,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
                   enabled: feedback == null,
                   onSubmitted: (_) => _check(),
                   decoration: const InputDecoration(
-                    labelText: 'Ta reponse',
+                    labelText: 'Ta réponse',
                     helperText:
                         'Les accents et la ponctuation ne sont pas comptes.',
                     helperMaxLines: 2,
@@ -219,8 +219,8 @@ class _Header extends StatelessWidget {
         Text('Production libre', style: context.type.displayMedium),
         const SizedBox(height: LL.s12),
         Text(
-          'Reconnaitre une phrase et savoir la produire sont deux competences '
-          'differentes. Celle-ci ne progresse qu\'en ecrivant.',
+          'Reconnaître une phrase et savoir la produire sont deux compétences '
+          'différentes. Celle-ci ne progresse qu\'en écrivant.',
           style: context.type.bodyLarge,
         ),
       ],
@@ -350,7 +350,7 @@ class _ShadowingCardState extends State<_ShadowingCard> {
           ),
           const SizedBox(height: LL.s12),
           Text(
-            'Ecoute la phrase, puis repete-la a voix haute en meme temps que '
+            'Écoute la phrase, puis repete-la à voix haute en même temps que '
             'l\'audio. Trois fois de suite, sans lire.',
             style: context.type.bodyMedium,
           ),
@@ -375,7 +375,7 @@ class _ShadowingCardState extends State<_ShadowingCard> {
                         .speak(card.target, course.ttsLocale, slow: true);
                   },
                   icon: const Icon(Icons.volume_up_rounded, size: 20),
-                  label: const Text('Ecouter'),
+                  label: const Text('Écouter'),
                 ),
               ),
               const SizedBox(width: LL.s12),

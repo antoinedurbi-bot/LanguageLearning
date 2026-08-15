@@ -41,7 +41,7 @@ const _prompts = <String, List<IslandPrompt>>{
     ),
     IslandPrompt(
       id: 'daily',
-      question: 'A quoi ressemble une journee typique ?',
+      question: 'A quoi ressemble une journée typique ?',
       hint: 'Trois ou quatre actions au present suffisent. C\'est aussi un '
           'excellent entrainement aux verbes du quotidien.',
     ),
@@ -49,13 +49,13 @@ const _prompts = <String, List<IslandPrompt>>{
       id: 'like',
       question: 'Qu\'est-ce que tu aimes ou n\'aimes pas dans ce travail ?',
       hint: 'Prepare une opinion et une raison. "Parce que" est le mot qui '
-          'fait passer d\'un niveau debutant a un niveau conversationnel.',
+          'fait passer d\'un niveau debutant à un niveau conversationnel.',
     ),
     IslandPrompt(
       id: 'before',
       question: 'Que faisais-tu avant ?',
       hint: 'Force a utiliser le passe. Meme une seule phrase te fait '
-          'travailler le temps le plus utile apres le present.',
+          'travailler le temps le plus utile après le present.',
     ),
   ],
   'language': [
@@ -74,7 +74,7 @@ const _prompts = <String, List<IslandPrompt>>{
     IslandPrompt(
       id: 'hard',
       question: 'Qu\'est-ce qui est le plus difficile pour toi ?',
-      hint: 'Reponse tres utile : elle invite l\'autre a t\'aider, et elle '
+      hint: 'Réponse tres utile : elle invite l\'autre a t\'aider, et elle '
           'explique tes hesitations a venir.',
     ),
     IslandPrompt(
@@ -88,7 +88,7 @@ const _prompts = <String, List<IslandPrompt>>{
     IslandPrompt(
       id: 'today',
       question: 'Que fais-tu aujourd\'hui ou cette semaine ?',
-      hint: 'Le futur proche. C\'est la reponse a "quoi de neuf ?", qui '
+      hint: 'Le futur proche. C\'est la réponse a "quoi de neuf ?", qui '
           'revient dans toutes les conversations.',
     ),
     IslandPrompt(
@@ -101,7 +101,7 @@ const _prompts = <String, List<IslandPrompt>>{
       id: 'travel',
       question: 'Un voyage que tu as fait, ou que tu veux faire ?',
       hint: 'Sujet universel et sans risque. Un passe et un futur dans la '
-          'meme reponse.',
+          'meme réponse.',
     ),
     IslandPrompt(
       id: 'opinion',
@@ -116,22 +116,22 @@ const _islandMeta = [
   (
     id: 'self',
     title: 'Qui je suis',
-    situation: 'Les deux premieres minutes de toute rencontre.',
+    situation: 'Les deux premières minutes de toute rencontre.',
     why: 'C\'est la seule chose qu\'on te demandera a coup sur, dans toutes '
         'les conversations, toute ta vie. La preparer une fois sert mille fois.',
   ),
   (
     id: 'work',
     title: 'Ce que je fais',
-    situation: 'Juste apres les presentations, sans exception.',
-    why: 'Deuxieme question universelle. Sans reponse prete, la conversation '
+    situation: 'Juste après les presentations, sans exception.',
+    why: 'Deuxième question universelle. Sans réponse prete, la conversation '
         'cale exactement au moment ou elle demarrait.',
   ),
   (
     id: 'language',
     title: 'Pourquoi j\'apprends',
     situation: 'Des qu\'on remarque que tu n\'es pas natif.',
-    why: 'Repondre avec aisance change le regard de l\'autre : tu passes de '
+    why: 'Répondre avec aisance change le regard de l\'autre : tu passes de '
         '"touriste qui bafouille" a "quelqu\'un qui apprend", et on t\'aide.',
   ),
   (
@@ -151,19 +151,19 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
       IslandChunk(target: 'I am from ...', native: 'Je viens de ...'),
       IslandChunk(
           target: 'I have been living in ... for ... years',
-          native: 'J\'habite a ... depuis ... ans'),
+          native: 'J\'habite à ... depuis ... ans'),
       IslandChunk(
           target: 'I have one brother and two sisters',
-          native: 'J\'ai un frere et deux soeurs'),
+          native: 'J\'ai un frère et deux soeurs'),
     ],
     'work': [
       IslandChunk(target: 'I work as a ...', native: 'Je travaille comme ...'),
       IslandChunk(
           target: 'I usually start around ...',
-          native: 'Je commence generalement vers ...'),
+          native: 'Je commence généralement vers ...'),
       IslandChunk(
           target: 'What I like most is ...',
-          native: 'Ce que je prefere, c\'est ...'),
+          native: 'Ce que je préfère, c\'est ...'),
       IslandChunk(target: 'I used to work in ...', native: 'Avant je travaillais dans ...'),
     ],
     'language': [
@@ -172,7 +172,7 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
           native: 'J\'apprends l\'anglais parce que ...'),
       IslandChunk(
           target: 'I have been studying for about ...',
-          native: 'J\'etudie depuis environ ...'),
+          native: 'J\'étudie depuis environ ...'),
       IslandChunk(
           target: 'The hardest part for me is ...',
           native: 'Le plus dur pour moi, c\'est ...'),
@@ -183,7 +183,7 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
     'plans': [
       IslandChunk(target: 'I am going to ...', native: 'Je vais ...'),
       IslandChunk(target: 'I am planning to ...', native: 'J\'ai prevu de ...'),
-      IslandChunk(target: 'I went to ... last year', native: 'Je suis alle a ... l\'annee derniere'),
+      IslandChunk(target: 'I went to ... last year', native: 'Je suis allé à ... l\'année dernière'),
       IslandChunk(target: 'I think it is ... because ...', native: 'Je trouve que c\'est ... parce que ...'),
     ],
   },
@@ -193,73 +193,73 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
       IslandChunk(target: 'Soy de ...', native: 'Je viens de ...'),
       IslandChunk(
           target: 'Hace ... años que vivo en ...',
-          native: 'Cela fait ... ans que j\'habite a ...'),
+          native: 'Cela fait ... ans que j\'habite à ...'),
       IslandChunk(
           target: 'Tengo un hermano y dos hermanas',
-          native: 'J\'ai un frere et deux soeurs'),
+          native: 'J\'ai un frère et deux soeurs'),
     ],
     'work': [
       IslandChunk(target: 'Trabajo como ...', native: 'Je travaille comme ...'),
-      IslandChunk(target: 'Suelo empezar a las ...', native: 'Je commence generalement a ...'),
-      IslandChunk(target: 'Lo que más me gusta es ...', native: 'Ce que je prefere, c\'est ...'),
+      IslandChunk(target: 'Suelo empezar a las ...', native: 'Je commence généralement à ...'),
+      IslandChunk(target: 'Lo que más me gusta es ...', native: 'Ce que je préfère, c\'est ...'),
       IslandChunk(target: 'Antes trabajaba en ...', native: 'Avant je travaillais dans ...'),
     ],
     'language': [
       IslandChunk(
           target: 'Estoy aprendiendo español porque ...',
           native: 'J\'apprends l\'espagnol parce que ...'),
-      IslandChunk(target: 'Llevo ... estudiando', native: 'J\'etudie depuis ...'),
+      IslandChunk(target: 'Llevo ... estudiando', native: 'J\'étudie depuis ...'),
       IslandChunk(target: 'Lo más difícil para mí es ...', native: 'Le plus dur pour moi, c\'est ...'),
       IslandChunk(target: 'Me gustaría poder ...', native: 'J\'aimerais pouvoir ...'),
     ],
     'plans': [
       IslandChunk(target: 'Voy a ...', native: 'Je vais ...'),
       IslandChunk(target: 'Tengo pensado ...', native: 'J\'ai prevu de ...'),
-      IslandChunk(target: 'El año pasado fui a ...', native: 'L\'annee derniere je suis alle a ...'),
+      IslandChunk(target: 'El año pasado fui a ...', native: 'L\'année dernière je suis allé à ...'),
       IslandChunk(target: 'Me parece ... porque ...', native: 'Je trouve ca ... parce que ...'),
     ],
   },
   'zh': {
     'self': [
       IslandChunk(target: '我叫 ...', native: 'Je m\'appelle ...', romanization: 'Wǒ jiào ...'),
-      IslandChunk(target: '我是法国人。', native: 'Je suis francais.', romanization: 'Wǒ shì Fǎguó rén.'),
+      IslandChunk(target: '我是法国人。', native: 'Je suis français.', romanization: 'Wǒ shì Fǎguó rén.'),
       IslandChunk(
           target: '我在 ... 住了 ... 年了。',
-          native: 'J\'habite a ... depuis ... ans.',
+          native: 'J\'habite à ... depuis ... ans.',
           romanization: 'Wǒ zài ... zhùle ... nián le.'),
-      IslandChunk(target: '我有一个哥哥。', native: 'J\'ai un grand frere.', romanization: 'Wǒ yǒu yí ge gēge.'),
+      IslandChunk(target: '我有一个哥哥。', native: 'J\'ai un grand frère.', romanization: 'Wǒ yǒu yí ge gēge.'),
     ],
     'work': [
       IslandChunk(target: '我是 ...', native: 'Je suis (metier) ...', romanization: 'Wǒ shì ...'),
-      IslandChunk(target: '我每天 ... 点上班。', native: 'Je commence a ... heures.', romanization: 'Wǒ měitiān ... diǎn shàngbān.'),
-      IslandChunk(target: '我最喜欢的是 ...', native: 'Ce que je prefere, c\'est ...', romanization: 'Wǒ zuì xǐhuan de shì ...'),
+      IslandChunk(target: '我每天 ... 点上班。', native: 'Je commence à ... heures.', romanization: 'Wǒ měitiān ... diǎn shàngbān.'),
+      IslandChunk(target: '我最喜欢的是 ...', native: 'Ce que je préfère, c\'est ...', romanization: 'Wǒ zuì xǐhuan de shì ...'),
       IslandChunk(target: '以前我做过 ...', native: 'Avant, j\'ai fait ...', romanization: 'Yǐqián wǒ zuòguo ...'),
     ],
     'language': [
       IslandChunk(target: '我学中文因为 ...', native: 'J\'apprends le chinois parce que ...', romanization: 'Wǒ xué Zhōngwén yīnwèi ...'),
-      IslandChunk(target: '我学了 ... 了。', native: 'J\'etudie depuis ...', romanization: 'Wǒ xuéle ... le.'),
+      IslandChunk(target: '我学了 ... 了。', native: 'J\'étudie depuis ...', romanization: 'Wǒ xuéle ... le.'),
       IslandChunk(target: '对我来说，最难的是声调。', native: 'Pour moi, le plus dur ce sont les tons.', romanization: 'Duì wǒ lái shuō, zuì nán de shì shēngdiào.'),
-      IslandChunk(target: '我希望可以 ...', native: 'J\'espere pouvoir ...', romanization: 'Wǒ xīwàng kěyǐ ...'),
+      IslandChunk(target: '我希望可以 ...', native: 'J\'espère pouvoir ...', romanization: 'Wǒ xīwàng kěyǐ ...'),
     ],
     'plans': [
-      IslandChunk(target: '我要去 ...', native: 'Je vais aller a ...', romanization: 'Wǒ yào qù ...'),
+      IslandChunk(target: '我要去 ...', native: 'Je vais aller à ...', romanization: 'Wǒ yào qù ...'),
       IslandChunk(target: '这个周末我打算 ...', native: 'Ce week-end je compte ...', romanization: 'Zhège zhōumò wǒ dǎsuàn ...'),
-      IslandChunk(target: '我去年去过 ...', native: 'L\'annee derniere je suis alle a ...', romanization: 'Wǒ qùnián qùguo ...'),
+      IslandChunk(target: '我去年去过 ...', native: 'L\'année dernière je suis allé à ...', romanization: 'Wǒ qùnián qùguo ...'),
       IslandChunk(target: '我觉得 ... 因为 ...', native: 'Je trouve que ... parce que ...', romanization: 'Wǒ juéde ... yīnwèi ...'),
     ],
   },
   'tr': {
     'self': [
       IslandChunk(target: 'Benim adım ...', native: 'Je m\'appelle ...'),
-      IslandChunk(target: 'Fransızım.', native: 'Je suis francais.'),
-      IslandChunk(target: '... yıldır ...\'da yaşıyorum.', native: 'J\'habite a ... depuis ... ans.'),
-      IslandChunk(target: 'Bir erkek kardeşim var.', native: 'J\'ai un frere.'),
+      IslandChunk(target: 'Fransızım.', native: 'Je suis français.'),
+      IslandChunk(target: '... yıldır ...\'da yaşıyorum.', native: 'J\'habite à ... depuis ... ans.'),
+      IslandChunk(target: 'Bir erkek kardeşim var.', native: 'J\'ai un frère.'),
     ],
     'work': [
       IslandChunk(target: '... olarak çalışıyorum.', native: 'Je travaille comme ...'),
-      IslandChunk(target: 'Genelde ...\'da başlıyorum.', native: 'Je commence generalement a ...'),
-      IslandChunk(target: 'En sevdiğim şey ...', native: 'Ce que je prefere, c\'est ...'),
-      IslandChunk(target: 'Önceden ...\'da çalışıyordum.', native: 'Avant je travaillais a ...'),
+      IslandChunk(target: 'Genelde ...\'da başlıyorum.', native: 'Je commence généralement à ...'),
+      IslandChunk(target: 'En sevdiğim şey ...', native: 'Ce que je préfère, c\'est ...'),
+      IslandChunk(target: 'Önceden ...\'da çalışıyordum.', native: 'Avant je travaillais à ...'),
     ],
     'language': [
       IslandChunk(target: 'Türkçe öğreniyorum çünkü ...', native: 'J\'apprends le turc parce que ...'),
@@ -270,7 +270,7 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
     'plans': [
       IslandChunk(target: '... gideceğim.', native: 'Je vais aller ...'),
       IslandChunk(target: 'Bu hafta sonu ... düşünüyorum.', native: 'Ce week-end je pense ...'),
-      IslandChunk(target: 'Geçen yıl ...\'a gittim.', native: 'L\'annee derniere je suis alle a ...'),
+      IslandChunk(target: 'Geçen yıl ...\'a gittim.', native: 'L\'année dernière je suis allé à ...'),
       IslandChunk(target: 'Bence ... çünkü ...', native: 'Je pense que ... parce que ...'),
     ],
   },

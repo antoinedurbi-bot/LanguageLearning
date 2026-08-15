@@ -56,7 +56,7 @@ class CollectionScreen extends StatelessWidget {
                           Text(
                             items.isEmpty
                                 ? 'Rien pour l\'instant'
-                                : '${items.length} element'
+                                : '${items.length} élément'
                                     '${items.length > 1 ? 's' : ''}',
                             style: context.type.headlineSmall,
                           ),
@@ -119,7 +119,7 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: LL.s16),
             Text(
               'Touche n\'importe quel mot ou phrase dans l\'app, puis '
-              '« Enregistrer ». Ce que tu gardes ici est a toi : cette '
+              '« Enregistrer ». Ce que tu gardes ici est à toi : cette '
               'collection n\'est pas effacee quand tu reinitialises ta '
               'progression.',
               textAlign: TextAlign.center,
@@ -216,7 +216,7 @@ class _SavedRow extends StatelessWidget {
                   if (!controller.soundEnabled) return;
                   context.read<TtsService>().speak(item.target, ttsLocale);
                 },
-                semanticLabel: 'Ecouter',
+                semanticLabel: 'Écouter',
                 child: Container(
                   width: 40,
                   height: 40,

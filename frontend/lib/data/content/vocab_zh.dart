@@ -22,9 +22,9 @@ const vocabZh = VocabularyPack(
           romanization: 'de',
           example: '我的书',
           exampleNative: 'mon livre',
-          note: 'Le caractere le plus frequent du chinois. Il relie ce qui '
-              'qualifie a ce qui est qualifie, toujours dans l\'ordre inverse '
-              'du francais : 我的书 = "moi-de-livre".',
+          note: 'Le caractère le plus frequent du chinois. Il relie ce qui '
+              'qualifie à ce qui est qualifie, toujours dans l\'ordre inverse '
+              'du français : 我的书 = "moi-de-livre".',
         ),
         VocabEntry(
           id: 'zh-v-le',
@@ -46,7 +46,7 @@ const vocabZh = VocabularyPack(
           romanization: 'ma',
           example: '你好吗？',
           exampleNative: 'Comment vas-tu ?',
-          note: 'Se colle a la fin d\'une phrase affirmative pour en faire une '
+          note: 'Se colle à la fin d\'une phrase affirmative pour en faire une '
               'question. Aucune inversion, aucun changement d\'ordre.',
         ),
         VocabEntry(
@@ -57,7 +57,7 @@ const vocabZh = VocabularyPack(
           romanization: 'zài',
           example: '我在找这个地址。',
           exampleNative: 'Je cherche cette adresse.',
-          note: 'Deux emplois : localiser (在家 = a la maison) et marquer '
+          note: 'Deux emplois : localiser (在家 = à la maison) et marquer '
               'l\'action en cours devant un verbe. Le complement de lieu se '
               'place toujours AVANT le verbe.',
         ),
@@ -83,7 +83,7 @@ const vocabZh = VocabularyPack(
           exampleNative: 'J\'arrive tout de suite.',
           note: 'Un des mots les plus difficiles a cerner : il resserre le '
               'lien entre deux choses (immediatete, consequence, insistance). '
-              'A apprendre par exemples plutot que par definition.',
+              'A apprendre par exemples plutôt que par definition.',
         ),
         VocabEntry(
           id: 'zh-v-hai',
@@ -94,7 +94,7 @@ const vocabZh = VocabularyPack(
           example: '我还没吃。',
           exampleNative: 'Je n\'ai pas encore mange.',
           note: 'Se lit aussi "huán" avec le sens de "rendre". Le meme '
-              'caractere, deux prononciations, deux sens.',
+              'caractère, deux prononciations, deux sens.',
         ),
         VocabEntry(
           id: 'zh-v-neng',
@@ -104,8 +104,8 @@ const vocabZh = VocabularyPack(
           romanization: 'néng / huì / kěyǐ',
           example: '我会说中文。',
           exampleNative: 'Je sais parler chinois.',
-          note: 'Trois "pouvoir" : 会 = savoir faire (appris), 能 = etre '
-              'physiquement capable, 可以 = avoir la permission. Le francais '
+          note: 'Trois "pouvoir" : 会 = savoir faire (appris), 能 = être '
+              'physiquement capable, 可以 = avoir la permission. Le français '
               'confond les trois.',
         ),
         VocabEntry(
@@ -139,7 +139,7 @@ const vocabZh = VocabularyPack(
           romanization: 'yìdiǎnr',
           example: '说慢一点儿。',
           exampleNative: 'Parle un peu plus lentement.',
-          note: 'Se place APRES l\'adjectif pour attenuer. A ne pas confondre '
+          note: 'Se place APRÈS l\'adjectif pour attenuer. A ne pas confondre '
               'avec 有点儿, qui se met avant et sous-entend un reproche '
               '(有点儿贵 = un peu trop cher).',
         ),
@@ -151,7 +151,7 @@ const vocabZh = VocabularyPack(
           romanization: 'ba',
           example: '我们走吧。',
           exampleNative: 'Allons-y.',
-          note: 'Adoucit une phrase en proposition plutot qu\'en ordre. '
+          note: 'Adoucit une phrase en proposition plutôt qu\'en ordre. '
               'Sans 吧, "我们走" sonne comme un commandement.',
         ),
       ],
@@ -181,7 +181,7 @@ const vocabZh = VocabularyPack(
           example: '一杯咖啡',
           exampleNative: 'un cafe',
           note: 'Litteralement "verre/tasse". On compte le contenant, pas le '
-              'liquide, exactement comme "un verre d\'eau" en francais.',
+              'liquide, exactement comme "un verre d\'eau" en français.',
         ),
         VocabEntry(
           id: 'zh-v-zhang',
@@ -223,8 +223,8 @@ const vocabZh = VocabularyPack(
           pos: 'classificateur',
           romanization: 'cì',
           example: '我去过两次。',
-          exampleNative: 'J\'y suis alle deux fois.',
-          note: 'Se place apres le verbe, avec le nombre : 去过两次. Le compte '
+          exampleNative: 'J\'y suis allé deux fois.',
+          note: 'Se place après le verbe, avec le nombre : 去过两次. Le compte '
               'de fois suit toujours l\'action.',
         ),
         VocabEntry(
@@ -234,7 +234,7 @@ const vocabZh = VocabularyPack(
           pos: 'interrogatif',
           romanization: 'duōshao / jǐ',
           example: '多少钱？',
-          exampleNative: 'Combien ca coute ?',
+          exampleNative: 'Combien ca coûte ?',
           note: '几 pour un petit nombre attendu (moins de dix) et toujours '
               'suivi d\'un classificateur. 多少 pour un nombre indetermine ou '
               'grand, comme un prix.',
@@ -248,7 +248,7 @@ const vocabZh = VocabularyPack(
           example: '六点半',
           exampleNative: 'six heures et demie',
           note: 'Pour l\'heure qu\'il est. Une duree en heures, c\'est '
-              '小时 (xiǎoshí) : deux mots differents la ou le francais dit '
+              '小时 (xiǎoshí) : deux mots differents la ou le français dit '
               '"heure" pour les deux.',
         ),
       ],
@@ -287,17 +287,17 @@ const vocabZh = VocabularyPack(
     KeyPhrase(
       id: 'zh-p-nounderstand',
       target: '对不起，我听不懂。',
-      native: 'Desole, je ne comprends pas.',
+      native: 'Désolé, je ne comprends pas.',
       whenToUse: '听不懂 dit precisement "j\'entends mais je ne saisis pas", '
           'ce qui est plus utile que "je ne comprends pas".',
       romanization: 'Duìbuqǐ, wǒ tīng bu dǒng.',
-      literal: 'Desole / je / ecouter-pas-comprendre.',
+      literal: 'Désolé / je / écouter-pas-comprendre.',
       category: 'reparation',
     ),
     KeyPhrase(
       id: 'zh-p-write',
       target: '请写下来，好吗？',
-      native: 'Pouvez-vous l\'ecrire, s\'il vous plait ?',
+      native: 'Pouvez-vous l\'écrire, s\'il vous plait ?',
       whenToUse: 'Tres efficace en chinois : l\'ecrit leve les ambiguites de '
           'tons que l\'oral laisse passer.',
       romanization: 'Qǐng xiě xiàlái, hǎo ma?',
@@ -308,15 +308,15 @@ const vocabZh = VocabularyPack(
       target: '我要一个这个。',
       native: 'Je voudrais un de ceux-la.',
       whenToUse: 'En pointant du doigt. Resout n\'importe quelle commande '
-          'sans connaitre le nom du plat.',
+          'sans connaître le nom du plat.',
       romanization: 'Wǒ yào yí ge zhège.',
       category: 'survie',
     ),
     KeyPhrase(
       id: 'zh-p-howmuch',
       target: '多少钱？',
-      native: 'Combien ca coute ?',
-      whenToUse: 'Partout. Prevoir que la reponse arrive vite et en 块.',
+      native: 'Combien ca coûte ?',
+      whenToUse: 'Partout. Prevoir que la réponse arrive vite et en 块.',
       romanization: 'Duōshao qián?',
       category: 'survie',
     ),
@@ -324,7 +324,7 @@ const vocabZh = VocabularyPack(
       id: 'zh-p-where',
       target: '请问，洗手间在哪儿？',
       native: 'Excusez-moi, ou sont les toilettes ?',
-      whenToUse: '请问 ouvre poliment n\'importe quelle question a un '
+      whenToUse: '请问 ouvre poliment n\'importe quelle question à un '
           'inconnu. Le moule se reutilise avec n\'importe quel lieu.',
       romanization: 'Qǐngwèn, xǐshǒujiān zài nǎr?',
       literal: 'Prier-demander / toilettes / se-trouver / ou ?',
@@ -352,7 +352,7 @@ const vocabZh = VocabularyPack(
       id: 'zh-p-noneed',
       target: '不用了，谢谢。',
       native: 'Ce n\'est pas la peine, merci.',
-      whenToUse: 'Refuser poliment. Refuser une premiere offre est normal en '
+      whenToUse: 'Refuser poliment. Refuser une première offre est normal en '
           'Chine ; l\'insistance de l\'autre fait partie du rituel.',
       romanization: 'Bú yòng le, xièxie.',
       category: 'politesse',
@@ -361,8 +361,8 @@ const vocabZh = VocabularyPack(
       id: 'zh-p-beginner',
       target: '我的中文不太好。',
       native: 'Mon chinois n\'est pas tres bon.',
-      whenToUse: 'Desamorce d\'emblee. Les interlocuteurs ralentissent '
-          'spontanement apres cette phrase.',
+      whenToUse: 'Désamorce d\'emblee. Les interlocuteurs ralentissent '
+          'spontanement après cette phrase.',
       romanization: 'Wǒ de Zhōngwén bú tài hǎo.',
       category: 'politesse',
     ),

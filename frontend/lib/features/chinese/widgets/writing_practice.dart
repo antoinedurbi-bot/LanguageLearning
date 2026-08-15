@@ -117,7 +117,7 @@ class _WritingPracticeState extends State<WritingPractice> {
           ? 'Trace plus long : suis tout le trait.'
           : attempt.reversed
               ? 'Bon trait, mais a l\'envers : le sens compte.'
-              : 'Pas tout a fait : c\'est le trait n° ${_completed + 1}.';
+              : 'Pas tout à fait : c\'est le trait n° ${_completed + 1}.';
       if (_missesOnStroke >= _missesBeforeHint) _showStrokeHint = true;
     });
   }
@@ -271,7 +271,7 @@ class _StatusBar extends StatelessWidget {
               finished
                   ? (misses == 0
                       ? 'Parfait, sans erreur.'
-                      : 'Caractere termine — $misses erreur'
+                      : 'Caractère termine — $misses erreur'
                           '${misses > 1 ? 's' : ''}.')
                   : message ?? 'Trait $completed/$total — trace le suivant.',
               textAlign: TextAlign.center,

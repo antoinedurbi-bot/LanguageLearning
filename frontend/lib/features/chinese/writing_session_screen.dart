@@ -88,7 +88,7 @@ class _WritingSessionScreenState extends State<WritingSessionScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(LL.s24),
                     child: Text(
-                      'Aucun caractere disponible pour l\'ecriture.',
+                      'Aucun caractère disponible pour l\'écriture.',
                       style: context.type.bodyLarge,
                     ),
                   ),
@@ -134,7 +134,7 @@ class _WritingSessionScreenState extends State<WritingSessionScreen> {
                                     const SizedBox(height: LL.s4),
                                     Text(
                                       hanzi.definition.isEmpty
-                                          ? 'Trace le caractere'
+                                          ? 'Trace le caractère'
                                           : hanzi.definition,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -154,7 +154,7 @@ class _WritingSessionScreenState extends State<WritingSessionScreen> {
                                       .read<TtsService>()
                                       .speak(hanzi.character, 'zh-CN');
                                 },
-                                semanticLabel: 'Ecouter',
+                                semanticLabel: 'Écouter',
                                 child: Container(
                                   width: 44,
                                   height: 44,
@@ -202,8 +202,8 @@ class _WritingSessionScreenState extends State<WritingSessionScreen> {
                             ),
                             label: Text(
                               _showAnimation
-                                  ? 'Revenir a l\'ecriture'
-                                  : 'Montre-moi le modele',
+                                  ? 'Revenir à l\'écriture'
+                                  : 'Montre-moi le modèle',
                             ),
                           ),
                         ),
@@ -293,14 +293,14 @@ class _Summary extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('$total', style: context.type.displayMedium),
-                      Text('caracteres', style: context.type.labelMedium),
+                      Text('caractères', style: context.type.labelMedium),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: LL.s32),
               Text(
-                'Session d\'ecriture terminee',
+                'Session d\'écriture terminee',
                 textAlign: TextAlign.center,
                 style: context.type.headlineMedium,
               ),
@@ -309,8 +309,8 @@ class _Summary extends StatelessWidget {
                 misses == 0
                     ? 'Aucun trait rate. Impressionnant.'
                     : '$misses trait${misses > 1 ? 's' : ''} a reprendre — '
-                        'c\'est normal : ecrire de memoire est bien plus dur '
-                        'que reconnaitre.',
+                        'c\'est normal : écrire de mémoire est bien plus dur '
+                        'que reconnaître.',
                 textAlign: TextAlign.center,
                 style: context.type.bodyMedium,
               ),

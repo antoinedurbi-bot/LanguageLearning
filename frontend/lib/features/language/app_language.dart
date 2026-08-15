@@ -35,7 +35,7 @@ const availableLanguages = [
     nativeName: 'English',
     script: 'Aa',
     description: 'Voyage, travail, et tout le reste.',
-    difficultyNote: 'Proche du francais - environ 600 h pour un bon niveau',
+    difficultyNote: 'Proche du français - environ 600 h pour un bon niveau',
   ),
   AppLanguage(
     code: 'es',
@@ -43,14 +43,14 @@ const availableLanguages = [
     nativeName: 'Español',
     script: 'Ñ',
     description: 'La langue la plus rentable pour un francophone.',
-    difficultyNote: 'Tres proche du francais - environ 600 h',
+    difficultyNote: 'Très proche du français - environ 600 h',
   ),
   AppLanguage(
     code: 'zh',
     name: 'Chinois',
     nativeName: '中文',
     script: '中',
-    description: 'Mandarin: tons, caracteres, grammaire simple.',
+    description: 'Mandarin: tons, caractères, grammaire simple.',
     difficultyNote: 'Distance maximale - environ 2200 h, mais sans conjugaison',
   ),
   AppLanguage(

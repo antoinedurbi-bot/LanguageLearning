@@ -58,7 +58,7 @@ class _CharacterExplorerScreenState extends State<CharacterExplorerScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('DICTIONNAIRE', style: context.type.labelSmall),
-                          Text('Caracteres', style: context.type.headlineSmall),
+                          Text('Caractères', style: context.type.headlineSmall),
                         ],
                       ),
                     ),
@@ -72,7 +72,7 @@ class _CharacterExplorerScreenState extends State<CharacterExplorerScreen> {
                   autocorrect: false,
                   onChanged: (value) => setState(() => _query = value),
                   decoration: InputDecoration(
-                    hintText: 'Caractere, pinyin (ni hao), ou sens',
+                    hintText: 'Caractère, pinyin (ni hao), ou sens',
                     prefixIcon: const Icon(Icons.search_rounded),
                     suffixIcon: _query.isEmpty
                         ? null
@@ -175,7 +175,7 @@ class _CharacterExplorerScreenState extends State<CharacterExplorerScreen> {
             child: Padding(
               padding: const EdgeInsets.all(LL.s32),
               child: Text(
-                'Aucun caractere ne correspond a "$_query".',
+                'Aucun caractère ne correspond a "$_query".',
                 textAlign: TextAlign.center,
                 style: context.type.bodyLarge,
               ),
