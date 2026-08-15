@@ -4,7 +4,9 @@ import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/content/islands.dart';
+import 'package:learning_app/data/content/stories.dart';
 import 'package:learning_app/data/content/vocabularies.dart';
+import 'package:learning_app/features/reading/story_list_screen.dart';
 import 'package:learning_app/features/vocabulary/collection_screen.dart';
 import 'package:learning_app/features/vocabulary/islands_screen.dart';
 import 'package:learning_app/features/vocabulary/phrases_screen.dart';
@@ -30,6 +32,7 @@ class LibrarySection extends StatelessWidget {
 
     final pack = vocabularyFor(code);
     final islands = islandsFor(code);
+    final texts = storiesFor(code);
     final savedCount = controller.collection?.items.length ?? 0;
 
     return Column(
@@ -43,6 +46,28 @@ class LibrarySection extends StatelessWidget {
           style: context.type.bodyMedium,
         ),
         const SizedBox(height: LL.s16),
+        // Reading comes first on purpose: it is the only activity here where
+        // everything else the learner has studied has to work together at
+        // real speed.
+        if (texts.isNotEmpty) ...[
+          _Tile(
+            icon: Icons.auto_stories_rounded,
+            tint: LL.amber,
+            title: 'Lectures',
+            subtitle:
+                '${texts.length} textes, chaque mot cliquable pour son sens',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => StoryListScreen(
+                  stories: texts,
+                  languageCode: code,
+                  ttsLocale: course.ttsLocale,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: LL.s12),
+        ],
         if (pack != null) ...[
           _Tile(
             icon: Icons.menu_book_rounded,
@@ -95,7 +120,7 @@ class LibrarySection extends StatelessWidget {
         ],
         _Tile(
           icon: Icons.bookmark_rounded,
-          tint: c.warning,
+          tint: LL.rose,
           title: 'Ma collection',
           subtitle: savedCount == 0
               ? 'Rien d\'enregistre pour l\'instant'
