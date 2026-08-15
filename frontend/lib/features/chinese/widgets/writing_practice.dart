@@ -271,7 +271,7 @@ class _StatusBar extends StatelessWidget {
               finished
                   ? (misses == 0
                       ? 'Parfait, sans erreur.'
-                      : 'Caractère termine — $misses erreur'
+                      : 'Caractère terminé — $misses erreur'
                           '${misses > 1 ? 's' : ''}.')
                   : message ?? 'Trait $completed/$total — trace le suivant.',
               textAlign: TextAlign.center,

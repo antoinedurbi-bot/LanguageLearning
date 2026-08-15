@@ -9,6 +9,7 @@ import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/progress.dart';
 import 'package:learning_app/features/auth/sign_in_screen.dart';
+import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -439,6 +440,7 @@ class _SettingsCard extends StatelessWidget {
             subtitle: const Text('Lit les phrases dans la langue cible'),
             secondary: const Icon(Icons.volume_up_rounded),
           ),
+          if (controller.soundEnabled) const _VoiceDiagnostic(),
           ListTile(
             leading: const Icon(Icons.dark_mode_rounded),
             title: const Text('Thème'),
@@ -570,6 +572,102 @@ class _AccountCard extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Tells the learner, in the one place they would look, whether their device
+/// can actually pronounce the language they are studying.
+///
+/// Without this the play buttons simply do nothing when no voice is installed,
+/// which reads as a broken app rather than a missing system component.
+class _VoiceDiagnostic extends StatefulWidget {
+  const _VoiceDiagnostic();
+
+  @override
+  State<_VoiceDiagnostic> createState() => _VoiceDiagnosticState();
+}
+
+class _VoiceDiagnosticState extends State<_VoiceDiagnostic> {
+  VoiceStatus? _status;
+  String? _checkedLocale;
+
+  Future<void> _check(String locale) async {
+    if (_checkedLocale == locale) return;
+    _checkedLocale = locale;
+    final status = await context.read<TtsService>().voiceStatus(locale);
+    if (!mounted) return;
+    setState(() => _status = status);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+    final controller = context.watch<LearningController>();
+    final course = controller.course;
+    final language = controller.language;
+    if (course == null || language == null) return const SizedBox.shrink();
+
+    // Kick off the lookup on first build for this locale.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _check(course.ttsLocale));
+
+    final status = _status;
+    if (status == null || status == VoiceStatus.unknown) {
+      // Saying nothing is right here: we have no evidence either way.
+      return const SizedBox.shrink();
+    }
+
+    if (status == VoiceStatus.ready) {
+      return ListTile(
+        dense: true,
+        leading: Icon(Icons.check_circle_rounded, size: 18, color: c.success),
+        title: Text(
+          'Voix ${language.name.toLowerCase()} détectée sur cet appareil',
+          style: context.type.labelSmall?.copyWith(color: c.success),
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(LL.s16, 0, LL.s16, LL.s12),
+      child: Container(
+        padding: const EdgeInsets.all(LL.s12),
+        decoration: BoxDecoration(
+          color: c.warning.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(LL.rSm),
+          border: Border.all(color: c.warning.withValues(alpha: 0.35)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.volume_off_rounded, size: 18, color: c.warning),
+            const SizedBox(width: LL.s12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Aucune voix ${language.name.toLowerCase()} sur cet appareil',
+                    style:
+                        context.type.labelLarge?.copyWith(color: c.warning),
+                  ),
+                  const SizedBox(height: LL.s4),
+                  Text(
+                    'Les boutons de lecture resteront muets tant que le pack '
+                    'vocal n\'est pas installé. L\'app utilise les voix du '
+                    'système, elle n\'en embarque pas.\n\n'
+                    'Windows : Paramètres → Heure et langue → Voix → Ajouter '
+                    'des voix.\n'
+                    'Android : Paramètres → Langues → Synthèse vocale.\n'
+                    'iOS : Réglages → Accessibilité → Contenu énoncé → Voix.',
+                    style: context.type.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

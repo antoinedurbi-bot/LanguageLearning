@@ -136,7 +136,7 @@ void main() {
     await tester.tap(find.text('Facile'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Session terminee'), findsOneWidget);
+    expect(find.text('Session terminée'), findsOneWidget);
     expect(find.text('100%'), findsOneWidget);
     expect(find.text('de réussite'), findsOneWidget);
     expect(find.text('1 / 1'), findsOneWidget);

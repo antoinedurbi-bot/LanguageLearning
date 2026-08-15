@@ -3,9 +3,11 @@ import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
+import 'package:learning_app/data/content/frames.dart';
 import 'package:learning_app/data/content/islands.dart';
 import 'package:learning_app/data/content/stories.dart';
 import 'package:learning_app/data/content/vocabularies.dart';
+import 'package:learning_app/features/forge/sentence_forge_screen.dart';
 import 'package:learning_app/features/reading/story_list_screen.dart';
 import 'package:learning_app/features/vocabulary/collection_screen.dart';
 import 'package:learning_app/features/vocabulary/islands_screen.dart';
@@ -33,6 +35,7 @@ class LibrarySection extends StatelessWidget {
     final pack = vocabularyFor(code);
     final islands = islandsFor(code);
     final texts = storiesFor(code);
+    final sentenceFrames = framesFor(code);
     final savedCount = controller.collection?.items.length ?? 0;
 
     return Column(
@@ -100,12 +103,32 @@ class LibrarySection extends StatelessWidget {
           ),
           const SizedBox(height: LL.s12),
         ],
+        if (sentenceFrames.isNotEmpty) ...[
+          _Tile(
+            icon: Icons.auto_fix_high_rounded,
+            tint: LL.cyan,
+            title: 'Atelier de phrases',
+            subtitle: '${sentenceFrames.length} structures, '
+                '${sentenceFrames.fold<int>(0, (s, f) => s + f.combinations)} '
+                'phrases possibles',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => SentenceForgeScreen(
+                  frames: sentenceFrames,
+                  languageCode: code,
+                  ttsLocale: course.ttsLocale,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: LL.s12),
+        ],
         if (islands.isNotEmpty) ...[
           _Tile(
             icon: Icons.hub_rounded,
             tint: c.success,
             title: 'Îles linguistiques',
-            subtitle: 'Tes réponses toutes pretes aux questions inévitables',
+            subtitle: 'Tes réponses toutes prêtes aux questions inévitables',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => IslandsScreen(
@@ -123,8 +146,8 @@ class LibrarySection extends StatelessWidget {
           tint: LL.rose,
           title: 'Ma collection',
           subtitle: savedCount == 0
-              ? 'Rien d\'enregistre pour l\'instant'
-              : '$savedCount élément${savedCount > 1 ? 's' : ''} garde'
+              ? 'Rien d\'enregistré pour l\'instant'
+              : '$savedCount élément${savedCount > 1 ? 's' : ''} gardé'
                   '${savedCount > 1 ? 's' : ''}',
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute<void>(

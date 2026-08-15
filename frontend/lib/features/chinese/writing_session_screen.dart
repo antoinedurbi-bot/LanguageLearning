@@ -300,7 +300,7 @@ class _Summary extends StatelessWidget {
               ),
               const SizedBox(height: LL.s32),
               Text(
-                'Session d\'écriture terminee',
+                'Session d\'écriture terminée',
                 textAlign: TextAlign.center,
                 style: context.type.headlineMedium,
               ),

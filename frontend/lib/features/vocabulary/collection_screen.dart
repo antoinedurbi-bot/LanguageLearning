@@ -160,7 +160,7 @@ class _SavedRow extends StatelessWidget {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${item.target} retire.'),
+            content: Text('${item.target} retiré.'),
             action: SnackBarAction(
               label: 'Annuler',
               // Re-saving restores it exactly: the item carries its own text,

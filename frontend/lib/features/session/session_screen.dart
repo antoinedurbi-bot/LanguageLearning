@@ -732,7 +732,7 @@ class _SummaryScreen extends StatelessWidget {
                       Reveal(
                         index: 1,
                         child: Text(
-                          answered == 0 ? 'Rien à réviser' : 'Session terminee',
+                          answered == 0 ? 'Rien à réviser' : 'Session terminée',
                           textAlign: TextAlign.center,
                           style: context.type.headlineMedium,
                         ),
