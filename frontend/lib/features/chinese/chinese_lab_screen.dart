@@ -5,8 +5,11 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/hanzi/hanzi.dart';
 import 'package:learning_app/data/hanzi/pinyin.dart';
+import 'package:learning_app/data/hanzi/radicals.dart';
 import 'package:learning_app/features/chinese/character_explorer_screen.dart';
+import 'package:learning_app/features/chinese/chengyu_screen.dart';
 import 'package:learning_app/features/chinese/pinyin_chart_screen.dart';
+import 'package:learning_app/features/chinese/radical_explorer_screen.dart';
 import 'package:learning_app/features/chinese/tone_trainer_screen.dart';
 import 'package:learning_app/features/chinese/writing_session_screen.dart';
 
@@ -29,6 +32,7 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
   // JSON are decoded once per session and only if this tab is opened.
   final _hanzi = HanziRepository();
   final _pinyin = PinyinRepository();
+  final _radicals = RadicalRepository();
 
   late Future<PinyinData> _pinyinData;
 
@@ -98,6 +102,43 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
         Reveal(
           index: 4,
           child: _LabCard(
+            icon: Icons.account_tree_rounded,
+            title: 'Clés (部首)',
+            subtitle: '162 clés, triees par nombre de caracteres debloques.',
+            body: 'Chaque caractère composé est bati sur des clés. Les '
+                'reconnaitre transforme des formes arbitraires en indices de '
+                'sens et de prononciation.',
+            colors: ramp,
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) =>
+                    RadicalExplorerScreen(repository: _radicals),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: LL.s12),
+        Reveal(
+          index: 5,
+          child: _LabCard(
+            icon: Icons.auto_stories_rounded,
+            title: 'Chengyu (成语)',
+            subtitle: 'Idiomes en quatre caractères, avec leur histoire.',
+            body: 'Le chinois avancé parle par chengyu : des expressions '
+                'figées de quatre caractères, souvent issues d\'une fable ou '
+                'd\'un épisode historique.',
+            colors: ramp,
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const ChengyuScreen(),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: LL.s12),
+        Reveal(
+          index: 6,
+          child: _LabCard(
             icon: Icons.menu_book_rounded,
             title: 'Dictionnaire',
             subtitle: '615 caractères, 1256 mots HSK 1-2.',
@@ -112,7 +153,7 @@ class _ChineseLabScreenState extends State<ChineseLabScreen> {
           ),
         ),
         const SizedBox(height: LL.s24),
-        Reveal(index: 5, child: _SourceNote(color: c.textTertiary)),
+        Reveal(index: 7, child: _SourceNote(color: c.textTertiary)),
       ],
     );
   }
@@ -258,8 +299,9 @@ class _SourceNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Données des traits : Make Me a Hanzi. Niveaux et fréquences : HSK 3.0. '
-      'Les définitions de caractères sont en anglais, telles quelles depuis '
-      'ces sources.',
+      'Clés : classification Kangxi (domaine public), exemples calculés '
+      'depuis les 615 caractères de l\'app. Les définitions de caractères '
+      'sont en anglais, telles quelles depuis ces sources.',
       style:
           context.type.labelSmall?.copyWith(color: color, letterSpacing: 0.1),
     );
