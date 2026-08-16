@@ -17,6 +17,7 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_tts: ^4.2.5
   flutter_svg: ^2.0.17
+  rive: ^0.13.20
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,8 @@ flutter:
     - assets/data/
     # OpenMoji (CC BY-SA 4.0, https://openmoji.org) — see assets/illustrations/CREDITS.md.
     - assets/illustrations/
+    # rive-flutter example asset (MIT) — see assets/rive/CREDITS.md.
+    - assets/rive/
 
   # Fonts are bundled rather than fetched at runtime: the app is designed to
   # work offline, and a network-dependent typeface would leave the first launch

@@ -84,6 +84,36 @@ class CreditsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text('ANIMATION', style: context.type.labelSmall),
+                          const SizedBox(height: LL.s12),
+                          Text(
+                            'L\'animation de fin de session parfaite utilise '
+                            'Rive, un fichier d\'exemple du kit de '
+                            'développement rive-flutter.',
+                            style: context.type.bodyMedium,
+                          ),
+                          const SizedBox(height: LL.s12),
+                          Text(
+                            'github.com/rive-app/rive-flutter',
+                            style: context.type.bodyMedium
+                                ?.copyWith(color: c.accent),
+                          ),
+                          const SizedBox(height: LL.s4),
+                          Text(
+                            'Licence MIT — © Rive.',
+                            style: context.type.labelSmall?.copyWith(
+                              color: c.textTertiary,
+                              letterSpacing: 0.1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: LL.s16),
+                    GlassCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Text('MÉTHODE', style: context.type.labelSmall),
                           const SizedBox(height: LL.s12),
                           Text(

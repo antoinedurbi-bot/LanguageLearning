@@ -7,6 +7,7 @@ import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/motion.dart';
+import 'package:learning_app/core/widgets/rive_moment.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
@@ -699,11 +700,13 @@ class _SummaryScreen extends StatelessWidget {
 
     final mood = answered == 0
         ? Illust.moon
-        : rate >= 0.95
-            ? Illust.rocket
-            : rate >= 0.8
-                ? Illust.party
-                : Illust.owl;
+        : rate >= 0.8
+            ? Illust.party
+            : Illust.owl;
+    // A perfect-enough session is the one moment that gets a fully
+    // interactive Rive animation instead of a static illustration — see
+    // RiveMoment's doc comment for why it stays to just this one spot.
+    final perfect = answered > 0 && rate >= 0.95;
 
     return Scaffold(
       body: AuroraBackground(
@@ -720,8 +723,10 @@ class _SummaryScreen extends StatelessWidget {
                     children: [
                       Reveal(
                         child: Center(
-                          child:
-                              Illustration(mood, size: 88, haloColors: colors),
+                          child: perfect
+                              ? const RiveMoment(size: 132)
+                              : Illustration(mood,
+                                  size: 88, haloColors: colors),
                         ),
                       ),
                       const SizedBox(height: LL.s12),
