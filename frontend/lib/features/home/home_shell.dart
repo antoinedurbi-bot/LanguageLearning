@@ -4,6 +4,7 @@ import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/features/chinese/chinese_lab_screen.dart';
 import 'package:learning_app/features/home/home_screen.dart';
+import 'package:learning_app/features/japanese/japanese_lab_screen.dart';
 import 'package:learning_app/features/lessons/unit_list_screen.dart';
 import 'package:learning_app/features/practice/practice_screen.dart';
 import 'package:learning_app/features/profile/profile_screen.dart';
@@ -43,6 +44,12 @@ class _HomeShellState extends State<HomeShell> {
     label: '中文',
   );
 
+  static const _japaneseDestination = (
+    icon: Icons.translate_outlined,
+    active: Icons.translate,
+    label: '日本語',
+  );
+
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
@@ -51,10 +58,12 @@ class _HomeShellState extends State<HomeShell> {
     );
     final ramp = language == null ? null : LL.gradientFor(language);
     final isChinese = language == 'zh';
+    final isJapanese = language == 'ja';
 
     final destinations = [
       ..._baseDestinations,
       if (isChinese) _chineseDestination,
+      if (isJapanese) _japaneseDestination,
     ];
     // Switching away from Mandarin removes a tab, so an index pointing at it
     // would fall off the end.
@@ -74,6 +83,7 @@ class _HomeShellState extends State<HomeShell> {
               const PracticeScreen(),
               const ProfileScreen(),
               if (isChinese) const ChineseLabScreen(),
+              if (isJapanese) const JapaneseLabScreen(),
             ],
           ),
         ),

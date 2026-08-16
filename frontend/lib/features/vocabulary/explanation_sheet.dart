@@ -263,6 +263,7 @@ class ExplanationSheet extends StatelessWidget {
         'es' => 'es-ES',
         'zh' => 'zh-CN',
         'tr' => 'tr-TR',
+        'ja' => 'ja-JP',
         _ => 'en-US',
       };
 }

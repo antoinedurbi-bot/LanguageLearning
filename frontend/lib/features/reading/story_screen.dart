@@ -469,7 +469,7 @@ class _TappableLineState extends State<_TappableLine> {
     final c = context.ll;
     // Mandarin needs more room between lines: the glyphs are denser and the
     // reader is still segmenting words visually.
-    final isCjk = widget.languageCode == 'zh';
+    final isCjk = widget.languageCode == 'zh' || widget.languageCode == 'ja';
     final base = (isCjk ? context.type.titleMedium : context.type.titleSmall)
         ?.copyWith(height: isCjk ? 2.0 : 1.85, letterSpacing: 0);
 

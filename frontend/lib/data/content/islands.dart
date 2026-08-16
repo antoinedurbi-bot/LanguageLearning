@@ -274,6 +274,32 @@ const _chunks = <String, Map<String, List<IslandChunk>>>{
       IslandChunk(target: 'Bence ... çünkü ...', native: 'Je pense que ... parce que ...'),
     ],
   },
+  'ja': {
+    'self': [
+      IslandChunk(target: 'わたしの なまえは ...です。', native: 'Je m\'appelle ...', romanization: 'Watashi no namae wa ... desu.'),
+      IslandChunk(target: 'フランスから きました。', native: 'Je viens de France.', romanization: 'Furansu kara kimashita.'),
+      IslandChunk(target: '...ねんかん ...に すんでいます。', native: 'J\'habite à ... depuis ... ans.', romanization: '... nenkan ... ni sunde imasu.'),
+      IslandChunk(target: 'あにが ひとり、いもうとが ふたり います。', native: 'J\'ai un grand frère et deux petites sœurs.', romanization: 'Ani ga hitori, imouto ga futari imasu.'),
+    ],
+    'work': [
+      IslandChunk(target: 'わたしは ...です。', native: 'Je suis (métier) ...', romanization: 'Watashi wa ... desu.'),
+      IslandChunk(target: 'まいにち ...じに しごとを はじめます。', native: 'Je commence à ... heures.', romanization: 'Mainichi ... ji ni shigoto o hajimemasu.'),
+      IslandChunk(target: 'いちばん すきなのは ...です。', native: 'Ce que je préfère, c\'est ...', romanization: 'Ichiban sukina no wa ... desu.'),
+      IslandChunk(target: 'まえは ...を していました。', native: 'Avant, je faisais ...', romanization: 'Mae wa ... o shite imashita.'),
+    ],
+    'language': [
+      IslandChunk(target: '...から にほんごを べんきょうしています。', native: 'J\'apprends le japonais parce que ...', romanization: '... kara nihongo o benkyou shite imasu.'),
+      IslandChunk(target: '...から べんきょうしています。', native: 'J\'étudie depuis ...', romanization: '... kara benkyou shite imasu.'),
+      IslandChunk(target: 'かんじが いちばん むずかしいです。', native: 'Pour moi, le plus dur ce sont les kanji.', romanization: 'Kanji ga ichiban muzukashii desu.'),
+      IslandChunk(target: '...たいです。', native: 'J\'espère pouvoir ...', romanization: '... tai desu.'),
+    ],
+    'plans': [
+      IslandChunk(target: '...に いくつもりです。', native: 'Je vais aller à ...', romanization: '... ni iku tsumori desu.'),
+      IslandChunk(target: 'こんしゅうまつは ...つもりです。', native: 'Ce week-end je compte ...', romanization: 'Konshuumatsu wa ... tsumori desu.'),
+      IslandChunk(target: 'きょねん ...に いきました。', native: 'L\'année dernière je suis allé à ...', romanization: 'Kyonen ... ni ikimashita.'),
+      IslandChunk(target: 'わたしは ...と おもいます。なぜなら ...からです。', native: 'Je trouve que ... parce que ...', romanization: 'Watashi wa ... to omoimasu. Naze nara ... kara desu.'),
+    ],
+  },
 };
 
 /// Islands for one language, or an empty list if none are defined.

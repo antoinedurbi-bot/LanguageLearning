@@ -6,7 +6,7 @@ import 'package:learning_app/data/repository/collection_repository.dart';
 void main() {
   group('vocabulary packs', () {
     test('every language has a pack with themes and phrases', () {
-      for (final code in ['en', 'es', 'zh', 'tr']) {
+      for (final code in ['en', 'es', 'zh', 'tr', 'ja']) {
         final pack = vocabularyFor(code);
         expect(pack, isNotNull, reason: '$code has no vocabulary pack');
         expect(pack!.themes, isNotEmpty);
@@ -49,6 +49,14 @@ void main() {
       for (final phrase in zh.phrases) {
         expect(phrase.romanization, isNotNull);
       }
+
+      final ja = vocabularyFor('ja')!;
+      for (final entry in ja.allEntries) {
+        expect(entry.romanization, isNotNull, reason: '${entry.id} has no romaji');
+      }
+      for (final phrase in ja.phrases) {
+        expect(phrase.romanization, isNotNull);
+      }
     });
 
     test('repair phrases come first in every language', () {
@@ -61,7 +69,7 @@ void main() {
 
   group('islands', () {
     test('every language gets islands with prompts and chunks', () {
-      for (final code in ['en', 'es', 'zh', 'tr']) {
+      for (final code in ['en', 'es', 'zh', 'tr', 'ja']) {
         final islands = islandsFor(code);
         expect(islands, isNotEmpty, reason: '$code has no islands');
         for (final island in islands) {

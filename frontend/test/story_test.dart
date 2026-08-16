@@ -71,7 +71,7 @@ void main() {
 
   group('story content', () {
     test('every language ships readable texts', () {
-      for (final code in ['en', 'es', 'zh', 'tr']) {
+      for (final code in ['en', 'es', 'zh', 'tr', 'ja']) {
         final list = storiesFor(code);
         expect(list, isNotEmpty, reason: '$code has no stories');
         for (final story in list) {

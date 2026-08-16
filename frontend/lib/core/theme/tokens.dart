@@ -57,6 +57,7 @@ class LL {
     'es': [Color(0xFFFFB020), Color(0xFFFF6B8A)],
     'zh': [Color(0xFFFF6B8A), Color(0xFF7C5CFF)],
     'tr': [Color(0xFF2FE0A6), Color(0xFF22D3EE)],
+    'ja': [Color(0xFFFF5C7A), Color(0xFFFFC15C)],
   };
 
   static List<Color> gradientFor(String code) =>
