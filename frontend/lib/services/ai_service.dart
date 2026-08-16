@@ -24,6 +24,29 @@ class AiFeedback {
   final bool fromServer;
 }
 
+/// One turn of a chat conversation.
+class ChatTurn {
+  const ChatTurn({required this.role, required this.content});
+
+  /// "user" or "assistant".
+  final String role;
+  final String content;
+
+  Map<String, String> toJson() => {'role': role, 'content': content};
+}
+
+/// The tutor's reply, or the honest absence of one.
+class ChatReply {
+  const ChatReply({required this.text, required this.available});
+
+  final String? text;
+
+  /// False when the backend could not reach the LLM at all (no key
+  /// configured, timeout) — distinct from a network error on our own request,
+  /// which throws instead.
+  final bool available;
+}
+
 /// Client for the FastAPI correction endpoint.
 ///
 /// The base URL is compile-time configurable so a real deployment does not
@@ -87,6 +110,40 @@ class AiService {
         for (final note in (json['notes'] as List? ?? const []))
           note.toString(),
       ],
+    );
+  }
+
+  Future<ChatReply> chat({
+    required String targetLanguage,
+    required String level,
+    required List<ChatTurn> history,
+  }) async {
+    final response = await http
+        .post(
+          Uri.parse('$_resolvedBase/api/ai/chat'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'target_language': targetLanguage,
+            'level': level,
+            'history': [for (final turn in history) turn.toJson()],
+          }),
+        )
+        .timeout(const Duration(seconds: 22));
+
+    if (response.statusCode >= 400) {
+      throw http.ClientException(
+        'Tuteur indisponible (${response.statusCode})',
+      );
+    }
+
+    final json = jsonDecode(utf8.decode(response.bodyBytes));
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Reponse inattendue du serveur');
+    }
+
+    return ChatReply(
+      text: json['reply'] as String?,
+      available: json['available'] as bool? ?? false,
     );
   }
 }

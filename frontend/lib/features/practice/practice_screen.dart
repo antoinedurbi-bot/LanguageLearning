@@ -7,10 +7,13 @@ import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/models/entitlement.dart';
 import 'package:learning_app/data/srs/session.dart';
 import 'package:learning_app/features/fluency/sprint_screen.dart';
+import 'package:learning_app/features/premium/premium_screen.dart';
 import 'package:learning_app/features/vocabulary/library_section.dart';
 import 'package:learning_app/services/ai_service.dart';
+import 'package:learning_app/services/stt_service.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -32,16 +35,46 @@ class _PracticeScreenState extends State<PracticeScreen> {
   final _checker = const AnswerChecker();
   final _controller = TextEditingController();
   final _random = math.Random();
+  final _stt = SttService();
 
   CardItem? _card;
   String? _languageCode;
   bool _checking = false;
+  bool _listening = false;
   AiFeedback? _feedback;
 
   @override
   void dispose() {
     _controller.dispose();
+    _stt.stop();
     super.dispose();
+  }
+
+  Future<void> _listen(String ttsLocale) async {
+    if (_listening) return;
+    setState(() => _listening = true);
+
+    // speech_to_text wants an underscore-separated BCP-47 id (es_ES); the
+    // course locales are already close to that shape but hyphenated.
+    final localeId = ttsLocale.replaceAll('-', '_');
+    final heard = await _stt.listenOnce(localeId: localeId);
+
+    if (!mounted) return;
+    setState(() {
+      _listening = false;
+      if (heard != null && heard.trim().isNotEmpty) {
+        _controller.text = heard;
+        _feedback = null;
+      }
+    });
+
+    if (heard == null && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Rien entendu — vérifie le micro et réessaie.'),
+        ),
+      );
+    }
   }
 
   void _syncPrompt(LearningController controller) {
@@ -112,15 +145,23 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     setState(() => _checking = true);
     AiFeedback result;
-    try {
-      result = await _aiService.checkAnswer(
-        prompt: card.native,
-        answer: _controller.text,
-        targetLanguage: code,
-        expectedAnswer: card.target,
-      );
-    } catch (_) {
+    final premium = context.read<LearningController>().isPremium;
+    if (!premium) {
+      // AI-backed correction is a premium perk; free accounts still get a
+      // full, working answer check, just the deterministic one — never a
+      // dead end, only a less forgiving judge of paraphrases.
       result = _gradeLocally(card, _controller.text);
+    } else {
+      try {
+        result = await _aiService.checkAnswer(
+          prompt: card.native,
+          answer: _controller.text,
+          targetLanguage: code,
+          expectedAnswer: card.target,
+        );
+      } catch (_) {
+        result = _gradeLocally(card, _controller.text);
+      }
     }
 
     if (!mounted) return;
@@ -143,6 +184,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     final ramp = language.gradient;
     final feedback = _feedback;
+    final premium = controller.isPremium;
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(LL.s20, LL.s16, LL.s20, LL.s32 + 64),
@@ -177,11 +219,85 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 ),
                 const SizedBox(height: LL.s16),
                 if (feedback == null)
-                  GradientButton(
-                    label: 'Corriger',
-                    colors: ramp,
-                    loading: _checking,
-                    onPressed: _checking ? null : _check,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GradientButton(
+                              label: 'Corriger',
+                              colors: ramp,
+                              loading: _checking,
+                              onPressed: _checking ? null : _check,
+                            ),
+                          ),
+                          const SizedBox(width: LL.s8),
+                          Pressable(
+                            onPressed: premium
+                                ? () => _listen(
+                                    controller.course?.ttsLocale ?? language.code)
+                                : () => openPaywall(context,
+                                    reason: PremiumPerk.pronunciation),
+                            semanticLabel: premium
+                                ? (_listening
+                                    ? 'Écoute en cours'
+                                    : 'Répondre à l\'oral')
+                                : 'Passer à Premium pour répondre à l\'oral',
+                            child: Container(
+                              width: 48,
+                              height: 48,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: _listening
+                                    ? context.ll.accent.withValues(alpha: 0.2)
+                                    : context.ll.glassFill,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: _listening
+                                      ? context.ll.accent
+                                      : context.ll.glassStroke,
+                                ),
+                              ),
+                              child: premium
+                                  ? Icon(
+                                      _listening
+                                          ? Icons.mic_rounded
+                                          : Icons.mic_none_rounded,
+                                      color: _listening
+                                          ? context.ll.accent
+                                          : context.ll.textPrimary,
+                                    )
+                                  : Icon(Icons.lock_rounded,
+                                      size: 18, color: context.ll.textTertiary),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (!premium) ...[
+                        const SizedBox(height: LL.s8),
+                        Pressable(
+                          onPressed: () => openPaywall(context,
+                              reason: PremiumPerk.aiCorrection),
+                          semanticLabel:
+                              'Passer à Premium pour la correction IA',
+                          child: Row(
+                            children: [
+                              Icon(Icons.auto_awesome_rounded,
+                                  size: 14, color: context.ll.textTertiary),
+                              const SizedBox(width: LL.s4),
+                              Text(
+                                'Correction IA avec Premium',
+                                style: context.type.labelSmall?.copyWith(
+                                  color: context.ll.textTertiary,
+                                  letterSpacing: 0.1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
                   )
                 else
                   GradientButton(
@@ -199,7 +315,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
           Reveal(child: _FeedbackCard(feedback: feedback, card: card)),
         ],
         const SizedBox(height: LL.s16),
-        Reveal(index: 2, child: _SprintCard(colors: ramp)),
+        Reveal(index: 2, child: _SprintCard(colors: ramp, premium: premium)),
         const SizedBox(height: LL.s16),
         const Reveal(index: 3, child: _ShadowingCard()),
         const SizedBox(height: LL.s32),
@@ -320,19 +436,24 @@ class _FeedbackCard extends StatelessWidget {
 /// It sits in the workshop rather than the daily flow because it is optional
 /// by design: fluency work is the one strand that must never feel like a debt.
 class _SprintCard extends StatelessWidget {
-  const _SprintCard({required this.colors});
+  const _SprintCard({required this.colors, required this.premium});
 
   final List<Color> colors;
+  final bool premium;
 
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
 
     return Pressable(
-      onPressed: () => Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (_) => const SprintScreen()),
-      ),
-      semanticLabel: 'Sprint, soixante secondes de phrases connues',
+      onPressed: () => premium
+          ? Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const SprintScreen()),
+            )
+          : openPaywall(context, reason: PremiumPerk.fluencySprint),
+      semanticLabel: premium
+          ? 'Sprint, soixante secondes de phrases connues'
+          : 'Sprint, Premium requis',
       child: GlassCard(
         glow: colors.last,
         child: Column(
@@ -344,7 +465,13 @@ class _SprintCard extends StatelessWidget {
                 const SizedBox(width: LL.s8),
                 Text('Sprint', style: context.type.labelLarge),
                 const Spacer(),
-                Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+                if (!premium)
+                  const LLChip(
+                      label: 'Premium',
+                      icon: Icons.lock_rounded,
+                      color: LL.amber)
+                else
+                  Icon(Icons.chevron_right_rounded, color: c.textTertiary),
               ],
             ),
             const SizedBox(height: LL.s12),

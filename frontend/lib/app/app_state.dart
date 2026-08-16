@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/data/content/courses.dart';
 import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/models/entitlement.dart';
 import 'package:learning_app/data/models/progress.dart';
 import 'package:learning_app/data/repository/collection_repository.dart';
 import 'package:learning_app/data/repository/progress_repository.dart';
@@ -37,6 +38,8 @@ class LearningController extends ChangeNotifier {
   LanguageCollection? _collection;
   ThemeMode _themeMode = ThemeMode.dark;
   bool _soundEnabled = true;
+  bool _isPremium = false;
+  String? _freeLanguageCode;
 
   bool get ready => _ready;
   AppLanguage? get language => _language;
@@ -44,6 +47,15 @@ class LearningController extends ChangeNotifier {
   LanguageCollection? get collection => _collection;
   ThemeMode get themeMode => _themeMode;
   bool get soundEnabled => _soundEnabled;
+  bool get isPremium => _isPremium;
+
+  /// The language a free account is allowed to study — the first one ever
+  /// picked. Null until a language has been chosen at least once.
+  String? get freeLanguageCode => _freeLanguageCode;
+
+  /// Whether the current account can study [code] right now.
+  bool canSelectLanguage(String code) =>
+      _isPremium || _freeLanguageCode == null || _freeLanguageCode == code;
 
   Course? get course => _language == null ? null : courseFor(_language!.code);
 
@@ -56,6 +68,8 @@ class LearningController extends ChangeNotifier {
       _ => ThemeMode.dark,
     };
     _soundEnabled = await _settings.soundEnabled();
+    _isPremium = await _settings.premiumUnlocked();
+    _freeLanguageCode = await _settings.freeLanguageCode();
 
     final code = await _settings.selectedLanguage();
     final language = languageFor(code);
@@ -69,7 +83,14 @@ class LearningController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> selectLanguage(AppLanguage language) async {
+  /// Switches the active language. Returns false without changing anything
+  /// if a free account tries to switch away from its one allowed language —
+  /// the UI is expected to check [canSelectLanguage] before offering the
+  /// option at all, so this is the defensive second check, not the primary
+  /// gate.
+  Future<bool> selectLanguage(AppLanguage language) async {
+    if (!canSelectLanguage(language.code)) return false;
+
     _language = language;
     _progress = null;
     _collection = null;
@@ -78,7 +99,21 @@ class LearningController extends ChangeNotifier {
     await _settings.setSelectedLanguage(language.code);
     _progress = await _repository.load(language.code);
     _collection = await _collections.load(language.code);
+
+    if (_freeLanguageCode == null) {
+      _freeLanguageCode = language.code;
+      await _settings.setFreeLanguageCode(language.code);
+    }
+
     notifyListeners();
+    return true;
+  }
+
+  Future<void> unlockPremium(String code) async {
+    if (!PromoCode.isValid(code)) return;
+    _isPremium = true;
+    notifyListeners();
+    await _settings.setPremiumUnlocked(true);
   }
 
   Future<void> clearLanguage() async {

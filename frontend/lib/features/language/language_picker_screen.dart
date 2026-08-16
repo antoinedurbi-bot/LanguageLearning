@@ -6,7 +6,9 @@ import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
+import 'package:learning_app/data/models/entitlement.dart';
 import 'package:learning_app/features/language/app_language.dart';
+import 'package:learning_app/features/premium/premium_screen.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePickerScreen extends StatelessWidget {
@@ -14,7 +16,7 @@ class LanguagePickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.read<LearningController>();
+    final controller = context.watch<LearningController>();
 
     return Scaffold(
       body: AuroraBackground(
@@ -52,8 +54,18 @@ class LanguagePickerScreen extends StatelessWidget {
                                 index: i + 1,
                                 child: _LanguageCard(
                                   language: availableLanguages[i],
-                                  onTap: () => controller
-                                      .selectLanguage(availableLanguages[i]),
+                                  locked: !controller.canSelectLanguage(
+                                      availableLanguages[i].code),
+                                  onTap: () {
+                                    if (controller.canSelectLanguage(
+                                        availableLanguages[i].code)) {
+                                      controller.selectLanguage(
+                                          availableLanguages[i]);
+                                    } else {
+                                      openPaywall(context,
+                                          reason: PremiumPerk.languages);
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -63,8 +75,14 @@ class LanguagePickerScreen extends StatelessWidget {
                       Reveal(
                         index: availableLanguages.length + 1,
                         child: Text(
-                          'Tu pourras changer de langue a tout moment, sans perdre '
-                          'ta progression.',
+                          controller.freeLanguageCode == null
+                              ? 'Ton choix reste gratuit à vie. Les autres '
+                                  'langues demandent Premium.'
+                              : controller.isPremium
+                                  ? 'Tu peux changer de langue à tout moment, '
+                                      'sans perdre ta progression.'
+                                  : 'Ta langue gratuite est déjà choisie. '
+                                      'Premium débloque les autres.',
                           textAlign: TextAlign.center,
                           style: context.type.bodyMedium,
                         ),
@@ -106,9 +124,14 @@ class _Header extends StatelessWidget {
 }
 
 class _LanguageCard extends StatelessWidget {
-  const _LanguageCard({required this.language, required this.onTap});
+  const _LanguageCard({
+    required this.language,
+    required this.locked,
+    required this.onTap,
+  });
 
   final AppLanguage language;
+  final bool locked;
   final VoidCallback onTap;
 
   @override
@@ -118,7 +141,9 @@ class _LanguageCard extends StatelessWidget {
 
     return Pressable(
       onPressed: onTap,
-      semanticLabel: 'Apprendre ${language.name}, ${language.difficultyNote}',
+      semanticLabel: locked
+          ? '${language.name}, verrouillé, nécessite Premium'
+          : 'Apprendre ${language.name}, ${language.difficultyNote}',
       child: GlassCard(
         glow: ramp.first,
         gradient: LinearGradient(
@@ -168,7 +193,14 @@ class _LanguageCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(Icons.arrow_forward_rounded, color: c.textTertiary),
+                if (locked)
+                  const LLChip(
+                    label: 'Premium',
+                    icon: Icons.lock_rounded,
+                    color: LL.amber,
+                  )
+                else
+                  Icon(Icons.arrow_forward_rounded, color: c.textTertiary),
               ],
             ),
             const SizedBox(height: LL.s16),

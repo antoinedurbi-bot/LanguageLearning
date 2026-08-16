@@ -7,7 +7,10 @@ import 'package:learning_app/data/content/frames.dart';
 import 'package:learning_app/data/content/islands.dart';
 import 'package:learning_app/data/content/stories.dart';
 import 'package:learning_app/data/content/vocabularies.dart';
+import 'package:learning_app/data/models/entitlement.dart';
+import 'package:learning_app/features/chat/chat_screen.dart';
 import 'package:learning_app/features/forge/sentence_forge_screen.dart';
+import 'package:learning_app/features/premium/premium_screen.dart';
 import 'package:learning_app/features/reading/story_list_screen.dart';
 import 'package:learning_app/features/vocabulary/collection_screen.dart';
 import 'package:learning_app/features/vocabulary/islands_screen.dart';
@@ -21,6 +24,11 @@ import 'package:provider/provider.dart';
 /// These live in the workshop tab rather than the navigation bar because they
 /// are consulted, not practised on a schedule — and because the bar is already
 /// full on Chinese.
+///
+/// Free keeps vocabulary, key phrases and the saved collection: a genuinely
+/// useful daily driver. Reading, the sentence workshop, islands and the AI
+/// tutor are premium — the material that took the most work to build, and
+/// the reason to upgrade beyond "it works".
 class LibrarySection extends StatelessWidget {
   const LibrarySection({super.key});
 
@@ -37,6 +45,15 @@ class LibrarySection extends StatelessWidget {
     final texts = storiesFor(code);
     final sentenceFrames = framesFor(code);
     final savedCount = controller.collection?.items.length ?? 0;
+    final premium = controller.isPremium;
+
+    void gated(PremiumPerk perk, VoidCallback openFeature) {
+      if (premium) {
+        openFeature();
+      } else {
+        openPaywall(context, reason: perk);
+      }
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,9 +66,28 @@ class LibrarySection extends StatelessWidget {
           style: context.type.bodyMedium,
         ),
         const SizedBox(height: LL.s16),
-        // Reading comes first on purpose: it is the only activity here where
-        // everything else the learner has studied has to work together at
-        // real speed.
+        _Tile(
+          icon: Icons.smart_toy_rounded,
+          tint: LL.violet,
+          title: 'Tuteur IA',
+          subtitle: 'Discute librement, il corrige au fil de la conversation',
+          locked: !premium,
+          onPressed: () => gated(
+            PremiumPerk.aiChat,
+            () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => ChatScreen(
+                  languageName: controller.language!.name,
+                  languageCode: code,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: LL.s12),
+        // Reading comes first among the reference tiles on purpose: it is the
+        // only activity here where everything else the learner has studied
+        // has to work together at real speed.
         if (texts.isNotEmpty) ...[
           _Tile(
             icon: Icons.auto_stories_rounded,
@@ -59,12 +95,16 @@ class LibrarySection extends StatelessWidget {
             title: 'Lectures',
             subtitle:
                 '${texts.length} textes, chaque mot cliquable pour son sens',
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => StoryListScreen(
-                  stories: texts,
-                  languageCode: code,
-                  ttsLocale: course.ttsLocale,
+            locked: !premium,
+            onPressed: () => gated(
+              PremiumPerk.reading,
+              () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => StoryListScreen(
+                    stories: texts,
+                    languageCode: code,
+                    ttsLocale: course.ttsLocale,
+                  ),
                 ),
               ),
             ),
@@ -111,12 +151,16 @@ class LibrarySection extends StatelessWidget {
             subtitle: '${sentenceFrames.length} structures, '
                 '${sentenceFrames.fold<int>(0, (s, f) => s + f.combinations)} '
                 'phrases possibles',
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => SentenceForgeScreen(
-                  frames: sentenceFrames,
-                  languageCode: code,
-                  ttsLocale: course.ttsLocale,
+            locked: !premium,
+            onPressed: () => gated(
+              PremiumPerk.sentenceForge,
+              () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => SentenceForgeScreen(
+                    frames: sentenceFrames,
+                    languageCode: code,
+                    ttsLocale: course.ttsLocale,
+                  ),
                 ),
               ),
             ),
@@ -129,12 +173,16 @@ class LibrarySection extends StatelessWidget {
             tint: c.success,
             title: 'Îles linguistiques',
             subtitle: 'Tes réponses toutes prêtes aux questions inévitables',
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => IslandsScreen(
-                  islands: islands,
-                  languageCode: code,
-                  ttsLocale: course.ttsLocale,
+            locked: !premium,
+            onPressed: () => gated(
+              PremiumPerk.islands,
+              () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => IslandsScreen(
+                    islands: islands,
+                    languageCode: code,
+                    ttsLocale: course.ttsLocale,
+                  ),
                 ),
               ),
             ),
@@ -170,6 +218,7 @@ class _Tile extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.onPressed,
+    this.locked = false,
   });
 
   final IconData icon;
@@ -177,6 +226,7 @@ class _Tile extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onPressed;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +234,9 @@ class _Tile extends StatelessWidget {
 
     return Pressable(
       onPressed: onPressed,
-      semanticLabel: '$title. $subtitle',
+      semanticLabel: locked
+          ? '$title, Premium requis. $subtitle'
+          : '$title. $subtitle',
       child: GlassCard(
         padding: const EdgeInsets.all(LL.s16),
         radius: LL.rMd,
@@ -215,7 +267,10 @@ class _Tile extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+            if (locked)
+              const LLChip(label: 'Premium', icon: Icons.lock_rounded, color: LL.amber)
+            else
+              Icon(Icons.chevron_right_rounded, color: c.textTertiary),
           ],
         ),
       ),

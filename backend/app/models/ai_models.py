@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class ExerciseRequest(BaseModel):
@@ -31,3 +31,46 @@ class AnswerCheckResponse(BaseModel):
 
     # One remark per difference found, so the client can render them as a list.
     notes: list[str] = Field(default_factory=list)
+
+
+class ChatTurn(BaseModel):
+    # "user" or "assistant" — validated below rather than typed as a Literal
+    # so a malformed client request gets a clear 422 instead of a silent
+    # coercion.
+    role: str
+    content: str
+
+    @field_validator("role")
+    @classmethod
+    def _role_is_valid(cls, value: str) -> str:
+        if value not in ("user", "assistant"):
+            raise ValueError('role must be "user" or "assistant"')
+        return value
+
+
+class ChatRequest(BaseModel):
+    target_language: str = Field(examples=["espagnol"])
+    level: str = Field(default="beginner", examples=["beginner"])
+
+    # Full conversation so far, oldest first, ending with the learner's latest
+    # message. Capped generously here; the service trims further before
+    # sending to the model.
+    history: list[ChatTurn] = Field(max_length=40)
+
+    @field_validator("history")
+    @classmethod
+    def _history_not_empty(cls, value: list[ChatTurn]) -> list[ChatTurn]:
+        if not value:
+            raise ValueError("history must contain at least one message")
+        if value[-1].role != "user":
+            raise ValueError("the last message in history must be from the user")
+        return value
+
+
+class ChatResponse(BaseModel):
+    reply: str | None
+
+    # False when the AI backend could not be reached at all (no key,
+    # timeout) — distinct from a normal reply, so the client can show a
+    # specific "tuteur indisponible" state instead of an empty bubble.
+    available: bool

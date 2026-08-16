@@ -145,4 +145,24 @@ class SettingsRepository {
   Future<void> setSprintBest(String languageCode, int value) async =>
       (await SharedPreferences.getInstance())
           .setInt('sprint_best_$languageCode', value);
+
+  // ------------------------------------------------------------ entitlement
+
+  static const _premium = 'premium_unlocked';
+  static const _freeLanguage = 'free_language_code';
+
+  Future<bool> premiumUnlocked() async =>
+      (await SharedPreferences.getInstance()).getBool(_premium) ?? false;
+
+  Future<void> setPremiumUnlocked(bool value) async =>
+      (await SharedPreferences.getInstance()).setBool(_premium, value);
+
+  /// The one language a free account can study. Set the first time a learner
+  /// picks a language; premium lifts the restriction without clearing it, so
+  /// nothing is lost if premium is ever turned back off.
+  Future<String?> freeLanguageCode() async =>
+      (await SharedPreferences.getInstance()).getString(_freeLanguage);
+
+  Future<void> setFreeLanguageCode(String code) async =>
+      (await SharedPreferences.getInstance()).setString(_freeLanguage, code);
 }
