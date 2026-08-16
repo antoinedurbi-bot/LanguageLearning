@@ -3,12 +3,14 @@ import 'package:learning_app/data/content/stories_es.dart';
 import 'package:learning_app/data/content/stories_tr.dart';
 import 'package:learning_app/data/content/stories_zh.dart';
 import 'package:learning_app/data/models/story.dart';
+import 'package:learning_app/data/content/stories_ja.dart';
 
 final stories = <String, List<Story>>{
   'en': storiesEn,
   'es': storiesEs,
   'zh': storiesZh,
   'tr': storiesTr,
+  'ja': storiesJa,
 };
 
 List<Story> storiesFor(String languageCode) =>

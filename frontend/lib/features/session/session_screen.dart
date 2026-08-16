@@ -140,7 +140,7 @@ class _SessionScreenState extends State<SessionScreen> {
   /// tokens must not insert any.
   String _join(List<String> tokens) {
     final code = context.read<LearningController>().language?.code;
-    if (code == 'zh') return tokens.join();
+    if (code == 'zh' || code == 'ja') return tokens.join();
     return tokens
         .join(' ')
         .replaceAll(RegExp(r'\s+([,.!?;:])'), r'$1')

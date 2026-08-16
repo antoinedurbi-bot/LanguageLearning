@@ -30,7 +30,7 @@ void main() {
 
     test('word-bank tokens rebuild the target sentence', () {
       for (final entry in courses.entries) {
-        final joiner = entry.key == 'zh' ? '' : ' ';
+        final joiner = (entry.key == 'zh' || entry.key == 'ja') ? '' : ' ';
         for (final card in entry.value.allCards) {
           final rebuilt = card.tokens.join(joiner);
           expect(
@@ -278,7 +278,7 @@ void main() {
 
   group('grammar lessons', () {
     test('every unit in EN, ES and ZH has a grammar lesson', () {
-      for (final code in ['en', 'es', 'zh']) {
+      for (final code in ['en', 'es', 'zh', 'ja']) {
         final course = courses[code]!;
         for (final unit in course.units) {
           expect(unit.grammarLesson, isNotNull,
@@ -312,7 +312,7 @@ void main() {
     });
 
     test('mistake blocks always pair a wrong form with a fix and a reason', () {
-      for (final code in ['en', 'es', 'zh']) {
+      for (final code in ['en', 'es', 'zh', 'ja']) {
         for (final unit in courses[code]!.units) {
           final lesson = unit.grammarLesson;
           if (lesson == null) continue;
@@ -330,7 +330,7 @@ void main() {
 
     test('table blocks are rectangular (every row matches the header count)',
         () {
-      for (final code in ['en', 'es', 'zh']) {
+      for (final code in ['en', 'es', 'zh', 'ja']) {
         for (final unit in courses[code]!.units) {
           final lesson = unit.grammarLesson;
           if (lesson == null) continue;

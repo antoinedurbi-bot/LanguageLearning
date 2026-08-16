@@ -62,6 +62,16 @@ const availableLanguages = [
     difficultyNote:
         'Structure inhabituelle - environ 1100 h, mais peu d\'exceptions',
   ),
+  AppLanguage(
+    code: 'ja',
+    name: 'Japonais',
+    nativeName: '日本語',
+    script: 'あ',
+    description: 'Deux syllabaires, des kanji, une politesse a plusieurs '
+        'niveaux.',
+    difficultyNote:
+        'Distance maximale - environ 2200 h, une grammaire tres reguliere',
+  ),
 ];
 
 AppLanguage? languageFor(String? code) {
