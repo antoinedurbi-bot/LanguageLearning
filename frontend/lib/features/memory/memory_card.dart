@@ -20,14 +20,20 @@ class MemoryCard extends StatefulWidget {
 
 class _MemoryCardState extends State<MemoryCard>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 900),
-  );
+  // Created eagerly here rather than via a lazy `late final` initializer: a
+  // lazy initializer that build() never reads would otherwise run for the
+  // first time inside dispose() when the widget is torn down before ever
+  // being laid out, which crashes trying to look up an ancestor on an
+  // already-deactivated element.
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
     // The curve draws itself in once; with reduced motion it simply appears.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;

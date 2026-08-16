@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
+import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/repository/collection_repository.dart';
 import 'package:learning_app/features/vocabulary/explanation_sheet.dart';
@@ -68,7 +69,7 @@ class CollectionScreen extends StatelessWidget {
               ),
               Expanded(
                 child: items.isEmpty
-                    ? _EmptyState(color: c.textSecondary)
+                    ? const _EmptyState()
                     : ListView(
                         padding: const EdgeInsets.fromLTRB(
                             LL.s20, LL.s8, LL.s20, LL.s32),
@@ -103,9 +104,7 @@ class CollectionScreen extends StatelessWidget {
 }
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState({required this.color});
-
-  final Color color;
+  const _EmptyState();
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +114,7 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.bookmark_border_rounded, size: 48, color: color),
+            const Illustration(Illust.magnifier, size: 88),
             const SizedBox(height: LL.s16),
             Text(
               'Touche n\'importe quel mot ou phrase dans l\'app, puis '

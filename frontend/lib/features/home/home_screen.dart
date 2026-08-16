@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _StatTile(
-                  icon: Icons.local_fire_department_rounded,
+                  illust: Illust.fire,
                   value: '${progress.streak}',
                   label: progress.streak > 1 ? 'jours d\'affilee' : 'jour',
                   tint: LL.amber,
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(width: LL.s12),
               Expanded(
                 child: _StatTile(
-                  icon: Icons.verified_rounded,
+                  illust: Illust.trophy,
                   value: '${progress.learnedCount}',
                   label: 'phrases acquises',
                   tint: context.ll.success,
@@ -179,11 +180,15 @@ class _DailyGoalCard extends StatelessWidget {
           ),
           const SizedBox(height: LL.s20),
           if (nothingToDo)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Icon(Icons.check_circle_rounded, size: 18, color: c.success),
-                const SizedBox(width: LL.s8),
+                Illustration(
+                  goalReached ? Illust.medal : Illust.moon,
+                  size: 72,
+                  haloColors: [c.success, colors.first],
+                  haloOpacity: 0.28,
+                ),
+                const SizedBox(height: LL.s8),
                 Text(
                   goalReached ? 'Objectif atteint' : 'File d\'attente vide',
                   style: context.type.labelLarge?.copyWith(color: c.success),
@@ -209,13 +214,15 @@ class _DailyGoalCard extends StatelessWidget {
 
 class _StatTile extends StatelessWidget {
   const _StatTile({
-    required this.icon,
+    this.icon,
+    this.illust,
     required this.value,
     required this.label,
     required this.tint,
-  });
+  }) : assert(icon != null || illust != null);
 
-  final IconData icon;
+  final IconData? icon;
+  final Illust? illust;
   final String value;
   final String label;
   final Color tint;
@@ -228,7 +235,10 @@ class _StatTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: tint, size: 22),
+          if (illust != null)
+            Illustration(illust!, size: 36)
+          else
+            Icon(icon, color: tint, size: 22),
           const SizedBox(height: LL.s12),
           Text(
             value,

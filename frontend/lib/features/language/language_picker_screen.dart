@@ -3,6 +3,7 @@ import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/features/language/app_language.dart';
@@ -89,26 +90,7 @@ class _Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Floating(
-          child: Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [c.accent, c.accentAlt]),
-              borderRadius: BorderRadius.circular(LL.rMd),
-              boxShadow: [
-                BoxShadow(
-                  color: c.accent.withValues(alpha: 0.45),
-                  blurRadius: 34,
-                  spreadRadius: -4,
-                  offset: const Offset(0, 12),
-                ),
-              ],
-            ),
-            child: const Icon(Icons.graphic_eq_rounded,
-                color: Colors.white, size: 32),
-          ),
-        ),
+        FloatingOwl(size: 104, haloColors: [c.accent, c.accentAlt]),
         const SizedBox(height: LL.s24),
         Text('Quelle langue\nveux-tu parler ?',
             style: context.type.displayMedium),

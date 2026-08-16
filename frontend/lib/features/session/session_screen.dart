@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
+import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
@@ -696,6 +697,14 @@ class _SummaryScreen extends StatelessWidget {
           'reviennent vite, et c\'est la qu\'elles s\'ancrent.';
     }
 
+    final mood = answered == 0
+        ? Illust.moon
+        : rate >= 0.95
+            ? Illust.rocket
+            : rate >= 0.8
+                ? Illust.party
+                : Illust.owl;
+
     return Scaffold(
       body: AuroraBackground(
         colors: [colors.first, colors.last, c.auroraC],
@@ -709,6 +718,13 @@ class _SummaryScreen extends StatelessWidget {
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(LL.s24),
                     children: [
+                      Reveal(
+                        child: Center(
+                          child:
+                              Illustration(mood, size: 88, haloColors: colors),
+                        ),
+                      ),
+                      const SizedBox(height: LL.s12),
                       Reveal(
                         child: Center(
                           child: ProgressRing(

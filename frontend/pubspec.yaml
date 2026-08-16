@@ -16,6 +16,7 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.5.3
   flutter_tts: ^4.2.5
+  flutter_svg: ^2.0.17
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,8 @@ flutter:
     # Declared as a directory so a newly generated file is bundled without
     # anyone having to remember to add it here.
     - assets/data/
+    # OpenMoji (CC BY-SA 4.0, https://openmoji.org) — see assets/illustrations/CREDITS.md.
+    - assets/illustrations/
 
   # Fonts are bundled rather than fetched at runtime: the app is designed to
   # work offline, and a network-dependent typeface would leave the first launch

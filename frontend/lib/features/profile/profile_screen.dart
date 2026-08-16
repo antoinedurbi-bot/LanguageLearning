@@ -9,6 +9,7 @@ import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/progress.dart';
 import 'package:learning_app/features/auth/sign_in_screen.dart';
+import 'package:learning_app/features/profile/credits_screen.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -535,6 +536,14 @@ class _AccountCard extends StatelessWidget {
                 }
               },
             ),
+          ListTile(
+            leading: const Icon(Icons.info_outline_rounded),
+            title: const Text('À propos'),
+            subtitle: const Text('Crédits et licences'),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const CreditsScreen()),
+            ),
+          ),
           // Destructive action, visually separated from everything above.
           Divider(color: c.divider, indent: LL.s16, endIndent: LL.s16),
           ListTile(
