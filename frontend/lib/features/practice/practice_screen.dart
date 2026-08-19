@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
+import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/entitlement.dart';
 import 'package:learning_app/data/srs/session.dart';
@@ -42,6 +44,12 @@ class _PracticeScreenState extends State<PracticeScreen> {
   bool _checking = false;
   bool _listening = false;
   AiFeedback? _feedback;
+
+  // Local "lane" through this practice session — resets on relaunch. Not a
+  // stored stat, just enough visible progress to give the linear lane at the
+  // top of the screen something real to show, per the mockup's session lane.
+  int _sessionAnswered = 0;
+  static const _laneTarget = 8;
 
   @override
   void dispose() {
@@ -168,6 +176,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
     setState(() {
       _feedback = result;
       _checking = false;
+      _sessionAnswered = math.min(_sessionAnswered + 1, _laneTarget);
     });
   }
 
@@ -190,6 +199,14 @@ class _PracticeScreenState extends State<PracticeScreen> {
       padding: const EdgeInsets.fromLTRB(LL.s20, LL.s16, LL.s20, LL.s32 + 64),
       children: [
         const Reveal(child: _Header()),
+        const SizedBox(height: LL.s16),
+        Reveal(
+          index: 1,
+          child: LinearProgress(
+            value: _sessionAnswered / _laneTarget,
+            colors: [ramp.first, ramp.last],
+          ),
+        ),
         const SizedBox(height: LL.s24),
         Reveal(
           index: 1,
@@ -250,13 +267,14 @@ class _PracticeScreenState extends State<PracticeScreen> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: _listening
-                                    ? context.ll.accent.withValues(alpha: 0.2)
-                                    : context.ll.glassFill,
+                                    ? context.ll.accent
+                                    : context.ll.surface,
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: _listening
                                       ? context.ll.accent
                                       : context.ll.glassStroke,
+                                  width: 2,
                                 ),
                               ),
                               child: premium
@@ -265,7 +283,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
                                           ? Icons.mic_rounded
                                           : Icons.mic_none_rounded,
                                       color: _listening
-                                          ? context.ll.accent
+                                          ? Colors.white
                                           : context.ll.textPrimary,
                                     )
                                   : Icon(Icons.lock_rounded,
@@ -366,16 +384,15 @@ class _FeedbackCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                feedback.isCorrect
-                    ? Icons.check_circle_rounded
-                    : Icons.lightbulb_rounded,
-                color: tint,
-                size: 20,
+              MimiMascot(
+                state: feedback.isCorrect
+                    ? MimiState.celebrating
+                    : MimiState.encouraging,
+                size: 44,
               ),
-              const SizedBox(width: LL.s8),
+              const SizedBox(width: LL.s12),
               Text(
-                feedback.isCorrect ? 'Correct' : 'A ajuster',
+                feedback.isCorrect ? 'Correct' : 'À ajuster',
                 style: context.type.labelLarge?.copyWith(color: tint),
               ),
               const Spacer(),

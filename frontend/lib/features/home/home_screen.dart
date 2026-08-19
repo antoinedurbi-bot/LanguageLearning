@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
+import 'package:learning_app/core/widgets/celebration_confetti.dart';
 import 'package:learning_app/core/widgets/glass.dart';
-import 'package:learning_app/core/widgets/illustration.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/features/session/session_screen.dart';
 import 'package:provider/provider.dart';
 
-/// The daily screen. One question answered above the fold: what do I do now?
-class HomeScreen extends StatelessWidget {
+/// The daily screen — "Accueil" in the Mimi mockup. One question answered
+/// above the fold: what do I do now?
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _confetti = CelebrationConfettiController();
+  bool _goalReachedBefore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,60 +38,88 @@ class HomeScreen extends StatelessWidget {
     final fresh = controller.newCount;
     final done = progress.reviewsToday;
     final goal = progress.dailyGoal;
-    final goalReached = done >= goal;
+    final goalReached = done >= goal && goal > 0;
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(LL.s20, LL.s16, LL.s20, LL.s32 + 64),
-      children: [
-        Reveal(child: _Greeting(languageName: language.name)),
-        const SizedBox(height: LL.s24),
-        Reveal(
-          index: 1,
-          child: _DailyGoalCard(
-            done: done,
-            goal: goal,
-            due: due,
-            fresh: fresh,
-            colors: ramp,
-            goalReached: goalReached,
+    // A streak milestone or a freshly-hit daily goal is exactly the
+    // "meaningful moment" the confetti package is meant for — a quiet
+    // in-place toggle, not a modal.
+    if (goalReached && !_goalReachedBefore) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _confetti.burst());
+    }
+    _goalReachedBefore = goalReached;
+
+    return CelebrationConfetti(
+      controller: _confetti,
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(LL.s20, LL.s16, LL.s20, LL.s32 + 64),
+        children: [
+          Reveal(
+            child: _GreetingRow(
+              languageName: language.name,
+              streak: progress.streak,
+            ),
           ),
-        ),
-        const SizedBox(height: LL.s16),
-        Reveal(
-          index: 2,
-          child: Row(
-            children: [
-              Expanded(
-                child: _StatTile(
-                  illust: Illust.fire,
-                  value: '${progress.streak}',
-                  label: progress.streak > 1 ? 'jours d\'affilee' : 'jour',
-                  tint: LL.amber,
+          const SizedBox(height: LL.s20),
+          Reveal(index: 1, child: _MimiTipCard(due: due, fresh: fresh)),
+          const SizedBox(height: LL.s16),
+          Reveal(
+            index: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  child: _StatTile(
+                    value: '${progress.streak}',
+                    label: progress.streak > 1 ? 'jours de suite' : 'jour',
+                    icon: Icons.local_fire_department_rounded,
+                    tint: LL.marigold,
+                  ),
                 ),
-              ),
-              const SizedBox(width: LL.s12),
-              Expanded(
-                child: _StatTile(
-                  illust: Illust.trophy,
-                  value: '${progress.learnedCount}',
-                  label: 'phrases acquises',
-                  tint: context.ll.success,
+                const SizedBox(width: LL.s12),
+                Expanded(
+                  child: _StatTile(
+                    value: '${progress.learnedCount}',
+                    label: 'phrases acquises',
+                    icon: Icons.emoji_events_rounded,
+                    tint: LL.sage,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(width: LL.s12),
+                Expanded(
+                  child: _StatTile(
+                    value: '$due',
+                    label: due > 1 ? 'à réviser' : 'à réviser',
+                    icon: Icons.replay_rounded,
+                    tint: LL.teal,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: LL.s24),
-        Reveal(index: 3, child: _MethodNote(due: due, fresh: fresh)),
-      ],
+          const SizedBox(height: LL.s16),
+          Reveal(
+            index: 3,
+            child: _PathCard(
+              done: done,
+              goal: goal,
+              due: due,
+              fresh: fresh,
+              colors: ramp,
+              goalReached: goalReached,
+            ),
+          ),
+          const SizedBox(height: LL.s24),
+          Reveal(index: 4, child: _MethodNote(due: due, fresh: fresh)),
+        ],
+      ),
     );
   }
 }
 
-class _Greeting extends StatelessWidget {
-  const _Greeting({required this.languageName});
+class _GreetingRow extends StatelessWidget {
+  const _GreetingRow({required this.languageName, required this.streak});
 
   final String languageName;
+  final int streak;
 
   @override
   Widget build(BuildContext context) {
@@ -94,19 +132,165 @@ class _Greeting extends StatelessWidget {
                 ? 'Bon après-midi'
                 : 'Bonsoir';
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(greeting.toUpperCase(), style: context.type.labelSmall),
-        const SizedBox(height: LL.s4),
-        Text(languageName, style: context.type.displayMedium),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                greeting.toUpperCase(),
+                style: context.type.labelSmall,
+              ),
+              const SizedBox(height: LL.s4),
+              Text(languageName, style: context.type.displayMedium),
+            ],
+          ),
+        ),
+        // Streak pill: a pressed-keycap chip in marigold, the mockup's
+        // small persistent celebration of the streak count.
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: LL.s12, vertical: LL.s8),
+          decoration: BoxDecoration(
+            color: LL.marigold,
+            borderRadius: BorderRadius.circular(LL.rPill),
+            boxShadow: [
+              BoxShadow(color: LLColors.pressedShadeOf(LL.marigold), offset: const Offset(0, 4)),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 18),
+              const SizedBox(width: LL.s4),
+              Text(
+                '$streak',
+                style: context.type.labelLarge?.copyWith(
+                  fontFamily: 'SpaceMono',
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
 }
 
-class _DailyGoalCard extends StatelessWidget {
-  const _DailyGoalCard({
+/// Mimi's card: the toucan mascot beside a rotating tip. The tip rotates by
+/// context (the same "why the queue looks this way" honesty the previous
+/// method note carried) rather than being decorative filler.
+class _MimiTipCard extends StatelessWidget {
+  const _MimiTipCard({required this.due, required this.fresh});
+
+  final int due;
+  final int fresh;
+
+  static const _idleTips = [
+    'Une petite série vaut mieux qu\'une grande, une fois par semaine.',
+    'Relire à voix haute aide autant que relire des yeux.',
+    'Le sommeil consolide ce que tu viens d\'apprendre — vise une vraie nuit.',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final MimiState state;
+    final String message;
+
+    if (due > 0) {
+      state = MimiState.streakProud;
+      message = due == 1
+          ? 'Une carte t\'attend — le bon moment pour la revoir, c\'est maintenant.'
+          : '$due cartes t\'attendent. On y va ?';
+    } else if (fresh > 0) {
+      state = MimiState.idle;
+      message = '$fresh nouvelle${fresh > 1 ? 's' : ''} phrase'
+          '${fresh > 1 ? 's' : ''} prête${fresh > 1 ? 's' : ''} à découvrir.';
+    } else {
+      state = MimiState.celebrating;
+      final tip = _idleTips[DateTime.now().day % _idleTips.length];
+      message = 'Tout est à jour aujourd\'hui. $tip';
+    }
+
+    return GlassCard(
+      tint: LL.teal,
+      padding: const EdgeInsets.all(LL.s20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          MimiMascot(state: state, size: 76),
+          const SizedBox(width: LL.s16),
+          Expanded(
+            child: Text(
+              message,
+              style: context.type.bodyLarge?.copyWith(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatTile extends StatelessWidget {
+  const _StatTile({
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.tint,
+  });
+
+  final IconData icon;
+  final String value;
+  final String label;
+  final Color tint;
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      tint: tint,
+      padding: const EdgeInsets.all(LL.s16),
+      radius: LL.rMd,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.22),
+              borderRadius: BorderRadius.circular(LL.rSm - 4),
+            ),
+            child: Icon(icon, color: Colors.white, size: 18),
+          ),
+          const SizedBox(height: LL.s12),
+          Text(
+            value,
+            style: context.type.headlineMedium?.copyWith(
+              color: Colors.white,
+              fontFamily: 'SpaceMono',
+              fontFeatures: const [FontFeature.tabularFigures()],
+            ),
+          ),
+          Text(
+            label,
+            style: context.type.labelMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.85),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The daily-goal / language-path card: a progress ring plus the CTA.
+class _PathCard extends StatelessWidget {
+  const _PathCard({
     required this.done,
     required this.goal,
     required this.due,
@@ -146,7 +330,6 @@ class _DailyGoalCard extends StatelessWidget {
     }
 
     return GlassCard(
-      glow: colors.first,
       padding: const EdgeInsets.all(LL.s24),
       child: Column(
         children: [
@@ -159,6 +342,7 @@ class _DailyGoalCard extends StatelessWidget {
                 Text(
                   '$done',
                   style: context.type.displayMedium?.copyWith(
+                    fontFamily: 'SpaceMono',
                     fontFeatures: const [FontFeature.tabularFigures()],
                   ),
                 ),
@@ -182,11 +366,9 @@ class _DailyGoalCard extends StatelessWidget {
           if (nothingToDo)
             Column(
               children: [
-                Illustration(
-                  goalReached ? Illust.medal : Illust.moon,
+                MimiMascot(
+                  state: goalReached ? MimiState.celebrating : MimiState.idle,
                   size: 72,
-                  haloColors: [c.success, colors.first],
-                  haloOpacity: 0.28,
                 ),
                 const SizedBox(height: LL.s8),
                 Text(
@@ -199,54 +381,13 @@ class _DailyGoalCard extends StatelessWidget {
             GradientButton(
               label: goalReached ? 'Continuer quand même' : 'Commencer',
               icon: Icons.play_arrow_rounded,
-              colors: colors,
+              colors: [colors.first],
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<void>(
                   builder: (_) => const SessionScreen(),
                 ),
               ),
             ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StatTile extends StatelessWidget {
-  const _StatTile({
-    this.icon,
-    this.illust,
-    required this.value,
-    required this.label,
-    required this.tint,
-  }) : assert(icon != null || illust != null);
-
-  final IconData? icon;
-  final Illust? illust;
-  final String value;
-  final String label;
-  final Color tint;
-
-  @override
-  Widget build(BuildContext context) {
-    return GlassCard(
-      padding: const EdgeInsets.all(LL.s16),
-      radius: LL.rMd,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (illust != null)
-            Illustration(illust!, size: 36)
-          else
-            Icon(icon, color: tint, size: 22),
-          const SizedBox(height: LL.s12),
-          Text(
-            value,
-            style: context.type.headlineMedium?.copyWith(
-              fontFeatures: const [FontFeature.tabularFigures()],
-            ),
-          ),
-          Text(label, style: context.type.labelMedium),
         ],
       ),
     );

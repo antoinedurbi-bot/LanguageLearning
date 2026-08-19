@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// Design tokens for LinguaLab.
+/// Design tokens for LinguaLab — the "Mimi" identity.
+///
+/// Warm, saturated, sticker-flat color-blocking with a toucan mascot, chunky
+/// hand-drawn-feeling shapes and "physical" pressed buttons — chosen over the
+/// earlier dark/glass system because it reads as inviting rather than as a
+/// generic AI dashboard. Both a light "paper" mode and a warm dark mode are
+/// first-class; nothing here is a naive invert of the other.
 ///
 /// Everything visual is derived from here: no raw hex values live in widgets.
-/// The palette is dark-first (the product is used at night, on the couch) with
-/// a light variant tuned separately rather than inverted.
 class LL {
   LL._();
 
@@ -23,8 +27,10 @@ class LL {
   static const double s64 = 64;
 
   // ----------------------------------------------------------------- radii
-  static const double rSm = 12;
-  static const double rMd = 20;
+  // Chunkier than the previous system: Mimi's shapes read as thick and
+  // hand-drawn rather than as sharp corporate rounding.
+  static const double rSm = 14;
+  static const double rMd = 22;
   static const double rLg = 28;
   static const double rXl = 36;
   static const double rPill = 999;
@@ -43,25 +49,56 @@ class LL {
   static const Duration stagger = Duration(milliseconds: 45);
 
   // ---------------------------------------------------------------- brand
-  // Accent ramp shared by both themes; these are the "aurora" hues.
-  static const Color violet = Color(0xFF7C5CFF);
-  static const Color indigo = Color(0xFF4A7BFF);
-  static const Color cyan = Color(0xFF22D3EE);
-  static const Color mint = Color(0xFF2FE0A6);
-  static const Color amber = Color(0xFFFFB020);
-  static const Color rose = Color(0xFFFF6B8A);
+  // Mimi palette — light-mode reference values, per the approved mockups.
+  // Coral: primary action/CTA. Teal: secondary/mascot card. Marigold: reward
+  // / celebration. Sage: mastery/success.
+  static const Color coral = Color(0xFFE85D3F);
+  static const Color coralDark = Color(0xFFC8482E);
+  static const Color teal = Color(0xFF1C6B63);
+  static const Color tealDark = Color(0xFF134E48);
+  static const Color marigold = Color(0xFFF2A63D);
+  static const Color marigoldDark = Color(0xFFC97F1F);
+  static const Color sage = Color(0xFF8FAE6B);
+  static const Color sageDark = Color(0xFF6B8A49);
+  static const Color cream = Color(0xFFFBF3E3);
+  static const Color creamAlt = Color(0xFFF4EAD2);
+  static const Color ink = Color(0xFF241F16);
 
-  /// Accent per language code, so each language owns a recognisable colour.
+  // Dark-mode accent variants — same hues, brightened for contrast on a
+  // warm near-black ground rather than dimmed.
+  static const Color coralBright = Color(0xFFFF7A57);
+  static const Color tealBright = Color(0xFF3FA69A);
+  static const Color marigoldBright = Color(0xFFFFC266);
+  static const Color sageBright = Color(0xFFA9CC80);
+
+  /// The four confetti accents, used for celebration bursts.
+  static const List<Color> confettiColors = [coral, teal, marigold, sage];
+
+  // ------------------------------------------------------- legacy aliases
+  // The previous "aurora" palette's names, kept pointing at the closest
+  // Mimi colour so screens not yet redesigned in this pass keep compiling
+  // and inherit the new identity's hues rather than breaking outright.
+  // Follow-up passes should migrate call sites to the names above and
+  // remove these.
+  static const Color violet = teal;
+  static const Color indigo = tealDark;
+  static const Color cyan = tealBright;
+  static const Color mint = sage;
+  static const Color amber = marigold;
+  static const Color rose = coral;
+
+  /// Accent per language code, so each language owns a recognisable colour —
+  /// pulled from the same warm family rather than the old cool "aurora" ramp.
   static const Map<String, List<Color>> languageGradient = {
-    'en': [Color(0xFF4A7BFF), Color(0xFF22D3EE)],
-    'es': [Color(0xFFFFB020), Color(0xFFFF6B8A)],
-    'zh': [Color(0xFFFF6B8A), Color(0xFF7C5CFF)],
-    'tr': [Color(0xFF2FE0A6), Color(0xFF22D3EE)],
-    'ja': [Color(0xFFFF5C7A), Color(0xFFFFC15C)],
+    'en': [teal, Color(0xFF2F8A80)],
+    'es': [marigold, coral],
+    'zh': [coral, Color(0xFFD1462E)],
+    'tr': [sage, teal],
+    'ja': [coral, marigold],
   };
 
   static List<Color> gradientFor(String code) =>
-      languageGradient[code] ?? const [violet, cyan];
+      languageGradient[code] ?? const [coral, marigold];
 }
 
 /// Semantic colours resolved per theme. Widgets read these through
@@ -92,78 +129,99 @@ class LLColors extends ThemeExtension<LLColors> {
     required this.isDark,
   });
 
+  /// Paper / page background.
   final Color background;
   final Color backgroundAlt;
+
+  /// Card surfaces — flat, not translucent, in the Mimi system.
   final Color surface;
   final Color surfaceRaised;
+
+  /// Kept for API compatibility with the previous glass system: a handful of
+  /// widgets still read `glassFill`/`glassStroke` for a soft fill or hairline
+  /// border. In Mimi these resolve to a flat tint and a solid ~2px border
+  /// colour rather than a translucent blur.
   final Color glassFill;
   final Color glassStroke;
+
   final Color textPrimary;
   final Color textSecondary;
   final Color textTertiary;
   final Color divider;
+
+  /// Primary action colour — coral.
   final Color accent;
+
+  /// Secondary colour — teal.
   final Color accentAlt;
+
+  /// Mastery / success — sage.
   final Color success;
+
+  /// Reward / celebration — marigold.
   final Color warning;
+
   final Color danger;
   final Color onAccent;
   final Color scrim;
+
+  /// Retained for the language-gradient accent triples used by a few
+  /// screens; no longer paints an aurora field by default.
   final Color auroraA;
   final Color auroraB;
   final Color auroraC;
   final bool isDark;
 
-  /// Dark theme. Text contrast: primary #F2F4FF on #070A14 ~ 17:1,
-  /// secondary #A9B2CC ~ 8:1, tertiary #7A839E ~ 4.6:1.
-  static const dark = LLColors(
-    background: Color(0xFF070A14),
-    backgroundAlt: Color(0xFF0C1020),
-    surface: Color(0xFF12172A),
-    surfaceRaised: Color(0xFF1A2039),
-    glassFill: Color(0x14FFFFFF),
-    glassStroke: Color(0x1FFFFFFF),
-    textPrimary: Color(0xFFF2F4FF),
-    textSecondary: Color(0xFFA9B2CC),
-    textTertiary: Color(0xFF7A839E),
-    divider: Color(0x1FFFFFFF),
-    accent: LL.violet,
-    accentAlt: LL.cyan,
-    success: Color(0xFF2FE0A6),
-    warning: Color(0xFFFFB020),
-    danger: Color(0xFFFF6B8A),
-    onAccent: Color(0xFF080B18),
-    scrim: Color(0x99000000),
-    auroraA: Color(0xFF7C5CFF),
-    auroraB: Color(0xFF22D3EE),
-    auroraC: Color(0xFFFF6B8A),
-    isDark: true,
+  /// Light "paper" theme — the Mimi mockup's reference palette, used as-is.
+  static const light = LLColors(
+    background: LL.cream,
+    backgroundAlt: LL.creamAlt,
+    surface: Colors.white,
+    surfaceRaised: Colors.white,
+    glassFill: LL.creamAlt,
+    glassStroke: Color(0x1F241F16), // ink @ 12%
+    textPrimary: LL.ink,
+    textSecondary: Color(0xB3241F16), // ink @ 70%
+    textTertiary: Color(0x80241F16), // ink @ 50%
+    divider: Color(0x1F241F16),
+    accent: LL.coral,
+    accentAlt: LL.teal,
+    success: LL.sage,
+    warning: LL.marigold,
+    danger: Color(0xFFC8482E),
+    onAccent: Colors.white,
+    scrim: Color(0x80241F16),
+    auroraA: LL.coral,
+    auroraB: LL.teal,
+    auroraC: LL.marigold,
+    isDark: false,
   );
 
-  /// Light theme. Deliberately warm-paper rather than pure white, with
-  /// darker accent variants so contrast stays >= 4.5:1 on light surfaces.
-  static const light = LLColors(
-    background: Color(0xFFF6F5FB),
-    backgroundAlt: Color(0xFFEFEEF8),
-    surface: Color(0xFFFFFFFF),
-    surfaceRaised: Color(0xFFFFFFFF),
-    glassFill: Color(0xCCFFFFFF),
-    glassStroke: Color(0x14101433),
-    textPrimary: Color(0xFF10142B),
-    textSecondary: Color(0xFF4A5170),
-    textTertiary: Color(0xFF6C7391),
-    divider: Color(0x1A101433),
-    accent: Color(0xFF5B3DE0),
-    accentAlt: Color(0xFF0E93AD),
-    success: Color(0xFF0F8F68),
-    warning: Color(0xFF9A6100),
-    danger: Color(0xFFD1345B),
-    onAccent: Color(0xFFFFFFFF),
-    scrim: Color(0x80101433),
-    auroraA: Color(0xFF9F8BFF),
-    auroraB: Color(0xFF7BE0F5),
-    auroraC: Color(0xFFFFB3C4),
-    isDark: false,
+  /// Dark theme — cream becomes a warm near-black, ink becomes warm cream
+  /// text, and the four accents brighten to stay legible. Not an invert:
+  /// each value was picked separately for contrast on the dark ground.
+  static const dark = LLColors(
+    background: Color(0xFF1C1812),
+    backgroundAlt: Color(0xFF241E16),
+    surface: Color(0xFF2A231A),
+    surfaceRaised: Color(0xFF332A1F),
+    glassFill: Color(0xFF2A231A),
+    glassStroke: Color(0x24FBF3E3), // cream @ 14%
+    textPrimary: Color(0xFFF7EFDD),
+    textSecondary: Color(0xFFC9BFA9),
+    textTertiary: Color(0xFF988E78),
+    divider: Color(0x1FFBF3E3),
+    accent: LL.coralBright,
+    accentAlt: LL.tealBright,
+    success: LL.sageBright,
+    warning: LL.marigoldBright,
+    danger: Color(0xFFFF7A57),
+    onAccent: Color(0xFF1C1812),
+    scrim: Color(0xB3000000),
+    auroraA: LL.coralBright,
+    auroraB: LL.tealBright,
+    auroraC: LL.marigoldBright,
+    isDark: true,
   );
 
   @override
@@ -242,10 +300,21 @@ class LLColors extends ThemeExtension<LLColors> {
       isDark: t < 0.5 ? isDark : other.isDark,
     );
   }
+
+  /// Darker shade of a colour, used for the "physical" button drop-shadow
+  /// (mimics `box-shadow: 0 6px 0 <darker-shade>`) — a flat colour offset,
+  /// not a blurred grey shadow.
+  static Color pressedShadeOf(Color c) {
+    final hsl = HSLColor.fromColor(c);
+    return hsl
+        .withLightness((hsl.lightness - 0.16).clamp(0.0, 1.0))
+        .withSaturation((hsl.saturation + 0.06).clamp(0.0, 1.0))
+        .toColor();
+  }
 }
 
 extension LLContext on BuildContext {
-  LLColors get ll => Theme.of(this).extension<LLColors>() ?? LLColors.dark;
+  LLColors get ll => Theme.of(this).extension<LLColors>() ?? LLColors.light;
   TextTheme get type => Theme.of(this).textTheme;
 
   /// True when the user asked the OS to reduce motion. Every animated widget

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 
-/// Theme construction. Two fonts only: Plus Jakarta Sans carries display and
-/// headline roles (geometric, confident), Inter carries body and labels
-/// (neutral, high legibility at small sizes).
+/// Theme construction — the "Mimi" identity's three-font system: Fredoka
+/// carries display/headline/button roles (rounded, warm, not childish),
+/// Nunito Sans carries body copy, Space Mono carries tags/stats/mono data
+/// (set directly on the widgets that need it, e.g. streak counters).
 class AppTheme {
   static ThemeData get dark => _build(LLColors.dark, Brightness.dark);
   static ThemeData get light => _build(LLColors.light, Brightness.light);
 
-  /// Display face: geometric and confident, for headlines only.
-  static const _display = 'PlusJakartaSans';
+  /// Display face: rounded and warm, for headlines and buttons.
+  static const _display = 'Fredoka';
 
   /// Body face: neutral, high legibility at small sizes.
-  static const _body = 'Inter';
+  static const _body = 'NunitoSans';
+
+  /// Tags/stats/mono data face — exposed for direct use, e.g. `LL.mono`.
+  static const mono = 'SpaceMono';
 
   static TextTheme _textTheme(LLColors c) {
     const display = TextStyle(fontFamily: _display);
@@ -23,21 +27,21 @@ class AppTheme {
       displayLarge: display.copyWith(
         fontSize: 46,
         height: 1.08,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
         letterSpacing: -1.4,
         color: c.textPrimary,
       ),
       displayMedium: display.copyWith(
         fontSize: 36,
         height: 1.12,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
         letterSpacing: -1.0,
         color: c.textPrimary,
       ),
       headlineMedium: display.copyWith(
         fontSize: 28,
         height: 1.18,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
         letterSpacing: -0.6,
         color: c.textPrimary,
       ),
@@ -136,7 +140,7 @@ class AppTheme {
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(LL.rMd),
-          side: BorderSide(color: c.glassStroke),
+          side: BorderSide(color: c.glassStroke, width: 2),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -183,11 +187,11 @@ class AppTheme {
         errorStyle: text.labelMedium?.copyWith(color: c.danger),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(LL.rSm + 4),
-          borderSide: BorderSide(color: c.glassStroke),
+          borderSide: BorderSide(color: c.glassStroke, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(LL.rSm + 4),
-          borderSide: BorderSide(color: c.glassStroke),
+          borderSide: BorderSide(color: c.glassStroke, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(LL.rSm + 4),

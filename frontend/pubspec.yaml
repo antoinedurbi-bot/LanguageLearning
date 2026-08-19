@@ -19,6 +19,8 @@ dependencies:
   flutter_svg: ^2.0.17
   rive: ^0.13.20
   speech_to_text: ^7.0.0
+  flutter_animate: ^4.5.2
+  confetti: ^0.8.0
 
 dev_dependencies:
   flutter_test:
@@ -41,20 +43,30 @@ flutter:
   # Fonts are bundled rather than fetched at runtime: the app is designed to
   # work offline, and a network-dependent typeface would leave the first launch
   # rendering in a fallback face.
+  #
+  # "Mimi" identity type system — see assets/fonts/CREDITS.md.
+  # Fredoka: display/headings/buttons. Nunito Sans: body text. Space Mono:
+  # tags/stats/mono data.
   fonts:
-    - family: Inter
+    - family: Fredoka
       fonts:
-        - asset: assets/fonts/Inter-400.ttf
-          weight: 400
-        - asset: assets/fonts/Inter-500.ttf
+        - asset: assets/fonts/Fredoka-500.ttf
           weight: 500
-        - asset: assets/fonts/Inter-600.ttf
+        - asset: assets/fonts/Fredoka-600.ttf
           weight: 600
-        - asset: assets/fonts/Inter-700.ttf
+        - asset: assets/fonts/Fredoka-700.ttf
           weight: 700
-    - family: PlusJakartaSans
+    - family: NunitoSans
       fonts:
-        - asset: assets/fonts/PlusJakartaSans-700.ttf
+        - asset: assets/fonts/NunitoSans-400.ttf
+          weight: 400
+        - asset: assets/fonts/NunitoSans-600.ttf
+          weight: 600
+        - asset: assets/fonts/NunitoSans-700.ttf
           weight: 700
-        - asset: assets/fonts/PlusJakartaSans-800.ttf
-          weight: 800
+    - family: SpaceMono
+      fonts:
+        - asset: assets/fonts/SpaceMono-400.ttf
+          weight: 400
+        - asset: assets/fonts/SpaceMono-700.ttf
+          weight: 700

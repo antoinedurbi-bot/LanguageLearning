@@ -1,23 +1,26 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 
-/// Frosted surface used for every card in the app.
+/// The card used everywhere in the app.
 ///
-/// In dark mode it is a genuine backdrop blur over the aurora; in light mode
-/// the fill is near-opaque so text keeps its 4.5:1 contrast rather than
-/// fighting the background — the two themes are tuned separately on purpose.
+/// Kept the `GlassCard` name for API compatibility with every screen that
+/// already builds on it, but the Mimi identity replaced the frosted-blur
+/// treatment with a flat, solid surface and a thick 2px border — no
+/// translucency, no backdrop blur. Pass [tint] for a saturated color-blocked
+/// tile (coral/marigold/sage/teal, as in the stat tiles on Home); leave it
+/// null for the plain cream/near-black card most content sits on.
 class GlassCard extends StatelessWidget {
   const GlassCard({
     super.key,
     required this.child,
     this.padding = const EdgeInsets.all(LL.s20),
     this.radius = LL.rLg,
-    this.blur = 24,
+    this.blur = 24, // retained for API compat; unused in the flat treatment.
     this.borderColor,
     this.gradient,
     this.glow,
+    this.tint,
+    this.onTint,
   });
 
   final Widget child;
@@ -26,46 +29,55 @@ class GlassCard extends StatelessWidget {
   final double blur;
   final Color? borderColor;
 
-  /// Optional accent wash layered on top of the frost.
+  /// Optional wash painted on the flat fill.
   final Gradient? gradient;
 
-  /// Colour of the soft outer glow. Null means no glow.
+  /// Kept for API compatibility. In the Mimi system a small coloured drop
+  /// shadow reads as "physical" rather than a soft glow, so this only tints
+  /// the border when set and no explicit [tint] is given.
   final Color? glow;
+
+  /// A saturated color-blocked background (coral/teal/marigold/sage). When
+  /// set, text/icon colours default to [onTint] (or white/ink by contrast).
+  final Color? tint;
+
+  /// Foreground colour to use on a [tint] fill. Defaults to white, which
+  /// reads well on every Mimi accent.
+  final Color? onTint;
 
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
     final border = BorderRadius.circular(radius);
+    final fill = tint ?? c.surface;
+    final strokeColor = tint != null
+        ? Colors.transparent
+        : (borderColor ?? glow?.withValues(alpha: 0.5) ?? c.glassStroke);
 
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: border,
         boxShadow: [
-          if (glow != null)
-            BoxShadow(
-              color: glow!.withValues(alpha: c.isDark ? 0.28 : 0.20),
-              blurRadius: 36,
-              spreadRadius: -6,
-              offset: const Offset(0, 10),
-            ),
           BoxShadow(
-            color: Colors.black.withValues(alpha: c.isDark ? 0.34 : 0.07),
-            blurRadius: 24,
-            offset: const Offset(0, 10),
+            color: c.isDark
+                ? Colors.black.withValues(alpha: 0.4)
+                : LL.ink.withValues(alpha: 0.08),
+            blurRadius: 0,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: border,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: c.glassFill,
-              gradient: gradient,
-              borderRadius: border,
-              border: Border.all(color: borderColor ?? c.glassStroke, width: 1),
-            ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: fill,
+          gradient: gradient,
+          borderRadius: border,
+          border: Border.all(color: strokeColor, width: 2),
+        ),
+        child: DefaultTextStyle.merge(
+          style: tint != null ? TextStyle(color: onTint ?? Colors.white) : null,
+          child: IconTheme.merge(
+            data: IconThemeData(color: tint != null ? (onTint ?? Colors.white) : null),
             child: Padding(padding: padding, child: child),
           ),
         ),
