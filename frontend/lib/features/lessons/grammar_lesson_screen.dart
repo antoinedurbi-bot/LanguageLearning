@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -30,10 +29,10 @@ class GrammarLessonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = context.ll;
     return Scaffold(
-      body: AuroraBackground(
-        colors: [colors.first, colors.last, context.ll.auroraC],
-        intensity: 0.6,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [

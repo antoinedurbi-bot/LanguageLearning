@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -85,9 +85,8 @@ class _StoryScreenState extends State<StoryScreen> {
     final ramp = LL.gradientFor(story.languageCode);
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.4,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -183,7 +182,10 @@ class _Toolbar extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              HapticFeedback.selectionClick();
+              Navigator.of(context).pop();
+            },
             icon: const Icon(Icons.arrow_back_rounded),
             tooltip: 'Retour',
           ),
@@ -191,7 +193,9 @@ class _Toolbar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('LECTURE', style: context.type.labelSmall),
+                Text('LECTURE',
+                    style: context.type.labelSmall
+                        ?.copyWith(color: c.accent)),
                 Text(
                   lookedUp == 0
                       ? story.titleNative
@@ -451,8 +455,10 @@ class _TappableLineState extends State<_TappableLine> {
       if (!widget.line.tokens[i].isWord) continue;
       final index = i;
       _recognizers[index] = TapGestureRecognizer()
-        ..onTap = () =>
-            widget.onTapToken(index, widget.line.tokens[index]);
+        ..onTap = () {
+          HapticFeedback.selectionClick();
+          widget.onTapToken(index, widget.line.tokens[index]);
+        };
     }
   }
 

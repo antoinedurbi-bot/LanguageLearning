@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
+import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/island.dart';
@@ -30,9 +30,8 @@ class IslandsScreen extends StatelessWidget {
     final collection = context.watch<LearningController>().collection;
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -118,7 +117,7 @@ class IslandsScreen extends StatelessWidget {
                                 0,
                             colors: ramp,
                             onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
+                              SharedAxisRoute<void>(
                                 builder: (_) => IslandDetailScreen(
                                   island: islands[i],
                                   languageCode: languageCode,
@@ -250,9 +249,8 @@ class _IslandDetailScreenState extends State<IslandDetailScreen> {
     final controller = context.read<LearningController>();
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -267,7 +265,8 @@ class _IslandDetailScreenState extends State<IslandDetailScreen> {
                     ),
                     Expanded(
                       child: Text(widget.island.title,
-                          style: context.type.headlineSmall),
+                          style: context.type.headlineSmall
+                              ?.copyWith(color: ramp.first)),
                     ),
                     Pressable(
                       onPressed: () =>

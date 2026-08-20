@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
-import 'package:learning_app/core/widgets/illustration.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
+import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/entitlement.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ import 'package:provider/provider.dart';
 /// everywhere.
 void openPaywall(BuildContext context, {PremiumPerk? reason}) {
   Navigator.of(context).push(
-    MaterialPageRoute<void>(builder: (_) => PremiumScreen(reason: reason)),
+    SharedAxisRoute<void>(builder: (_) => PremiumScreen(reason: reason)),
   );
 }
 
@@ -57,11 +58,13 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
     if (!mounted) return;
     if (controller.isPremium && !before) {
+      HapticFeedback.mediumImpact();
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Premium débloqué. Profites-en.')),
       );
     } else {
+      HapticFeedback.heavyImpact();
       setState(() {
         _checking = false;
         _error = 'Code invalide.';
@@ -76,8 +79,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
     if (controller.isPremium) {
       return Scaffold(
-        body: AuroraBackground(
-          colors: [c.success, c.accent, c.auroraC],
+        body: ColoredBox(
+          color: c.background,
           child: SafeArea(
             child: Center(
               child: Padding(
@@ -85,7 +88,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Illustration(Illust.trophy, size: 96, haloColors: [c.success, c.accent]),
+                    const MimiMascot(state: MimiState.celebrating, size: 120),
                     const SizedBox(height: LL.s20),
                     Text('Tu es déjà premium',
                         style: context.type.headlineSmall,
@@ -105,8 +108,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
     }
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [LL.violet, LL.cyan, c.auroraC],
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -128,8 +131,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   children: [
                     const Reveal(
                       child: Center(
-                        child: Illustration(Illust.rocket,
-                            size: 88, haloColors: [LL.violet, LL.cyan]),
+                        child: MimiMascot(state: MimiState.streakProud, size: 108),
                       ),
                     ),
                     const SizedBox(height: LL.s20),
@@ -204,7 +206,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           const SizedBox(height: LL.s16),
                           GradientButton(
                             label: 'Valider',
-                            colors: const [LL.violet, LL.cyan],
+                            colors: const [LL.marigold],
                             loading: _checking,
                             onPressed: _checking ? null : _redeem,
                           ),

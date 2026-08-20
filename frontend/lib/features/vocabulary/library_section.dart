@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/content/frames.dart';
 import 'package:learning_app/data/content/islands.dart';
@@ -68,14 +69,14 @@ class LibrarySection extends StatelessWidget {
         const SizedBox(height: LL.s16),
         _Tile(
           icon: Icons.smart_toy_rounded,
-          tint: LL.violet,
+          tint: LL.teal,
           title: 'Tuteur IA',
           subtitle: 'Discute librement, il corrige au fil de la conversation',
           locked: !premium,
           onPressed: () => gated(
             PremiumPerk.aiChat,
             () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
+              SharedAxisRoute<void>(
                 builder: (_) => ChatScreen(
                   languageName: controller.language!.name,
                   languageCode: code,
@@ -91,7 +92,7 @@ class LibrarySection extends StatelessWidget {
         if (texts.isNotEmpty) ...[
           _Tile(
             icon: Icons.auto_stories_rounded,
-            tint: LL.amber,
+            tint: LL.marigold,
             title: 'Lectures',
             subtitle:
                 '${texts.length} textes, chaque mot cliquable pour son sens',
@@ -99,7 +100,7 @@ class LibrarySection extends StatelessWidget {
             onPressed: () => gated(
               PremiumPerk.reading,
               () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
+                SharedAxisRoute<void>(
                   builder: (_) => StoryListScreen(
                     stories: texts,
                     languageCode: code,
@@ -118,7 +119,7 @@ class LibrarySection extends StatelessWidget {
             title: 'Vocabulaire',
             subtitle: '${pack.allEntries.length} mots, par thème',
             onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
+              SharedAxisRoute<void>(
                 builder: (_) => VocabularyScreen(
                   pack: pack,
                   ttsLocale: course.ttsLocale,
@@ -133,7 +134,7 @@ class LibrarySection extends StatelessWidget {
             title: 'Phrases clés',
             subtitle: '${pack.phrases.length} phrases à connaître par cœur',
             onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
+              SharedAxisRoute<void>(
                 builder: (_) => PhrasesScreen(
                   pack: pack,
                   ttsLocale: course.ttsLocale,
@@ -146,7 +147,7 @@ class LibrarySection extends StatelessWidget {
         if (sentenceFrames.isNotEmpty) ...[
           _Tile(
             icon: Icons.auto_fix_high_rounded,
-            tint: LL.cyan,
+            tint: LL.tealBright,
             title: 'Atelier de phrases',
             subtitle: '${sentenceFrames.length} structures, '
                 '${sentenceFrames.fold<int>(0, (s, f) => s + f.combinations)} '
@@ -155,7 +156,7 @@ class LibrarySection extends StatelessWidget {
             onPressed: () => gated(
               PremiumPerk.sentenceForge,
               () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
+                SharedAxisRoute<void>(
                   builder: (_) => SentenceForgeScreen(
                     frames: sentenceFrames,
                     languageCode: code,
@@ -177,7 +178,7 @@ class LibrarySection extends StatelessWidget {
             onPressed: () => gated(
               PremiumPerk.islands,
               () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
+                SharedAxisRoute<void>(
                   builder: (_) => IslandsScreen(
                     islands: islands,
                     languageCode: code,
@@ -191,14 +192,14 @@ class LibrarySection extends StatelessWidget {
         ],
         _Tile(
           icon: Icons.bookmark_rounded,
-          tint: LL.rose,
+          tint: LL.coral,
           title: 'Ma collection',
           subtitle: savedCount == 0
               ? 'Rien d\'enregistré pour l\'instant'
               : '$savedCount élément${savedCount > 1 ? 's' : ''} gardé'
                   '${savedCount > 1 ? 's' : ''}',
           onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
+            SharedAxisRoute<void>(
               builder: (_) => CollectionScreen(
                 languageCode: code,
                 ttsLocale: course.ttsLocale,
@@ -268,7 +269,7 @@ class _Tile extends StatelessWidget {
               ),
             ),
             if (locked)
-              const LLChip(label: 'Premium', icon: Icons.lock_rounded, color: LL.amber)
+              const LLChip(label: 'Premium', icon: Icons.lock_rounded, color: LL.marigold)
             else
               Icon(Icons.chevron_right_rounded, color: c.textTertiary),
           ],

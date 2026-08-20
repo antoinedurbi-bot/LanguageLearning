@@ -1,7 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/features/chinese/chinese_lab_screen.dart';
 import 'package:learning_app/features/home/home_screen.dart';
 import 'package:learning_app/features/japanese/japanese_lab_screen.dart';
@@ -26,6 +27,7 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
+  int _previousIndex = 0;
 
   static const _baseDestinations = [
     (icon: Icons.bolt_outlined, active: Icons.bolt, label: 'Aujourd\'hui'),
@@ -56,7 +58,6 @@ class _HomeShellState extends State<HomeShell> {
     final language = context.select<LearningController, String?>(
       (controller) => controller.language?.code,
     );
-    final ramp = language == null ? null : LL.gradientFor(language);
     final isChinese = language == 'zh';
     final isJapanese = language == 'ja';
 
@@ -69,29 +70,47 @@ class _HomeShellState extends State<HomeShell> {
     // would fall off the end.
     final index = _index.clamp(0, destinations.length - 1);
 
+    final tabs = [
+      const HomeScreen(),
+      const UnitListScreen(),
+      const PracticeScreen(),
+      const ProfileScreen(),
+      if (isChinese) const ChineseLabScreen(),
+      if (isJapanese) const JapaneseLabScreen(),
+    ];
+
     return Scaffold(
       extendBody: true,
-      body: AuroraBackground(
-        colors: ramp == null ? null : [ramp.first, ramp.last, c.auroraC],
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           bottom: false,
-          child: IndexedStack(
-            index: index,
-            children: [
-              const HomeScreen(),
-              const UnitListScreen(),
-              const PracticeScreen(),
-              const ProfileScreen(),
-              if (isChinese) const ChineseLabScreen(),
-              if (isJapanese) const JapaneseLabScreen(),
-            ],
+          child: PageTransitionSwitcher(
+            duration: LL.medium,
+            reverse: index < _previousIndex,
+            transitionBuilder: (child, animation, secondaryAnimation) {
+              if (context.reduceMotion) return child;
+              return SharedAxisTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.horizontal,
+                child: child,
+              );
+            },
+            child: KeyedSubtree(
+              key: ValueKey(index),
+              child: tabs[index],
+            ),
           ),
         ),
       ),
       bottomNavigationBar: _GlassNavBar(
         index: index,
         destinations: destinations,
-        onChanged: (value) => setState(() => _index = value),
+        onChanged: (value) => setState(() {
+          _previousIndex = _index;
+          _index = value;
+        }),
       ),
     );
   }
@@ -115,14 +134,16 @@ class _GlassNavBar extends StatelessWidget {
     final c = context.ll;
     final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
 
+    // Flat, solid nav bar — no translucency, a plain top hairline in the
+    // Mimi "paper" language rather than a frosted glass strip.
     return Container(
       padding: EdgeInsets.only(bottom: bottomInset),
       decoration: BoxDecoration(
-        color: c.background.withValues(alpha: c.isDark ? 0.88 : 0.94),
-        border: Border(top: BorderSide(color: c.divider)),
+        color: c.surface,
+        border: Border(top: BorderSide(color: c.divider, width: 2)),
       ),
       child: SizedBox(
-        height: 64,
+        height: 68,
         child: Row(
           children: [
             for (var i = 0; i < destinations.length; i++)
@@ -130,7 +151,10 @@ class _GlassNavBar extends StatelessWidget {
                 child: _NavItem(
                   destination: destinations[i],
                   selected: i == index,
-                  onTap: () => onChanged(i),
+                  onTap: () {
+                    if (i != index) HapticFeedback.selectionClick();
+                    onChanged(i);
+                  },
                 ),
               ),
           ],
@@ -154,7 +178,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
-    final color = selected ? c.accent : c.textTertiary;
+    final iconColor = selected ? c.onAccent : c.textTertiary;
 
     return Semantics(
       selected: selected,
@@ -166,27 +190,31 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Color-blocked "pill" active indicator, in place of the old
+            // gradient glow underline — a solid coral chip behind the icon.
             AnimatedContainer(
               duration: LL.fast,
-              curve: LL.enter,
-              height: 3,
-              width: selected ? 22 : 0,
-              margin: const EdgeInsets.only(bottom: LL.s8),
+              curve: LL.spring,
+              padding: EdgeInsets.symmetric(
+                horizontal: selected ? LL.s16 : LL.s8,
+                vertical: LL.s4,
+              ),
               decoration: BoxDecoration(
-                color: c.accent,
+                color: selected ? c.accent : Colors.transparent,
                 borderRadius: BorderRadius.circular(LL.rPill),
               ),
-            ),
-            Icon(
-              selected ? destination.active : destination.icon,
-              color: color,
-              size: 24,
+              child: Icon(
+                selected ? destination.active : destination.icon,
+                color: iconColor,
+                size: 22,
+              ),
             ),
             const SizedBox(height: LL.s4),
             Text(
               destination.label,
               style: context.type.labelSmall?.copyWith(
-                color: color,
+                fontFamily: 'Fredoka',
+                color: selected ? c.accent : c.textTertiary,
                 letterSpacing: 0.1,
                 fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
               ),

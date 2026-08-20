@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/repository/collection_repository.dart';
@@ -34,9 +33,8 @@ class CollectionScreen extends StatelessWidget {
     final items = collection?.items ?? const <SavedItem>[];
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -53,7 +51,9 @@ class CollectionScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('MA COLLECTION', style: context.type.labelSmall),
+                          Text('MA COLLECTION',
+                              style: context.type.labelSmall
+                                  ?.copyWith(color: ramp.first)),
                           Text(
                             items.isEmpty
                                 ? 'Rien pour l\'instant'
