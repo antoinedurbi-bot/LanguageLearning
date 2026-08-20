@@ -1,13 +1,13 @@
-"""Correction via an LLM reachable through OpenRouter.
+"""Correction via an LLM reachable through Groq's free, OpenAI-compatible API.
 
 The deterministic grader in `ai_service.py` compares a learner's answer to the
 exact reference sentence, which means a perfectly natural paraphrase — "I'd
 like a coffee" instead of "I would like a coffee, please" — gets marked wrong.
 An LLM can tell the two apart. This module is the optional upgrade: when
-`OPENROUTER_API_KEY` is set, `grade` asks a model to judge the answer on
-meaning and grammar rather than string equality, and returns `None` on any
-failure (missing key, timeout, malformed response) so the caller can fall back
-to the deterministic grader without the request ever failing outright.
+`GROQ_API_KEY` is set, `grade` asks a model to judge the answer on meaning and
+grammar rather than string equality, and returns `None` on any failure
+(missing key, timeout, malformed response) so the caller can fall back to the
+deterministic grader without the request ever failing outright.
 """
 
 from __future__ import annotations
@@ -20,12 +20,11 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-_OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+_GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-# Chosen for cost and instruction-following on a narrow, structured grading
-# task rather than open-ended chat; override with OPENROUTER_MODEL for a
-# different quality/cost trade-off.
-_DEFAULT_MODEL = "anthropic/claude-3.5-haiku"
+# Free tier, fast, and strong enough for a narrow structured grading task;
+# override with GROQ_MODEL for a different model from https://console.groq.com/docs/models.
+_DEFAULT_MODEL = "llama-3.3-70b-versatile"
 
 _TIMEOUT_SECONDS = 8.0
 
@@ -98,7 +97,7 @@ def _parse_response(raw_content: str) -> LlmGradingResult | None:
     try:
         data = json.loads(text)
     except json.JSONDecodeError:
-        logger.warning("OpenRouter response was not valid JSON: %r", text[:200])
+        logger.warning("Groq response was not valid JSON: %r", text[:200])
         return None
 
     if not isinstance(data, dict) or "is_correct" not in data:
@@ -127,22 +126,17 @@ async def grade(
     expected_answer: str,
     target_language: str,
 ) -> LlmGradingResult | None:
-    """Grades via OpenRouter. Returns None if the LLM path is unavailable or
+    """Grades via Groq. Returns None if the LLM path is unavailable or
     fails for any reason — the caller is expected to fall back silently."""
-    api_key = os.environ.get("OPENROUTER_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         return None
 
-    model = os.environ.get("OPENROUTER_MODEL", _DEFAULT_MODEL)
+    model = os.environ.get("GROQ_MODEL", _DEFAULT_MODEL)
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    # OpenRouter attributes usage per app when these are set; harmless to omit.
-    if referer := os.environ.get("OPENROUTER_HTTP_REFERER"):
-        headers["HTTP-Referer"] = referer
-    if title := os.environ.get("OPENROUTER_APP_TITLE", "LinguaLab"):
-        headers["X-Title"] = title
 
     payload = {
         "model": model,
@@ -165,18 +159,18 @@ async def grade(
     try:
         async with httpx.AsyncClient(timeout=_TIMEOUT_SECONDS) as client:
             response = await client.post(
-                _OPENROUTER_URL, headers=headers, json=payload
+                _GROQ_URL, headers=headers, json=payload
             )
             response.raise_for_status()
             body = response.json()
     except (httpx.HTTPError, ValueError) as error:
-        logger.warning("OpenRouter grading unavailable: %s", error)
+        logger.warning("Groq grading unavailable: %s", error)
         return None
 
     try:
         content = body["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError):
-        logger.warning("Unexpected OpenRouter response shape: %r", body)
+        logger.warning("Unexpected Groq response shape: %r", body)
         return None
 
     return _parse_response(content)

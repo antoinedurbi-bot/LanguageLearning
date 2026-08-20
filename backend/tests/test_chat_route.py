@@ -14,7 +14,7 @@ class _FakeResult:
 
 class TestChatRoute:
     def test_unavailable_without_a_key(self, monkeypatch):
-        monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+        monkeypatch.delenv("GROQ_API_KEY", raising=False)
 
         response = client.post(
             "/api/ai/chat",

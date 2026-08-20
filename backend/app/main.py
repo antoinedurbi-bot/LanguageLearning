@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Loaded before importing the routers so OPENROUTER_API_KEY (read at call
+# Loaded before importing the routers so GROQ_API_KEY (read at call
 # time by app.services.llm_grader) is already in the environment when a
 # request comes in. A missing .env is not an error: the app runs the same
 # way, just without LLM-backed correction.

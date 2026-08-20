@@ -51,7 +51,7 @@ de l'echec ; ne jamais la demander ne construit jamais la capacite a parler.
   - dictionnaire de 615 caracteres et 1256 mots HSK 1-2 : cle, composition,
     niveau, mots derives, recherche par pinyin sans les tons
 - Objectif quotidien, serie, taux de reussite, carte d'activite sur 12 semaines
-- Atelier de production libre avec correction : par LLM via OpenRouter si une
+- Atelier de production libre avec correction : par LLM via Groq si une
   cle est configuree (tolerant les paraphrases), deterministe sinon
 - Fonctionne entierement hors ligne et sans compte ; Firebase ne sert qu'a la
   sauvegarde entre appareils

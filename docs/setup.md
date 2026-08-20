@@ -66,25 +66,26 @@ Endpoints :
 compare la reponse au modele et renvoie les differences mot a mot dans `notes` ;
 absent, il repond qu'il ne peut pas corriger plutot que d'inventer un verdict.
 
-### Correction par LLM (OpenRouter, optionnel)
+### Correction par LLM (Groq, optionnel)
 
 Par defaut la correction est deterministe (diff normalise, sans accents ni
 ponctuation) : fiable, gratuite, mais elle rejette les paraphrases correctes
 ("I'd like a coffee" face a la reference "I would like a coffee, please.").
 
 Pour une correction qui tolere les paraphrases, copie `.env.example` en `.env`
-dans `backend/` et renseigne une cle OpenRouter :
+dans `backend/` et renseigne une cle Groq (gratuite sur
+[console.groq.com/keys](https://console.groq.com/keys)) :
 
 ```bash
 cp .env.example .env
 # puis edite .env :
-# OPENROUTER_API_KEY=sk-or-...
+# GROQ_API_KEY=gsk_...
 ```
 
 Sans cle, rien ne change : `check-answer` retombe silencieusement sur le
 correcteur deterministe. Avec une cle, chaque reponse qui ne correspond pas
 mot pour mot au modele est d'abord soumise a un LLM (modele par defaut :
-`anthropic/claude-3.5-haiku`, configurable via `OPENROUTER_MODEL`) qui juge le
+`llama-3.3-70b-versatile`, configurable via `GROQ_MODEL`) qui juge le
 sens et la grammaire plutot que l'egalite de chaine ; le correcteur
 deterministe ne sert plus que de filet de securite si l'appel echoue ou
 timeout (8 secondes). Une reponse identique au modele de reference n'appelle

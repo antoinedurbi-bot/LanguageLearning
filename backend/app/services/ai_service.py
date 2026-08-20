@@ -4,7 +4,7 @@ Two graders exist. The deterministic one compares the learner's sentence to
 the expected one and reports the specific differences: cheap, reliable, and
 right whenever the answer matches the reference closely. Its blind spot is a
 correct paraphrase — "I'd like a coffee" marked wrong against "I would like a
-coffee, please." When `OPENROUTER_API_KEY` is set, `check_answer` asks an LLM
+coffee, please." When `GROQ_API_KEY` is set, `check_answer` asks an LLM
 (via `llm_grader`) to judge meaning and grammar first, and only falls back to
 the deterministic grader if that call is unavailable or fails — an exact
 match is still handled without calling the LLM at all, since there is nothing

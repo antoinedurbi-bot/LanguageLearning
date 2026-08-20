@@ -52,7 +52,7 @@ class TestParseResponse:
 
 class TestGradeWithoutApiKey:
     def test_returns_none_when_no_key_is_configured(self, monkeypatch):
-        monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+        monkeypatch.delenv("GROQ_API_KEY", raising=False)
 
         result = asyncio.run(
             llm_grader.grade(
@@ -67,7 +67,7 @@ class TestGradeWithoutApiKey:
 
 class TestGradeWithMockedHttp:
     """Exercises the real request path with the network call mocked out, so
-    no test here makes an actual call to OpenRouter."""
+    no test here makes an actual call to Groq."""
 
     def _install_fake_client(self, monkeypatch, *, json_body=None, raise_error=None):
         class FakeResponse:
@@ -94,7 +94,7 @@ class TestGradeWithMockedHttp:
         monkeypatch.setattr(llm_grader.httpx, "AsyncClient", FakeAsyncClient)
 
     def test_returns_a_result_on_a_well_formed_response(self, monkeypatch):
-        monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
+        monkeypatch.setenv("GROQ_API_KEY", "test-key")
         self._install_fake_client(
             monkeypatch,
             json_body={
@@ -123,7 +123,7 @@ class TestGradeWithMockedHttp:
         assert result.is_correct
 
     def test_returns_none_on_an_unexpected_response_shape(self, monkeypatch):
-        monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
+        monkeypatch.setenv("GROQ_API_KEY", "test-key")
         self._install_fake_client(monkeypatch, json_body={"unexpected": True})
 
         result = asyncio.run(
@@ -137,7 +137,7 @@ class TestGradeWithMockedHttp:
         assert result is None
 
     def test_returns_none_on_http_error(self, monkeypatch):
-        monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
+        monkeypatch.setenv("GROQ_API_KEY", "test-key")
         self._install_fake_client(
             monkeypatch,
             json_body={},

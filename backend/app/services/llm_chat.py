@@ -1,4 +1,4 @@
-"""Open-ended tutoring chat, via the same OpenRouter path as grading.
+"""Open-ended tutoring chat, via the same Groq path as grading.
 
 Separate from `llm_grader.py` on purpose: grading is a structured, single-shot
 JSON task with a narrow prompt, while chat carries conversation history and a
@@ -19,8 +19,8 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-_OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-_DEFAULT_MODEL = "anthropic/claude-3.5-haiku"
+_GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+_DEFAULT_MODEL = "llama-3.3-70b-versatile"
 _TIMEOUT_SECONDS = 20.0
 
 # A learner in open chat can drift into asking about anything; the prompt
@@ -72,25 +72,21 @@ async def reply(
     level: str,
     history: list[ChatMessage],
 ) -> ChatResult | None:
-    """Sends the conversation to OpenRouter and returns the tutor's reply.
+    """Sends the conversation to Groq and returns the tutor's reply.
 
     `history` is the full conversation so far, oldest first, ending with the
     learner's latest message — the caller is responsible for trimming it to a
     reasonable length before calling this.
     """
-    api_key = os.environ.get("OPENROUTER_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         return None
 
-    model = os.environ.get("OPENROUTER_MODEL", _DEFAULT_MODEL)
+    model = os.environ.get("GROQ_MODEL", _DEFAULT_MODEL)
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    if referer := os.environ.get("OPENROUTER_HTTP_REFERER"):
-        headers["HTTP-Referer"] = referer
-    if title := os.environ.get("OPENROUTER_APP_TITLE", "LinguaLab"):
-        headers["X-Title"] = title
 
     system_prompt = _SYSTEM_PROMPT_TEMPLATE.format(
         language=language,
@@ -110,18 +106,18 @@ async def reply(
     try:
         async with httpx.AsyncClient(timeout=_TIMEOUT_SECONDS) as client:
             response = await client.post(
-                _OPENROUTER_URL, headers=headers, json=payload
+                _GROQ_URL, headers=headers, json=payload
             )
             response.raise_for_status()
             body = response.json()
     except (httpx.HTTPError, ValueError) as error:
-        logger.warning("OpenRouter chat unavailable: %s", error)
+        logger.warning("Groq chat unavailable: %s", error)
         return None
 
     try:
         content = body["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError):
-        logger.warning("Unexpected OpenRouter chat response shape: %r", body)
+        logger.warning("Unexpected Groq chat response shape: %r", body)
         return None
 
     text = str(content).strip()
