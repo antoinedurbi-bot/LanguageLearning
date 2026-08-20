@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -72,148 +71,144 @@ class _WritingSessionScreenState extends State<WritingSessionScreen> {
     final ramp = LL.gradientFor('zh');
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: FutureBuilder<List<Hanzi>>(
-            future: _queue,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              final queue = snapshot.data!;
-              if (queue.isEmpty) {
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(LL.s24),
-                    child: Text(
-                      'Aucun caractère disponible pour l\'écriture.',
-                      style: context.type.bodyLarge,
-                    ),
+      body: SafeArea(
+        child: FutureBuilder<List<Hanzi>>(
+          future: _queue,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final queue = snapshot.data!;
+            if (queue.isEmpty) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(LL.s24),
+                  child: Text(
+                    'Aucun caractère disponible pour l\'écriture.',
+                    style: context.type.bodyLarge,
                   ),
-                );
-              }
-
-              if (_finished) {
-                return _Summary(
-                  total: queue.length,
-                  misses: _misses,
-                  colors: ramp,
-                );
-              }
-
-              final hanzi = queue[_index];
-
-              return Column(
-                children: [
-                  _Header(
-                    position: _index + 1,
-                    total: queue.length,
-                    colors: ramp,
-                  ),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.fromLTRB(
-                          LL.s20, LL.s8, LL.s20, LL.s24),
-                      children: [
-                        GlassCard(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      hanzi.pinyin.isEmpty
-                                          ? '—'
-                                          : hanzi.pinyin.first,
-                                      style: context.type.headlineSmall
-                                          ?.copyWith(color: c.accentAlt),
-                                    ),
-                                    const SizedBox(height: LL.s4),
-                                    Text(
-                                      hanzi.definition.isEmpty
-                                          ? 'Trace le caractère'
-                                          : hanzi.definition,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: context.type.bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Pressable(
-                                onPressed: () {
-                                  if (!context
-                                      .read<LearningController>()
-                                      .soundEnabled) {
-                                    return;
-                                  }
-                                  context
-                                      .read<TtsService>()
-                                      .speak(hanzi.character, 'zh-CN');
-                                },
-                                semanticLabel: 'Écouter',
-                                child: Container(
-                                  width: 44,
-                                  height: 44,
-                                  decoration: BoxDecoration(
-                                    color: c.accentAlt.withValues(alpha: 0.16),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(Icons.volume_up_rounded,
-                                      size: 20, color: c.accentAlt),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: LL.s20),
-                        Center(
-                          child: _showAnimation
-                              ? StrokeOrderAnimation(
-                                  key: ValueKey('anim-${hanzi.character}'),
-                                  hanzi: hanzi,
-                                  size: 280,
-                                )
-                              : WritingPractice(
-                                  key: ValueKey('write-${hanzi.character}'),
-                                  hanzi: hanzi,
-                                  size: 280,
-                                  onCompleted: (misses) => Future<void>.delayed(
-                                    const Duration(milliseconds: 700),
-                                    () {
-                                      if (mounted) _advance(queue, misses);
-                                    },
-                                  ),
-                                ),
-                        ),
-                        const SizedBox(height: LL.s16),
-                        Center(
-                          child: TextButton.icon(
-                            onPressed: () => setState(
-                                () => _showAnimation = !_showAnimation),
-                            icon: Icon(
-                              _showAnimation
-                                  ? Icons.edit_rounded
-                                  : Icons.play_circle_outline_rounded,
-                              size: 18,
-                            ),
-                            label: Text(
-                              _showAnimation
-                                  ? 'Revenir à l\'écriture'
-                                  : 'Montre-moi le modèle',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               );
-            },
-          ),
+            }
+
+            if (_finished) {
+              return _Summary(
+                total: queue.length,
+                misses: _misses,
+                colors: ramp,
+              );
+            }
+
+            final hanzi = queue[_index];
+
+            return Column(
+              children: [
+                _Header(
+                  position: _index + 1,
+                  total: queue.length,
+                  colors: ramp,
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.fromLTRB(
+                        LL.s20, LL.s8, LL.s20, LL.s24),
+                    children: [
+                      GlassCard(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    hanzi.pinyin.isEmpty
+                                        ? '—'
+                                        : hanzi.pinyin.first,
+                                    style: context.type.headlineSmall
+                                        ?.copyWith(color: c.accentAlt),
+                                  ),
+                                  const SizedBox(height: LL.s4),
+                                  Text(
+                                    hanzi.definition.isEmpty
+                                        ? 'Trace le caractère'
+                                        : hanzi.definition,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: context.type.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Pressable(
+                              onPressed: () {
+                                if (!context
+                                    .read<LearningController>()
+                                    .soundEnabled) {
+                                  return;
+                                }
+                                context
+                                    .read<TtsService>()
+                                    .speak(hanzi.character, 'zh-CN');
+                              },
+                              semanticLabel: 'Écouter',
+                              child: Container(
+                                width: 44,
+                                height: 44,
+                                decoration: BoxDecoration(
+                                  color: c.accentAlt.withValues(alpha: 0.16),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(Icons.volume_up_rounded,
+                                    size: 20, color: c.accentAlt),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: LL.s20),
+                      Center(
+                        child: _showAnimation
+                            ? StrokeOrderAnimation(
+                                key: ValueKey('anim-${hanzi.character}'),
+                                hanzi: hanzi,
+                                size: 280,
+                              )
+                            : WritingPractice(
+                                key: ValueKey('write-${hanzi.character}'),
+                                hanzi: hanzi,
+                                size: 280,
+                                onCompleted: (misses) => Future<void>.delayed(
+                                  const Duration(milliseconds: 700),
+                                  () {
+                                    if (mounted) _advance(queue, misses);
+                                  },
+                                ),
+                              ),
+                      ),
+                      const SizedBox(height: LL.s16),
+                      Center(
+                        child: TextButton.icon(
+                          onPressed: () => setState(
+                              () => _showAnimation = !_showAnimation),
+                          icon: Icon(
+                            _showAnimation
+                                ? Icons.edit_rounded
+                                : Icons.play_circle_outline_rounded,
+                            size: 18,
+                          ),
+                          label: Text(
+                            _showAnimation
+                                ? 'Revenir à l\'écriture'
+                                : 'Montre-moi le modèle',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

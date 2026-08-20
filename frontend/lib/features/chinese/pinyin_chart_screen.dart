@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/hanzi/pinyin.dart';
@@ -32,9 +31,6 @@ class _PinyinChartScreenState extends State<PinyinChartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.ll;
-    final ramp = LL.gradientFor('zh');
-
     final initials = [
       for (final initial in PinyinData.initialOrder)
         if (widget.data.chart.containsKey(initial)) initial,
@@ -45,82 +41,78 @@ class _PinyinChartScreenState extends State<PinyinChartScreen> {
             : (initials.isEmpty ? null : initials.first));
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: 'Retour',
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('PRONONCIATION', style: context.type.labelSmall),
-                          Text('Table des syllabes',
-                              style: context.type.headlineSmall),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  padding:
-                      const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
-                  children: [
-                    GlassCard(
-                      child: Text(
-                        'Le mandarin n\'utilise qu\'environ 400 syllabes '
-                        'différentes. Choisis une initiale, puis touche une '
-                        'syllabe pour l\'entendre dans chacun de ses tons.',
-                        style: context.type.bodyMedium,
-                      ),
-                    ),
-                    const SizedBox(height: LL.s16),
-                    Text('INITIALE', style: context.type.labelSmall),
-                    const SizedBox(height: LL.s8),
-                    Wrap(
-                      spacing: LL.s8,
-                      runSpacing: LL.s8,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    tooltip: 'Retour',
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for (final initial in initials)
-                          _InitialChip(
-                            label: initial.isEmpty ? '(aucune)' : initial,
-                            selected: initial == active,
-                            onTap: () =>
-                                setState(() => _selectedInitial = initial),
-                          ),
+                        Text('PRONONCIATION', style: context.type.labelSmall),
+                        Text('Table des syllabes',
+                            style: context.type.headlineSmall),
                       ],
                     ),
-                    const SizedBox(height: LL.s24),
-                    if (active != null) ...[
-                      Text(
-                        active.isEmpty
-                            ? 'SYLLABES SANS INITIALE'
-                            : 'SYLLABES EN « $active »',
-                        style: context.type.labelSmall,
-                      ),
-                      const SizedBox(height: LL.s12),
-                      _FinalsGrid(
-                        initial: active,
-                        finals: widget.data.chart[active] ?? const {},
-                      ),
-                    ],
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: ListView(
+                padding:
+                    const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
+                children: [
+                  GlassCard(
+                    child: Text(
+                      'Le mandarin n\'utilise qu\'environ 400 syllabes '
+                      'différentes. Choisis une initiale, puis touche une '
+                      'syllabe pour l\'entendre dans chacun de ses tons.',
+                      style: context.type.bodyMedium,
+                    ),
+                  ),
+                  const SizedBox(height: LL.s16),
+                  Text('INITIALE', style: context.type.labelSmall),
+                  const SizedBox(height: LL.s8),
+                  Wrap(
+                    spacing: LL.s8,
+                    runSpacing: LL.s8,
+                    children: [
+                      for (final initial in initials)
+                        _InitialChip(
+                          label: initial.isEmpty ? '(aucune)' : initial,
+                          selected: initial == active,
+                          onTap: () =>
+                              setState(() => _selectedInitial = initial),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: LL.s24),
+                  if (active != null) ...[
+                    Text(
+                      active.isEmpty
+                          ? 'SYLLABES SANS INITIALE'
+                          : 'SYLLABES EN « $active »',
+                      style: context.type.labelSmall,
+                    ),
+                    const SizedBox(height: LL.s12),
+                    _FinalsGrid(
+                      initial: active,
+                      finals: widget.data.chart[active] ?? const {},
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

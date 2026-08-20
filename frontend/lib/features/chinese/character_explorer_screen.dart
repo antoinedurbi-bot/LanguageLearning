@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/hanzi/hanzi.dart';
 import 'package:learning_app/features/chinese/character_detail_screen.dart';
@@ -35,105 +34,100 @@ class _CharacterExplorerScreenState extends State<CharacterExplorerScreen> {
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
-    final ramp = LL.gradientFor('zh');
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: 'Retour',
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('DICTIONNAIRE', style: context.type.labelSmall),
-                          Text('Caractères', style: context.type.headlineSmall),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: TextField(
-                  controller: _controller,
-                  autocorrect: false,
-                  onChanged: (value) => setState(() => _query = value),
-                  decoration: InputDecoration(
-                    hintText: 'Caractère, pinyin (ni hao), ou sens',
-                    prefixIcon: const Icon(Icons.search_rounded),
-                    suffixIcon: _query.isEmpty
-                        ? null
-                        : IconButton(
-                            tooltip: 'Effacer',
-                            icon: const Icon(Icons.close_rounded),
-                            onPressed: () {
-                              _controller.clear();
-                              setState(() => _query = '');
-                            },
-                          ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    tooltip: 'Retour',
                   ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('DICTIONNAIRE', style: context.type.labelSmall),
+                        Text('Caractères', style: context.type.headlineSmall),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: TextField(
+                controller: _controller,
+                autocorrect: false,
+                onChanged: (value) => setState(() => _query = value),
+                decoration: InputDecoration(
+                  hintText: 'Caractère, pinyin (ni hao), ou sens',
+                  prefixIcon: const Icon(Icons.search_rounded),
+                  suffixIcon: _query.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: 'Effacer',
+                          icon: const Icon(Icons.close_rounded),
+                          onPressed: () {
+                            _controller.clear();
+                            setState(() => _query = '');
+                          },
+                        ),
                 ),
               ),
-              const SizedBox(height: LL.s12),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: Row(
-                  children: [
-                    for (final level in [0, 1, 2])
-                      Padding(
-                        padding: const EdgeInsets.only(right: LL.s8),
-                        child: Pressable(
-                          onPressed: () => setState(() => _level = level),
-                          semanticLabel: level == 0
-                              ? 'Tous les niveaux'
-                              : 'Niveau HSK $level',
-                          child: AnimatedContainer(
-                            duration: LL.fast,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: LL.s16,
-                              vertical: LL.s8 + 2,
+            ),
+            const SizedBox(height: LL.s12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: Row(
+                children: [
+                  for (final level in [0, 1, 2])
+                    Padding(
+                      padding: const EdgeInsets.only(right: LL.s8),
+                      child: Pressable(
+                        onPressed: () => setState(() => _level = level),
+                        semanticLabel: level == 0
+                            ? 'Tous les niveaux'
+                            : 'Niveau HSK $level',
+                        child: AnimatedContainer(
+                          duration: LL.fast,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: LL.s16,
+                            vertical: LL.s8 + 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: _level == level
+                                ? c.accent.withValues(alpha: 0.18)
+                                : c.glassFill,
+                            borderRadius: BorderRadius.circular(LL.rPill),
+                            border: Border.all(
+                              color:
+                                  _level == level ? c.accent : c.glassStroke,
                             ),
-                            decoration: BoxDecoration(
+                          ),
+                          child: Text(
+                            level == 0 ? 'Tout' : 'HSK $level',
+                            style: context.type.labelMedium?.copyWith(
                               color: _level == level
-                                  ? c.accent.withValues(alpha: 0.18)
-                                  : c.glassFill,
-                              borderRadius: BorderRadius.circular(LL.rPill),
-                              border: Border.all(
-                                color:
-                                    _level == level ? c.accent : c.glassStroke,
-                              ),
-                            ),
-                            child: Text(
-                              level == 0 ? 'Tout' : 'HSK $level',
-                              style: context.type.labelMedium?.copyWith(
-                                color: _level == level
-                                    ? c.accent
-                                    : c.textSecondary,
-                              ),
+                                  ? c.accent
+                                  : c.textSecondary,
                             ),
                           ),
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
-              const SizedBox(height: LL.s12),
-              Expanded(child: _buildResults()),
-            ],
-          ),
+            ),
+            const SizedBox(height: LL.s12),
+            Expanded(child: _buildResults()),
+          ],
         ),
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
-import 'package:learning_app/core/widgets/illustration.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/entitlement.dart';
@@ -19,80 +19,79 @@ class LanguagePickerScreen extends StatelessWidget {
     final controller = context.watch<LearningController>();
 
     return Scaffold(
-      body: AuroraBackground(
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final wide = constraints.maxWidth >= 720;
-              return Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 900),
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: wide ? LL.s32 : LL.s20,
-                      vertical: LL.s32,
-                    ),
-                    children: [
-                      const Reveal(child: _Header()),
-                      const SizedBox(height: LL.s32),
-                      // A Wrap rather than a fixed-aspect grid: card height
-                      // depends on how the description wraps and on the user's
-                      // text scale, and a locked aspect ratio would clip it.
-                      Wrap(
-                        spacing: LL.s16,
-                        runSpacing: LL.s16,
-                        children: [
-                          for (var i = 0; i < availableLanguages.length; i++)
-                            SizedBox(
-                              width: wide
-                                  ? (constraints.maxWidth.clamp(0, 900) -
-                                          LL.s32 * 2 -
-                                          LL.s16) /
-                                      2
-                                  : double.infinity,
-                              child: Reveal(
-                                index: i + 1,
-                                child: _LanguageCard(
-                                  language: availableLanguages[i],
-                                  locked: !controller.canSelectLanguage(
-                                      availableLanguages[i].code),
-                                  onTap: () {
-                                    if (controller.canSelectLanguage(
-                                        availableLanguages[i].code)) {
-                                      controller.selectLanguage(
-                                          availableLanguages[i]);
-                                    } else {
-                                      openPaywall(context,
-                                          reason: PremiumPerk.languages);
-                                    }
-                                  },
-                                ),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final wide = constraints.maxWidth >= 720;
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 900),
+                child: ListView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: wide ? LL.s32 : LL.s20,
+                    vertical: LL.s32,
+                  ),
+                  children: [
+                    const Reveal(child: _Header()),
+                    const SizedBox(height: LL.s32),
+                    // A Wrap rather than a fixed-aspect grid: card height
+                    // depends on how the description wraps and on the user's
+                    // text scale, and a locked aspect ratio would clip it.
+                    Wrap(
+                      spacing: LL.s16,
+                      runSpacing: LL.s16,
+                      children: [
+                        for (var i = 0; i < availableLanguages.length; i++)
+                          SizedBox(
+                            width: wide
+                                ? (constraints.maxWidth.clamp(0, 900) -
+                                        LL.s32 * 2 -
+                                        LL.s16) /
+                                    2
+                                : double.infinity,
+                            child: Reveal(
+                              index: i + 1,
+                              child: _LanguageCard(
+                                language: availableLanguages[i],
+                                locked: !controller.canSelectLanguage(
+                                    availableLanguages[i].code),
+                                onTap: () {
+                                  if (controller.canSelectLanguage(
+                                      availableLanguages[i].code)) {
+                                    HapticFeedback.mediumImpact();
+                                    controller.selectLanguage(
+                                        availableLanguages[i]);
+                                  } else {
+                                    openPaywall(context,
+                                        reason: PremiumPerk.languages);
+                                  }
+                                },
                               ),
                             ),
-                        ],
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: LL.s24),
+                    Reveal(
+                      index: availableLanguages.length + 1,
+                      child: Text(
+                        controller.freeLanguageCode == null
+                            ? 'Ton choix reste gratuit à vie. Les autres '
+                                'langues demandent Premium.'
+                            : controller.isPremium
+                                ? 'Tu peux changer de langue à tout moment, '
+                                    'sans perdre ta progression.'
+                                : 'Ta langue gratuite est déjà choisie. '
+                                    'Premium débloque les autres.',
+                        textAlign: TextAlign.center,
+                        style: context.type.bodyMedium,
                       ),
-                      const SizedBox(height: LL.s24),
-                      Reveal(
-                        index: availableLanguages.length + 1,
-                        child: Text(
-                          controller.freeLanguageCode == null
-                              ? 'Ton choix reste gratuit à vie. Les autres '
-                                  'langues demandent Premium.'
-                              : controller.isPremium
-                                  ? 'Tu peux changer de langue à tout moment, '
-                                      'sans perdre ta progression.'
-                                  : 'Ta langue gratuite est déjà choisie. '
-                                      'Premium débloque les autres.',
-                          textAlign: TextAlign.center,
-                          style: context.type.bodyMedium,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -104,19 +103,26 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.ll;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        FloatingOwl(size: 104, haloColors: [c.accent, c.accentAlt]),
-        const SizedBox(height: LL.s24),
-        Text('Quelle langue\nveux-tu parler ?',
-            style: context.type.displayMedium),
-        const SizedBox(height: LL.s12),
-        Text(
-          'Une seule a la fois. Apprendre deux langues en parallele divise le '
-          'temps d\'exposition, et c\'est l\'exposition qui fait progresser.',
-          style: context.type.bodyLarge,
+        const MimiMascot(state: MimiState.idle, size: 96),
+        const SizedBox(width: LL.s16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Quelle langue\nveux-tu parler ?',
+                  style: context.type.displayMedium),
+              const SizedBox(height: LL.s12),
+              Text(
+                'Une seule a la fois. Apprendre deux langues en parallele '
+                'divise le temps d\'exposition, et c\'est l\'exposition qui '
+                'fait progresser.',
+                style: context.type.bodyLarge,
+              ),
+            ],
+          ),
         ),
       ],
     );

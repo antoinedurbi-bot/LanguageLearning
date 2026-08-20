@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -55,93 +54,89 @@ class _RadicalExplorerScreenState extends State<RadicalExplorerScreen> {
     final ramp = LL.gradientFor('zh');
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: FutureBuilder<List<Radical>>(
-            future: _radicals,
-            builder: (context, snapshot) {
-              final radicals = snapshot.data;
-              if (radicals == null) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return Column(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: const Icon(Icons.arrow_back_rounded),
-                          tooltip: 'Retour',
+      body: SafeArea(
+        child: FutureBuilder<List<Radical>>(
+          future: _radicals,
+          builder: (context, snapshot) {
+            final radicals = snapshot.data;
+            if (radicals == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.arrow_back_rounded),
+                        tooltip: 'Retour',
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('CHINOIS', style: context.type.labelSmall),
+                            Text('Clés (部首)',
+                                style: context.type.headlineSmall),
+                          ],
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('CHINOIS', style: context.type.labelSmall),
-                              Text('Clés (部首)',
-                                  style: context.type.headlineSmall),
-                            ],
-                          ),
-                        ),
-                        FilledButton.tonalIcon(
-                          onPressed: radicals.isEmpty
-                              ? null
-                              : () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) => RadicalQuizScreen(
-                                        radicals: radicals,
-                                      ),
+                      ),
+                      FilledButton.tonalIcon(
+                        onPressed: radicals.isEmpty
+                            ? null
+                            : () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => RadicalQuizScreen(
+                                      radicals: radicals,
                                     ),
                                   ),
-                          icon: const Icon(Icons.quiz_rounded, size: 18),
-                          label: const Text('Quiz'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${_mastered.length} / ${radicals.length} maitrisees. '
-                        'Triees par nombre de caracteres debloques.',
-                        style: context.type.labelMedium
-                            ?.copyWith(color: c.textTertiary),
+                                ),
+                        icon: const Icon(Icons.quiz_rounded, size: 18),
+                        label: const Text('Quiz'),
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${_mastered.length} / ${radicals.length} maitrisees. '
+                      'Triees par nombre de caracteres debloques.',
+                      style: context.type.labelMedium
+                          ?.copyWith(color: c.textTertiary),
                     ),
                   ),
-                  const SizedBox(height: LL.s8),
-                  Expanded(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(
-                          LL.s20, LL.s8, LL.s20, LL.s32 + 64),
-                      itemCount: radicals.length,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(height: LL.s12),
-                      itemBuilder: (context, index) {
-                        final radical = radicals[index];
-                        return Reveal(
-                          index: index.clamp(0, 12),
-                          child: _RadicalRow(
-                            radical: radical,
-                            mastered: _mastered.contains(radical.radical),
-                            colors: ramp,
-                            onToggle: () => _toggleMastered(radical.radical),
-                          ),
-                        );
-                      },
-                    ),
+                ),
+                const SizedBox(height: LL.s8),
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(
+                        LL.s20, LL.s8, LL.s20, LL.s32 + 64),
+                    itemCount: radicals.length,
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(height: LL.s12),
+                    itemBuilder: (context, index) {
+                      final radical = radicals[index];
+                      return Reveal(
+                        index: index.clamp(0, 12),
+                        child: _RadicalRow(
+                          radical: radical,
+                          mastered: _mastered.contains(radical.radical),
+                          colors: ramp,
+                          onToggle: () => _toggleMastered(radical.radical),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -291,68 +286,63 @@ class _RadicalQuizScreenState extends State<RadicalQuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.ll;
     final ramp = LL.gradientFor('zh');
     final answer = _pool[_index];
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close_rounded),
-                      tooltip: 'Fermer',
-                    ),
-                    Expanded(
-                      child: LinearProgressIndicator(
-                        value: (_index) / _pool.length,
-                        color: ramp.first,
-                      ),
-                    ),
-                    const SizedBox(width: LL.s12),
-                    Text('$_correct/${_pool.length}',
-                        style: context.type.labelMedium),
-                  ],
-                ),
-                const SizedBox(height: LL.s32),
-                Center(
-                  child: Text(answer.radical,
-                      style: const TextStyle(fontSize: 96, height: 1)),
-                ),
-                const SizedBox(height: LL.s32),
-                Text('Quel est le sens de cette cle ?',
-                    style: context.type.titleMedium),
-                const SizedBox(height: LL.s16),
-                for (final choice in _choices)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: LL.s12),
-                    child: _ChoiceButton(
-                      label: choice.meaning,
-                      selected: _picked == choice,
-                      correct: _picked != null && choice.radical == answer.radical,
-                      wrong: _picked == choice && choice.radical != answer.radical,
-                      onTap: () => _pick(choice),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.close_rounded),
+                    tooltip: 'Fermer',
+                  ),
+                  Expanded(
+                    child: LinearProgressIndicator(
+                      value: (_index) / _pool.length,
+                      color: ramp.first,
                     ),
                   ),
-                const Spacer(),
-                if (_picked != null)
-                  FilledButton(
-                    onPressed: _next,
-                    child: Text(
-                      _index + 1 >= _pool.length ? 'Terminer' : 'Suivant',
-                    ),
+                  const SizedBox(width: LL.s12),
+                  Text('$_correct/${_pool.length}',
+                      style: context.type.labelMedium),
+                ],
+              ),
+              const SizedBox(height: LL.s32),
+              Center(
+                child: Text(answer.radical,
+                    style: const TextStyle(fontSize: 96, height: 1)),
+              ),
+              const SizedBox(height: LL.s32),
+              Text('Quel est le sens de cette cle ?',
+                  style: context.type.titleMedium),
+              const SizedBox(height: LL.s16),
+              for (final choice in _choices)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: LL.s12),
+                  child: _ChoiceButton(
+                    label: choice.meaning,
+                    selected: _picked == choice,
+                    correct: _picked != null && choice.radical == answer.radical,
+                    wrong: _picked == choice && choice.radical != answer.radical,
+                    onTap: () => _pick(choice),
                   ),
-              ],
-            ),
+                ),
+              const Spacer(),
+              if (_picked != null)
+                FilledButton(
+                  onPressed: _next,
+                  child: Text(
+                    _index + 1 >= _pool.length ? 'Terminer' : 'Suivant',
+                  ),
+                ),
+            ],
           ),
         ),
       ),

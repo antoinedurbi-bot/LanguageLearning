@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -37,121 +36,117 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
     final hanzi = widget.hanzi;
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              _Header(hanzi: hanzi),
-              Expanded(
-                child: ListView(
-                  padding:
-                      const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
-                  children: [
-                    Reveal(child: _HeroCard(hanzi: hanzi, ramp: ramp)),
-                    const SizedBox(height: LL.s16),
-                    Reveal(
-                      index: 1,
-                      child: GlassCard(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    _writing
-                                        ? 'Écris le caractère'
-                                        : 'Ordre des traits',
-                                    style: context.type.titleMedium,
-                                  ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            _Header(hanzi: hanzi),
+            Expanded(
+              child: ListView(
+                padding:
+                    const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
+                children: [
+                  Reveal(child: _HeroCard(hanzi: hanzi, ramp: ramp)),
+                  const SizedBox(height: LL.s16),
+                  Reveal(
+                    index: 1,
+                    child: GlassCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  _writing
+                                      ? 'Écris le caractère'
+                                      : 'Ordre des traits',
+                                  style: context.type.titleMedium,
                                 ),
-                                Pressable(
-                                  onPressed: () =>
-                                      setState(() => _writing = !_writing),
-                                  semanticLabel: _writing
-                                      ? 'Revoir l\'animation'
-                                      : 'S\'entraîner a écrire',
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: LL.s12,
-                                      vertical: LL.s8,
+                              ),
+                              Pressable(
+                                onPressed: () =>
+                                    setState(() => _writing = !_writing),
+                                semanticLabel: _writing
+                                    ? 'Revoir l\'animation'
+                                    : 'S\'entraîner a écrire',
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: LL.s12,
+                                    vertical: LL.s8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: c.accent.withValues(alpha: 0.16),
+                                    borderRadius:
+                                        BorderRadius.circular(LL.rPill),
+                                    border: Border.all(
+                                      color: c.accent.withValues(alpha: 0.4),
                                     ),
-                                    decoration: BoxDecoration(
-                                      color: c.accent.withValues(alpha: 0.16),
-                                      borderRadius:
-                                          BorderRadius.circular(LL.rPill),
-                                      border: Border.all(
-                                        color: c.accent.withValues(alpha: 0.4),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        _writing
+                                            ? Icons
+                                                .play_circle_outline_rounded
+                                            : Icons.edit_rounded,
+                                        size: 16,
+                                        color: c.accent,
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          _writing
-                                              ? Icons
-                                                  .play_circle_outline_rounded
-                                              : Icons.edit_rounded,
-                                          size: 16,
-                                          color: c.accent,
-                                        ),
-                                        const SizedBox(width: LL.s4 + 2),
-                                        Text(
-                                          _writing ? 'Animation' : 'Écrire',
-                                          style: context.type.labelMedium
-                                              ?.copyWith(color: c.accent),
-                                        ),
-                                      ],
-                                    ),
+                                      const SizedBox(width: LL.s4 + 2),
+                                      Text(
+                                        _writing ? 'Animation' : 'Écrire',
+                                        style: context.type.labelMedium
+                                            ?.copyWith(color: c.accent),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: LL.s16),
-                            Center(
-                              child: _writing
-                                  ? WritingPractice(
-                                      key: ValueKey('write-${hanzi.character}'),
-                                      hanzi: hanzi,
-                                      size: 280,
-                                    )
-                                  : StrokeOrderAnimation(
-                                      key: ValueKey('anim-${hanzi.character}'),
-                                      hanzi: hanzi,
-                                      size: 240,
-                                    ),
-                            ),
-                            if (!_writing) ...[
-                              const SizedBox(height: LL.s16),
-                              Text(
-                                '${hanzi.strokeCount} traits. L\'ordre n\'est pas '
-                                'decoratif : il decide des proportions, et c\'est '
-                                'lui qu\'attendent les claviers à reconnaissance '
-                                'd\'écriture.',
-                                style: context.type.bodyMedium,
                               ),
                             ],
+                          ),
+                          const SizedBox(height: LL.s16),
+                          Center(
+                            child: _writing
+                                ? WritingPractice(
+                                    key: ValueKey('write-${hanzi.character}'),
+                                    hanzi: hanzi,
+                                    size: 280,
+                                  )
+                                : StrokeOrderAnimation(
+                                    key: ValueKey('anim-${hanzi.character}'),
+                                    hanzi: hanzi,
+                                    size: 240,
+                                  ),
+                          ),
+                          if (!_writing) ...[
+                            const SizedBox(height: LL.s16),
+                            Text(
+                              '${hanzi.strokeCount} traits. L\'ordre n\'est pas '
+                              'decoratif : il decide des proportions, et c\'est '
+                              'lui qu\'attendent les claviers à reconnaissance '
+                              'd\'écriture.',
+                              style: context.type.bodyMedium,
+                            ),
                           ],
-                        ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: LL.s16),
-                    Reveal(index: 2, child: _CompositionCard(hanzi: hanzi)),
-                    const SizedBox(height: LL.s16),
-                    Reveal(
-                      index: 3,
-                      child: _WordsCard(
-                        hanzi: hanzi,
-                        repository: widget.repository,
-                      ),
+                  ),
+                  const SizedBox(height: LL.s16),
+                  Reveal(index: 2, child: _CompositionCard(hanzi: hanzi)),
+                  const SizedBox(height: LL.s16),
+                  Reveal(
+                    index: 3,
+                    child: _WordsCard(
+                      hanzi: hanzi,
+                      repository: widget.repository,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/features/memory/memory_card.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -93,6 +94,7 @@ class _MasteryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.ll;
+    final milestone = total > 0 && learned / total >= 0.5;
     return GlassCard(
       glow: colors.first,
       child: Row(
@@ -114,7 +116,19 @@ class _MasteryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Phrases acquises', style: context.type.titleMedium),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text('Phrases acquises',
+                          style: context.type.titleMedium),
+                    ),
+                    if (milestone)
+                      const MimiMascot(
+                        state: MimiState.streakProud,
+                        size: 40,
+                      ),
+                  ],
+                ),
                 const SizedBox(height: LL.s8),
                 Text(
                   '$learned sur $total, et $seen rencontrées au moins une fois.',

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/kana/kanji.dart';
@@ -31,8 +30,6 @@ class _KanjiExplorerScreenState extends State<KanjiExplorerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.ll;
-    final ramp = LL.gradientFor('ja');
     final q = _query.trim().toLowerCase();
 
     final results = starterKanji.where((k) {
@@ -45,72 +42,68 @@ class _KanjiExplorerScreenState extends State<KanjiExplorerScreen> {
     }).toList();
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: 'Retour',
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('DICTIONNAIRE', style: context.type.labelSmall),
-                          Text('Kanji', style: context.type.headlineSmall),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: TextField(
-                  controller: _controller,
-                  autocorrect: false,
-                  onChanged: (v) => setState(() => _query = v),
-                  decoration: InputDecoration(
-                    hintText: 'Kanji, lecture (tabe), ou sens',
-                    prefixIcon: const Icon(Icons.search_rounded),
-                    suffixIcon: _query.isEmpty
-                        ? null
-                        : IconButton(
-                            tooltip: 'Effacer',
-                            icon: const Icon(Icons.close_rounded),
-                            onPressed: () {
-                              _controller.clear();
-                              setState(() => _query = '');
-                            },
-                          ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    tooltip: 'Retour',
                   ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('DICTIONNAIRE', style: context.type.labelSmall),
+                        Text('Kanji', style: context.type.headlineSmall),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: TextField(
+                controller: _controller,
+                autocorrect: false,
+                onChanged: (v) => setState(() => _query = v),
+                decoration: InputDecoration(
+                  hintText: 'Kanji, lecture (tabe), ou sens',
+                  prefixIcon: const Icon(Icons.search_rounded),
+                  suffixIcon: _query.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: 'Effacer',
+                          icon: const Icon(Icons.close_rounded),
+                          onPressed: () {
+                            _controller.clear();
+                            setState(() => _query = '');
+                          },
+                        ),
                 ),
               ),
-              const SizedBox(height: LL.s12),
-              Expanded(
-                child: results.isEmpty
-                    ? Center(
-                        child: Text('Aucun resultat',
-                            style: context.type.bodyMedium),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.fromLTRB(
-                            LL.s20, 0, LL.s20, LL.s32),
-                        itemCount: results.length,
-                        itemBuilder: (context, i) =>
-                            _KanjiRow(kanji: results[i]),
-                      ),
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: LL.s12),
+            Expanded(
+              child: results.isEmpty
+                  ? Center(
+                      child: Text('Aucun resultat',
+                          style: context.type.bodyMedium),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(
+                          LL.s20, 0, LL.s20, LL.s32),
+                      itemCount: results.length,
+                      itemBuilder: (context, i) =>
+                          _KanjiRow(kanji: results[i]),
+                    ),
+            ),
+          ],
         ),
       ),
     );

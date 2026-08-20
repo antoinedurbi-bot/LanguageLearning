@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/kana/kana.dart';
@@ -27,9 +26,6 @@ class _KanaChartScreenState extends State<KanaChartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.ll;
-    final ramp = LL.gradientFor('ja');
-
     final entries = allKana.where((k) {
       if (k.script != _script) return false;
       if (k.isCombo) return _showCombos;
@@ -45,100 +41,96 @@ class _KanaChartScreenState extends State<KanaChartScreen> {
         kanaRowOrder.indexOf(a).compareTo(kanaRowOrder.indexOf(b)));
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: 'Retour',
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    tooltip: 'Retour',
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('SYLLABAIRES', style: context.type.labelSmall),
+                        Text('Hiragana et katakana',
+                            style: context.type.headlineSmall),
+                      ],
                     ),
-                    Expanded(
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _ScriptToggle(
+                      script: _script,
+                      onChanged: (s) => setState(() => _script = s),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: LL.s8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: Wrap(
+                spacing: LL.s8,
+                children: [
+                  FilterChip(
+                    label: const Text('Sonores (゛゜)'),
+                    selected: _showDakuten,
+                    onSelected: (v) => setState(() => _showDakuten = v),
+                  ),
+                  FilterChip(
+                    label: const Text('Combinaisons (ゃゅょ)'),
+                    selected: _showCombos,
+                    onSelected: (v) => setState(() => _showCombos = v),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.fromLTRB(
+                    LL.s20, LL.s12, LL.s20, LL.s32),
+                itemCount: rows.length,
+                itemBuilder: (context, i) {
+                  final row = rows[i];
+                  final items =
+                      entries.where((k) => k.row == row).toList();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: LL.s16),
+                    child: GlassCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('SYLLABAIRES', style: context.type.labelSmall),
-                          Text('Hiragana et katakana',
-                              style: context.type.headlineSmall),
+                          Text(kanaRowLabel[row] ?? row,
+                              style: context.type.labelMedium),
+                          const SizedBox(height: LL.s8),
+                          Wrap(
+                            spacing: LL.s8,
+                            runSpacing: LL.s8,
+                            children: [
+                              for (final k in items) _KanaTile(kana: k),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _ScriptToggle(
-                        script: _script,
-                        onChanged: (s) => setState(() => _script = s),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: LL.s8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: Wrap(
-                  spacing: LL.s8,
-                  children: [
-                    FilterChip(
-                      label: const Text('Sonores (゛゜)'),
-                      selected: _showDakuten,
-                      onSelected: (v) => setState(() => _showDakuten = v),
-                    ),
-                    FilterChip(
-                      label: const Text('Combinaisons (ゃゅょ)'),
-                      selected: _showCombos,
-                      onSelected: (v) => setState(() => _showCombos = v),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(
-                      LL.s20, LL.s12, LL.s20, LL.s32),
-                  itemCount: rows.length,
-                  itemBuilder: (context, i) {
-                    final row = rows[i];
-                    final items =
-                        entries.where((k) => k.row == row).toList();
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: LL.s16),
-                      child: GlassCard(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(kanaRowLabel[row] ?? row,
-                                style: context.type.labelMedium),
-                            const SizedBox(height: LL.s8),
-                            Wrap(
-                              spacing: LL.s8,
-                              runSpacing: LL.s8,
-                              children: [
-                                for (final k in items) _KanaTile(kana: k),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

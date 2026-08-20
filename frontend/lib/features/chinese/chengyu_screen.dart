@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -41,76 +40,72 @@ class _ChengyuScreenState extends State<ChengyuScreen> {
     final ramp = LL.gradientFor('zh');
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: 'Retour',
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('CHINOIS', style: context.type.labelSmall),
-                          Text('Chengyu 成语', style: context.type.headlineSmall),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '${_known.length} / ${chengyuZh.length} connus.',
-                    style: context.type.labelMedium
-                        ?.copyWith(color: c.textTertiary),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(LL.s8, LL.s8, LL.s20, LL.s8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    tooltip: 'Retour',
                   ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('CHINOIS', style: context.type.labelSmall),
+                        Text('Chengyu 成语', style: context.type.headlineSmall),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '${_known.length} / ${chengyuZh.length} connus.',
+                  style: context.type.labelMedium
+                      ?.copyWith(color: c.textTertiary),
                 ),
               ),
-              const SizedBox(height: LL.s8),
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(
-                      LL.s20, LL.s8, LL.s20, LL.s32 + 64),
-                  itemCount: chengyuZh.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: LL.s12),
-                  itemBuilder: (context, index) {
-                    final item = chengyuZh[index];
-                    return Reveal(
-                      index: index.clamp(0, 12),
-                      child: _ChengyuRow(
-                        chengyu: item,
-                        known: _known.contains(item.id),
-                        colors: ramp,
-                        onTap: () async {
-                          await Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => ChengyuDetailScreen(
-                                chengyu: item,
-                                colors: ramp,
-                              ),
+            ),
+            const SizedBox(height: LL.s8),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.fromLTRB(
+                    LL.s20, LL.s8, LL.s20, LL.s32 + 64),
+                itemCount: chengyuZh.length,
+                separatorBuilder: (_, __) => const SizedBox(height: LL.s12),
+                itemBuilder: (context, index) {
+                  final item = chengyuZh[index];
+                  return Reveal(
+                    index: index.clamp(0, 12),
+                    child: _ChengyuRow(
+                      chengyu: item,
+                      known: _known.contains(item.id),
+                      colors: ramp,
+                      onTap: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => ChengyuDetailScreen(
+                              chengyu: item,
+                              colors: ramp,
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -215,58 +210,54 @@ class _ChengyuDetailScreenState extends State<ChengyuDetailScreen> {
     final chengyu = widget.chengyu;
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [widget.colors.first, widget.colors.last, c.auroraC],
-        intensity: 0.5,
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.arrow_back_rounded),
-                    tooltip: 'Retour',
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(LL.s20, LL.s8, LL.s20, LL.s32),
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  tooltip: 'Retour',
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: _toggle,
+                  icon: Icon(
+                    _known
+                        ? Icons.check_circle_rounded
+                        : Icons.radio_button_unchecked_rounded,
+                    color: _known ? widget.colors.first : c.textTertiary,
                   ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: _toggle,
-                    icon: Icon(
-                      _known
-                          ? Icons.check_circle_rounded
-                          : Icons.radio_button_unchecked_rounded,
-                      color: _known ? widget.colors.first : c.textTertiary,
-                    ),
-                    tooltip: _known ? 'Marquer comme non connu' : 'Je connais',
-                  ),
-                ],
-              ),
-              Center(
-                child: Text(chengyu.characters,
-                    style:
-                        const TextStyle(fontSize: 56, fontWeight: FontWeight.w600)),
-              ),
-              const SizedBox(height: LL.s8),
-              Center(
-                child: Text(chengyu.pinyin, style: context.type.titleMedium),
-              ),
-              const SizedBox(height: LL.s24),
-              _Section(title: 'Sens litteral', body: chengyu.literal, colors: widget.colors),
-              const SizedBox(height: LL.s12),
-              _Section(title: 'Signification', body: chengyu.meaning, colors: widget.colors),
-              const SizedBox(height: LL.s12),
-              _Section(title: 'Origine', body: chengyu.story, colors: widget.colors),
-              const SizedBox(height: LL.s12),
-              _Section(title: 'Usage', body: chengyu.usage, colors: widget.colors),
-              const SizedBox(height: LL.s12),
-              _Section(
-                title: 'Exemple',
-                body: '${chengyu.example}\n${chengyu.exampleNative}',
-                colors: widget.colors,
-              ),
-            ],
-          ),
+                  tooltip: _known ? 'Marquer comme non connu' : 'Je connais',
+                ),
+              ],
+            ),
+            Center(
+              child: Text(chengyu.characters,
+                  style:
+                      const TextStyle(fontSize: 56, fontWeight: FontWeight.w600)),
+            ),
+            const SizedBox(height: LL.s8),
+            Center(
+              child: Text(chengyu.pinyin, style: context.type.titleMedium),
+            ),
+            const SizedBox(height: LL.s24),
+            _Section(title: 'Sens litteral', body: chengyu.literal, colors: widget.colors),
+            const SizedBox(height: LL.s12),
+            _Section(title: 'Signification', body: chengyu.meaning, colors: widget.colors),
+            const SizedBox(height: LL.s12),
+            _Section(title: 'Origine', body: chengyu.story, colors: widget.colors),
+            const SizedBox(height: LL.s12),
+            _Section(title: 'Usage', body: chengyu.usage, colors: widget.colors),
+            const SizedBox(height: LL.s12),
+            _Section(
+              title: 'Exemple',
+              body: '${chengyu.example}\n${chengyu.exampleNative}',
+              colors: widget.colors,
+            ),
+          ],
         ),
       ),
     );

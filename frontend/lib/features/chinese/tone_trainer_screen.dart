@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -133,99 +132,95 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
     final ramp = LL.gradientFor('zh');
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.55,
-        child: SafeArea(
-          child: Column(
-            children: [
-              _Header(asked: _asked, correct: _correct),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: LL.s20),
-                child: SegmentedButton<_Mode>(
-                  showSelectedIcon: false,
-                  segments: const [
-                    ButtonSegment(
-                      value: _Mode.isolated,
-                      label: Text('Une syllabe'),
+      body: SafeArea(
+        child: Column(
+          children: [
+            _Header(asked: _asked, correct: _correct),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: LL.s20),
+              child: SegmentedButton<_Mode>(
+                showSelectedIcon: false,
+                segments: const [
+                  ButtonSegment(
+                    value: _Mode.isolated,
+                    label: Text('Une syllabe'),
+                  ),
+                  ButtonSegment(
+                    value: _Mode.pairs,
+                    label: Text('Deux syllabes'),
+                  ),
+                ],
+                selected: {_mode},
+                onSelectionChanged: (value) => _setMode(value.first),
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                padding:
+                    const EdgeInsets.fromLTRB(LL.s20, LL.s20, LL.s20, LL.s24),
+                children: [
+                  Shake(trigger: _shake, child: _buildPrompt()),
+                  const SizedBox(height: LL.s20),
+                  if (_mode == _Mode.isolated)
+                    _ToneChoices(
+                      label: 'Quel ton ?',
+                      selected: _answerFirst,
+                      correct: _revealed ? _single?.tone : null,
+                      includeNeutral: false,
+                      onSelect: _revealed
+                          ? null
+                          : (tone) => setState(() => _answerFirst = tone),
+                    )
+                  else ...[
+                    _ToneChoices(
+                      label: '1re syllabe',
+                      selected: _answerFirst,
+                      correct: _revealed ? _pair?.first : null,
+                      includeNeutral: false,
+                      onSelect: _revealed
+                          ? null
+                          : (tone) => setState(() => _answerFirst = tone),
                     ),
-                    ButtonSegment(
-                      value: _Mode.pairs,
-                      label: Text('Deux syllabes'),
+                    const SizedBox(height: LL.s16),
+                    _ToneChoices(
+                      label: '2e syllabe',
+                      selected: _answerSecond,
+                      correct: _revealed ? _pair?.second : null,
+                      includeNeutral: true,
+                      onSelect: _revealed
+                          ? null
+                          : (tone) => setState(() => _answerSecond = tone),
                     ),
                   ],
-                  selected: {_mode},
-                  onSelectionChanged: (value) => _setMode(value.first),
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  padding:
-                      const EdgeInsets.fromLTRB(LL.s20, LL.s20, LL.s20, LL.s24),
-                  children: [
-                    Shake(trigger: _shake, child: _buildPrompt()),
+                  if (_revealed) ...[
                     const SizedBox(height: LL.s20),
-                    if (_mode == _Mode.isolated)
-                      _ToneChoices(
-                        label: 'Quel ton ?',
-                        selected: _answerFirst,
-                        correct: _revealed ? _single?.tone : null,
-                        includeNeutral: false,
-                        onSelect: _revealed
-                            ? null
-                            : (tone) => setState(() => _answerFirst = tone),
-                      )
-                    else ...[
-                      _ToneChoices(
-                        label: '1re syllabe',
-                        selected: _answerFirst,
-                        correct: _revealed ? _pair?.first : null,
-                        includeNeutral: false,
-                        onSelect: _revealed
-                            ? null
-                            : (tone) => setState(() => _answerFirst = tone),
-                      ),
-                      const SizedBox(height: LL.s16),
-                      _ToneChoices(
-                        label: '2e syllabe',
-                        selected: _answerSecond,
-                        correct: _revealed ? _pair?.second : null,
-                        includeNeutral: true,
-                        onSelect: _revealed
-                            ? null
-                            : (tone) => setState(() => _answerSecond = tone),
-                      ),
-                    ],
-                    if (_revealed) ...[
-                      const SizedBox(height: LL.s20),
-                      Reveal(
-                          child: _Answer(
-                              single: _single, pair: _pair, mode: _mode)),
-                    ],
+                    Reveal(
+                        child: _Answer(
+                            single: _single, pair: _pair, mode: _mode)),
                   ],
-                ),
+                ],
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(
-                  LL.s20,
-                  LL.s16,
-                  LL.s20,
-                  LL.s16 + MediaQuery.viewPaddingOf(context).bottom,
-                ),
-                decoration: BoxDecoration(
-                  color: c.background.withValues(alpha: 0.92),
-                  border: Border(top: BorderSide(color: c.divider)),
-                ),
-                child: GradientButton(
-                  label: _revealed ? 'Suivant' : 'Verifier',
-                  icon: _revealed ? Icons.arrow_forward_rounded : null,
-                  colors: ramp,
-                  onPressed:
-                      _revealed ? _next : (_canValidate ? _validate : null),
-                ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                LL.s20,
+                LL.s16,
+                LL.s20,
+                LL.s16 + MediaQuery.viewPaddingOf(context).bottom,
               ),
-            ],
-          ),
+              decoration: BoxDecoration(
+                color: c.background.withValues(alpha: 0.92),
+                border: Border(top: BorderSide(color: c.divider)),
+              ),
+              child: GradientButton(
+                label: _revealed ? 'Suivant' : 'Verifier',
+                icon: _revealed ? Icons.arrow_forward_rounded : null,
+                colors: ramp,
+                onPressed:
+                    _revealed ? _next : (_canValidate ? _validate : null),
+              ),
+            ),
+          ],
         ),
       ),
     );
