@@ -24,7 +24,7 @@ _GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 # Free tier, fast, and strong enough for a narrow structured grading task;
 # override with GROQ_MODEL for a different model from https://console.groq.com/docs/models.
-_DEFAULT_MODEL = "llama-3.3-70b-versatile"
+_DEFAULT_MODEL = "openai/gpt-oss-120b"
 
 _TIMEOUT_SECONDS = 8.0
 

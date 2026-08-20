@@ -85,7 +85,7 @@ cp .env.example .env
 Sans cle, rien ne change : `check-answer` retombe silencieusement sur le
 correcteur deterministe. Avec une cle, chaque reponse qui ne correspond pas
 mot pour mot au modele est d'abord soumise a un LLM (modele par defaut :
-`llama-3.3-70b-versatile`, configurable via `GROQ_MODEL`) qui juge le
+`openai/gpt-oss-120b`, configurable via `GROQ_MODEL`) qui juge le
 sens et la grammaire plutot que l'egalite de chaine ; le correcteur
 deterministe ne sert plus que de filet de securite si l'appel echoue ou
 timeout (8 secondes). Une reponse identique au modele de reference n'appelle

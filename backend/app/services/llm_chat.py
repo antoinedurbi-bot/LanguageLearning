@@ -20,7 +20,7 @@ import httpx
 logger = logging.getLogger(__name__)
 
 _GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
-_DEFAULT_MODEL = "llama-3.3-70b-versatile"
+_DEFAULT_MODEL = "openai/gpt-oss-120b"
 _TIMEOUT_SECONDS = 20.0
 
 # A learner in open chat can drift into asking about anything; the prompt
