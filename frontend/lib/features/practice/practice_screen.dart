@@ -486,7 +486,7 @@ class _SprintCard extends StatelessWidget {
                   const LLChip(
                       label: 'Premium',
                       icon: Icons.lock_rounded,
-                      color: LL.amber)
+                      color: LL.marigold)
                 else
                   Icon(Icons.chevron_right_rounded, color: c.textTertiary),
               ],

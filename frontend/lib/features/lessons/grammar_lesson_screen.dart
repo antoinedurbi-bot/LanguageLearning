@@ -410,11 +410,11 @@ class _ToneRow extends StatelessWidget {
   final String ttsLocale;
 
   static const _toneColors = {
-    0: LL.violet,
-    1: LL.indigo,
-    2: LL.mint,
-    3: LL.amber,
-    4: LL.rose,
+    0: LL.teal,
+    1: LL.tealDark,
+    2: LL.sage,
+    3: LL.marigold,
+    4: LL.coral,
   };
 
   @override

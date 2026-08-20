@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
@@ -274,10 +275,10 @@ class _Intro extends StatelessWidget {
             child: Row(
               children: [
                 const Icon(Icons.emoji_events_rounded,
-                    size: 18, color: LL.amber),
+                    size: 18, color: LL.marigold),
                 const SizedBox(width: LL.s8),
                 Text('Ton record : $best phrases',
-                    style: context.type.bodyLarge?.copyWith(color: LL.amber)),
+                    style: context.type.bodyLarge?.copyWith(color: LL.marigold)),
               ],
             ),
           ),
@@ -335,7 +336,20 @@ class _Round extends StatelessWidget {
     final c = context.ll;
     final item = card;
     if (item == null) {
-      return const Center(child: Text('Aucune phrase disponible'));
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const MimiMascot(state: MimiState.encouraging, size: 72),
+            const SizedBox(height: LL.s12),
+            Text(
+              'Plus rien à réviser pour ce sprint — reviens un peu plus tard.',
+              textAlign: TextAlign.center,
+              style: context.type.bodyLarge,
+            ),
+          ],
+        ),
+      );
     }
 
     return Padding(
@@ -510,10 +524,10 @@ class _Result extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.emoji_events_rounded, color: LL.amber),
+                const Icon(Icons.emoji_events_rounded, color: LL.marigold),
                 const SizedBox(width: LL.s8),
                 Text('Nouveau record',
-                    style: context.type.titleMedium?.copyWith(color: LL.amber)),
+                    style: context.type.titleMedium?.copyWith(color: LL.marigold)),
               ],
             ),
           )

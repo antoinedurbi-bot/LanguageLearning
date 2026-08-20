@@ -114,7 +114,7 @@ class _VocabularyScreenState extends State<VocabularyScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(LL.s32),
                           child: Text(
-                            'Aucun mot ne correspond a "$_query".',
+                            'Aucun mot ne correspond à "$_query".',
                             textAlign: TextAlign.center,
                             style: context.type.bodyLarge,
                           ),

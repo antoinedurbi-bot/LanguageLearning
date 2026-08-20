@@ -18,9 +18,17 @@ class AppTheme {
   /// Tags/stats/mono data face — exposed for direct use, e.g. `LL.mono`.
   static const mono = 'SpaceMono';
 
+  /// CJK fallback faces, tried in order whenever a glyph is missing from the
+  /// active family (Fredoka/NunitoSans/SpaceMono only cover Latin). Noto
+  /// Serif SC covers Simplified Chinese, Noto Serif JP covers hiragana/
+  /// katakana/kanji; declaring both on every text style means Chinese and
+  /// Japanese content renders correctly regardless of which screen or
+  /// language is active. See assets/fonts/CREDITS.md.
+  static const cjkFallback = ['NotoSerifSC', 'NotoSerifJP'];
+
   static TextTheme _textTheme(LLColors c) {
-    const display = TextStyle(fontFamily: _display);
-    const body = TextStyle(fontFamily: _body);
+    const display = TextStyle(fontFamily: _display, fontFamilyFallback: cjkFallback);
+    const body = TextStyle(fontFamily: _body, fontFamilyFallback: cjkFallback);
 
     // Type scale: 12 / 14 / 16 / 18 / 22 / 28 / 36 / 46.
     return TextTheme(
@@ -109,6 +117,7 @@ class AppTheme {
       scaffoldBackgroundColor: c.background,
       canvasColor: c.background,
       splashFactory: InkSparkle.splashFactory,
+      fontFamilyFallback: cjkFallback,
       colorScheme: ColorScheme(
         brightness: brightness,
         primary: c.accent,

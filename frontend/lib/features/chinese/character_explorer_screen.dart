@@ -169,7 +169,7 @@ class _CharacterExplorerScreenState extends State<CharacterExplorerScreen> {
             child: Padding(
               padding: const EdgeInsets.all(LL.s32),
               child: Text(
-                'Aucun caractère ne correspond a "$_query".',
+                'Aucun caractère ne correspond à "$_query".',
                 textAlign: TextAlign.center,
                 style: context.type.bodyLarge,
               ),

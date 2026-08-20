@@ -71,3 +71,23 @@ flutter:
           weight: 400
         - asset: assets/fonts/SpaceMono-700.ttf
           weight: 700
+    # CJK fallback faces, subset to only the Hanzi/Kana/Kanji glyphs this app
+    # actually uses (see assets/fonts/CREDITS.md for how the subset was
+    # built). Declared as their own families and wired in via
+    # `fontFamilyFallback` in app_theme.dart rather than left to the
+    # platform: on native, missing glyphs in the app's fonts silently fall
+    # back to a system CJK font, but Flutter web's CanvasKit renderer has no
+    # such fallback, so Chinese/Japanese text rendered as empty tofu boxes
+    # until these were bundled.
+    - family: NotoSerifSC
+      fonts:
+        - asset: assets/fonts/NotoSerifSC-400.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSerifSC-700.ttf
+          weight: 700
+    - family: NotoSerifJP
+      fonts:
+        - asset: assets/fonts/NotoSerifJP-400.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSerifJP-700.ttf
+          weight: 700

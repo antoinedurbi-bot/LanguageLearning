@@ -92,8 +92,10 @@ class _KanjiExplorerScreenState extends State<KanjiExplorerScreen> {
             Expanded(
               child: results.isEmpty
                   ? Center(
-                      child: Text('Aucun resultat',
-                          style: context.type.bodyMedium),
+                      child: Text(
+                        'Aucun kanji ne correspond à "$_query".',
+                        style: context.type.bodyMedium,
+                      ),
                     )
                   : ListView.builder(
                       padding: const EdgeInsets.fromLTRB(

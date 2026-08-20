@@ -165,7 +165,7 @@ class _NumbersCard extends StatelessWidget {
           _Number(
             value: '${progress.streak}',
             label: 'série',
-            tint: LL.amber,
+            tint: LL.marigold,
           ),
           _Divider(color: c.divider),
           _Number(

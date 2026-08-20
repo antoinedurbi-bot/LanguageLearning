@@ -50,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
           'Pas de connexion. La progression reste enregistrée localement.',
         'too-many-requests' =>
           'Trop de tentatives. Reessaie dans quelques minutes.',
-        _ => error.message ?? 'Connexion impossible pour le moment.',
+        _ => error.message ?? 'Mimi n\'arrive pas à se connecter pour le moment — réessaie dans un instant.',
       };
 
   Future<void> _submit() async {
@@ -82,7 +82,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (mounted) setState(() => _error = _messageFor(error));
     } catch (_) {
       if (mounted) {
-        setState(() => _error = 'Connexion impossible pour le moment.');
+        setState(() => _error = 'Mimi n\'arrive pas à se connecter pour le moment — réessaie dans un instant.');
       }
     } finally {
       if (mounted) setState(() => _loading = false);

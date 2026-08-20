@@ -203,7 +203,7 @@ class _LanguageCard extends StatelessWidget {
                   const LLChip(
                     label: 'Premium',
                     icon: Icons.lock_rounded,
-                    color: LL.amber,
+                    color: LL.marigold,
                   )
                 else
                   Icon(Icons.arrow_forward_rounded, color: c.textTertiary),

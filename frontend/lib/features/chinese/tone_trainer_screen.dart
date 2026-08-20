@@ -231,7 +231,10 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
     final hasItem = _mode == _Mode.isolated ? _single != null : _pair != null;
     if (!hasItem) {
       return GlassCard(
-        child: Text('Aucun élément disponible.', style: context.type.bodyLarge),
+        child: Text(
+          'Rien à entraîner pour l\'instant — reviens un peu plus tard.',
+          style: context.type.bodyLarge,
+        ),
       );
     }
 
