@@ -3,6 +3,7 @@ import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
+import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/card_item.dart';
@@ -96,7 +97,7 @@ class _UnitCard extends StatelessWidget {
     return Pressable(
       onPressed: unlocked
           ? () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
+                SharedAxisRoute<void>(
                   builder: (_) => UnitDetailScreen(unit: unit),
                 ),
               )

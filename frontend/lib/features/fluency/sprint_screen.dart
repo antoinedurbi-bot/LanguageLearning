@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -93,6 +93,7 @@ class _SprintScreenState extends State<SprintScreen> {
 
   Future<void> _finish() async {
     _timer?.cancel();
+    HapticFeedback.mediumImpact();
     setState(() => _phase = _Phase.done);
 
     final code = context.read<LearningController>().language?.code;
@@ -100,6 +101,7 @@ class _SprintScreenState extends State<SprintScreen> {
     if (_cleared > _best) {
       await _settings.setSprintBest(code, _cleared);
       if (!mounted) return;
+      HapticFeedback.heavyImpact();
       setState(() {
         _best = _cleared;
         _newRecord = true;
@@ -108,6 +110,10 @@ class _SprintScreenState extends State<SprintScreen> {
   }
 
   void _answer({required bool knew}) {
+    // Pressable already fires a light selection tick on tap; a stronger
+    // pulse only for "compris" (knew) makes correct recall feel distinct
+    // from a pass, without grading the deliberately consequence-free sprint.
+    if (knew) HapticFeedback.lightImpact();
     setState(() {
       if (knew) {
         _cleared++;
@@ -137,9 +143,8 @@ class _SprintScreenState extends State<SprintScreen> {
         .isReady(course.allCards, progress.states, DateTime.now());
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: _phase == _Phase.running ? 0.75 : 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [

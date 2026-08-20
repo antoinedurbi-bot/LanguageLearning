@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/services/ai_service.dart';
@@ -94,6 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     } catch (_) {
       if (!mounted) return;
+      HapticFeedback.heavyImpact();
       setState(() {
         _sending = false;
         _messages.add(_ChatEntry(
@@ -113,9 +114,8 @@ class _ChatScreenState extends State<ChatScreen> {
     final ramp = LL.gradientFor(widget.languageCode);
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.4,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -124,7 +124,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        HapticFeedback.selectionClick();
+                        Navigator.of(context).pop();
+                      },
                       icon: const Icon(Icons.arrow_back_rounded),
                       tooltip: 'Retour',
                     ),
@@ -132,7 +135,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('TUTEUR IA', style: context.type.labelSmall),
+                          Text('TUTEUR IA',
+                              style: context.type.labelSmall
+                                  ?.copyWith(color: ramp.first)),
                           Text(widget.languageName,
                               style: context.type.titleMedium),
                         ],
@@ -214,8 +219,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: ramp),
+                          color: ramp.first,
                           shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: LLColors.pressedShadeOf(ramp.first),
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: const Icon(Icons.arrow_upward_rounded,
                             color: Colors.white),
@@ -280,11 +291,8 @@ class _Bubble extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: LL.s16, vertical: LL.s12),
             decoration: BoxDecoration(
-              gradient: isUser
-                  ? LinearGradient(colors: colors)
-                  : null,
               color: isUser
-                  ? null
+                  ? colors.first
                   : (entry.failed
                       ? c.danger.withValues(alpha: 0.12)
                       : c.glassFill),
@@ -294,13 +302,14 @@ class _Bubble extends StatelessWidget {
                 bottomLeft: Radius.circular(isUser ? LL.rMd : LL.s4),
                 bottomRight: Radius.circular(isUser ? LL.s4 : LL.rMd),
               ),
-              border: isUser
-                  ? null
-                  : Border.all(
-                      color: entry.failed
-                          ? c.danger.withValues(alpha: 0.3)
-                          : c.glassStroke,
-                    ),
+              border: Border.all(
+                width: 2,
+                color: isUser
+                    ? Colors.transparent
+                    : (entry.failed
+                        ? c.danger.withValues(alpha: 0.3)
+                        : c.glassStroke),
+              ),
             ),
             child: SelectableText(
               entry.content,

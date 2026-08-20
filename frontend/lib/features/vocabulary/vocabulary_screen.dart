@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/vocabulary.dart';
@@ -58,9 +57,8 @@ class _VocabularyScreenState extends State<VocabularyScreen> {
     ].where((t) => t.entries.isNotEmpty).toList();
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -77,7 +75,9 @@ class _VocabularyScreenState extends State<VocabularyScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('VOCABULAIRE', style: context.type.labelSmall),
+                          Text('VOCABULAIRE',
+                              style: context.type.labelSmall
+                                  ?.copyWith(color: ramp.first)),
                           Text('Les mots qui comptent',
                               style: context.type.headlineSmall),
                         ],

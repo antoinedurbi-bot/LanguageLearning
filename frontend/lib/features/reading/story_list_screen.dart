@@ -1,6 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
@@ -26,9 +27,8 @@ class StoryListScreen extends StatelessWidget {
     final ramp = LL.gradientFor(languageCode);
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, c.auroraC],
-        intensity: 0.5,
+      body: ColoredBox(
+        color: c.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -37,7 +37,10 @@ class StoryListScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        HapticFeedback.selectionClick();
+                        Navigator.of(context).pop();
+                      },
                       icon: const Icon(Icons.arrow_back_rounded),
                       tooltip: 'Retour',
                     ),
@@ -45,7 +48,9 @@ class StoryListScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('LECTURES', style: context.type.labelSmall),
+                          Text('LECTURES',
+                              style: context.type.labelSmall
+                                  ?.copyWith(color: ramp.first)),
                           Text('Lire pour de vrai',
                               style: context.type.headlineSmall),
                         ],
@@ -66,16 +71,25 @@ class StoryListScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: LL.s12),
                         child: Reveal(
                           index: i + 1,
-                          child: _StoryCard(
-                            story: stories[i],
-                            colors: ramp,
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => StoryScreen(
-                                  story: stories[i],
-                                  ttsLocale: ttsLocale,
-                                ),
-                              ),
+                          child: OpenContainer<void>(
+                            closedElevation: 0,
+                            openElevation: 0,
+                            closedColor: Colors.transparent,
+                            openColor: c.background,
+                            middleColor: c.background,
+                            closedShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(LL.rLg),
+                            ),
+                            transitionType: ContainerTransitionType.fadeThrough,
+                            transitionDuration: LL.medium,
+                            openBuilder: (_, __) => StoryScreen(
+                              story: stories[i],
+                              ttsLocale: ttsLocale,
+                            ),
+                            closedBuilder: (_, openContainer) => _StoryCard(
+                              story: stories[i],
+                              colors: ramp,
+                              onPressed: openContainer,
                             ),
                           ),
                         ),

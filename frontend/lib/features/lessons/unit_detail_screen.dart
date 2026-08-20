@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
-import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/core/widgets/glass.dart';
 import 'package:learning_app/core/widgets/motion.dart';
+import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
@@ -31,8 +31,8 @@ class UnitDetailScreen extends StatelessWidget {
         language?.gradient ?? [context.ll.accent, context.ll.accentAlt];
 
     return Scaffold(
-      body: AuroraBackground(
-        colors: [ramp.first, ramp.last, context.ll.auroraC],
+      body: ColoredBox(
+        color: context.ll.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -50,7 +50,7 @@ class UnitDetailScreen extends StatelessWidget {
                             lesson: unit.grammarLesson!,
                             colors: ramp,
                             onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
+                              SharedAxisRoute<void>(
                                 builder: (_) => GrammarLessonScreen(
                                   unit: unit,
                                   lesson: unit.grammarLesson!,
@@ -96,7 +96,7 @@ class UnitDetailScreen extends StatelessWidget {
                     final items = controller.buildUnitSession(unit);
                     if (items.isEmpty) return;
                     Navigator.of(context).push(
-                      MaterialPageRoute<void>(
+                      SharedAxisRoute<void>(
                         builder: (_) => SessionScreen(items: items),
                       ),
                     );
