@@ -253,6 +253,101 @@ const vocabZh = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'zh-t3',
+      title: 'Compter et décrire',
+      subtitle: 'Nombres, jours et couleurs qui manquaient à l\'appel',
+      entries: [
+        VocabEntry(
+          id: 'zh-v-numbers-1-10',
+          target: '一，二，三...十',
+          native: 'un, deux, trois... dix',
+          pos: 'nombres',
+          romanization: 'yī, èr, sān... shí',
+          example: '我有三个哥哥。',
+          exampleNative: 'J\'ai trois grands frères.',
+          note: 'Système décimal parfaitement régulier : onze se dit 十一 '
+              '(dix-un), vingt se dit 二十 (deux-dix). Aucune irrégularité à '
+              'apprendre, contrairement au français ou à l\'anglais.',
+        ),
+        VocabEntry(
+          id: 'zh-v-days',
+          target: '星期一，星期二，星期三...',
+          native: 'lundi, mardi, mercredi...',
+          pos: 'noms',
+          romanization: 'xīngqīyī, xīngqī\'èr, xīngqīsān...',
+          example: '星期一见！',
+          exampleNative: 'A lundi !',
+          note: 'Les jours se construisent avec 星期 (semaine) + un chiffre : '
+              'lundi = semaine-un, mardi = semaine-deux... dimanche est '
+              'l\'exception, 星期天 ou 星期日, jamais 星期七.',
+        ),
+        VocabEntry(
+          id: 'zh-v-colors',
+          target: '红色，蓝色，绿色，黄色，黑色，白色',
+          native: 'rouge, bleu, vert, jaune, noir, blanc',
+          pos: 'adjectifs',
+          romanization: 'hóngsè, lánsè, lǜsè, huángsè, hēisè, báisè',
+          example: '她穿红色的衣服。',
+          exampleNative: 'Elle porte des vêtements rouges.',
+          note: '色 (sè) veut dire "couleur" et se rattache au nom de la '
+              'teinte. Devant un nom, la couleur est suivie de 的 : 红色的衣服 '
+              '(des vêtements de couleur rouge).',
+        ),
+        VocabEntry(
+          id: 'zh-v-da-xiao',
+          target: '大 / 小',
+          native: 'grand / petit',
+          pos: 'adjectifs',
+          romanization: 'dà / xiǎo',
+          example: '房子很大，厨房很小。',
+          exampleNative: 'La maison est grande, la cuisine est petite.',
+          note: 'Un adjectif seul devant 很 (très) même sans intensité '
+              'particulière : 很大 se traduit souvent juste par "grand", pas '
+              'forcément "très grand". Sans 很, la phrase sonne comme une '
+              'comparaison implicite.',
+        ),
+        VocabEntry(
+          id: 'zh-v-hao-huai',
+          target: '好 / 不好',
+          native: 'bon / mauvais',
+          pos: 'adjectifs',
+          romanization: 'hǎo / bù hǎo',
+          example: '这家饭馆很好。',
+          exampleNative: 'Ce restaurant est bon.',
+          note: '好 sert aussi de particule d\'accord ("d\'accord, bien") et '
+              'entre dans des dizaines de mots composés : 你好 (bonjour), '
+              '好吃 (bon au goût), 好看 (beau à regarder).',
+        ),
+        VocabEntry(
+          id: 'zh-v-xiang-yao',
+          target: '想 / 要',
+          native: 'avoir envie de / vouloir',
+          pos: 'verbes',
+          romanization: 'xiǎng / yào',
+          example: '我想喝咖啡，但是我要走了。',
+          exampleNative: 'J\'ai envie d\'un café, mais je dois partir.',
+          note: '想 exprime un souhait plus doux ("j\'aimerais bien"), 要 est '
+              'plus direct et ferme ("je veux", "j\'ai besoin de"). Les deux '
+              'se placent directement devant le verbe, sans particule '
+              'intermédiaire.',
+        ),
+        VocabEntry(
+          id: 'zh-v-keyi-bixu',
+          target: '可以 / 必须',
+          native: 'pouvoir (permission) / devoir (obligation)',
+          pos: 'verbes',
+          romanization: 'kěyǐ / bìxū',
+          example: '你可以在这儿等，但是必须出示票。',
+          exampleNative: 'Tu peux attendre ici, mais tu dois montrer ton '
+              'billet.',
+          note: '可以 pour une permission ("c\'est possible/autorisé"), 能 '
+              '(néng) pour une capacité physique, 必须 pour une obligation '
+              'stricte — trois nuances que le français regroupe souvent sous '
+              '"pouvoir/devoir".',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

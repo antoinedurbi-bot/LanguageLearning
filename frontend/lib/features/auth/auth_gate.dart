@@ -6,6 +6,7 @@ import 'package:learning_app/core/widgets/aurora_background.dart';
 import 'package:learning_app/features/auth/sign_in_screen.dart';
 import 'package:learning_app/features/home/home_shell.dart';
 import 'package:learning_app/features/language/language_picker_screen.dart';
+import 'package:learning_app/features/placement/placement_quiz_screen.dart';
 import 'package:provider/provider.dart';
 
 /// Decides what the learner sees first.
@@ -48,6 +49,7 @@ class _LanguageGate extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = context.watch<LearningController>();
     if (controller.language == null) return const LanguagePickerScreen();
+    if (controller.needsPlacement) return const PlacementQuizScreen();
     return const HomeShell();
   }
 }

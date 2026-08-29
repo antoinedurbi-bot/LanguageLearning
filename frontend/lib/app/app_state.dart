@@ -4,9 +4,11 @@ import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/entitlement.dart';
 import 'package:learning_app/data/models/progress.dart';
 import 'package:learning_app/data/repository/collection_repository.dart';
+import 'package:learning_app/data/repository/placement_repository.dart';
 import 'package:learning_app/data/repository/progress_repository.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
 import 'package:learning_app/data/srs/session.dart';
+import 'package:learning_app/data/srs/weak_spots.dart';
 import 'package:learning_app/features/language/app_language.dart';
 
 /// Whether Firebase initialised successfully. When false the app runs fully
@@ -21,16 +23,20 @@ class LearningController extends ChangeNotifier {
     ProgressRepository? repository,
     SettingsRepository? settings,
     CollectionRepository? collections,
+    PlacementRepository? placement,
     this.scheduler = const Scheduler(),
   })  : _repository = repository ?? ProgressRepository(),
         _settings = settings ?? SettingsRepository(),
-        _collections = collections ?? CollectionRepository();
+        _collections = collections ?? CollectionRepository(),
+        _placement = placement ?? PlacementRepository();
 
   final ProgressRepository _repository;
   final SettingsRepository _settings;
   final CollectionRepository _collections;
+  final PlacementRepository _placement;
   final Scheduler scheduler;
   final SessionBuilder _builder = const SessionBuilder();
+  final WeakSpotsAggregator weakSpots = const WeakSpotsAggregator();
 
   bool _ready = false;
   AppLanguage? _language;
@@ -40,6 +46,8 @@ class LearningController extends ChangeNotifier {
   bool _soundEnabled = true;
   bool _isPremium = false;
   String? _freeLanguageCode;
+  bool _placementSeen = false;
+  int? _placementRecommendedUnit;
 
   bool get ready => _ready;
   AppLanguage? get language => _language;
@@ -52,6 +60,12 @@ class LearningController extends ChangeNotifier {
   /// The language a free account is allowed to study — the first one ever
   /// picked. Null until a language has been chosen at least once.
   String? get freeLanguageCode => _freeLanguageCode;
+
+  /// Whether the placement quiz still needs to be offered for the current
+  /// language — true right after a language is first picked, false once the
+  /// learner has completed or skipped it (or for a language change back to
+  /// one already resolved before).
+  bool get needsPlacement => _language != null && !_placementSeen;
 
   /// Whether the current account can study [code] right now.
   bool canSelectLanguage(String code) =>
@@ -77,6 +91,8 @@ class LearningController extends ChangeNotifier {
       _language = language;
       _progress = await _repository.load(language.code);
       _collection = await _collections.load(language.code);
+      _placementSeen = await _placement.hasSeen(language.code);
+      _placementRecommendedUnit = await _placement.recommendedUnit(language.code);
     }
 
     _ready = true;
@@ -94,11 +110,14 @@ class LearningController extends ChangeNotifier {
     _language = language;
     _progress = null;
     _collection = null;
+    _placementSeen = false;
     notifyListeners();
 
     await _settings.setSelectedLanguage(language.code);
     _progress = await _repository.load(language.code);
     _collection = await _collections.load(language.code);
+    _placementSeen = await _placement.hasSeen(language.code);
+    _placementRecommendedUnit = await _placement.recommendedUnit(language.code);
 
     if (_freeLanguageCode == null) {
       _freeLanguageCode = language.code;
@@ -107,6 +126,23 @@ class LearningController extends ChangeNotifier {
 
     notifyListeners();
     return true;
+  }
+
+  /// Records that the placement quiz has been shown for the current
+  /// language, optionally adjusting the daily-goal-agnostic "recommended
+  /// unit" a learner can jump to. Called both when the quiz is completed and
+  /// when the learner chooses to skip it — either way it must not be shown
+  /// again for this language.
+  Future<void> resolvePlacement({int? recommendedUnitIndex}) async {
+    final language = _language;
+    if (language == null) return;
+    _placementSeen = true;
+    _placementRecommendedUnit = recommendedUnitIndex;
+    notifyListeners();
+    await _placement.markSeen(
+      language.code,
+      recommendedUnit: recommendedUnitIndex,
+    );
   }
 
   Future<void> unlockPremium(String code) async {
@@ -222,9 +258,16 @@ class LearningController extends ChangeNotifier {
   }
 
   /// A unit opens once the previous one is at least half started, so the
-  /// learner is never dropped into material built on things they have not met.
+  /// learner is never dropped into material built on things they have not
+  /// met — with one exception: units up to and including the placement
+  /// quiz's recommendation open immediately, since the quiz is exactly the
+  /// evidence that the learner already knows that material. The gate still
+  /// applies past that point, so a strong placement result skips the boring
+  /// stretch without granting a free pass through the whole course.
   bool isUnitUnlocked(Course course, int index) {
     if (index == 0) return true;
+    final recommended = _placementRecommendedUnit;
+    if (recommended != null && index <= recommended) return true;
     final previous = course.units[index - 1];
     return startedInUnit(previous) >= (previous.cards.length / 2).ceil();
   }
@@ -258,6 +301,29 @@ class LearningController extends ChangeNotifier {
         ),
     ];
     return items.take(maxItems).toList();
+  }
+
+  /// The learner's weakest cards for the current course, ranked worst-first.
+  /// Empty until they have actually studied something — see
+  /// [WeakSpotsAggregator] for why unseen cards never appear here.
+  List<WeakSpotEntry> get weakCardSpots {
+    final course = this.course;
+    final progress = _progress;
+    if (course == null || progress == null) return const [];
+    return weakSpots.rankCards(course, progress, DateTime.now());
+  }
+
+  /// A session built from the current weakest cards, reusing the normal
+  /// exercise machinery.
+  List<SessionItem> buildWeakSpotSession({int maxItems = 15}) {
+    final progress = _progress;
+    if (progress == null) return const [];
+    return weakSpots.buildSession(
+      weakCardSpots,
+      progress,
+      DateTime.now(),
+      maxItems: maxItems,
+    );
   }
 
   // ------------------------------------------------------------- mutation

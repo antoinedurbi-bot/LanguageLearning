@@ -203,6 +203,103 @@ const vocabJa = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'ja-t3',
+      title: 'Compter et décrire',
+      subtitle: 'Nombres, jours et couleurs qui manquaient à l\'appel',
+      entries: [
+        VocabEntry(
+          id: 'ja-v-numbers-1-10',
+          target: 'いち、に、さん...じゅう',
+          native: 'un, deux, trois... dix',
+          pos: 'nombres',
+          romanization: 'ichi, ni, san... jū',
+          example: 'きょうだいが さんにん います。',
+          exampleNative: 'J\'ai trois frères et sœurs.',
+          note: 'La lecture change selon ce qu\'on compte : さんにん (trois '
+              'personnes) n\'utilise pas le même suffixe que さんまい (trois '
+              'feuilles/billets) ou さんこ (trois objets). Le nombre nu '
+              'いち・に・さん sert surtout à compter dans l\'abstrait.',
+        ),
+        VocabEntry(
+          id: 'ja-v-days',
+          target: 'げつようび、かようび、すいようび...',
+          native: 'lundi, mardi, mercredi...',
+          pos: 'noms',
+          romanization: 'getsuyōbi, kayōbi, suiyōbi...',
+          example: 'げつようびに あいましょう。',
+          exampleNative: 'On se voit lundi.',
+          note: 'Chaque jour finit par 曜日 (yōbi, "jour de la semaine") '
+              'précédé d\'un caractère lié à un élément : 月 (lune, lundi), '
+              '火 (feu, mardi), 水 (eau, mercredi) — un moule à reconnaître '
+              'plutôt que sept mots isolés.',
+        ),
+        VocabEntry(
+          id: 'ja-v-colors',
+          target: 'あかい、あおい、しろい、くろい',
+          native: 'rouge, bleu, blanc, noir',
+          pos: 'adjectifs -i',
+          romanization: 'akai, aoi, shiroi, kuroi',
+          example: 'あかい かばんが すきです。',
+          exampleNative: 'J\'aime le sac rouge.',
+          note: 'Ces couleurs sont des adjectifs en -い (i-keiyōshi) : elles '
+              'se conjuguent comme un verbe (あかくない = pas rouge) et se '
+              'placent directement avant le nom, sans particule.',
+        ),
+        VocabEntry(
+          id: 'ja-v-ookii-chiisai',
+          target: 'おおきい / ちいさい',
+          native: 'grand / petit',
+          pos: 'adjectifs -i',
+          romanization: 'ōkii / chiisai',
+          example: 'いえは ちいさいですが、だいどころは おおきいです。',
+          exampleNative: 'La maison est petite mais la cuisine est grande.',
+          note: 'Adjectifs en -い : la forme négative remplace le い final '
+              'par くない (ちいさくない = pas petit). Devant un nom, ils restent '
+              'inchangés : おおきい いえ.',
+        ),
+        VocabEntry(
+          id: 'ja-v-ii-warui',
+          target: 'いい / わるい',
+          native: 'bon / mauvais',
+          pos: 'adjectifs -i',
+          romanization: 'ii / warui',
+          example: 'この レストランは いいです。',
+          exampleNative: 'Ce restaurant est bon.',
+          note: 'いい est irrégulier à la forme négative et passée : on '
+              'conjugue en fait よい (よくない, pas よくくない). Un piège classique '
+              'pour qui apprend les adjectifs -い par un seul modèle.',
+        ),
+        VocabEntry(
+          id: 'ja-v-hoshii-iru',
+          target: 'ほしい / いる',
+          native: 'vouloir (un objet) / avoir besoin de',
+          pos: 'adjectif / verbe',
+          romanization: 'hoshii / iru',
+          example: 'コーヒーが ほしいです。じかんが いります。',
+          exampleNative: 'Je veux un café. J\'ai besoin de temps.',
+          note: 'ほしい est un adjectif -い, pas un verbe : "je veux X" se dit '
+              'littéralement "X est désirable pour moi", avec が et non を. '
+              'いる ici est le verbe "être nécessaire", homophone du verbe '
+              '"exister" pour les êtres animés.',
+        ),
+        VocabEntry(
+          id: 'ja-v-dekiru-nakerebanaranai',
+          target: 'できる / なければならない',
+          native: 'pouvoir (capacité) / devoir (obligation)',
+          pos: 'verbe / structure',
+          romanization: 'dekiru / nakereba naranai',
+          example: 'ここで まつことが できます。でも きっぷを みせなければ '
+              'なりません。',
+          exampleNative: 'Tu peux attendre ici, mais tu dois montrer ton '
+              'billet.',
+          note: 'できる (pouvoir/savoir faire) se construit avec un nom '
+              'verbal + こと. なければならない (devoir) est une structure longue '
+              'mais fixe, construite sur la forme négative du verbe — bien '
+              'plus lourde que le "must" anglais ou le "devoir" français.',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

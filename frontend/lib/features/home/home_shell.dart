@@ -8,6 +8,7 @@ import 'package:learning_app/features/home/home_screen.dart';
 import 'package:learning_app/features/japanese/japanese_lab_screen.dart';
 import 'package:learning_app/features/lessons/unit_list_screen.dart';
 import 'package:learning_app/features/practice/practice_screen.dart';
+import 'package:learning_app/features/practice/weak_spots_screen.dart';
 import 'package:learning_app/features/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,11 @@ class _HomeShellState extends State<HomeShell> {
       label: 'Parcours'
     ),
     (icon: Icons.mic_none_outlined, active: Icons.mic, label: 'Atelier'),
+    (
+      icon: Icons.gps_not_fixed_rounded,
+      active: Icons.gps_fixed_rounded,
+      label: 'Faibles'
+    ),
     (icon: Icons.insights_outlined, active: Icons.insights, label: 'Progrès'),
   ];
 
@@ -74,6 +80,7 @@ class _HomeShellState extends State<HomeShell> {
       const HomeScreen(),
       const UnitListScreen(),
       const PracticeScreen(),
+      const WeakSpotsScreen(),
       const ProfileScreen(),
       if (isChinese) const ChineseLabScreen(),
       if (isJapanese) const JapaneseLabScreen(),
