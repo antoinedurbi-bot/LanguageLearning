@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:learning_app/core/theme/tokens.dart';
 
 /// Mimi's expressive states. Each maps to a distinct hand-vector drawing —
 /// see [MimiPainter].
@@ -42,6 +43,12 @@ class MimiMascot extends StatelessWidget {
       height: size,
       child: CustomPaint(painter: MimiPainter(state)),
     );
+
+    // context.reduceMotion is the app-wide reduced-motion check (see
+    // LLContext in core/theme/tokens.dart) — every animated widget reads it
+    // rather than each inventing its own. Mimi still changes state
+    // immediately, just without the bounce/scale/hop motion.
+    if (context.reduceMotion) return child;
 
     // A soft bounce/scale on state change rather than a snap cut. Keyed on
     // state so flutter_animate replays the entrance whenever it changes.

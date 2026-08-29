@@ -8,6 +8,7 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/page_transitions.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/entitlement.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:provider/provider.dart';
 
 /// Opens the paywall. The one call site every lock in the app should use, so
@@ -59,12 +60,14 @@ class _PremiumScreenState extends State<PremiumScreen> {
     if (!mounted) return;
     if (controller.isPremium && !before) {
       HapticFeedback.mediumImpact();
+      playSfx(context, SfxSound.celebration);
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Premium débloqué. Profites-en.')),
       );
     } else {
       HapticFeedback.heavyImpact();
+      playSfx(context, SfxSound.incorrect);
       setState(() {
         _checking = false;
         _error = 'Code invalide.';

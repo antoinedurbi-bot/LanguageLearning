@@ -6,6 +6,7 @@ import 'package:learning_app/data/hanzi/hanzi.dart';
 import 'package:learning_app/data/hanzi/stroke_scoring.dart';
 import 'package:learning_app/data/hanzi/svg_path.dart';
 import 'package:learning_app/features/chinese/widgets/stroke_order.dart';
+import 'package:learning_app/services/sound_service.dart';
 
 /// Trace-the-character practice.
 ///
@@ -90,6 +91,7 @@ class _WritingPracticeState extends State<WritingPractice> {
 
     if (attempt.accepted) {
       HapticFeedback.selectionClick();
+      playSfx(context, SfxSound.tap);
       final next = _completed + 1;
       final done = next >= widget.hanzi.strokes.length;
       setState(() {
@@ -102,12 +104,14 @@ class _WritingPracticeState extends State<WritingPractice> {
       });
       if (done) {
         HapticFeedback.mediumImpact();
+        playSfx(context, SfxSound.celebration);
         widget.onCompleted?.call(_totalMisses);
       }
       return;
     }
 
     HapticFeedback.heavyImpact();
+    playSfx(context, SfxSound.incorrect);
     setState(() {
       _current.clear();
       _missesOnStroke++;

@@ -5,14 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/aurora_background.dart';
-import 'package:learning_app/core/widgets/illustration.dart';
+import 'package:learning_app/core/widgets/mimi_mascot.dart';
 import 'package:learning_app/core/widgets/motion.dart';
-import 'package:learning_app/core/widgets/rive_moment.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
 import 'package:learning_app/data/srs/session.dart';
 import 'package:learning_app/features/session/exercises.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -189,6 +189,7 @@ class _SessionScreenState extends State<SessionScreen> {
     });
 
     correct ? HapticFeedback.mediumImpact() : HapticFeedback.heavyImpact();
+    playSfx(context, correct ? SfxSound.correct : SfxSound.incorrect);
     _answerFocus.unfocus();
 
     // Hearing the sentence right after answering is the moment it sticks.
@@ -698,15 +699,15 @@ class _SummaryScreen extends StatelessWidget {
           'reviennent vite, et c\'est la qu\'elles s\'ancrent.';
     }
 
-    final mood = answered == 0
-        ? Illust.moon
-        : rate >= 0.8
-            ? Illust.party
-            : Illust.owl;
-    // A perfect-enough session is the one moment that gets a fully
-    // interactive Rive animation instead of a static illustration — see
-    // RiveMoment's doc comment for why it stays to just this one spot.
-    final perfect = answered > 0 && rate >= 0.95;
+    // Session-complete is Mimi's biggest moment: she reacts to how the
+    // session went rather than showing a generic static illustration.
+    final mimiState = answered == 0
+        ? MimiState.idle
+        : rate >= 0.95
+            ? MimiState.celebrating
+            : rate >= 0.8
+                ? MimiState.streakProud
+                : MimiState.encouraging;
 
     return Scaffold(
       body: AuroraBackground(
@@ -723,10 +724,7 @@ class _SummaryScreen extends StatelessWidget {
                     children: [
                       Reveal(
                         child: Center(
-                          child: perfect
-                              ? const RiveMoment(size: 132)
-                              : Illustration(mood,
-                                  size: 88, haloColors: colors),
+                          child: MimiMascot(state: mimiState, size: 120),
                         ),
                       ),
                       const SizedBox(height: LL.s12),

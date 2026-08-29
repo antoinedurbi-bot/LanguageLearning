@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learning_app/core/theme/tokens.dart';
 
 /// The names available in `assets/illustrations/`.
 ///
@@ -105,69 +104,6 @@ class Illustration extends StatelessWidget {
         ),
       ),
       child: svg,
-    );
-  }
-}
-
-/// The owl on a gentle up-and-down float, used wherever the app needs a
-/// recurring "presence" rather than a static icon — the closest thing this
-/// app has to a mascot.
-class FloatingOwl extends StatefulWidget {
-  const FloatingOwl({super.key, this.size = 96, this.haloColors});
-
-  final double size;
-  final List<Color>? haloColors;
-
-  @override
-  State<FloatingOwl> createState() => _FloatingOwlState();
-}
-
-class _FloatingOwlState extends State<FloatingOwl>
-    with SingleTickerProviderStateMixin {
-  // Created eagerly in initState rather than via a lazy `late final`
-  // initializer: a lazy initializer that has never been read by build() would
-  // otherwise run for the first time inside dispose() when a widget is torn
-  // down before ever being laid out (e.g. an off-screen list item), which
-  // tries to look up an ancestor on an already-deactivated element.
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2600),
-    );
-    // Started post-frame, and only when motion is not reduced: starting a
-    // repeating animation unconditionally here would run forever even for
-    // users who asked for reduced motion, and would hang any test driven by
-    // pumpAndSettle, which waits for animations to finish.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || context.reduceMotion) return;
-      _controller.repeat(reverse: true);
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (context.reduceMotion) {
-      return Illustration(Illust.owl,
-          size: widget.size, haloColors: widget.haloColors);
-    }
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (_, child) {
-        final t = Curves.easeInOut.transform(_controller.value);
-        return Transform.translate(offset: Offset(0, -6 * t), child: child);
-      },
-      child: Illustration(Illust.owl,
-          size: widget.size, haloColors: widget.haloColors),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learning_app/core/theme/tokens.dart';
+import 'package:learning_app/services/sound_service.dart';
 
 /// Tap wrapper that scales slightly on press and fires a haptic tick.
 ///
@@ -61,7 +62,10 @@ class _PressableState extends State<Pressable> {
           onTapCancel: () => _set(false),
           onTap: _enabled
               ? () {
-                  if (widget.haptic) HapticFeedback.selectionClick();
+                  if (widget.haptic) {
+                    HapticFeedback.selectionClick();
+                    playSfx(context, SfxSound.tap);
+                  }
                   widget.onPressed!.call();
                 }
               : null,
@@ -130,6 +134,10 @@ class _GradientButtonState extends State<GradientButton> {
     final c = context.ll;
     final fill = widget.colors?.first ?? c.accent;
     final shadowColor = LLColors.pressedShadeOf(fill);
+    // Picked per-fill rather than hard-coded: white fails AA contrast
+    // (~2-2.5:1) on the lighter sage/marigold fills, e.g. the Spanish
+    // language ramp, which starts with marigold.
+    final fg = LLColors.readableOn(fill);
     const restOffset = 6.0;
     final offset = context.reduceMotion
         ? (_down ? 0.0 : restOffset)
@@ -150,6 +158,7 @@ class _GradientButtonState extends State<GradientButton> {
           onTap: _enabled
               ? () {
                   HapticFeedback.mediumImpact();
+                  playSfx(context, SfxSound.tap);
                   widget.onPressed!.call();
                 }
               : null,
@@ -179,26 +188,26 @@ class _GradientButtonState extends State<GradientButton> {
                 ),
                 child: Center(
                   child: widget.loading
-                      ? const SizedBox(
+                      ? SizedBox(
                           width: 22,
                           height: 22,
                           child: CircularProgressIndicator(
                             strokeWidth: 2.4,
-                            color: Colors.white,
+                            color: fg,
                           ),
                         )
                       : Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (widget.icon != null) ...[
-                              Icon(widget.icon, size: 20, color: Colors.white),
+                              Icon(widget.icon, size: 20, color: fg),
                               const SizedBox(width: LL.s8 + 2),
                             ],
                             Text(
                               widget.label,
                               style: context.type.labelLarge?.copyWith(
                                 fontFamily: 'Fredoka',
-                                color: Colors.white,
+                                color: fg,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               ),
@@ -258,7 +267,7 @@ class _PhysicalButtonState extends State<PhysicalButton> {
     final fill = widget.filled ? base : c.surface;
     final shadowColor =
         widget.filled ? LLColors.pressedShadeOf(base) : c.glassStroke;
-    final fg = widget.filled ? Colors.white : base;
+    final fg = widget.filled ? LLColors.readableOn(base) : base;
     const restOffset = 4.0;
     final offset = _down && _enabled ? 1.0 : restOffset;
 
@@ -277,6 +286,7 @@ class _PhysicalButtonState extends State<PhysicalButton> {
           onTap: _enabled
               ? () {
                   HapticFeedback.selectionClick();
+                  playSfx(context, SfxSound.tap);
                   widget.onPressed!.call();
                 }
               : null,

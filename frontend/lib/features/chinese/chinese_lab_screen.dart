@@ -265,7 +265,7 @@ class _LabCard extends StatelessWidget {
                     gradient: LinearGradient(colors: colors),
                     borderRadius: BorderRadius.circular(LL.rSm + 4),
                   ),
-                  child: Icon(icon, color: Colors.white, size: 24),
+                  child: Icon(icon, color: LLColors.readableOn(colors.first), size: 24),
                 ),
                 const SizedBox(width: LL.s16),
                 Expanded(

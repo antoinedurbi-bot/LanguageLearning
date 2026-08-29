@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/app/language_learning_app.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,10 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider.value(value: controller),
         Provider(create: (_) => TtsService(), dispose: (_, tts) => tts.stop()),
+        Provider(
+          create: (_) => SoundService(),
+          dispose: (_, sound) => sound.dispose(),
+        ),
       ],
       child: const LanguageLearningApp(),
     ),

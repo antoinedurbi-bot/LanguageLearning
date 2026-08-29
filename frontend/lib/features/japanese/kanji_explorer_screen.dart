@@ -148,7 +148,7 @@ class _KanjiRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(kanji.meaning, style: context.type.titleSmall),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: LL.s2),
                     Text(
                       [
                         if (kanji.onyomi.isNotEmpty)
@@ -206,6 +206,7 @@ class _KanjiDetailSheet extends StatelessWidget {
                         .read<TtsService>()
                         .speak(kanji.character, 'ja-JP'),
                     icon: const Icon(Icons.volume_up_rounded),
+                    tooltip: 'Écouter',
                   ),
                 ],
               ),

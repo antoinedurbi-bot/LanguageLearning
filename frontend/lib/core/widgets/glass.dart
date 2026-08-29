@@ -53,6 +53,7 @@ class GlassCard extends StatelessWidget {
     final strokeColor = tint != null
         ? Colors.transparent
         : (borderColor ?? glow?.withValues(alpha: 0.5) ?? c.glassStroke);
+    final fg = onTint ?? (tint == null ? null : LLColors.readableOn(tint!));
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -75,9 +76,9 @@ class GlassCard extends StatelessWidget {
           border: Border.all(color: strokeColor, width: 2),
         ),
         child: DefaultTextStyle.merge(
-          style: tint != null ? TextStyle(color: onTint ?? Colors.white) : null,
+          style: fg == null ? null : TextStyle(color: fg),
           child: IconTheme.merge(
-            data: IconThemeData(color: tint != null ? (onTint ?? Colors.white) : null),
+            data: IconThemeData(color: fg),
             child: Padding(padding: padding, child: child),
           ),
         ),
