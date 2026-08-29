@@ -398,6 +398,106 @@ const vocabEs = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'es-t4',
+      title: 'Compter et décrire',
+      subtitle: 'Nombres, jours et adjectifs qui manquaient à l\'appel',
+      entries: [
+        VocabEntry(
+          id: 'es-v-numbers-1-10',
+          target: 'uno, dos, tres... diez',
+          native: 'un, deux, trois... dix',
+          pos: 'nombres',
+          example: 'Tengo tres hermanos y dos hermanas.',
+          exampleNative: 'J\'ai trois frères et deux sœurs.',
+          note: '"Uno" devient "un" devant un nom masculin singulier : "un '
+              'hermano" et non "uno hermano". Devant un nom féminin il reste '
+              '"una".',
+        ),
+        VocabEntry(
+          id: 'es-v-days',
+          target: 'lunes, martes, miércoles...',
+          native: 'lundi, mardi, mercredi...',
+          pos: 'noms',
+          example: '¡Nos vemos el lunes!',
+          exampleNative: 'On se voit lundi !',
+          note: 'Les jours de la semaine ne prennent pas de majuscule en '
+              'espagnol. On dit "el lunes" (lundi, un jour précis) mais "los '
+              'lunes" (le lundi, habituellement).',
+        ),
+        VocabEntry(
+          id: 'es-v-colors',
+          target: 'rojo, azul, verde, amarillo, negro, blanco',
+          native: 'rouge, bleu, vert, jaune, noir, blanc',
+          pos: 'adjectifs',
+          example: 'Lleva una chaqueta roja.',
+          exampleNative: 'Elle porte une veste rouge.',
+          note: 'Contrairement à l\'anglais, les couleurs s\'accordent en '
+              'genre et en nombre comme tout adjectif espagnol : "chaqueta '
+              'roja" mais "zapatos rojos". Elles se placent après le nom.',
+        ),
+        VocabEntry(
+          id: 'es-v-big-small',
+          target: 'grande / pequeño',
+          native: 'grand / petit',
+          pos: 'adjectifs',
+          example: 'Es un piso pequeño pero con una cocina grande.',
+          exampleNative: 'C\'est un petit appartement mais avec une grande '
+              'cuisine.',
+          note: '"Grande" devient "gran" devant un nom singulier, féminin ou '
+              'masculin, et change de sens : "un gran hombre" (un homme '
+              'formidable) contre "un hombre grande" (un homme de grande '
+              'taille).',
+        ),
+        VocabEntry(
+          id: 'es-v-good-bad',
+          target: 'bueno / malo',
+          native: 'bon / mauvais',
+          pos: 'adjectifs',
+          example: 'La comida aquí es muy buena.',
+          exampleNative: 'La nourriture ici est très bonne.',
+          note: '"Bueno" et "malo" perdent leur "-o" devant un nom masculin '
+              'singulier : "un buen día", pas "un bueno día". Devant un nom '
+              'féminin, la forme complète reste : "una buena idea".',
+        ),
+        VocabEntry(
+          id: 'es-v-querer-necesitar',
+          target: 'querer / necesitar',
+          native: 'vouloir / avoir besoin de',
+          pos: 'verbes',
+          example: 'Quiero un café, pero necesito salir ahora.',
+          exampleNative: 'Je veux un café, mais je dois partir maintenant.',
+          note: '"Querer" est irrégulier (quiero, quieres, quiere...) alors '
+              'que "necesitar" est régulier. Les deux se suivent directement '
+              'd\'un infinitif : "necesito salir", sans préposition.',
+        ),
+        VocabEntry(
+          id: 'es-v-poder-deber',
+          target: 'poder / deber',
+          native: 'pouvoir / devoir (obligation)',
+          pos: 'verbes',
+          example: 'Puedes esperar aquí, pero debes mostrar tu billete.',
+          exampleNative: 'Tu peux attendre ici, mais tu dois montrer ton '
+              'billet.',
+          note: '"Poder" est un verbe à diphtongue (puedo, puedes, puede) '
+              'comme "querer". "Deber" pour une obligation ferme, "tener que" '
+              'pour une obligation plus concrète du quotidien.',
+        ),
+        VocabEntry(
+          id: 'es-v-cuanto',
+          target: 'cuánto / cuántos',
+          native: 'combien (indénombrable) / combien de (dénombrable)',
+          pos: 'expression',
+          example: '¿Cuánto tiempo tenemos? ¿Cuántas personas vienen?',
+          exampleNative: 'Combien de temps avons-nous ? Combien de personnes '
+              'viennent ?',
+          note: '"Cuánto" s\'accorde en genre et en nombre avec le nom qui '
+              'suit : cuánto/cuánta au singulier, cuántos/cuántas au '
+              'pluriel — contrairement au français, un seul mot ne suffit '
+              'pas ici.',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

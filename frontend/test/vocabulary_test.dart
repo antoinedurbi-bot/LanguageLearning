@@ -65,6 +65,20 @@ void main() {
             reason: '${pack.languageCode} buries its repair phrases');
       }
     });
+
+    test('the "counting and describing" gap-fill theme covers numbers, '
+        'days and colors for every core language', () {
+      for (final code in ['en', 'es', 'zh', 'ja']) {
+        final pack = vocabularyFor(code)!;
+        final ids = pack.allEntries.map((e) => e.id).toSet();
+        expect(ids.contains('$code-v-numbers-1-10'), isTrue,
+            reason: '$code has no numbers entry');
+        expect(ids.contains('$code-v-days'), isTrue,
+            reason: '$code has no days-of-week entry');
+        expect(ids.contains('$code-v-colors'), isTrue,
+            reason: '$code has no colors entry');
+      }
+    });
   });
 
   group('islands', () {

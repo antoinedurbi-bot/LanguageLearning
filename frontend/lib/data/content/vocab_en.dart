@@ -404,6 +404,108 @@ const vocabEn = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'en-t4',
+      title: 'Compter et décrire',
+      subtitle: 'Nombres, jours et adjectifs qui manquaient à l\'appel',
+      entries: [
+        VocabEntry(
+          id: 'en-v-numbers-1-10',
+          target: 'one, two, three... ten',
+          native: 'un, deux, trois... dix',
+          pos: 'nombres',
+          example: 'I have three brothers and two sisters.',
+          exampleNative: 'J\'ai trois frères et deux sœurs.',
+          note: 'Un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix se '
+              'disent one, two, three, four, five, six, seven, eight, nine, '
+              'ten. Aucune irrégularité avant "eleven" (onze) : le plus dur '
+              'reste la prononciation de "three" et "thirteen".',
+        ),
+        VocabEntry(
+          id: 'en-v-days',
+          target: 'Monday, Tuesday, Wednesday...',
+          native: 'lundi, mardi, mercredi...',
+          pos: 'noms',
+          example: 'See you on Monday!',
+          exampleNative: 'A lundi !',
+          note: 'Les jours prennent toujours une majuscule en anglais, '
+              'contrairement au français. On dit "on Monday", jamais juste '
+              '"Monday" tout seul pour situer une action dans le temps.',
+        ),
+        VocabEntry(
+          id: 'en-v-colors',
+          target: 'red, blue, green, yellow, black, white',
+          native: 'rouge, bleu, vert, jaune, noir, blanc',
+          pos: 'adjectifs',
+          example: 'She is wearing a red coat.',
+          exampleNative: 'Elle porte un manteau rouge.',
+          note: 'L\'adjectif de couleur se place avant le nom, jamais après : '
+              '"a red coat", jamais "a coat red". Contrairement au français, '
+              'il ne s\'accorde ni en genre ni en nombre.',
+        ),
+        VocabEntry(
+          id: 'en-v-big-small',
+          target: 'big / small',
+          native: 'grand / petit',
+          pos: 'adjectifs',
+          example: 'It is a small flat but a big kitchen.',
+          exampleNative: 'C\'est un petit appartement mais une grande '
+              'cuisine.',
+          note: 'Pour les objets et les lieux, "big/small" plutôt que '
+              '"large/little" au quotidien. "Large" convient pour une taille '
+              'de vêtement ou une quantité formelle ("a large amount").',
+        ),
+        VocabEntry(
+          id: 'en-v-good-bad',
+          target: 'good / bad',
+          native: 'bon / mauvais',
+          pos: 'adjectifs',
+          example: 'The food here is really good.',
+          exampleNative: 'La nourriture ici est vraiment bonne.',
+          note: 'Ne pas confondre avec l\'adverbe "well" : "I speak English '
+              'well" (bien, adverbe) contre "My English is good" (bon, '
+              'adjectif). "I am good" veut dire "je vais bien" familièrement.',
+        ),
+        VocabEntry(
+          id: 'en-v-want-need',
+          target: 'to want / to need',
+          native: 'vouloir / avoir besoin de',
+          pos: 'verbes',
+          example: 'I want a coffee, but I need to leave now.',
+          exampleNative: 'Je veux un café, mais je dois partir maintenant.',
+          note: '"Need" est plus fort qu\'un simple souhait : c\'est une '
+              'nécessité. Les deux se construisent directement avec un verbe '
+              'à l\'infinitif précédé de "to" : "I need to go", jamais "I '
+              'need go".',
+        ),
+        VocabEntry(
+          id: 'en-v-can-must',
+          target: 'can / must',
+          native: 'pouvoir / devoir (obligation)',
+          pos: 'verbes modaux',
+          example: 'You can wait here, but you must show your ticket.',
+          exampleNative: 'Tu peux attendre ici, mais tu dois montrer ton '
+              'billet.',
+          note: 'Verbes modaux : jamais de "to" après ("can go", pas "can to '
+              'go"), pas de "-s" à la troisième personne ("she can", pas '
+              '"she cans"). "Must" pour une obligation forte, "should" pour '
+              'un conseil.',
+        ),
+        VocabEntry(
+          id: 'en-v-how-many-much',
+          target: 'how many / how much',
+          native: 'combien de (dénombrable) / combien de (indénombrable)',
+          pos: 'expression',
+          example: 'How many people are coming? How much time do we have?',
+          exampleNative: 'Combien de personnes viennent ? Combien de temps '
+              'avons-nous ?',
+          note: 'Le choix depend du nom qui suit : dénombrable au pluriel '
+              '(people, books) prend "many"; indénombrable (time, money, '
+              'water) prend "much". Une erreur très fréquente chez les '
+              'francophones qui traduisent "combien" par un seul mot.',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(
