@@ -162,13 +162,16 @@ class _GreetingRow extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 18),
+              // Marigold is too light for white to clear AA contrast
+              // (~2:1) — LLColors.readableOn picks ink here instead.
+              Icon(Icons.local_fire_department_rounded,
+                  color: LLColors.readableOn(LL.marigold), size: 18),
               const SizedBox(width: LL.s4),
               Text(
                 '$streak',
                 style: context.type.labelLarge?.copyWith(
                   fontFamily: 'SpaceMono',
-                  color: Colors.white,
+                  color: LLColors.readableOn(LL.marigold),
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -215,6 +218,7 @@ class _MimiTipCard extends StatelessWidget {
       message = 'Tout est à jour aujourd\'hui. $tip';
     }
 
+    final fg = LLColors.readableOn(LL.teal);
     return GlassCard(
       tint: LL.teal,
       padding: const EdgeInsets.all(LL.s20),
@@ -226,7 +230,7 @@ class _MimiTipCard extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: context.type.bodyLarge?.copyWith(color: Colors.white),
+              style: context.type.bodyLarge?.copyWith(color: fg),
             ),
           ),
         ],
@@ -250,6 +254,9 @@ class _StatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Picked per-tint: white fails AA contrast on the lighter marigold/sage
+    // tiles (~2-2.5:1) even though it reads fine on teal/coral.
+    final fg = LLColors.readableOn(tint);
     return GlassCard(
       tint: tint,
       padding: const EdgeInsets.all(LL.s16),
@@ -262,16 +269,16 @@ class _StatTile extends StatelessWidget {
             height: 32,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.22),
+              color: fg.withValues(alpha: 0.22),
               borderRadius: BorderRadius.circular(LL.rSm - 4),
             ),
-            child: Icon(icon, color: Colors.white, size: 18),
+            child: Icon(icon, color: fg, size: 18),
           ),
           const SizedBox(height: LL.s12),
           Text(
             value,
             style: context.type.headlineMedium?.copyWith(
-              color: Colors.white,
+              color: fg,
               fontFamily: 'SpaceMono',
               fontFeatures: const [FontFeature.tabularFigures()],
             ),
@@ -279,7 +286,7 @@ class _StatTile extends StatelessWidget {
           Text(
             label,
             style: context.type.labelMedium?.copyWith(
-              color: Colors.white.withValues(alpha: 0.85),
+              color: fg.withValues(alpha: 0.85),
             ),
           ),
         ],

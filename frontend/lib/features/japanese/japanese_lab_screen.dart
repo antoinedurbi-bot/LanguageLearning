@@ -108,7 +108,7 @@ class _LabCard extends StatelessWidget {
                     gradient: LinearGradient(colors: colors),
                     borderRadius: BorderRadius.circular(LL.rMd),
                   ),
-                  child: Icon(icon, color: Colors.white),
+                  child: Icon(icon, color: LLColors.readableOn(colors.first)),
                 ),
                 const SizedBox(width: LL.s12),
                 Expanded(

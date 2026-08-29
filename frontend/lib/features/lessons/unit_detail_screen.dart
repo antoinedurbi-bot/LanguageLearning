@@ -184,8 +184,8 @@ class _GrammarEntry extends StatelessWidget {
                 gradient: LinearGradient(colors: colors),
                 borderRadius: BorderRadius.circular(LL.rSm + 4),
               ),
-              child: const Icon(Icons.school_rounded,
-                  color: Colors.white, size: 24),
+              child: Icon(Icons.school_rounded,
+                  color: LLColors.readableOn(colors.first), size: 24),
             ),
             const SizedBox(width: LL.s16),
             Expanded(

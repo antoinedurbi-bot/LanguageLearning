@@ -177,7 +177,7 @@ class _LanguageCard extends StatelessWidget {
                   child: Text(
                     language.script,
                     style: context.type.headlineSmall?.copyWith(
-                      color: Colors.white,
+                      color: LLColors.readableOn(ramp.first),
                       fontWeight: FontWeight.w800,
                     ),
                   ),

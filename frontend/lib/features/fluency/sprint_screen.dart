@@ -12,6 +12,7 @@ import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/repository/progress_repository.dart';
 import 'package:learning_app/data/srs/fluency.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:provider/provider.dart';
 
 /// Sixty seconds of already-known sentences.
@@ -97,12 +98,14 @@ class _SprintScreenState extends State<SprintScreen> {
     HapticFeedback.mediumImpact();
     setState(() => _phase = _Phase.done);
 
-    final code = context.read<LearningController>().language?.code;
+    final controller = context.read<LearningController>();
+    final code = controller.language?.code;
     if (code == null) return;
     if (_cleared > _best) {
       await _settings.setSprintBest(code, _cleared);
       if (!mounted) return;
       HapticFeedback.heavyImpact();
+      playSfx(context, SfxSound.celebration);
       setState(() {
         _best = _cleared;
         _newRecord = true;
@@ -114,7 +117,10 @@ class _SprintScreenState extends State<SprintScreen> {
     // Pressable already fires a light selection tick on tap; a stronger
     // pulse only for "compris" (knew) makes correct recall feel distinct
     // from a pass, without grading the deliberately consequence-free sprint.
-    if (knew) HapticFeedback.lightImpact();
+    if (knew) {
+      HapticFeedback.lightImpact();
+      playSfx(context, SfxSound.correct);
+    }
     setState(() {
       if (knew) {
         _cleared++;

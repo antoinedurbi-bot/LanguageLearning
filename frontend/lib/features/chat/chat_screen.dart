@@ -5,6 +5,7 @@ import 'package:learning_app/core/theme/tokens.dart';
 import 'package:learning_app/core/widgets/illustration.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/services/ai_service.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:provider/provider.dart';
 
 /// Free conversation with an AI tutor, in the language being learned.
@@ -95,6 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch (_) {
       if (!mounted) return;
       HapticFeedback.heavyImpact();
+      playSfx(context, SfxSound.incorrect);
       setState(() {
         _sending = false;
         _messages.add(_ChatEntry(
@@ -228,8 +230,8 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_upward_rounded,
-                            color: Colors.white),
+                        child: Icon(Icons.arrow_upward_rounded,
+                            color: LLColors.readableOn(ramp.first)),
                       ),
                     ),
                   ],

@@ -9,6 +9,7 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/hanzi/pinyin.dart';
 import 'package:learning_app/features/chinese/widgets/tone_contour.dart';
+import 'package:learning_app/services/sound_service.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -113,6 +114,7 @@ class _ToneTrainerScreenState extends State<ToneTrainerScreen> {
       }
     });
     right ? HapticFeedback.mediumImpact() : HapticFeedback.heavyImpact();
+    playSfx(context, right ? SfxSound.correct : SfxSound.incorrect);
     _speak(slow: true);
   }
 

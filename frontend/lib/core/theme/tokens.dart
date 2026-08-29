@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// Design tokens for LinguaLab — the "Mimi" identity.
@@ -73,19 +75,6 @@ class LL {
 
   /// The four confetti accents, used for celebration bursts.
   static const List<Color> confettiColors = [coral, teal, marigold, sage];
-
-  // ------------------------------------------------------- legacy aliases
-  // The previous "aurora" palette's names, kept pointing at the closest
-  // Mimi colour so screens not yet redesigned in this pass keep compiling
-  // and inherit the new identity's hues rather than breaking outright.
-  // Follow-up passes should migrate call sites to the names above and
-  // remove these.
-  static const Color violet = teal;
-  static const Color indigo = tealDark;
-  static const Color cyan = tealBright;
-  static const Color mint = sage;
-  static const Color amber = marigold;
-  static const Color rose = coral;
 
   /// Accent per language code, so each language owns a recognisable colour —
   /// pulled from the same warm family rather than the old cool "aurora" ramp.
@@ -310,6 +299,35 @@ class LLColors extends ThemeExtension<LLColors> {
         .withLightness((hsl.lightness - 0.16).clamp(0.0, 1.0))
         .withSaturation((hsl.saturation + 0.06).clamp(0.0, 1.0))
         .toColor();
+  }
+
+  /// White or [LL.ink], whichever gives the higher WCAG contrast ratio
+  /// against [background].
+  ///
+  /// White text reads fine on the saturated coral/teal fills but fails AA
+  /// contrast (~2-2.5:1) on the lighter sage/marigold ones, so nothing that
+  /// paints text/icons on an arbitrary accent fill (a physical button, a
+  /// tinted card) should hard-code white — this picks whichever actually
+  /// contrasts against that specific colour.
+  static Color readableOn(Color background) {
+    double relativeLuminance(Color color) {
+      double channel(double v) => v <= 0.03928
+          ? v / 12.92
+          : math.pow((v + 0.055) / 1.055, 2.4).toDouble();
+      return 0.2126 * channel(color.r) +
+          0.7152 * channel(color.g) +
+          0.0722 * channel(color.b);
+    }
+
+    double contrastOf(Color a, Color b) {
+      final la = relativeLuminance(a) + 0.05;
+      final lb = relativeLuminance(b) + 0.05;
+      return la > lb ? la / lb : lb / la;
+    }
+
+    final whiteContrast = contrastOf(Colors.white, background);
+    final inkContrast = contrastOf(LL.ink, background);
+    return whiteContrast >= inkContrast ? Colors.white : LL.ink;
   }
 }
 
