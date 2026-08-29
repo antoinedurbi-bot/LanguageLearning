@@ -12,10 +12,17 @@ from app.api.ai_routes import router as ai_router  # noqa: E402
 
 app = FastAPI(title="Learning App AI API", version="0.1.0")
 
+# allow_origins=["*"] together with allow_credentials=True is invalid per the
+# CORS spec (the wildcard cannot be paired with credentialed requests) and
+# most browsers reject or strip the response. This API doesn't use
+# cookies/browser credentials, so credentials stay disabled here rather than
+# restricting origins, which would break the Flutter web build calling this
+# from arbitrary dev/hosting origins. If cookie-based auth is ever added,
+# allow_origins must be pinned to an explicit allowlist first.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

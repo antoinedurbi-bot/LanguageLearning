@@ -2,10 +2,10 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class ExerciseRequest(BaseModel):
-    native_language: str = Field(default="fr", examples=["fr"])
-    target_language: str = Field(examples=["en"])
-    level: str = Field(default="A1", examples=["A1"])
-    topic: str = Field(default="general", examples=["coffee shop"])
+    native_language: str = Field(default="fr", min_length=1, max_length=32, examples=["fr"])
+    target_language: str = Field(min_length=1, max_length=32, examples=["en"])
+    level: str = Field(default="A1", min_length=1, max_length=16, examples=["A1"])
+    topic: str = Field(default="general", min_length=1, max_length=200, examples=["coffee shop"])
 
 
 class ExerciseResponse(BaseModel):
@@ -15,13 +15,13 @@ class ExerciseResponse(BaseModel):
 
 
 class AnswerCheckRequest(BaseModel):
-    prompt: str
-    answer: str
-    target_language: str
+    prompt: str = Field(min_length=1, max_length=2000)
+    answer: str = Field(min_length=1, max_length=2000)
+    target_language: str = Field(min_length=1, max_length=32)
 
     # The sentence the client expects. When present the service can grade
     # precisely instead of guessing; when absent it falls back to heuristics.
-    expected_answer: str | None = None
+    expected_answer: str | None = Field(default=None, max_length=2000)
 
 
 class AnswerCheckResponse(BaseModel):
@@ -38,7 +38,7 @@ class ChatTurn(BaseModel):
     # so a malformed client request gets a clear 422 instead of a silent
     # coercion.
     role: str
-    content: str
+    content: str = Field(min_length=1, max_length=4000)
 
     @field_validator("role")
     @classmethod
@@ -49,8 +49,8 @@ class ChatTurn(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    target_language: str = Field(examples=["espagnol"])
-    level: str = Field(default="beginner", examples=["beginner"])
+    target_language: str = Field(min_length=1, max_length=32, examples=["espagnol"])
+    level: str = Field(default="beginner", min_length=1, max_length=16, examples=["beginner"])
 
     # Full conversation so far, oldest first, ending with the learner's latest
     # message. Capped generously here; the service trims further before
