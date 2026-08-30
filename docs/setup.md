@@ -1,44 +1,104 @@
-﻿# Configuration du projet
+# Configuration du projet
 
-## Firebase
+L'application fonctionne sans aucune configuration : la progression est stockee
+localement et l'atelier corrige hors ligne. Les etapes ci-dessous n'ajoutent que
+la sauvegarde entre appareils et la correction serveur.
 
-1. Cree un projet dans Firebase Console.
-2. Active Authentication avec Email/Password.
-3. Cree une base Cloud Firestore.
-4. Installe FlutterFire CLI puis execute dans `frontend/` :
+## Firebase (optionnel)
+
+1. Cree un projet dans la Firebase Console.
+2. Active Authentication (Email/Password) et Cloud Firestore.
+3. Depuis `frontend/`, execute :
 
 ```bash
 flutterfire configure
 ```
 
-Cela generera `lib/firebase_options.dart`, importe par `main.dart`.
+Cela genere `lib/firebase_options.dart`. Tant que `projectId` vaut
+`demo-learning-app`, l'application ignore Firebase et reste en mode local.
 
-## Backend IA
+4. Publie les regles et index :
+
+```bash
+firebase deploy --only firestore:rules,firestore:indexes
+```
+
+### Donnees Firestore
+
+```text
+users/{uid}/progress/{languageCode}
+  languageCode    string      'en' | 'es' | 'zh' | 'tr'
+  states          map         cardId -> { stability, difficulty, due,
+                                          lastReview, reps, lapses }
+  streak          number      serie en cours
+  bestStreak      number      record
+  lastStudyDay    string      'yyyy-MM-dd'
+  dailyGoal       number      cartes visees par jour
+  reviewsPerDay   map         'yyyy-MM-dd' -> nombre de revisions
+  totalReviews    number
+  correctReviews  number
+```
+
+L'historique `reviewsPerDay` est elague au-dela d'un an a chaque sauvegarde.
+
+Le document est ecrit apres chaque revision, en plus du stockage local. Le
+stockage local reste la source de verite pendant une session : un echec reseau
+degrade la synchronisation, il ne fait jamais perdre une revision.
+
+## Backend IA (optionnel)
 
 Dans `backend/` :
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+. .venv/bin/activate          # Windows : .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-L'API expose :
+Endpoints :
 
 - `GET /health`
 - `POST /api/ai/generate-exercise`
 - `POST /api/ai/check-answer`
 
-## Donnees Firestore proposees
+`check-answer` accepte un champ `expected_answer` optionnel. Fourni, le service
+compare la reponse au modele et renvoie les differences mot a mot dans `notes` ;
+absent, il repond qu'il ne peut pas corriger plutot que d'inventer un verdict.
 
-```text
-users/{uid}
-  displayName, nativeLanguage, targetLanguage, level, streak, createdAt
+### Correction par LLM (Groq, optionnel)
 
-users/{uid}/progress/{lessonId}
-  score, completed, updatedAt
+Par defaut la correction est deterministe (diff normalise, sans accents ni
+ponctuation) : fiable, gratuite, mais elle rejette les paraphrases correctes
+("I'd like a coffee" face a la reference "I would like a coffee, please.").
 
-lessons/{lessonId}
-  title, language, level, topic, vocabulary, exercises
+Pour une correction qui tolere les paraphrases, copie `.env.example` en `.env`
+dans `backend/` et renseigne une cle Groq (gratuite sur
+[console.groq.com/keys](https://console.groq.com/keys)) :
+
+```bash
+cp .env.example .env
+# puis edite .env :
+# GROQ_API_KEY=gsk_...
 ```
+
+Sans cle, rien ne change : `check-answer` retombe silencieusement sur le
+correcteur deterministe. Avec une cle, chaque reponse qui ne correspond pas
+mot pour mot au modele est d'abord soumise a un LLM (modele par defaut :
+`openai/gpt-oss-120b`, configurable via `GROQ_MODEL`) qui juge le
+sens et la grammaire plutot que l'egalite de chaine ; le correcteur
+deterministe ne sert plus que de filet de securite si l'appel echoue ou
+timeout (8 secondes). Une reponse identique au modele de reference n'appelle
+jamais le LLM : ce cas est deja tranche sans avoir besoin d'un avis.
+
+Voir `app/services/llm_grader.py` pour le prompt exact envoye au modele.
+
+### Pointer l'application vers l'API
+
+```bash
+flutter run --dart-define=AI_API_BASE_URL=http://192.168.1.20:8000
+```
+
+Sans cette variable, l'application vise `10.0.2.2:8000` sur l'emulateur Android
+et `127.0.0.1:8000` ailleurs. Si l'API est injoignable, l'atelier bascule sur la
+correction locale et l'indique par un badge « hors ligne ».

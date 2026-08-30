@@ -1,0 +1,20 @@
+# Render.com Blueprint - https://render.com/docs/blueprint-spec
+# Must live at the repo root for Render's "New + -> Blueprint" auto-detection
+# to find it; rootDir below scopes the actual service to backend/.
+services:
+  - type: web
+    name: language-learning-backend
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b

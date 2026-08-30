@@ -22,3 +22,6 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
+# Cached upstream datasets for tools/build_hanzi_assets.py
+.cache/

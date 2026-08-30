@@ -1,0 +1,37 @@
+# Fly.io app configuration - https://fly.io/docs/reference/configuration/
+# Deploy: from backend/, run `fly launch --no-deploy` once to create/link the
+# app (or edit `app` below to a name you own), set the secret, then
+# `fly deploy`.
+#   fly secrets set GROQ_API_KEY=your-key-here
+#   fly secrets set GROQ_MODEL=llama-3.3-70b-versatile   # optional
+
+app = "language-learning-backend"
+primary_region = "cdg"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  # Fly injects PORT itself; the Dockerfile's CMD reads it, and this must
+  # match internal_port below.
+  PORT = "8000"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/health"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
