@@ -70,15 +70,17 @@ class SttService {
 
     try {
       await _speech.listen(
-        localeId: localeId,
         onResult: (recognition) {
           result = recognition.recognizedWords;
           if (recognition.finalResult && !completer.isCompleted) {
             completer.complete(result);
           }
         },
-        listenFor: timeout,
-        pauseFor: const Duration(seconds: 3),
+        listenOptions: stt.SpeechListenOptions(
+          localeId: localeId,
+          listenFor: timeout,
+          pauseFor: const Duration(seconds: 3),
+        ),
       );
     } catch (error) {
       debugPrint('STT listen failed: $error');
