@@ -5,6 +5,7 @@ import 'package:learning_app/core/widgets/motion.dart';
 import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
+import 'package:learning_app/data/models/story.dart';
 import 'package:learning_app/app/app_state.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,33 @@ class GrammarLessonScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: LL.s16),
+                    if (lesson.longForm != null) ...[
+                      Reveal(
+                        index: 1,
+                        child: _LongFormNarrative(
+                          paragraphs: lesson.longForm!.narrative,
+                        ),
+                      ),
+                      const SizedBox(height: LL.s16),
+                      Reveal(
+                        index: 2,
+                        child: _LongFormDialogue(
+                          lines: lesson.longForm!.dialogue,
+                          ttsLocale: ttsLocale,
+                          accent: colors.first,
+                        ),
+                      ),
+                      const SizedBox(height: LL.s16),
+                      Reveal(
+                        index: 3,
+                        child: _LongFormWalkthroughs(
+                          examples: lesson.longForm!.walkthroughs,
+                          ttsLocale: ttsLocale,
+                          accent: colors.first,
+                        ),
+                      ),
+                      const SizedBox(height: LL.s16),
+                    ],
                     for (var i = 0; i < lesson.blocks.length; i++)
                       Padding(
                         padding: const EdgeInsets.only(bottom: LL.s16),
@@ -139,6 +167,313 @@ class _BlockView extends StatelessWidget {
       MeasureWordBlock b =>
         _MeasureWords(block: b, ttsLocale: ttsLocale, accent: accent),
     };
+  }
+}
+
+/// The chapter-like front matter added for a handful of foundational units:
+/// why the structure exists, a dialogue putting it to work, then two or
+/// three sentences taken apart piece by piece. All three sit above the
+/// standard blocks, which keep stating the rule exactly as they always did.
+class _LongFormNarrative extends StatelessWidget {
+  const _LongFormNarrative({required this.paragraphs});
+
+  final List<String> paragraphs;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+    return GlassCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.menu_book_rounded, size: 18, color: c.accent),
+              const SizedBox(width: LL.s8),
+              Text('Comprendre avant de pratiquer',
+                  style: context.type.labelLarge?.copyWith(color: c.accent)),
+            ],
+          ),
+          const SizedBox(height: LL.s12),
+          for (var i = 0; i < paragraphs.length; i++)
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: i == paragraphs.length - 1 ? 0 : LL.s12),
+              child: Text(paragraphs[i], style: context.type.bodyLarge),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A short annotated passage using the same bracket-markup convention as
+/// graded readings: taught chunks are shown inline with their gloss so the
+/// dialogue can be read without leaving the page.
+class _LongFormDialogue extends StatelessWidget {
+  const _LongFormDialogue({
+    required this.lines,
+    required this.ttsLocale,
+    required this.accent,
+  });
+
+  final List<StoryLine> lines;
+  final String ttsLocale;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.forum_rounded, size: 18, color: accent),
+              const SizedBox(width: LL.s8),
+              Text('En contexte',
+                  style: context.type.labelLarge?.copyWith(color: accent)),
+            ],
+          ),
+          const SizedBox(height: LL.s12),
+          for (var i = 0; i < lines.length; i++)
+            Padding(
+              padding:
+                  EdgeInsets.only(bottom: i == lines.length - 1 ? 0 : LL.s16),
+              child: _DialogueLine(
+                  line: lines[i], ttsLocale: ttsLocale, accent: accent),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DialogueLine extends StatelessWidget {
+  const _DialogueLine(
+      {required this.line, required this.ttsLocale, required this.accent});
+
+  final StoryLine line;
+  final String ttsLocale;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (line.speaker != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: LL.s4),
+                  child: Text(line.speaker!.toUpperCase(),
+                      style: context.type.labelSmall?.copyWith(color: accent)),
+                ),
+              RichText(
+                text: TextSpan(
+                  style: context.type.titleSmall
+                      ?.copyWith(color: c.textPrimary),
+                  children: [
+                    for (final token in line.tokens)
+                      if (token.taught && token.hasGloss)
+                        TextSpan(children: [
+                          TextSpan(
+                            text: token.text,
+                            style: TextStyle(
+                                color: accent, fontWeight: FontWeight.w700),
+                          ),
+                          TextSpan(
+                            text: ' (${token.gloss})',
+                            style: context.type.labelSmall
+                                ?.copyWith(color: c.textTertiary),
+                          ),
+                        ])
+                      else
+                        TextSpan(text: token.text),
+                  ],
+                ),
+              ),
+              if (line.romanization != null) ...[
+                const SizedBox(height: LL.s2),
+                Text(line.romanization!,
+                    style: context.type.labelMedium?.copyWith(color: accent)),
+              ],
+              const SizedBox(height: LL.s2),
+              Text(line.native, style: context.type.bodyMedium),
+              if (line.note != null) ...[
+                const SizedBox(height: LL.s4),
+                Text(
+                  line.note!,
+                  style: context.type.labelSmall
+                      ?.copyWith(color: accent, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ],
+          ),
+        ),
+        Pressable(
+          onPressed: () {
+            if (!context.read<LearningController>().soundEnabled) return;
+            context.read<TtsService>().speak(line.text, ttsLocale);
+          },
+          semanticLabel: 'Écouter',
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: accent.withValues(alpha: 0.14),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.volume_up_rounded, size: 16, color: accent),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Correct sentences taken apart piece by piece — the positive mirror of a
+/// [MistakeBlock]: not "here is what's wrong", but "here is why every piece
+/// of the right version is there".
+class _LongFormWalkthroughs extends StatelessWidget {
+  const _LongFormWalkthroughs({
+    required this.examples,
+    required this.ttsLocale,
+    required this.accent,
+  });
+
+  final List<WorkedExample> examples;
+  final String ttsLocale;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.construction_rounded, size: 18, color: accent),
+              const SizedBox(width: LL.s8),
+              Text('Décortiqué pièce par pièce',
+                  style: context.type.labelLarge?.copyWith(color: accent)),
+            ],
+          ),
+          const SizedBox(height: LL.s12),
+          for (var i = 0; i < examples.length; i++)
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: i == examples.length - 1 ? 0 : LL.s20),
+              child: _WorkedExampleView(
+                  example: examples[i], ttsLocale: ttsLocale, accent: accent),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WorkedExampleView extends StatelessWidget {
+  const _WorkedExampleView(
+      {required this.example, required this.ttsLocale, required this.accent});
+
+  final WorkedExample example;
+  final String ttsLocale;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ll;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SelectableText(example.target,
+                      style: context.type.titleSmall),
+                  if (example.romanization != null) ...[
+                    const SizedBox(height: LL.s2),
+                    Text(example.romanization!,
+                        style: context.type.labelMedium
+                            ?.copyWith(color: accent)),
+                  ],
+                  const SizedBox(height: LL.s2),
+                  Text(example.native, style: context.type.bodyMedium),
+                ],
+              ),
+            ),
+            Pressable(
+              onPressed: () {
+                if (!context.read<LearningController>().soundEnabled) return;
+                context.read<TtsService>().speak(example.target, ttsLocale);
+              },
+              semanticLabel: 'Écouter',
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.14),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.volume_up_rounded, size: 16, color: accent),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: LL.s8),
+        Container(
+          padding: const EdgeInsets.all(LL.s12),
+          decoration: BoxDecoration(
+            color: c.glassFill,
+            borderRadius: BorderRadius.circular(LL.rSm),
+            border: Border.all(color: c.glassStroke),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var i = 0; i < example.parts.length; i++)
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: i == example.parts.length - 1 ? 0 : LL.s8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: LL.s8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: accent.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(LL.rSm),
+                        ),
+                        child: Text(
+                          example.parts[i].chunk,
+                          style: context.type.labelMedium
+                              ?.copyWith(color: accent),
+                        ),
+                      ),
+                      const SizedBox(width: LL.s8),
+                      Expanded(
+                        child: Text(example.parts[i].explanation,
+                            style: context.type.bodyMedium),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 

@@ -1,10 +1,151 @@
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
+import 'package:learning_app/data/models/story.dart';
 
-const _en1Grammar = GrammarLesson(
+StoryLine _enLine(
+  String source, {
+  required String native,
+  String? speaker,
+  String? note,
+}) =>
+    StoryLine.parse(source, native: native, speaker: speaker, note: note);
+
+final _en1Grammar = GrammarLesson(
   title: 'Be, et comment poser une question',
   hook: 'Le verbe "be" et l\'ordre des mots dans une question sont les deux '
       'choses qui reviennent dans presque toutes les phrases anglaises.',
+  longForm: LongFormContent(
+    narrative: [
+      'En français, "être" est presque invisible : on le module à peine, '
+          'et on l\'omet carrément dans des tournures figées ("Enchanté", '
+          '"Prêt ?"). L\'anglais fait l\'inverse : "be" doit apparaître '
+          'dans chaque phrase qui décrit un état, et il change de forme '
+          'selon la personne — am, is, are — sans qu\'aucun raccourci ne '
+          'soit permis. Le réflexe francophone d\'"économiser" le verbe '
+          'être est la première chose à désapprendre.',
+      'La deuxième habitude à casser touche l\'ordre des mots dans une '
+          'question. Le français peut se contenter d\'une intonation '
+          'montante ("Tu es prêt ?") ou d\'une inversion légère. L\'anglais '
+          'exige que l\'auxiliaire — be, do, can — se déplace physiquement '
+          'devant le sujet : "You are ready" devient "Are you ready?", pas '
+          '"You are ready?" avec juste le ton qui change.',
+      'Ces deux points se rejoignent dans les questions avec un mot '
+          'interrogatif (where, what, how) : l\'ordre est toujours '
+          'mot-interrogatif + auxiliaire + sujet + reste de la phrase, sans '
+          'exception. "Where are you from?" respecte exactement ce moule ; '
+          'un francophone pressé dit souvent "Where you are from?" en '
+          'calquant l\'ordre français, et c\'est la faute la plus repérable '
+          'd\'un débutant à l\'oral.',
+      'Enfin, la négation d\'un verbe ordinaire (pas "be") a besoin d\'un '
+          'auxiliaire qui n\'existe pas en français : "do not" (ou "does '
+          'not" à la 3e personne). "I not understand" est un calque du '
+          'français qu\'aucun anglophone ne dit jamais — il faut "I do not '
+          'understand", même si "do" ne se traduit par rien de précis ici.',
+    ],
+    dialogue: [
+      _enLine(
+        '[Hi|Salut], [I\'m|je suis] Sam. [Are|es-tu] you [new|nouveau] [here|ici]?',
+        speaker: 'Sam',
+        native: 'Salut, je suis Sam. Tu es nouveau ici ?',
+        note: '"Are you" inverse be et le sujet pour la question : jamais '
+            '"You are new here?" en anglais correct.',
+      ),
+      _enLine(
+        '[Yes|oui], [I am|je suis]. [I\'m|je suis] from [Lyon|Lyon].',
+        speaker: 'Théo',
+        native: 'Oui, je suis nouveau. Je viens de Lyon.',
+      ),
+      _enLine(
+        '[Where|où] [are|sont] the [others|les autres] [from|d\'origine]?',
+        speaker: 'Théo',
+        native: 'D\'où viennent les autres ?',
+        note: 'Mot interrogatif + auxiliaire (are) + sujet : l\'ordre ne '
+            'change jamais, même avec "where".',
+      ),
+      _enLine(
+        'They [are|sont] from [everywhere|partout]. [Marco] [is|est] from '
+            '[Italy|Italie], [Yuki] [is|est] from [Japan|Japon].',
+        speaker: 'Sam',
+        native: 'Ils viennent de partout. Marco vient d\'Italie, Yuki '
+            'vient du Japon.',
+      ),
+      _enLine(
+        '[I|je] [do not|ne... pas] [understand|comprendre] [everything|tout] '
+            '[yet|encore], but [it\'s|c\'est] [fine|bien].',
+        speaker: 'Théo',
+        native: 'Je ne comprends pas encore tout, mais ça va.',
+        note: '"I do not understand", jamais "I not understand" : un verbe '
+            'ordinaire a toujours besoin de "do" pour se nier.',
+      ),
+      _enLine(
+        '[Don\'t worry|t\'en fais pas], [everyone|tout le monde] [was|était] '
+            'new [once|un jour].',
+        speaker: 'Sam',
+        native: 'T\'en fais pas, tout le monde a été nouveau un jour.',
+      ),
+    ],
+    walkthroughs: [
+      WorkedExample(
+        target: 'Where are you from?',
+        native: 'D\'où viens-tu ?',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'Where',
+            explanation:
+                'mot interrogatif, toujours en première position dans une '
+                'question anglaise.',
+          ),
+          WorkedExamplePart(
+            chunk: 'are',
+            explanation:
+                'l\'auxiliaire "be" passe juste après le mot interrogatif — '
+                'avant le sujet, jamais après.',
+          ),
+          WorkedExamplePart(
+            chunk: 'you',
+            explanation:
+                'le sujet vient en troisième position, pas en tête comme '
+                'dans une phrase affirmative française calquée.',
+          ),
+          WorkedExamplePart(
+            chunk: 'from?',
+            explanation:
+                'la préposition ferme la question ; elle ne peut pas être '
+                'déplacée devant "where" comme en français ("D\'où").',
+          ),
+        ],
+      ),
+      WorkedExample(
+        target: 'She is not tired, she is just quiet.',
+        native: 'Elle n\'est pas fatiguée, elle est juste silencieuse.',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'She',
+            explanation: 'sujet à la 3e personne du singulier.',
+          ),
+          WorkedExamplePart(
+            chunk: 'is not',
+            explanation:
+                'be se nie tout seul, sans "do" : "is not", jamais "does '
+                'not be" ni "not is".',
+          ),
+          WorkedExamplePart(
+            chunk: 'tired',
+            explanation:
+                'adjectif d\'état, placé après be comme toujours en '
+                'anglais.',
+          ),
+          WorkedExamplePart(
+            chunk: 'she is just quiet',
+            explanation:
+                'même structure sujet + be + adjectif répétée pour la '
+                'contraster ; "just" nuance sans complexifier la '
+                'construction.',
+          ),
+        ],
+      ),
+    ],
+  ),
   blocks: [
     ExplanationBlock(
       heading: 'To be : am / is / are',
@@ -315,7 +456,7 @@ const _en6Grammar = GrammarLesson(
 /// units are built almost entirely from the ~300 most common English words,
 /// which is where the steepest part of the comprehension curve lives. Each
 /// card introduces about one new element over the previous one.
-const courseEn = Course(
+final courseEn = Course(
   languageCode: 'en',
   ttsLocale: 'en-US',
   units: [
@@ -326,7 +467,7 @@ const courseEn = Course(
       level: 'A1',
       grammarLesson: _en1Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-1-1',
           target: 'Hello, my name is Anna.',
           native: 'Bonjour, je m\'appelle Anna.',
@@ -335,7 +476,7 @@ const courseEn = Course(
           distractors: ['me', 'am', 'called'],
           focus: 'my name is = je m\'appelle',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-1-2',
           target: 'Nice to meet you.',
           native: 'Enchante.',
@@ -344,7 +485,7 @@ const courseEn = Course(
           distractors: ['Good', 'know', 'see'],
           focus: 'Formule fixe, ne se traduit pas mot a mot',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-1-3',
           target: 'Where are you from?',
           native: 'D\'ou viens-tu ?',
@@ -353,7 +494,7 @@ const courseEn = Course(
           distractors: ['come', 'do', 'What'],
           focus: 'La preposition "from" ferme la question',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-1-4',
           target: 'I am from France.',
           native: 'Je viens de France.',
@@ -362,7 +503,7 @@ const courseEn = Course(
           distractors: ['come', 'is', 'the'],
           focus: 'On dit "I am from", pas "I come from"',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-1-5',
           target: 'Sorry, I do not understand.',
           native: 'Désolé, je ne comprends pas.',
@@ -371,7 +512,7 @@ const courseEn = Course(
           distractors: ['am', 'no', 'understanding'],
           focus: 'La negation utilise l\'auxiliaire "do not"',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-1-6',
           target: 'Can you speak more slowly, please?',
           native: 'Peux-tu parler plus lentement, s\'il te plait ?',
@@ -382,14 +523,14 @@ const courseEn = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'en-u2',
       title: 'Commander',
       subtitle: 'Cafe, restaurant, boutique',
       level: 'A1',
       grammarLesson: _en2Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-2-1',
           target: 'I would like a coffee, please.',
           native: 'Je voudrais un cafe, s\'il vous plait.',
@@ -398,7 +539,7 @@ const courseEn = Course(
           distractors: ['want', 'the', 'like to'],
           focus: '"I would like" est la forme polie de "I want"',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-2-2',
           target: 'How much is it?',
           native: 'Combien ca coûte ?',
@@ -407,7 +548,7 @@ const courseEn = Course(
           distractors: ['many', 'cost', 'does'],
           focus: 'How much pour un prix, how many pour un nombre',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-2-3',
           target: 'Can I pay by card?',
           native: 'Puis-je payer par carte ?',
@@ -416,7 +557,7 @@ const courseEn = Course(
           distractors: ['with', 'the', 'paying'],
           focus: 'by card / in cash: prepositions figees',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-2-4',
           target: 'Do you have anything without meat?',
           native: 'Avez-vous quelque chose sans viande ?',
@@ -425,7 +566,7 @@ const courseEn = Course(
           distractors: ['something', 'no', 'Are'],
           focus: '"anything" dans les questions, "something" en affirmatif',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-2-5',
           target: 'The bill, please.',
           native: 'L\'addition, s\'il vous plait.',
@@ -434,7 +575,7 @@ const courseEn = Course(
           distractors: ['A', 'addition', 'check'],
           focus: 'bill (UK) / check (US)',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-2-6',
           target: 'It was delicious, thank you.',
           native: 'C\'était delicieux, merci.',
@@ -445,14 +586,14 @@ const courseEn = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'en-u3',
       title: 'S\'orienter',
       subtitle: 'Demander son chemin, les transports',
       level: 'A1',
       grammarLesson: _en3Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-3-1',
           target: 'Excuse me, where is the station?',
           native: 'Excusez-moi, ou est la gare ?',
@@ -461,7 +602,7 @@ const courseEn = Course(
           distractors: ['Sorry', 'are', 'a'],
           focus: 'Excuse me pour aborder, sorry pour s\'excuser',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-3-2',
           target: 'It is on the left.',
           native: 'C\'est a gauche.',
@@ -470,7 +611,7 @@ const courseEn = Course(
           distractors: ['at', 'to', 'a'],
           focus: 'on the left / on the right',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-3-3',
           target: 'How do I get to the airport?',
           native: 'Comment aller a l\'aeroport ?',
@@ -479,7 +620,7 @@ const courseEn = Course(
           distractors: ['go', 'at', 'can'],
           focus: '"get to" = rejoindre un lieu',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-3-4',
           target: 'The train leaves at half past six.',
           native: 'Le train part a six heures et demie.',
@@ -488,7 +629,7 @@ const courseEn = Course(
           distractors: ['departs', 'in', 'and half'],
           focus: 'half past + heure = et demie',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-3-5',
           target: 'Is it far from here?',
           native: 'Est-ce loin d\'ici ?',
@@ -497,7 +638,7 @@ const courseEn = Course(
           distractors: ['Does', 'of', 'there'],
           focus: 'far from = loin de',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-3-6',
           target: 'I am looking for this address.',
           native: 'Je cherche cette adresse.',
@@ -508,14 +649,14 @@ const courseEn = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'en-u4',
       title: 'Le quotidien',
       subtitle: 'Habitudes et présent simple',
       level: 'A2',
       grammarLesson: _en4Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-4-1',
           target: 'I usually wake up at seven.',
           native: 'Je me reveille généralement a sept heures.',
@@ -524,7 +665,7 @@ const courseEn = Course(
           distractors: ['am waking', 'in', 'the seven'],
           focus: 'L\'adverbe de frequence se place avant le verbe',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-4-2',
           target: 'She works in a hospital.',
           native: 'Elle travaille dans un hopital.',
@@ -533,7 +674,7 @@ const courseEn = Course(
           distractors: ['work', 'at', 'the'],
           focus: 'Le -s de la 3e personne du singulier',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-4-3',
           target: 'We do not work on Sundays.',
           native: 'Nous ne travaillons pas le dimanche.',
@@ -542,7 +683,7 @@ const courseEn = Course(
           distractors: ['are not', 'in', 'the Sunday'],
           focus: 'on + jour de la semaine',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-4-4',
           target: 'What time do you finish?',
           native: 'A quelle heure finis-tu ?',
@@ -551,7 +692,7 @@ const courseEn = Course(
           distractors: ['Which', 'hour', 'are'],
           focus: 'What time, pas "which hour"',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-4-5',
           target: 'I am tired because I did not sleep.',
           native: 'Je suis fatigue parce que je n\'ai pas dormi.',
@@ -560,7 +701,7 @@ const courseEn = Course(
           distractors: ['have', 'slept', 'why'],
           focus: 'Après "did not", le verbe reste à la base',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-4-6',
           target: 'He is watching a film right now.',
           native: 'Il regarde un film en ce moment.',
@@ -571,14 +712,14 @@ const courseEn = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'en-u5',
       title: 'Raconter',
       subtitle: 'Le passe et les recits',
       level: 'A2',
       grammarLesson: _en5Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-5-1',
           target: 'I went to London last year.',
           native: 'Je suis allé a Londres l\'année dernière.',
@@ -587,7 +728,7 @@ const courseEn = Course(
           distractors: ['goed', 'in', 'the last'],
           focus: 'go devient went (verbe irregulier)',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-5-2',
           target: 'We stayed there for a week.',
           native: 'Nous y sommes restes une semaine.',
@@ -596,7 +737,7 @@ const courseEn = Course(
           distractors: ['stay', 'during', 'one'],
           focus: 'for + durée (jamais "during")',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-5-3',
           target: 'It was raining all day.',
           native: 'Il a plu toute la journée.',
@@ -605,7 +746,7 @@ const courseEn = Course(
           distractors: ['rained', 'every', 'the all'],
           focus: 'was + -ing = decor du recit',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-5-4',
           target: 'Have you ever been to Japan?',
           native: 'Es-tu deja allé au Japon ?',
@@ -614,7 +755,7 @@ const courseEn = Course(
           distractors: ['Did', 'already', 'gone'],
           focus: 'Experience de vie = have + participe passe',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-5-5',
           target: 'I have never tried this before.',
           native: 'Je n\'ai jamais essaye ca avant.',
@@ -623,7 +764,7 @@ const courseEn = Course(
           distractors: ['ever', 'try', 'that'],
           focus: 'never porte deja la negation',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-5-6',
           target: 'The food was better than I expected.',
           native: 'La nourriture était meilleure que ce que j\'attendais.',
@@ -634,14 +775,14 @@ const courseEn = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'en-u6',
       title: 'Nuancer',
       subtitle: 'Opinions, projets, hypotheses',
       level: 'B1',
       grammarLesson: _en6Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'en-6-1',
           target: 'I think we should leave earlier.',
           native: 'Je pense que nous devrions partir plus tôt.',
@@ -650,7 +791,7 @@ const courseEn = Course(
           distractors: ['that we', 'would', 'more early'],
           focus: '"that" s\'omet après think en anglais courant',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-6-2',
           target: 'If I had more time, I would travel.',
           native: 'Si j\'avais plus de temps, je voyagerais.',
@@ -659,7 +800,7 @@ const courseEn = Course(
           distractors: ['have', 'will', 'of time'],
           focus: 'Hypothese: if + passe, puis would',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-6-3',
           target: 'I am going to look for a new job.',
           native: 'Je vais chercher un nouveau travail.',
@@ -668,7 +809,7 @@ const courseEn = Course(
           distractors: ['will', 'search', 'the'],
           focus: 'be going to = intention deja decidee',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-6-4',
           target: 'It depends on what you want.',
           native: 'Ca depend de ce que tu veux.',
@@ -677,7 +818,7 @@ const courseEn = Course(
           distractors: ['of', 'that', 'depend'],
           focus: 'depend ON, jamais "depend of"',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-6-5',
           target: 'I am used to working late.',
           native: 'J\'ai l\'habitude de travailler tard.',
@@ -686,7 +827,7 @@ const courseEn = Course(
           distractors: ['use', 'work', 'lately'],
           focus: 'be used to + verbe-ing (piege classique)',
         ),
-        CardItem(
+        const CardItem(
           id: 'en-6-6',
           target: 'That is exactly what I meant.',
           native: 'C\'est exactement ce que je voulais dire.',

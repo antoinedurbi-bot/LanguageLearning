@@ -1,5 +1,19 @@
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
+import 'package:learning_app/data/models/story.dart';
+
+StoryLine _jaLine(
+  String source, {
+  required String native,
+  String? speaker,
+  String? note,
+  String? romanization,
+}) =>
+    StoryLine.parse(source,
+        native: native,
+        speaker: speaker,
+        note: note,
+        romanization: romanization);
 
 /// Japanese course for French speakers.
 ///
@@ -11,7 +25,7 @@ import 'package:learning_app/data/models/grammar_lesson.dart';
 /// aid, exactly like pinyin does for Mandarin. Kanji used in cards is
 /// limited to the starter set taught in the kanji lab
 /// (`data/kana/kanji.dart`), so nothing on a card is unglossed.
-const courseJa = Course(
+final courseJa = Course(
   languageCode: 'ja',
   ttsLocale: 'ja-JP',
   units: [
@@ -22,7 +36,7 @@ const courseJa = Course(
       level: 'A1',
       grammarLesson: _u1Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-1-1',
           target: 'こんにちは。',
           native: 'Bonjour.',
@@ -32,7 +46,7 @@ const courseJa = Course(
           distractors: ['こんばんは。', 'おはよう。'],
           focus: 'Salutation neutre, utilisable l\'apres-midi',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-1-2',
           target: 'はじめまして。',
           native: 'Enchante (a la premiere rencontre).',
@@ -42,7 +56,7 @@ const courseJa = Course(
           distractors: ['さようなら。', 'すみません。'],
           focus: 'Phrase figee, seulement a la toute premiere rencontre',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-1-3',
           target: 'わたしはフランスじんです。',
           native: 'Je suis français(e).',
@@ -52,7 +66,7 @@ const courseJa = Course(
           distractors: ['わたしが', 'フランスじんでした。', 'フランスじんの'],
           focus: 'は marque le sujet dont on parle (topic), です = "suis/est"',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-1-4',
           target: 'どうぞよろしくおねがいします。',
           native: 'Ravi de faire votre connaissance.',
@@ -62,7 +76,7 @@ const courseJa = Course(
           distractors: ['ありがとう', 'すみません', 'おねがいしました。'],
           focus: 'Formule figee dite juste apres はじめまして',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-1-5',
           target: 'おなまえはなんですか。',
           native: 'Quel est votre nom ?',
@@ -72,7 +86,7 @@ const courseJa = Course(
           distractors: ['おなまえが', 'だれですか。', 'なにでしたか。'],
           focus: 'か final transforme une phrase en question, sans inversion',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-1-6',
           target: 'ありがとうございます。',
           native: 'Merci beaucoup (poli).',
@@ -84,14 +98,14 @@ const courseJa = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'ja-u2',
       title: 'Objets et lieux',
       subtitle: 'Designer et situer les choses',
       level: 'A1',
       grammarLesson: _u2Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-2-1',
           target: 'これはほんです。',
           native: 'Ceci est un livre.',
@@ -101,7 +115,7 @@ const courseJa = Course(
           distractors: ['それは', 'あれは', 'ほんでした。'],
           focus: 'これ = "ceci" (pres de moi)',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-2-2',
           target: 'それはわたしのかばんです。',
           native: 'Ça, c\'est mon sac.',
@@ -111,7 +125,7 @@ const courseJa = Course(
           distractors: ['あなたの', 'わたしは', 'かばんでした。'],
           focus: 'の relie un possesseur a ce qu\'il possede, comme "de"',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-2-3',
           target: 'テーブルのうえにねこがいます。',
           native: 'Il y a un chat sur la table.',
@@ -121,7 +135,7 @@ const courseJa = Course(
           distractors: ['あります。', 'ねこは', 'したに'],
           focus: 'います pour les etres anime (personnes, animaux)',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-2-4',
           target: 'つくえのうえにほんがあります。',
           native: 'Il y a un livre sur le bureau.',
@@ -131,7 +145,7 @@ const courseJa = Course(
           distractors: ['います。', 'ほんは', 'したに'],
           focus: 'あります pour les objets et plantes (inanimes)',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-2-5',
           target: 'トイレはどこですか。',
           native: 'Où sont les toilettes ?',
@@ -143,14 +157,14 @@ const courseJa = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'ja-u3',
       title: 'Actions du quotidien',
       subtitle: 'La forme -ます au present et au passe',
       level: 'A1',
       grammarLesson: _u3Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-3-1',
           target: 'まいあさパンをたべます。',
           native: 'Je mange du pain tous les matins.',
@@ -160,7 +174,7 @@ const courseJa = Course(
           distractors: ['たべました。', 'パンが', 'たべません。'],
           focus: 'を marque l\'objet direct du verbe',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-3-2',
           target: 'きのうコーヒーをのみました。',
           native: 'Hier, j\'ai bu du café.',
@@ -170,7 +184,7 @@ const courseJa = Course(
           distractors: ['のみます。', 'コーヒーが', 'のみません。'],
           focus: 'ました = passe poli de ます',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-3-3',
           target: 'にちようびにがっこうへいきません。',
           native: 'Je ne vais pas à l\'école le dimanche.',
@@ -180,7 +194,7 @@ const courseJa = Course(
           distractors: ['いきます。', 'がっこうを', 'いきませんでした。'],
           focus: 'ません = negatif poli present ; に marque un point dans le temps',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-3-4',
           target: 'としょかんでほんをよみます。',
           native: 'Je lis un livre à la bibliothèque.',
@@ -190,7 +204,7 @@ const courseJa = Course(
           distractors: ['としょかんに', 'よみました。', 'ほんが'],
           focus: 'で marque le lieu ou une action se deroule (different de に)',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-3-5',
           target: 'ともだちとえいがをみました。',
           native: 'J\'ai vu un film avec un ami.',
@@ -200,7 +214,7 @@ const courseJa = Course(
           distractors: ['ともだちに', 'みます。', 'えいがが'],
           focus: 'と = "avec" entre deux personnes qui font l\'action ensemble',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-3-6',
           target: 'でんしゃでかいしゃにいきます。',
           native: 'Je vais au bureau en train.',
@@ -212,14 +226,14 @@ const courseJa = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'ja-u4',
       title: 'Décrire',
       subtitle: 'Adjectifs en い et adjectifs en な',
       level: 'A2',
       grammarLesson: _u4Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-4-1',
           target: 'このみせはたかいです。',
           native: 'Ce magasin est cher.',
@@ -229,7 +243,7 @@ const courseJa = Course(
           distractors: ['たかいでした。', 'たかくないです。', 'たかいな'],
           focus: 'Adjectif en い : porte lui-meme le present, です n\'ajoute que la politesse',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-4-2',
           target: 'このみせはたかくないです。',
           native: 'Ce magasin n\'est pas cher.',
@@ -239,7 +253,7 @@ const courseJa = Course(
           distractors: ['たかいです。', 'たかいくない', 'たかくなかった'],
           focus: 'Negatif d\'un adjectif en い : い devient くない',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-4-3',
           target: 'きのうはあつかったです。',
           native: 'Hier, il faisait chaud.',
@@ -249,7 +263,7 @@ const courseJa = Course(
           distractors: ['あついです。', 'あつくないです。', 'あつかったでした。'],
           focus: 'Passe d\'un adjectif en い : い devient かった',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-4-4',
           target: 'このまちはきれいです。',
           native: 'Cette ville est belle/propre.',
@@ -259,7 +273,7 @@ const courseJa = Course(
           distractors: ['きれいいです。', 'きれいな', 'きれかったです。'],
           focus: 'きれい est un adjectif en な malgre son い final : ne pas le conjuguer comme un adjectif en い',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-4-5',
           target: 'しずかなへやがすきです。',
           native: 'J\'aime les chambres calmes.',
@@ -271,14 +285,14 @@ const courseJa = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'ja-u5',
       title: 'Poli et familier',
       subtitle: 'La forme neutre (辞書形) a cote du ます',
       level: 'A2',
       grammarLesson: _u5Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-5-1',
           target: 'まいにちにほんごをべんきょうする。',
           native: 'J\'étudie le japonais tous les jours. (familier)',
@@ -288,7 +302,7 @@ const courseJa = Course(
           distractors: ['べんきょうします。', 'べんきょうした。', 'べんきょうしない。'],
           focus: 'する = forme neutre/dictionnaire, utilisee entre amis ou dans un journal',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-5-2',
           target: 'あした、ともだちにあう。',
           native: 'Demain, je vois un ami. (familier)',
@@ -298,7 +312,7 @@ const courseJa = Course(
           distractors: ['あいます。', 'あった。', 'あわない。'],
           focus: 'に marque la personne qu\'on rencontre',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-5-3',
           target: 'それ、しらない。',
           native: 'Ça, je (ne le) sais pas. (familier)',
@@ -308,7 +322,7 @@ const courseJa = Course(
           distractors: ['しりません。', 'しった。', 'しる。'],
           focus: 'Negatif neutre : る devient らない pour ce verbe irregulier de sens',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-5-4',
           target: 'せんせいはがっこうにいらっしゃいます。',
           native: 'Le professeur est à l\'école. (très poli)',
@@ -320,14 +334,14 @@ const courseJa = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'ja-u6',
       title: 'Enchaîner les actions',
       subtitle: 'La forme て',
       level: 'A2',
       grammarLesson: _u6Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'ja-6-1',
           target: 'あさおきて、シャワーをあびます。',
           native: 'Le matin, je me lève et je prends une douche.',
@@ -337,7 +351,7 @@ const courseJa = Course(
           distractors: ['おきます、', 'おきた、', 'あびて。'],
           focus: 'La forme て relie deux actions dans l\'ordre, sans repeter le sujet',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-6-2',
           target: 'ここでまってください。',
           native: 'Attendez ici, s\'il vous plaît.',
@@ -347,7 +361,7 @@ const courseJa = Course(
           distractors: ['まちます', 'まった', 'ください'],
           focus: 'て + ください = demande polie',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-6-3',
           target: 'いま、ばんごはんをたべています。',
           native: 'Je suis en train de dîner.',
@@ -357,7 +371,7 @@ const courseJa = Course(
           distractors: ['たべます。', 'たべました。', 'たべて。'],
           focus: 'て + います = action en cours, comme "etre en train de"',
         ),
-        CardItem(
+        const CardItem(
           id: 'ja-6-4',
           target: 'でんきをけして、ねました。',
           native: 'J\'ai éteint la lumière et je me suis couché.',
@@ -372,12 +386,163 @@ const courseJa = Course(
   ],
 );
 
-const _u1Grammar = GrammarLesson(
+final _u1Grammar = GrammarLesson(
   title: 'は, です, et les niveaux de politesse',
   hook: 'Le japonais courant repose sur trois reflexes des la premiere '
       'phrase : annoncer le sujet avec は, conclure avec です, et choisir '
       'un registre de politesse — rien de tout cela n\'a d\'equivalent '
       'direct en français.',
+  longForm: LongFormContent(
+    narrative: [
+      'Une phrase française commence presque toujours par son sujet, '
+          'suivi immédiatement du verbe : "Je suis étudiant." Le japonais '
+          'inverse cette logique de deux façons à la fois. D\'abord, il '
+          'annonce le sujet avec une particule dédiée, は (prononcée "wa" '
+          'dans ce rôle précis), qui ne se traduit par rien en français — '
+          'elle signale seulement "voici de quoi je vais parler". Ensuite, '
+          'le verbe n\'arrive jamais avant la fin de la phrase : わたしは '
+          'がくせいです se découpe littéralement en "moi (sujet) / étudiant '
+          '(attribut) / suis", le verbe fermant la phrase au lieu de '
+          'l\'ouvrir.',
+      'Un francophone cherche presque toujours un équivalent à は, et '
+          'c\'est l\'erreur à éviter : ce n\'est ni un pronom, ni un article, '
+          'ni une marque du sujet grammatical au sens où le français '
+          'l\'entend (le japonais a une autre particule, が, pour ça). は '
+          'marque le THÈME de la phrase — ce dont on parle — et peut porter '
+          'aussi bien sur une personne, un objet, un lieu ou une idée. '
+          'Traduire は par "je" ou "ce" mot à mot mène régulièrement à des '
+          'phrases qui sonnent juste en apparence mais trahissent une '
+          'incompréhension du mécanisme.',
+      'Le deuxième réflexe à construire porte sur la politesse, qui en '
+          'japonais n\'est pas une nuance de ton mais un choix de forme '
+          'verbale obligatoire. です et ます sont le degré poli standard, '
+          'celui qu\'on apprend en premier et qu\'on utilise par défaut avec '
+          'des inconnus, des collègues, dans n\'importe quelle situation '
+          'neutre. La forme familière (だ, ou le verbe seul) existe, mais '
+          'l\'employer trop tôt avec quelqu\'un qu\'on ne connaît pas produit '
+          'le même effet qu\'un tutoiement intempestif en français : ce '
+          'n\'est pas incompréhensible, c\'est déplacé.',
+      'Retiens donc l\'ordre des opérations pour une phrase japonaise '
+          'simple : d\'abord le thème suivi de は, puis l\'information '
+          'nouvelle, puis です/ます à la fin pour clore poliment. Cet ordre '
+          'ne varie presque jamais, ce qui en fait, paradoxalement, l\'une '
+          'des structures les plus prévisibles à apprendre — une fois '
+          'qu\'on a arrêté de chercher où placer le verbe "comme en '
+          'français".',
+    ],
+    dialogue: [
+      _jaLine(
+        '[はじめまして|enchanté|hajimemashite]。[わたしは|moi (thème)|watashi wa][たなかです|je suis Tanaka|Tanaka desu]。',
+        speaker: 'Tanaka',
+        native: 'Enchanté. Je suis Tanaka.',
+        note: 'わたしは introduit le thème (moi), たなかです ferme la phrase '
+            'avec le verbe : ordre thème → information → です.',
+      ),
+      _jaLine(
+        '[はじめまして|enchanté|hajimemashite]。[わたしも|moi aussi (thème)|watashi mo][がくせいです|je suis étudiant|gakusei desu]。',
+        speaker: 'Léa',
+        native: 'Enchantée. Moi aussi je suis étudiante.',
+        note: 'も remplace は pour dire "moi AUSSI" — même position, même '
+            'rôle de marqueur de thème.',
+      ),
+      _jaLine(
+        '[たなかさんは|Tanaka (thème, poli)|Tanaka-san wa][にほんじんですか|êtes-vous japonais ?|nihonjin desu ka]？',
+        speaker: 'Léa',
+        native: 'Monsieur Tanaka, êtes-vous japonais ?',
+        note: 'か final transforme l\'affirmation en question, sans '
+            'inversion : même ordre des mots, juste か ajouté.',
+      ),
+      _jaLine(
+        '[はい|oui|hai]，[にほんじんです|je suis japonais|nihonjin desu]。[れいさんは|et vous, Léa (thème)|Rei-san wa]？',
+        speaker: 'Tanaka',
+        native: 'Oui, je suis japonais. Et vous, Léa ?',
+        note: 'さん après un nom marque le respect ; on ne l\'utilise '
+            'jamais pour se désigner soi-même.',
+      ),
+      _jaLine(
+        '[わたしは|moi (thème)|watashi wa][フランスじんです|je suis française|furansujin desu]。',
+        speaker: 'Léa',
+        native: 'Moi, je suis française.',
+      ),
+      _jaLine(
+        '[どうぞよろしく|ravi de vous connaître|dōzo yoroshiku]。',
+        speaker: 'Tanaka',
+        native: 'Ravi de faire votre connaissance.',
+        note: 'Formule figée de clôture, quasi obligatoire après une '
+            'première présentation polie.',
+      ),
+    ],
+    walkthroughs: [
+      WorkedExample(
+        target: 'わたしはがくせいです。',
+        native: 'Je suis étudiant.',
+        romanization: 'Watashi wa gakusei desu.',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'わたし',
+            explanation: '"je/moi" — le pronom qui sera le thème de la '
+                'phrase.',
+          ),
+          WorkedExamplePart(
+            chunk: 'は',
+            explanation:
+                'particule de thème (prononcée "wa" ici) : annonce que la '
+                'phrase va parler de わたし. Aucune traduction directe en '
+                'français.',
+          ),
+          WorkedExamplePart(
+            chunk: 'がくせい',
+            explanation:
+                'l\'information nouvelle sur le thème : "étudiant", posée '
+                'sans verbe pour l\'instant.',
+          ),
+          WorkedExamplePart(
+            chunk: 'です',
+            explanation:
+                'copule polie qui ferme la phrase et joue le rôle du verbe '
+                '"être" : elle vient toujours en dernier, jamais entre le '
+                'thème et l\'attribut.',
+          ),
+        ],
+      ),
+      WorkedExample(
+        target: 'たなかさんはにほんじんですか。',
+        native: 'Monsieur Tanaka est-il japonais ?',
+        romanization: 'Tanaka-san wa nihonjin desu ka.',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'たなかさん',
+            explanation:
+                'nom + さん (marque de respect) : jamais utilisé pour '
+                'soi-même, réservé à autrui.',
+          ),
+          WorkedExamplePart(
+            chunk: 'は',
+            explanation:
+                'même particule de thème que dans l\'exemple précédent : '
+                'la phrase va parler de Tanaka.',
+          ),
+          WorkedExamplePart(
+            chunk: 'にほんじん',
+            explanation: '"japonais (nationalité)" — l\'information posée '
+                'sur le thème.',
+          ),
+          WorkedExamplePart(
+            chunk: 'です',
+            explanation: 'copule polie, identique à l\'affirmative.',
+          ),
+          WorkedExamplePart(
+            chunk: 'か。',
+            explanation:
+                'particule finale de question : transforme l\'affirmation '
+                'en question sans toucher à l\'ordre des mots, contrairement '
+                'à l\'inversion sujet-auxiliaire du français ou de '
+                'l\'anglais.',
+          ),
+        ],
+      ),
+    ],
+  ),
   blocks: [
     ExplanationBlock(
       heading: 'は marque le sujet dont on parle',
