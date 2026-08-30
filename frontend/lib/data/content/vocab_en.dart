@@ -506,6 +506,285 @@ const vocabEn = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'en-t5',
+      title: 'La famille',
+      subtitle: 'Parler de ses proches sans se tromper de mot',
+      entries: [
+        VocabEntry(
+          id: 'en-v-parents',
+          target: 'parents',
+          native: 'parents (père et mère uniquement)',
+          pos: 'nom',
+          example: 'My parents live in London.',
+          exampleNative: 'Mes parents vivent à Londres.',
+          note: 'Faux ami partiel : en anglais "parents" désigne seulement le '
+              'père et la mère, jamais l\'ensemble de la famille. Pour "un '
+              'parent" au sens large (un oncle, un cousin...), on dit "a '
+              'relative".',
+        ),
+        VocabEntry(
+          id: 'en-v-relative',
+          target: 'relative',
+          native: 'un parent (au sens large), un proche',
+          pos: 'nom',
+          example: 'She has relatives in Canada.',
+          exampleNative: 'Elle a de la famille au Canada.',
+          note: 'C\'est le mot qui couvre tante, cousin, grand-oncle... '
+              'Ne jamais utiliser "parent" pour ce sens, l\'erreur est '
+              'fréquente chez les francophones.',
+        ),
+        VocabEntry(
+          id: 'en-v-sibling',
+          target: 'sibling',
+          native: 'frère ou sœur (mot générique)',
+          pos: 'nom',
+          example: 'Do you have any siblings?',
+          exampleNative: 'Tu as des frères et sœurs ?',
+          note: 'Mot épicène très utile à l\'écrit et en langage soutenu : '
+              'pas besoin de dire "brothers and sisters" à chaque fois.',
+        ),
+        VocabEntry(
+          id: 'en-v-stepmother',
+          target: 'stepmother / stepfather',
+          native: 'belle-mère / beau-père (remariage)',
+          pos: 'noms',
+          example: 'My stepfather raised me since I was five.',
+          exampleNative: 'Mon beau-père m\'a élevé depuis mes cinq ans.',
+          note: 'Le préfixe "step-" marque un lien par remariage, jamais par '
+              'alliance : "mother-in-law" est la belle-mère du mariage '
+              '(la mère du conjoint), un mot totalement différent.',
+        ),
+        VocabEntry(
+          id: 'en-v-in-laws',
+          target: 'in-laws',
+          native: 'beaux-parents (famille du conjoint)',
+          pos: 'nom',
+          example: 'We are having dinner with my in-laws tonight.',
+          exampleNative: 'On dîne avec mes beaux-parents ce soir.',
+          note: 'Le suffixe "-in-law" s\'ajoute à tout lien familial créé par '
+              'le mariage : brother-in-law (beau-frère), daughter-in-law '
+              '(belle-fille).',
+        ),
+        VocabEntry(
+          id: 'en-v-only-child',
+          target: 'only child',
+          native: 'enfant unique',
+          pos: 'expression',
+          example: 'I am an only child, so I never had to share a room.',
+          exampleNative: 'Je suis enfant unique, je n\'ai jamais eu a '
+              'partager une chambre.',
+          note: 'Expression figee : jamais "unique child" ni "only kid" a '
+              'l\'ecrit formel, meme si "kid" reste tres courant a l\'oral.',
+        ),
+        VocabEntry(
+          id: 'en-v-twins',
+          target: 'twins',
+          native: 'jumeaux, jumelles',
+          pos: 'nom',
+          example: 'They are twins, but they don\'t look alike at all.',
+          exampleNative: 'Ce sont des jumeaux, mais ils ne se ressemblent '
+              'pas du tout.',
+          note: 'Toujours au pluriel des qu\'il y en a deux : "a twin" '
+              'designe une seule personne du duo.',
+        ),
+        VocabEntry(
+          id: 'en-v-raise',
+          target: 'to raise (a child)',
+          native: 'élever (un enfant)',
+          pos: 'verbe',
+          example: 'They raised three kids in a small flat.',
+          exampleNative: 'Ils ont eleve trois enfants dans un petit '
+              'appartement.',
+          note: '"To raise" pour les enfants ; "to grow" ne s\'emploie que '
+              'pour les plantes. "To bring up" est un synonyme tres proche '
+              'et tout aussi courant.',
+        ),
+        VocabEntry(
+          id: 'en-v-get-along',
+          target: 'to get along (with)',
+          native: 's\'entendre (avec)',
+          pos: 'verbe',
+          example: 'I get along really well with my sister-in-law.',
+          exampleNative: 'Je m\'entends tres bien avec ma belle-soeur.',
+          note: 'Verbe a particule courant : "get along with someone", '
+              'jamais "get along someone" tout court.',
+        ),
+        VocabEntry(
+          id: 'en-v-take-after',
+          target: 'to take after',
+          native: 'tenir de, ressembler a (un parent)',
+          pos: 'verbe',
+          example: 'She takes after her mother, both stubborn as mules.',
+          exampleNative: 'Elle tient de sa mere, toutes les deux tetues '
+              'comme des mules.',
+          note: 'Reserve a la ressemblance de caractere ou physique entre '
+              'generations, contrairement a "look like" qui vaut pour '
+              'n\'importe qui.',
+        ),
+        VocabEntry(
+          id: 'en-v-close-knit',
+          target: 'close-knit',
+          native: 'très soudé, très uni (famille, groupe)',
+          pos: 'adjectif',
+          example: 'We are a close-knit family; we see each other every '
+              'week.',
+          exampleNative: 'Nous sommes une famille tres soudee, on se voit '
+              'toutes les semaines.',
+          note: 'S\'emploie surtout pour une famille ou une communaute, '
+              'jamais pour un couple : la on dirait plutot "close".',
+        ),
+        VocabEntry(
+          id: 'en-v-grown-up',
+          target: 'grown-up',
+          native: 'adulte',
+          pos: 'nom, adjectif',
+          example: 'My kids are all grown-up now.',
+          exampleNative: 'Mes enfants sont tous adultes maintenant.',
+          note: 'Registre familier et souvent affectueux, employe par les '
+              'parents en parlant de leurs propres enfants devenus grands. '
+              '"Adult" est le mot neutre et administratif.',
+        ),
+      ],
+    ),
+    VocabTheme(
+      id: 'en-t6',
+      title: 'Les émotions',
+      subtitle: 'Dire ce qu\'on ressent, sans tout ramener a "sad" ou "happy"',
+      entries: [
+        VocabEntry(
+          id: 'en-v-feel',
+          target: 'to feel',
+          native: 'se sentir, ressentir',
+          pos: 'verbe',
+          example: 'I feel really tired today.',
+          exampleNative: 'Je me sens vraiment fatigue aujourd\'hui.',
+          note: 'Directement suivi d\'un adjectif, sans "myself" : "I feel '
+              'tired", jamais "I feel myself tired".',
+        ),
+        VocabEntry(
+          id: 'en-v-upset',
+          target: 'upset',
+          native: 'contrarié, énervé, bouleversé',
+          pos: 'adjectif',
+          example: 'She was really upset when she heard the news.',
+          exampleNative: 'Elle etait vraiment bouleversee en apprenant la '
+              'nouvelle.',
+          note: 'Couvre un large spectre, de "vexe" a "bouleverse" selon le '
+              'contexte ; l\'intensite se lit dans le ton, pas dans le mot.',
+        ),
+        VocabEntry(
+          id: 'en-v-worried',
+          target: 'worried',
+          native: 'inquiet',
+          pos: 'adjectif',
+          example: 'I\'m worried about my exam results.',
+          exampleNative: 'Je suis inquiet pour mes resultats d\'examen.',
+          note: 'Se construit avec "about" : "worried about something", '
+              'jamais "worried for" dans ce sens.',
+        ),
+        VocabEntry(
+          id: 'en-v-relieved',
+          target: 'relieved',
+          native: 'soulagé',
+          pos: 'adjectif',
+          example: 'I was so relieved when the test came back negative.',
+          exampleNative: 'J\'ai ete tellement soulage quand le test est '
+              'revenu negatif.',
+          note: 'Ne pas confondre avec "relaxed" (detendu, sans tension '
+              'prealable) : "relieved" suppose qu\'une inquietude vient de '
+              'se dissiper.',
+        ),
+        VocabEntry(
+          id: 'en-v-excited',
+          target: 'excited',
+          native: 'impatient, enthousiaste, ravi',
+          pos: 'adjectif',
+          example: 'I am so excited about the trip next week!',
+          exampleNative: 'Je suis tellement impatient pour le voyage la '
+              'semaine prochaine !',
+          note: 'Sens neutre et tres frequent, sans connotation sexuelle en '
+              'usage courant ; ne pas hesiter a l\'employer pour un simple '
+              'enthousiasme, contrairement au francais "excite".',
+        ),
+        VocabEntry(
+          id: 'en-v-embarrassed',
+          target: 'embarrassed',
+          native: 'gêné, honteux',
+          pos: 'adjectif',
+          example: 'I felt so embarrassed when I forgot his name.',
+          exampleNative: 'Je me suis senti tellement gene quand j\'ai '
+              'oublie son nom.',
+          note: 'Faux ami avec le francais "embarrasse" (encombre, charge '
+              'de quelque chose) : en anglais c\'est uniquement l\'emotion '
+              'de la gene sociale.',
+        ),
+        VocabEntry(
+          id: 'en-v-disappointed',
+          target: 'disappointed',
+          native: 'déçu',
+          pos: 'adjectif',
+          example: 'I was disappointed with the film, it was too slow.',
+          exampleNative: 'J\'ai ete decu par le film, il etait trop lent.',
+          note: 'Se construit avec "with" ou "in" (une personne) : '
+              '"disappointed in you", jamais "disappointed of".',
+        ),
+        VocabEntry(
+          id: 'en-v-overwhelmed',
+          target: 'overwhelmed',
+          native: 'débordé, submergé',
+          pos: 'adjectif',
+          example: 'I feel overwhelmed with all this work.',
+          exampleNative: 'Je me sens submerge par tout ce travail.',
+          note: 'Plus fort que "busy" (occupe) : suggere qu\'on n\'arrive '
+              'plus a faire face, pas juste qu\'on a beaucoup a faire.',
+        ),
+        VocabEntry(
+          id: 'en-v-proud',
+          target: 'proud',
+          native: 'fier',
+          pos: 'adjectif',
+          example: 'I am so proud of you.',
+          exampleNative: 'Je suis tellement fier de toi.',
+          note: 'Construction avec "of" : "proud of someone/something", '
+              'jamais "proud for".',
+        ),
+        VocabEntry(
+          id: 'en-v-jealous',
+          target: 'jealous',
+          native: 'jaloux',
+          pos: 'adjectif',
+          example: 'He got jealous when she talked to her ex.',
+          exampleNative: 'Il est devenu jaloux quand elle a parle a son '
+              'ex.',
+          note: '"Jealous" couvre aussi bien la jalousie amoureuse que '
+              'l\'envie ("jealous of your new car"), contrairement au '
+              'francais qui distinguerait jaloux et envieux.',
+        ),
+        VocabEntry(
+          id: 'en-v-cheer-up',
+          target: 'to cheer (someone) up',
+          native: 'remonter le moral (à qqn)',
+          pos: 'verbe',
+          example: 'I brought you some chocolate to cheer you up.',
+          exampleNative: 'Je t\'ai apporte du chocolat pour te remonter le '
+              'moral.',
+          note: 'Verbe a particule separable : "cheer her up" et "cheer up '
+              'her" (rare) sont possibles, mais avec un pronom l\'ordre '
+              '"cheer her up" est obligatoire.',
+        ),
+        VocabEntry(
+          id: 'en-v-feel-like',
+          target: 'to feel like (doing something)',
+          native: 'avoir envie de (faire quelque chose)',
+          pos: 'expression',
+          example: 'I don\'t feel like cooking tonight.',
+          exampleNative: 'Je n\'ai pas envie de cuisiner ce soir.',
+          note: 'Suivi d\'un verbe en "-ing", jamais de l\'infinitif : '
+              '"feel like cooking", pas "feel like to cook".',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

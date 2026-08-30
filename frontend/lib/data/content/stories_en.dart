@@ -216,6 +216,92 @@ final storiesEn = <Story>[
     ],
   ),
   Story(
+    id: 'en-story-doctor',
+    languageCode: 'en',
+    title: 'Just a cold',
+    titleNative: 'Juste un rhume',
+    blurb:
+        'Un rendez-vous chez le médecin, du premier symptôme jusqu\'à '
+        'l\'ordonnance. Le vocabulaire de la santé le plus utile au '
+        'quotidien.',
+    level: StoryLevel.first,
+    takeaway:
+        'Pour décrire un symptôme en anglais, "I have a sore throat" '
+        'utilise "have", jamais "I am" — retiens la structure "I have a/an '
+        '+ symptôme".',
+    lines: [
+      _l('Good [morning|matin]. I have an [appointment|rendez-vous] at [ten|dix].',
+          speaker: 'Patient',
+          native: 'Bonjour. J\'ai rendez-vous à dix heures.'),
+      _l('[Come in|Entrez]. What [seems to be|semble être] the [problem|problème]?',
+          speaker: 'Doctor',
+          native: 'Entrez. Quel est le problème ?',
+          note: '"What seems to be the problem?" est la question standard '
+              'd\'un médecin — plus douce que "what\'s wrong with you?".'),
+      _l('I\'ve had a [sore throat|mal de gorge] for [three|trois] [days|jours].',
+          speaker: 'Patient',
+          native: 'J\'ai mal à la gorge depuis trois jours.',
+          note: 'Les symptômes se construisent avec "have", jamais "be" : '
+              '"I have a sore throat", pas "I am sore throat".'),
+      _l('Do you have a [fever|fièvre]?',
+          speaker: 'Doctor', native: 'Avez-vous de la fièvre ?'),
+      _l('A [little|peu]. This [morning|matin] it was [thirty-eight|trente-huit].',
+          speaker: 'Patient',
+          native: 'Un peu. Ce matin il faisait trente-huit.',
+          note: 'Aux Etats-Unis et au Royaume-Uni la temperature du corps '
+              'se donne parfois en Fahrenheit ; en contexte medical general '
+              'le Celsius reste compris partout.'),
+      _l('Let me [have a look|jeter un oeil]. [Open|Ouvrez] your [mouth|bouche], please.',
+          speaker: 'Doctor',
+          native: 'Laissez-moi jeter un œil. Ouvrez la bouche, s\'il vous '
+              'plaît.'),
+      _l('It\'s [just|juste] a [cold|rhume]. [Rest|Reposez-vous] and [drink|buvez] [plenty of|beaucoup d\'] [water|eau].',
+          speaker: 'Doctor',
+          native: 'C\'est juste un rhume. Reposez-vous et buvez beaucoup '
+              'd\'eau.'),
+      _l('Should I [take|prendre] [anything|quelque chose]?',
+          speaker: 'Patient', native: 'Dois-je prendre quelque chose ?'),
+      _l('[Only|Seulement] if the [pain|douleur] [gets worse|empire]. [Come back|Revenez] if it\'s not [better|mieux] in a [week|semaine].',
+          speaker: 'Doctor',
+          native: 'Seulement si la douleur empire. Revenez si ce n\'est pas '
+              'mieux dans une semaine.',
+          note: '"Get worse" (empirer) et "get better" (s\'améliorer) sont '
+              'des paires très fréquentes en anglais médical courant.'),
+      _l('[Thank you|Merci], doctor.',
+          speaker: 'Patient', native: 'Merci, docteur.'),
+    ],
+    questions: [
+      const StoryQuestion(
+        question: 'Depuis combien de temps le patient a-t-il mal à la gorge ?',
+        options: ['Un jour', 'Trois jours', 'Une semaine'],
+        answerIndex: 1,
+        explanation: '"I\'ve had a sore throat for three days."',
+      ),
+      const StoryQuestion(
+        question: 'Que dit le médecin sur le diagnostic ?',
+        options: [
+          'C\'est une angine, il faut des antibiotiques',
+          'C\'est juste un rhume, il faut se reposer',
+          'Rien de précis n\'est dit',
+        ],
+        answerIndex: 1,
+        explanation: '"It\'s just a cold. Rest and drink plenty of water."',
+      ),
+      const StoryQuestion(
+        question: 'Dans quel cas le patient doit-il revenir ?',
+        options: [
+          'Si la douleur empire ou ne s\'améliore pas en une semaine',
+          'Seulement s\'il a encore de la fièvre demain',
+          'Il n\'a pas besoin de revenir',
+        ],
+        answerIndex: 0,
+        explanation:
+            '"Only if the pain gets worse. Come back if it\'s not better '
+            'in a week."',
+      ),
+    ],
+  ),
+  Story(
     id: 'en-story-what-you-do',
     languageCode: 'en',
     title: 'So, what do you do?',

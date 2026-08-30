@@ -498,6 +498,281 @@ const vocabEs = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'es-t5',
+      title: 'La familia',
+      subtitle: 'Parler de ses proches, avec les nuances de l\'espagnol',
+      entries: [
+        VocabEntry(
+          id: 'es-v-padres',
+          target: 'padres',
+          native: 'parents (père et mère)',
+          pos: 'nom',
+          example: 'Mis padres viven en Madrid.',
+          exampleNative: 'Mes parents vivent à Madrid.',
+          note: 'Comme en français, mais attention au pluriel masculin qui '
+              'inclut aussi le sens de "père et mère" : "padre" seul veut '
+              'dire uniquement "père".',
+        ),
+        VocabEntry(
+          id: 'es-v-pariente',
+          target: 'pariente',
+          native: 'un parent (au sens large), un proche',
+          pos: 'nom',
+          example: 'Tengo parientes en Argentina.',
+          exampleNative: 'J\'ai de la famille en Argentine.',
+          note: 'Faux ami a l\'envers : "pariente" ne veut jamais dire '
+              '"parent" au sens de pere/mere (ca c\'est "padre"), mais '
+              'membre de la famille au sens large.',
+        ),
+        VocabEntry(
+          id: 'es-v-hermanastro',
+          target: 'hermanastro / hermanastra',
+          native: 'demi-frère / demi-sœur',
+          pos: 'noms',
+          example: 'Mi hermanastro vive con su madre.',
+          exampleNative: 'Mon demi-frère vit avec sa mère.',
+          note: 'Le suffixe "-astro/-astra" marque un lien par remariage : '
+              'madrastra (belle-mère), padrastro (beau-père), du même '
+              'schéma que "stepmother" en anglais.',
+        ),
+        VocabEntry(
+          id: 'es-v-suegros',
+          target: 'suegros',
+          native: 'beaux-parents (famille du conjoint)',
+          pos: 'nom',
+          example: 'Cenamos con mis suegros el domingo.',
+          exampleNative: 'On dîne avec mes beaux-parents dimanche.',
+          note: '"Suegro/suegra" pour beau-père/belle-mère par alliance, à '
+              'ne pas confondre avec "padrastro/madrastra" qui sont par '
+              'remariage.',
+        ),
+        VocabEntry(
+          id: 'es-v-hijo-unico',
+          target: 'hijo único / hija única',
+          native: 'enfant unique',
+          pos: 'expression',
+          example: 'Soy hija única, así que siempre estuve muy mimada.',
+          exampleNative: 'Je suis enfant unique, donc j\'ai toujours été '
+              'très gâtée.',
+          note: 'S\'accorde en genre selon la personne : "hijo único" au '
+              'masculin, "hija única" au féminin.',
+        ),
+        VocabEntry(
+          id: 'es-v-gemelos',
+          target: 'gemelos / gemelas',
+          native: 'jumeaux, jumelles',
+          pos: 'nom',
+          example: 'Mis primos son gemelos idénticos.',
+          exampleNative: 'Mes cousins sont des vrais jumeaux.',
+          note: 'Pour des jumeaux non identiques (faux jumeaux), on dit '
+              'plutôt "mellizos", une distinction que le français ne fait '
+              'pas toujours à l\'oral.',
+        ),
+        VocabEntry(
+          id: 'es-v-criar',
+          target: 'criar',
+          native: 'élever (un enfant)',
+          pos: 'verbe',
+          example: 'Lo criaron sus abuelos.',
+          exampleNative: 'Il a été élevé par ses grands-parents.',
+          note: 'S\'emploie aussi pour les animaux, comme "élever" en '
+              'français ; "educar" est plus proche de "éduquer" (les '
+              'valeurs, les manières).',
+        ),
+        VocabEntry(
+          id: 'es-v-llevarse-bien',
+          target: 'llevarse bien (con)',
+          native: 's\'entendre bien (avec)',
+          pos: 'expression',
+          example: 'Me llevo muy bien con mi cuñada.',
+          exampleNative: 'Je m\'entends très bien avec ma belle-sœur.',
+          note: 'Verbe pronominal : "llevarse bien/mal con alguien", jamais '
+              'sans le "se".',
+        ),
+        VocabEntry(
+          id: 'es-v-parecerse',
+          target: 'parecerse a',
+          native: 'ressembler à',
+          pos: 'verbe',
+          example: 'Te pareces mucho a tu padre.',
+          exampleNative: 'Tu ressembles beaucoup à ton père.',
+          note: 'Verbe pronominal suivi de "a" : "parecerse a alguien", '
+              'jamais "parecer a alguien" sans le "se".',
+        ),
+        VocabEntry(
+          id: 'es-v-unida',
+          target: 'una familia unida',
+          native: 'une famille soudée, unie',
+          pos: 'expression',
+          example: 'Somos una familia muy unida.',
+          exampleNative: 'Nous sommes une famille très soudée.',
+          note: '"Unido/a" s\'accorde avec le nom qu\'il qualifie ; ne pas '
+              'confondre avec "único" (unique).',
+        ),
+        VocabEntry(
+          id: 'es-v-mayor-de-edad',
+          target: 'ser mayor de edad',
+          native: 'être majeur',
+          pos: 'expression',
+          example: 'Ya es mayor de edad, puede decidir solo.',
+          exampleNative: 'Il est déjà majeur, il peut décider seul.',
+          note: 'Expression administrative figée ; "adulto" décrit plutôt '
+              'l\'état general, pas le statut légal.',
+        ),
+        VocabEntry(
+          id: 'es-v-nieto',
+          target: 'nieto / nieta',
+          native: 'petit-fils / petite-fille',
+          pos: 'nom',
+          example: 'Mi abuela tiene cinco nietos.',
+          exampleNative: 'Ma grand-mère a cinq petits-enfants.',
+          note: 'Comme beaucoup de noms de famille en espagnol, il '
+              's\'accorde en genre : nieto/nieta, contrairement au '
+              'français "petit-enfant" qui reste identique.',
+        ),
+      ],
+    ),
+    VocabTheme(
+      id: 'es-t6',
+      title: 'Les émotions',
+      subtitle: 'Nuancer ses sentiments au-delà de "bien" et "mal"',
+      entries: [
+        VocabEntry(
+          id: 'es-v-sentirse',
+          target: 'sentirse',
+          native: 'se sentir',
+          pos: 'verbe',
+          example: 'Me siento un poco cansada hoy.',
+          exampleNative: 'Je me sens un peu fatiguée aujourd\'hui.',
+          note: 'Verbe pronominal : "me siento", "te sientes"... jamais '
+              '"siento" seul pour parler d\'un état (ça, c\'est "sentir '
+              'algo", ressentir quelque chose de precis).',
+        ),
+        VocabEntry(
+          id: 'es-v-enfadado',
+          target: 'enfadado / enojado',
+          native: 'fâché, énervé',
+          pos: 'adjectif',
+          example: 'Está enfadado porque llegué tarde.',
+          exampleNative: 'Il est fâché parce que je suis arrivé en '
+              'retard.',
+          note: '"Enfadado" est la forme d\'Espagne, "enojado" celle '
+              'privilégiée en Amérique latine ; les deux sont compris '
+              'partout.',
+        ),
+        VocabEntry(
+          id: 'es-v-preocupado',
+          target: 'preocupado',
+          native: 'inquiet, préoccupé',
+          pos: 'adjectif',
+          example: 'Estoy preocupada por el examen.',
+          exampleNative: 'Je suis inquiète pour l\'examen.',
+          note: 'Se construit avec "por" : "preocupado por algo", jamais '
+              '"preocupado de algo" dans ce sens.',
+        ),
+        VocabEntry(
+          id: 'es-v-aliviado',
+          target: 'aliviado',
+          native: 'soulagé',
+          pos: 'adjectif',
+          example: 'Me sentí aliviada cuando llegó sano y salvo.',
+          exampleNative: 'Je me suis sentie soulagée quand il est arrivé '
+              'sain et sauf.',
+          note: 'Ne pas confondre avec "relajado" (détendu, sans tension '
+              'préalable) : "aliviado" suppose une inquiétude qui '
+              'disparaît.',
+        ),
+        VocabEntry(
+          id: 'es-v-avergonzado',
+          target: 'avergonzado',
+          native: 'gêné, honteux',
+          pos: 'adjectif',
+          example: 'Me sentí avergonzado por llegar tarde a la reunión.',
+          exampleNative: 'Je me suis senti gêné d\'arriver en retard à la '
+              'réunion.',
+          note: 'Attention au vrai piège : "embarazada" ne veut PAS dire '
+              '"gêné" mais "enceinte". Le faux ami classique qui met les '
+              'francophones (et les anglophones) dans l\'embarras.',
+        ),
+        VocabEntry(
+          id: 'es-v-decepcionado',
+          target: 'decepcionado',
+          native: 'déçu',
+          pos: 'adjectif',
+          example: 'Estoy decepcionado con el resultado.',
+          exampleNative: 'Je suis déçu du résultat.',
+          note: 'Faux ami de construction : "decepcionar" veut dire '
+              '"décevoir", jamais "détecter" ni "démasquer" comme le '
+              'suggérerait sa ressemblance avec "deceive" en anglais.',
+        ),
+        VocabEntry(
+          id: 'es-v-agobiado',
+          target: 'agobiado',
+          native: 'débordé, stressé, submergé',
+          pos: 'adjectif',
+          example: 'Estoy muy agobiada con el trabajo esta semana.',
+          exampleNative: 'Je suis très débordée par le travail cette '
+              'semaine.',
+          note: 'Mot très courant à l\'oral pour la surcharge (travail, '
+              'obligations), plus fort et plus fréquent que "estresado" '
+              'dans la conversation quotidienne.',
+        ),
+        VocabEntry(
+          id: 'es-v-orgulloso',
+          target: 'orgulloso',
+          native: 'fier',
+          pos: 'adjectif',
+          example: 'Estoy muy orgulloso de ti.',
+          exampleNative: 'Je suis très fier de toi.',
+          note: 'Construction avec "de" : "orgulloso de algo/alguien", '
+              'jamais "orgulloso por".',
+        ),
+        VocabEntry(
+          id: 'es-v-celoso',
+          target: 'celoso',
+          native: 'jaloux',
+          pos: 'adjectif',
+          example: 'Se pone celoso cuando hablo con mis amigos.',
+          exampleNative: 'Il devient jaloux quand je parle à mes amis.',
+          note: 'Ne pas confondre avec "envidioso" (envieux, pour un objet '
+              'ou une réussite) : "celoso" est réservé à la jalousie '
+              'relationnelle.',
+        ),
+        VocabEntry(
+          id: 'es-v-animar',
+          target: 'animar (a alguien)',
+          native: 'remonter le moral (à qqn), encourager',
+          pos: 'verbe',
+          example: 'Le traje flores para animarla un poco.',
+          exampleNative: 'Je lui ai apporté des fleurs pour lui remonter '
+              'un peu le moral.',
+          note: 'Le pronominal "animarse" veut dire "se motiver, se '
+              'décider" : "¡animate!" (allez, lance-toi !).',
+        ),
+        VocabEntry(
+          id: 'es-v-tener-ganas',
+          target: 'tener ganas de',
+          native: 'avoir envie de',
+          pos: 'expression',
+          example: 'No tengo ganas de cocinar esta noche.',
+          exampleNative: 'Je n\'ai pas envie de cuisiner ce soir.',
+          note: 'Suivi directement de l\'infinitif : "tener ganas de '
+              'cocinar", jamais "tener ganas cocinar" sans "de".',
+        ),
+        VocabEntry(
+          id: 'es-v-emocionado',
+          target: 'emocionado',
+          native: 'ému, enthousiaste, impatient',
+          pos: 'adjectif',
+          example: 'Estoy muy emocionado por el viaje.',
+          exampleNative: 'Je suis très impatient pour le voyage.',
+          note: 'Faux ami : ne veut jamais dire "émotionné" au sens '
+              'francais rare, mais couvre a la fois l\'emotion ("tres '
+              'emu") et l\'enthousiasme impatient ("hate d\'y etre").',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

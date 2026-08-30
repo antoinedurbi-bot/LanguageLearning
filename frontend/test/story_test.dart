@@ -166,5 +166,24 @@ void main() {
       expect(storyById('zh-story-shichang')?.languageCode, 'zh');
       expect(storyById('nope'), isNull);
     });
+
+    test('every core language got a new everyday-situation story in this '
+        'pass, distinct from what already existed', () {
+      const newStoryIds = {
+        'en': 'en-story-doctor',
+        'es': 'es-story-direcciones',
+        'zh': 'zh-story-kanfangzi',
+        'ja': 'ja-story-michiannai',
+      };
+      newStoryIds.forEach((code, id) {
+        final story = storyById(id);
+        expect(story, isNotNull, reason: 'missing new story $id for $code');
+        expect(story!.languageCode, code);
+        expect(story.lines.length, greaterThanOrEqualTo(8),
+            reason: '$id is too short to match the existing stories');
+        expect(story.questions.length, greaterThanOrEqualTo(2),
+            reason: '$id needs comprehension questions like its siblings');
+      });
+    });
   });
 }

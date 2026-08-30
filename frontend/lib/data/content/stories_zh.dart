@@ -205,6 +205,103 @@ final storiesZh = <Story>[
     ],
   ),
   Story(
+    id: 'zh-story-kanfangzi',
+    languageCode: 'zh',
+    title: '看房子',
+    titleNative: 'Visiter un appartement',
+    blurb:
+        'Un dialogue pour louer un appartement : le prix, les charges, la '
+        'caution — le vocabulaire pratique dont personne ne parle en '
+        'cours.',
+    level: StoryLevel.first,
+    takeaway:
+        '押一付三 (une caution, trois mois payés d\'avance) est la formule '
+        'de location la plus courante en Chine — la retenir évite bien des '
+        'surprises au moment de signer.',
+    lines: [
+      _l('[你好|bonjour|nǐhǎo]，[你|vous|nǐ][是|êtes|shì][来|venu|lái][看|voir|kàn][房子|l\'appartement|fángzi][的|(lien)|de][吗|(question)|ma]？',
+          speaker: '房东 · le propriétaire',
+          native: 'Bonjour, vous venez pour visiter l\'appartement ?',
+          romanization: 'Nǐhǎo, nǐ shì lái kàn fángzi de ma?'),
+      _l('[是的|oui|shìde]，[这套|cet|zhè tào][房子|appartement|fángzi][多少钱|combien|duōshao qián][一个月|par mois|yí ge yuè]？',
+          speaker: '租客 · le locataire',
+          native: 'Oui, cet appartement coûte combien par mois ?',
+          romanization: 'Shìde, zhè tào fángzi duōshao qián yí ge yuè?',
+          note: '套 (tào) est le classificateur pour un logement complet, '
+              'contrairement à 个 qui sert pour la plupart des autres '
+              'objets.'),
+      _l('[三千五|trois mille cinq cents|sānqiān wǔ][一个月|par mois|yí ge yuè]，[押一付三|une caution, trois mois d\'avance|yā yī fù sān]。',
+          speaker: '房东 · le propriétaire',
+          native: 'Trois mille cinq par mois, une caution et trois mois '
+              'payés d\'avance.',
+          romanization: 'Sānqiān wǔ yí ge yuè, yā yī fù sān.',
+          note: '押一付三 est la formule standard de location en Chine : '
+              'un mois de caution (押一), puis trois mois payés d\'avance '
+              '(付三). La retenir mot pour mot évite les mauvaises '
+              'surprises.'),
+      _l('[包括|est-ce que ça inclut|bāokuò][水电费|eau et électricité|shuǐdiànfèi][吗|(question)|ma]？',
+          speaker: '租客 · le locataire',
+          native: 'Est-ce que ça inclut l\'eau et l\'électricité ?',
+          romanization: 'Bāokuò shuǐdiànfèi ma?'),
+      _l('[不|ne pas|bù][包括|inclure|bāokuò]，[水电费|eau et électricité|shuǐdiànfèi][自己|soi-même|zìjǐ][付|payer|fù]。',
+          speaker: '房东 · le propriétaire',
+          native: 'Non, l\'eau et l\'électricité sont à votre charge.',
+          romanization: 'Bù bāokuò, shuǐdiànfèi zìjǐ fù.'),
+      _l('[这|ici|zhè][附近|à proximité|fùjìn][有|y a-t-il|yǒu][地铁站|une station de métro|dìtiězhàn][吗|(question)|ma]？',
+          speaker: '租客 · le locataire',
+          native: 'Y a-t-il une station de métro à proximité ?',
+          romanization: 'Zhè fùjìn yǒu dìtiězhàn ma?'),
+      _l('[有|oui, il y a|yǒu]，[走路|à pied|zǒulù][五|cinq|wǔ][分钟|minutes|fēnzhōng][就|déjà|jiù][到|arriver|dào]。',
+          speaker: '房东 · le propriétaire',
+          native: 'Oui, cinq minutes à pied suffisent.',
+          romanization: 'Yǒu, zǒulù wǔ fēnzhōng jiù dào.',
+          note: '就 devant le verbe souligne la rapidité ou la facilité de '
+              'l\'action : « il suffit de... et c\'est déjà fait ».'),
+      _l('[可以|peut-on|kěyǐ][养|garder|yǎng][宠物|un animal|chǒngwù][吗|(question)|ma]？',
+          speaker: '租客 · le locataire',
+          native: 'Peut-on avoir un animal de compagnie ?',
+          romanization: 'Kěyǐ yǎng chǒngwù ma?'),
+      _l('[可以|oui|kěyǐ]，[但是|mais|dànshì][不能|ne peut pas|bù néng][养|garder|yǎng][狗|un chien|gǒu]。',
+          speaker: '房东 · le propriétaire',
+          native: 'Oui, mais pas de chien.',
+          romanization: 'Kěyǐ, dànshì bù néng yǎng gǒu.'),
+      _l('[好的|d\'accord|hǎode]，[我|je|wǒ][考虑|réfléchir|kǎolǜ][一下|un peu|yíxià]，[谢谢|merci|xièxie]。',
+          speaker: '租客 · le locataire',
+          native: 'D\'accord, je vais réfléchir un peu, merci.',
+          romanization: 'Hǎode, wǒ kǎolǜ yíxià, xièxie.',
+          note: '动词 + 一下 adoucit l\'action : 考虑一下 (réfléchir un peu) '
+              'sonne moins engageant que 考虑 tout seul.'),
+    ],
+    questions: [
+      const StoryQuestion(
+        question: 'Que veut dire 押一付三 ?',
+        options: [
+          'Une caution et trois mois payés d\'avance',
+          'Le loyer augmente de trois pour cent chaque année',
+          'Il faut rester au moins trois ans',
+        ],
+        answerIndex: 0,
+        explanation: '押一 (un mois de caution) 付三 (trois mois d\'avance).',
+      ),
+      const StoryQuestion(
+        question: 'L\'eau et l\'électricité sont-elles incluses dans le loyer ?',
+        options: ['Oui', 'Non, à la charge du locataire', 'Seulement l\'eau'],
+        answerIndex: 1,
+        explanation: '不包括，水电费自己付。',
+      ),
+      const StoryQuestion(
+        question: 'Quelle condition pose le propriétaire pour les animaux ?',
+        options: [
+          'Aucun animal n\'est autorisé',
+          'Les animaux sont autorisés, sauf les chiens',
+          'Seuls les chiens sont autorisés',
+        ],
+        answerIndex: 1,
+        explanation: '可以，但是不能养狗。',
+      ),
+    ],
+  ),
+  Story(
     id: 'zh-story-erduo',
     languageCode: 'zh',
     title: '我的耳朵变了',

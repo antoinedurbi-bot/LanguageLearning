@@ -348,6 +348,292 @@ const vocabZh = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'zh-t4',
+      title: '家人 - La famille',
+      subtitle: 'Le chinois distingue l\'aîné du cadet, et le côté paternel du maternel',
+      entries: [
+        VocabEntry(
+          id: 'zh-v-jiaren',
+          target: '家人',
+          native: 'famille, proches',
+          pos: 'nom',
+          romanization: 'jiārén',
+          example: '我家人都住在北京。',
+          exampleNative: 'Toute ma famille vit à Pékin.',
+          note: 'Désigne le cercle des proches vivant sous le même toit, à '
+              'distinguer de 家庭 (jiātíng), la "famille" comme institution '
+              'ou cellule sociale.',
+        ),
+        VocabEntry(
+          id: 'zh-v-fumu',
+          target: '父母',
+          native: 'parents (père et mère)',
+          pos: 'nom',
+          romanization: 'fùmǔ',
+          example: '我父母不住在这儿。',
+          exampleNative: 'Mes parents ne vivent pas ici.',
+          note: 'Registre plutôt écrit/formel. À l\'oral on dit souvent '
+              '爸爸妈妈 (bàba māma), "papa et maman", même entre adultes.',
+        ),
+        VocabEntry(
+          id: 'zh-v-gege-didi',
+          target: '哥哥 / 弟弟',
+          native: 'frère aîné / frère cadet',
+          pos: 'nom',
+          romanization: 'gēge / dìdi',
+          example: '我有一个哥哥和一个弟弟。',
+          exampleNative: 'J\'ai un frère aîné et un frère cadet.',
+          note: 'Le chinois n\'a pas de mot générique pour "frère" : il '
+              'faut toujours préciser s\'il est plus âgé ou plus jeune que '
+              'soi. Même logique pour 姐姐/妹妹.',
+        ),
+        VocabEntry(
+          id: 'zh-v-jiejie-meimei',
+          target: '姐姐 / 妹妹',
+          native: 'sœur aînée / sœur cadette',
+          pos: 'nom',
+          romanization: 'jiějie / mèimei',
+          example: '我姐姐比我大三岁。',
+          exampleNative: 'Ma sœur aînée a trois ans de plus que moi.',
+          note: 'Terme aussi utilisé, en registre familier, pour s\'adresser '
+              'poliment à une jeune femme un peu plus âgée que soi, même '
+              'sans lien de parenté.',
+        ),
+        VocabEntry(
+          id: 'zh-v-yeye-nainai',
+          target: '爷爷 / 奶奶',
+          native: 'grand-père / grand-mère paternels',
+          pos: 'nom',
+          romanization: 'yéye / nǎinai',
+          example: '我爷爷奶奶住在乡下。',
+          exampleNative: 'Mes grands-parents paternels vivent à la '
+              'campagne.',
+          note: 'Uniquement le côté du père. Pour le côté de la mère, on '
+              'utilise des mots différents : 外公/外婆.',
+        ),
+        VocabEntry(
+          id: 'zh-v-waigong-waipo',
+          target: '外公 / 外婆',
+          native: 'grand-père / grand-mère maternels',
+          pos: 'nom',
+          romanization: 'wàigōng / wàipó',
+          example: '我外婆做的菜很好吃。',
+          exampleNative: 'La cuisine de ma grand-mère maternelle est '
+              'délicieuse.',
+          note: 'Le caractère 外 ("extérieur") marque le côté maternel — un '
+              'vestige de la tradition où la fille mariée "sortait" de sa '
+              'famille d\'origine. Une distinction que le français ne fait '
+              'pas du tout.',
+        ),
+        VocabEntry(
+          id: 'zh-v-haizi',
+          target: '孩子',
+          native: 'enfant',
+          pos: 'nom',
+          romanization: 'háizi',
+          example: '他们有两个孩子。',
+          exampleNative: 'Ils ont deux enfants.',
+          note: 'Mot neutre et générique. 小孩 (xiǎohái) est un synonyme '
+              'plus oral et affectueux.',
+        ),
+        VocabEntry(
+          id: 'zh-v-dushengzinu',
+          target: '独生子女',
+          native: 'enfant unique',
+          pos: 'nom',
+          romanization: 'dúshēngzǐnǚ',
+          example: '我是独生子女，没有兄弟姐妹。',
+          exampleNative: 'Je suis enfant unique, je n\'ai pas de frères et '
+              'sœurs.',
+          note: 'Terme lié historiquement à la politique de l\'enfant '
+              'unique (1979-2015) ; toute une génération de Chinois se '
+              'décrit encore avec ce mot.',
+        ),
+        VocabEntry(
+          id: 'zh-v-yang',
+          target: '养',
+          native: 'élever (un enfant, un animal)',
+          pos: 'verbe',
+          romanization: 'yǎng',
+          example: '她一个人养大了三个孩子。',
+          exampleNative: 'Elle a élevé seule trois enfants.',
+          note: 'Le même verbe sert pour élever des enfants et des '
+              'animaux, comme en français, contrairement à 教育 (jiàoyù) '
+              'qui porte sur l\'éducation intellectuelle et morale.',
+        ),
+        VocabEntry(
+          id: 'zh-v-xiang',
+          target: '像',
+          native: 'ressembler à',
+          pos: 'verbe',
+          romanization: 'xiàng',
+          example: '你长得很像你妈妈。',
+          exampleNative: 'Tu ressembles beaucoup à ta mère.',
+          note: 'Construction fixe avec 长得 (zhǎng de) devant : "长得像" pour '
+              'la ressemblance physique.',
+        ),
+        VocabEntry(
+          id: 'zh-v-chudelai',
+          target: '处得来',
+          native: 's\'entendre bien (avec qqn)',
+          pos: 'expression',
+          romanization: 'chǔ de lái',
+          example: '我跟我嫂子处得来。',
+          exampleNative: 'Je m\'entends bien avec ma belle-sœur.',
+          note: 'Expression orale et familière ; à l\'écrit on préférera '
+              '相处融洽 (xiāngchǔ róngqià), plus formel.',
+        ),
+      ],
+    ),
+    VocabTheme(
+      id: 'zh-t5',
+      title: '感觉 - Les émotions',
+      subtitle: 'Nuancer ce qu\'on ressent au-delà de 高兴/不高兴',
+      entries: [
+        VocabEntry(
+          id: 'zh-v-juede',
+          target: '觉得',
+          native: 'trouver que, avoir l\'impression que',
+          pos: 'verbe',
+          romanization: 'juéde',
+          example: '我觉得有点累。',
+          exampleNative: 'J\'ai l\'impression d\'être un peu fatigué.',
+          note: 'Verbe d\'opinion et de ressenti à la fois, l\'un des plus '
+              'utilisés en chinois pour introduire un état ou un jugement '
+              'personnel.',
+        ),
+        VocabEntry(
+          id: 'zh-v-gaoxing',
+          target: '高兴',
+          native: 'content, heureux',
+          pos: 'adjectif',
+          romanization: 'gāoxìng',
+          example: '认识你很高兴。',
+          exampleNative: 'Ravi de faire ta connaissance.',
+          note: 'Décrit une joie ponctuelle liée à une situation, à la '
+              'différence de 幸福 (xìngfú), un bonheur plus profond et '
+              'durable (la vie, un mariage).',
+        ),
+        VocabEntry(
+          id: 'zh-v-nanguo',
+          target: '难过',
+          native: 'triste',
+          pos: 'adjectif',
+          romanization: 'nánguò',
+          example: '听到这个消息我很难过。',
+          exampleNative: 'J\'ai été très triste en apprenant cette '
+              'nouvelle.',
+          note: 'Littéralement "difficile à passer/traverser", une image '
+              'qui rend bien l\'idée d\'un moment pénible à surmonter.',
+        ),
+        VocabEntry(
+          id: 'zh-v-danxin',
+          target: '担心',
+          native: 'inquiet, s\'inquiéter',
+          pos: 'verbe',
+          romanization: 'dānxīn',
+          example: '别担心，一切都会好的。',
+          exampleNative: 'Ne t\'inquiète pas, tout ira bien.',
+          note: 'Se comporte comme un verbe : 担心某事 ("s\'inquiéter de '
+              'quelque chose"), pas besoin de mot de liaison type "de".',
+        ),
+        VocabEntry(
+          id: 'zh-v-shengqi',
+          target: '生气',
+          native: 'en colère, fâché',
+          pos: 'adjectif, verbe',
+          romanization: 'shēngqì',
+          example: '他为什么生气了？',
+          exampleNative: 'Pourquoi est-il en colère ?',
+          note: 'Littéralement "faire naître un souffle/une énergie" — '
+              'l\'image chinoise classique de la colère comme un excès de '
+              'qi.',
+        ),
+        VocabEntry(
+          id: 'zh-v-jinzhang',
+          target: '紧张',
+          native: 'nerveux, stressé',
+          pos: 'adjectif',
+          romanization: 'jǐnzhāng',
+          example: '面试前我很紧张。',
+          exampleNative: 'Je suis très nerveux avant l\'entretien.',
+          note: 'S\'emploie aussi pour une situation elle-même tendue '
+              '(政治紧张, tensions politiques), pas seulement pour une '
+              'personne.',
+        ),
+        VocabEntry(
+          id: 'zh-v-fangxin',
+          target: '放心',
+          native: 'être rassuré, tranquille',
+          pos: 'verbe',
+          romanization: 'fàngxīn',
+          example: '你放心，我会照顾好她的。',
+          exampleNative: 'Rassure-toi, je prendrai bien soin d\'elle.',
+          note: 'Littéralement "poser/relâcher le cœur" — l\'antonyme '
+              'exact de 担心 (s\'inquiéter).',
+        ),
+        VocabEntry(
+          id: 'zh-v-buhaoyisi',
+          target: '不好意思',
+          native: 'gêné ; aussi "excusez-moi", "désolé"',
+          pos: 'expression',
+          romanization: 'bù hǎoyìsi',
+          example: '不好意思，我迟到了。',
+          exampleNative: 'Désolé, je suis en retard.',
+          note: 'Double usage très fréquent : décrit la gêne ressentie ET '
+              'sert de formule d\'excuse polie légère, plus douce que 对不起.',
+        ),
+        VocabEntry(
+          id: 'zh-v-shiwang',
+          target: '失望',
+          native: 'déçu',
+          pos: 'adjectif',
+          romanization: 'shīwàng',
+          example: '考试结果让我很失望。',
+          exampleNative: 'Le résultat de l\'examen m\'a beaucoup déçu.',
+          note: 'Littéralement "perdre l\'espoir" ; s\'utilise aussi bien '
+              'pour une personne ("il m\'a déçu") que pour une situation.',
+        ),
+        VocabEntry(
+          id: 'zh-v-jiaoao',
+          target: '骄傲',
+          native: 'fier',
+          pos: 'adjectif',
+          romanization: 'jiāo\'ào',
+          example: '我为你感到骄傲。',
+          exampleNative: 'Je suis fier de toi.',
+          note: 'Peut aussi vouloir dire "arrogant" selon le contexte — '
+              'nuance qu\'il faut deviner au ton, exactement comme "fier" '
+              'peut aussi sonner négatif en français.',
+        ),
+        VocabEntry(
+          id: 'zh-v-xianmu-jidu',
+          target: '羡慕 / 嫉妒',
+          native: 'envieux (positif) / jaloux (négatif)',
+          pos: 'verbe, adjectif',
+          romanization: 'xiànmù / jídù',
+          example: '我很羡慕你的生活，但我不嫉妒你。',
+          exampleNative: 'J\'envie ta vie (admiration), mais je ne suis pas '
+              'jaloux de toi.',
+          note: 'Distinction nette que le français gomme souvent : 羡慕 est '
+              'une envie admirative sans rancœur, 嫉妒 est la jalousie au '
+              'sens négatif et possessif.',
+        ),
+        VocabEntry(
+          id: 'zh-v-xiang-miss',
+          target: '想',
+          native: 'avoir envie de ; penser à ; manquer à (qqn)',
+          pos: 'verbe',
+          romanization: 'xiǎng',
+          example: '我很想你。',
+          exampleNative: 'Tu me manques beaucoup.',
+          note: 'Verbe extrêmement polyvalent : 想 + verbe = "avoir envie '
+              'de faire", 想 + personne = "penser à / avoir cette personne '
+              'qui manque" — le sens exact dépend de ce qui suit.',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

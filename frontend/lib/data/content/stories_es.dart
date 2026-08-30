@@ -222,6 +222,103 @@ final storiesEs = <Story>[
     ],
   ),
   Story(
+    id: 'es-story-direcciones',
+    languageCode: 'es',
+    title: '¿Cómo se llega a la plaza?',
+    titleNative: 'Comment aller sur la place ?',
+    blurb:
+        'Un dialogue dans la rue pour demander son chemin — les mots pour '
+        'comprendre une réponse même quand elle va vite.',
+    level: StoryLevel.first,
+    takeaway:
+        'Pour demander un chemin : "¿cómo se llega a...?" ; pour comprendre '
+        'la réponse, retiens "todo recto" (tout droit), "a la derecha/'
+        'izquierda" (à droite/gauche) et "girar" (tourner).',
+    lines: [
+      _l('[Perdona|Excuse-moi], ¿[cómo se llega|comment arrive-t-on] a la [plaza mayor|place principale]?',
+          speaker: 'Turista',
+          native: 'Excuse-moi, comment on arrive sur la place principale ?',
+          note: '"Perdona" (tutoiement) ou "perdone" (vouvoiement) selon '
+              'à qui l\'on s\'adresse — un détail que l\'espagnol marque '
+              'toujours, contrairement à l\'anglais.'),
+      _l('[Sigue|Continue] [todo recto|tout droit] hasta el [semáforo|feu '
+              'rouge].',
+          speaker: 'Vecina',
+          native: 'Continue tout droit jusqu\'au feu.',
+          note: '"Todo recto" est l\'expression figée pour "tout droit" ; '
+              '"recto" seul veut aussi dire "droit" au sens moral, un faux '
+              'ami partiel avec le français "recto" (le côté d\'une '
+              'feuille).'),
+      _l('¿[Está lejos|c\'est loin]?',
+          speaker: 'Turista', native: 'C\'est loin ?'),
+      _l('No, está a [diez|dix] [minutos|minutes] a [pie|pied].',
+          speaker: 'Vecina',
+          native: 'Non, c\'est à dix minutes à pied.',
+          note: '"Estar a + distance/temps" est la construction fixe pour '
+              'situer un lieu : "está a diez minutos", jamais "es a diez '
+              'minutos".'),
+      _l('[Luego|Ensuite] [gira|tourne] a la [derecha|droite] en la calle '
+              'Mayor.',
+          speaker: 'Vecina',
+          native: 'Ensuite tourne à droite dans la rue Mayor.'),
+      _l('¿A la derecha en la [primera|première] calle?',
+          speaker: 'Turista',
+          native: 'À droite dans la première rue ?'),
+      _l('No, en la [segunda|deuxième]. La primera es un [callejón sin '
+              'salida|cul-de-sac].',
+          speaker: 'Vecina',
+          native: 'Non, dans la deuxième. La première est une impasse.',
+          note: '"Callejón sin salida" veut dire littéralement "ruelle '
+              'sans sortie" — une image parlante à retenir telle quelle.'),
+      _l('[Vale|D\'accord], sigo recto y luego a la derecha en la segunda '
+              'calle.',
+          speaker: 'Turista',
+          native: 'D\'accord, je continue tout droit puis à droite dans '
+              'la deuxième rue.',
+          note: '"Vale" est l\'accord oral le plus courant en Espagne, '
+              'équivalent de "d\'accord" ; en Amérique latine on dira '
+              'plutôt "está bien" ou "dale".'),
+      _l('[Exacto|Exactement]. Y no puedes [perderte|te perdre], hay una '
+              '[iglesia|église] [justo|juste] [enfrente|en face].',
+          speaker: 'Vecina',
+          native: 'Exactement. Et tu ne peux pas te perdre, il y a une '
+              'église juste en face.',
+          note: '"Perderte" est la forme pronominale de "perder" : "no '
+              'puedes perderte" = tu ne peux pas te tromper de chemin.'),
+      _l('[Muchas gracias|Merci beaucoup], muy [amable|aimable].',
+          speaker: 'Turista', native: 'Merci beaucoup, très aimable.'),
+    ],
+    questions: [
+      const StoryQuestion(
+        question: 'Que veut dire "todo recto" ?',
+        options: ['Tourne à droite', 'Tout droit', 'Fais demi-tour'],
+        answerIndex: 1,
+        explanation: '"Sigue todo recto hasta el semáforo."',
+      ),
+      const StoryQuestion(
+        question: 'Dans quelle rue le touriste doit-il tourner à droite ?',
+        options: [
+          'La première, un cul-de-sac',
+          'La deuxième, la calle Mayor',
+          'Il ne doit pas tourner',
+        ],
+        answerIndex: 1,
+        explanation: '"No, en la segunda. La primera es un callejón sin '
+            'salida."',
+      ),
+      const StoryQuestion(
+        question: 'Comment la voisine rassure-t-elle le touriste ?',
+        options: [
+          'Il y a un panneau indicateur',
+          'Une église est juste en face de la place',
+          'Elle va l\'accompagner',
+        ],
+        answerIndex: 1,
+        explanation: '"No puedes perderte, hay una iglesia justo enfrente."',
+      ),
+    ],
+  ),
+  Story(
     id: 'es-story-echo-de-menos',
     languageCode: 'es',
     title: 'Lo que echo de menos',

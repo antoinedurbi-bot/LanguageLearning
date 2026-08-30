@@ -300,6 +300,290 @@ const vocabJa = VocabularyPack(
         ),
       ],
     ),
+    VocabTheme(
+      id: 'ja-t4',
+      title: '家族 - La famille',
+      subtitle: 'Le mot change selon qu\'on parle de sa famille ou de celle des autres',
+      entries: [
+        VocabEntry(
+          id: 'ja-v-kazoku',
+          target: 'かぞく',
+          native: 'famille',
+          pos: 'nom',
+          romanization: 'kazoku',
+          example: 'かぞくは　なんにんですか。',
+          exampleNative: 'Vous êtes combien dans votre famille ?',
+          note: 'Mot neutre pour parler de sa propre famille comme de '
+              'celle des autres. Le kanji est 家族.',
+        ),
+        VocabEntry(
+          id: 'ja-v-ryoushin',
+          target: 'りょうしん',
+          native: 'parents (père et mère)',
+          pos: 'nom',
+          romanization: 'ryōshin',
+          example: 'りょうしんは　おおさかに　います。',
+          exampleNative: 'Mes parents sont à Osaka.',
+          note: 'Kanji 両親, littéralement "les deux parents". Pour parler '
+              'des parents de quelqu\'un d\'autre poliment, on dit ご両親 '
+              '(go-ryōshin).',
+        ),
+        VocabEntry(
+          id: 'ja-v-ani-otouto',
+          target: 'あに / おとうと',
+          native: 'frère aîné / frère cadet (les miens)',
+          pos: 'nom',
+          romanization: 'ani / otōto',
+          example: 'あにが　ひとり、おとうとが　ひとり　います。',
+          exampleNative: 'J\'ai un frère aîné et un frère cadet.',
+          note: 'Distinction cruciale : あに/おとうと servent uniquement '
+              'pour parler de SES propres frères. Pour le frère de '
+              'quelqu\'un d\'autre, on dit toujours お兄さん (onii-san) ou '
+              '弟さん (otōto-san), quel que soit son âge.',
+        ),
+        VocabEntry(
+          id: 'ja-v-ane-imouto',
+          target: 'あね / いもうと',
+          native: 'sœur aînée / sœur cadette (les miennes)',
+          pos: 'nom',
+          romanization: 'ane / imōto',
+          example: 'あねは　わたしより　みっつ　うえです。',
+          exampleNative: 'Ma sœur aînée a trois ans de plus que moi.',
+          note: 'Même logique que あに/おとうと : réservé à sa propre '
+              'famille. Pour la sœur de quelqu\'un d\'autre : お姉さん '
+              '(onee-san) ou 妹さん (imōto-san).',
+        ),
+        VocabEntry(
+          id: 'ja-v-kodomo',
+          target: 'こども',
+          native: 'enfant',
+          pos: 'nom',
+          romanization: 'kodomo',
+          example: 'こどもが　ふたり　います。',
+          exampleNative: 'J\'ai deux enfants.',
+          note: 'Kanji 子供. S\'emploie aussi bien pour "un enfant" que '
+              'pour "les enfants" en général, le japonais ne marquant pas '
+              'toujours le pluriel.',
+        ),
+        VocabEntry(
+          id: 'ja-v-hitorikko',
+          target: 'ひとりっこ',
+          native: 'enfant unique',
+          pos: 'nom',
+          romanization: 'hitorikko',
+          example: 'わたしは　ひとりっこです。',
+          exampleNative: 'Je suis enfant unique.',
+          note: 'Construit sur ひとり (un/seul) + 子 (enfant) : littéralement '
+              '"l\'enfant seul(e)".',
+        ),
+        VocabEntry(
+          id: 'ja-v-sodateru',
+          target: 'そだてる',
+          native: 'élever (un enfant)',
+          pos: 'verbe',
+          romanization: 'sodateru',
+          example: 'ひとりで　さんにんの　こどもを　そだてました。',
+          exampleNative: 'Elle a élevé seule trois enfants.',
+          note: 'Verbe transitif en る (ichidan) : そだてる (élever qqn) a '
+              'pour pendant intransitif そだつ (grandir, se développer).',
+        ),
+        VocabEntry(
+          id: 'ja-v-niru',
+          target: 'にる',
+          native: 'ressembler à',
+          pos: 'verbe',
+          romanization: 'niru',
+          example: 'あなたは　おかあさんに　にていますね。',
+          exampleNative: 'Vous ressemblez à votre mère.',
+          note: 'S\'emploie presque toujours à la forme en ている (にている) : '
+              'l\'état de ressemblance est vu comme un résultat durable, pas '
+              'une action ponctuelle.',
+        ),
+        VocabEntry(
+          id: 'ja-v-nakagaii',
+          target: 'なかがいい',
+          native: 'bien s\'entendre (avec qqn)',
+          pos: 'expression',
+          romanization: 'naka ga ii',
+          example: 'あねと　なかが　いいです。',
+          exampleNative: 'Je m\'entends bien avec ma sœur.',
+          note: 'Littéralement "la relation (仲) est bonne". L\'antonyme, '
+              'なかが悪い (naka ga warui), veut dire "être en froid avec '
+              'qqn".',
+        ),
+        VocabEntry(
+          id: 'ja-v-sokkuri',
+          target: 'そっくり',
+          native: 'qui se ressemble comme deux gouttes d\'eau',
+          pos: 'adjectif',
+          romanization: 'sokkuri',
+          example: 'ふたごは　そっくりです。',
+          exampleNative: 'Les jumeaux se ressemblent trait pour trait.',
+          note: 'Plus fort et plus imagé que にている : réservé à une '
+              'ressemblance frappante, presque parfaite.',
+        ),
+        VocabEntry(
+          id: 'ja-v-otona',
+          target: 'おとな',
+          native: 'adulte',
+          pos: 'nom',
+          romanization: 'otona',
+          example: 'こどもは　むりょうですが、おとなは　はらいます。',
+          exampleNative: 'C\'est gratuit pour les enfants, mais les '
+              'adultes paient.',
+          note: 'Kanji 大人, littéralement "grande personne". Terme neutre '
+              'et administratif, utilisé partout des tarifs de musée aux '
+              'formulaires officiels.',
+        ),
+      ],
+    ),
+    VocabTheme(
+      id: 'ja-t5',
+      title: '気持ち - Les émotions',
+      subtitle: 'Nuancer ce qu\'on ressent, au-delà de うれしい/かなしい',
+      entries: [
+        VocabEntry(
+          id: 'ja-v-kimochi',
+          target: 'きもち',
+          native: 'sentiment, ressenti',
+          pos: 'nom',
+          romanization: 'kimochi',
+          example: 'きもちが　わかります。',
+          exampleNative: 'Je comprends ce que vous ressentez.',
+          note: 'Kanji 気持ち, littéralement "ce que le qi/l\'énergie '
+              'porte". Mot de base pour introduire n\'importe quel état '
+              'émotionnel.',
+        ),
+        VocabEntry(
+          id: 'ja-v-ureshii',
+          target: 'うれしい',
+          native: 'content, heureux (à propos d\'un événement précis)',
+          pos: 'adjectif',
+          romanization: 'ureshii',
+          example: 'あえて　うれしいです。',
+          exampleNative: 'Je suis content de vous rencontrer.',
+          note: 'Décrit une joie ponctuelle liée à un événement, à la '
+              'différence de しあわせ (shiawase), un bonheur plus profond '
+              'et durable (la vie en général).',
+        ),
+        VocabEntry(
+          id: 'ja-v-kanashii',
+          target: 'かなしい',
+          native: 'triste',
+          pos: 'adjectif',
+          romanization: 'kanashii',
+          example: 'その　にゅーすを　きいて　かなしかったです。',
+          exampleNative: 'J\'ai été triste en apprenant cette nouvelle.',
+          note: 'Adjectif en い classique : se conjugue au passé en '
+              'かなしかった, comme tous les adjectifs de cette classe.',
+        ),
+        VocabEntry(
+          id: 'ja-v-shinpai',
+          target: 'しんぱい',
+          native: 'inquiétude, s\'inquiéter',
+          pos: 'nom, verbe',
+          romanization: 'shinpai',
+          example: 'しんぱいしないでください。',
+          exampleNative: 'Ne vous inquiétez pas.',
+          note: 'Nom verbal en する : しんぱいする (s\'inquiéter). Kanji 心配, '
+              'littéralement "distribution du cœur" — l\'idée que l\'esprit '
+              'se disperse sur plusieurs soucis.',
+        ),
+        VocabEntry(
+          id: 'ja-v-okoru',
+          target: 'おこる',
+          native: 'se mettre en colère',
+          pos: 'verbe',
+          romanization: 'okoru',
+          example: 'せんせいが　おこりました。',
+          exampleNative: 'Le professeur s\'est mis en colère.',
+          note: 'Verbe intransitif (godan). L\'adjectif dérivé おこりっぽい '
+              'décrit une personne "qui s\'énerve facilement".',
+        ),
+        VocabEntry(
+          id: 'ja-v-kinchou',
+          target: 'きんちょう',
+          native: 'nervosité, stress',
+          pos: 'nom, verbe',
+          romanization: 'kinchō',
+          example: 'めんせつの　まえは　きんちょうします。',
+          exampleNative: 'Je suis stressé avant un entretien.',
+          note: 'Nom verbal en する : きんちょうする. S\'emploie aussi pour '
+              'une situation tendue (国際緊張, tensions internationales), '
+              'pas seulement pour une personne.',
+        ),
+        VocabEntry(
+          id: 'ja-v-anshin',
+          target: 'あんしん',
+          native: 'tranquillité, être rassuré',
+          pos: 'nom, verbe',
+          romanization: 'anshin',
+          example: 'それを　きいて　あんしんしました。',
+          exampleNative: 'J\'ai été rassuré en entendant ça.',
+          note: 'Kanji 安心, littéralement "cœur en paix" — l\'antonyme '
+              'exact de しんぱい (l\'inquiétude).',
+        ),
+        VocabEntry(
+          id: 'ja-v-hazukashii',
+          target: 'はずかしい',
+          native: 'gêné, honteux',
+          pos: 'adjectif',
+          romanization: 'hazukashii',
+          example: 'まちがえて　はずかしかったです。',
+          exampleNative: 'J\'étais gêné d\'avoir fait une erreur.',
+          note: 'Couvre à la fois la timidité passagère et la honte plus '
+              'profonde ; le contexte seul permet de distinguer les deux '
+              'nuances.',
+        ),
+        VocabEntry(
+          id: 'ja-v-gakkari',
+          target: 'がっかり',
+          native: 'déçu',
+          pos: 'adverbe, verbe',
+          romanization: 'gakkari',
+          example: 'けっかを　きいて　がっかりしました。',
+          exampleNative: 'J\'ai été déçu en apprenant le résultat.',
+          note: 'S\'emploie surtout avec する : がっかりする. Onomatopée '
+              'expressive à l\'origine, très courante à l\'oral.',
+        ),
+        VocabEntry(
+          id: 'ja-v-urayamashii',
+          target: 'うらやましい',
+          native: 'envieux (admiratif, pas négatif)',
+          pos: 'adjectif',
+          romanization: 'urayamashii',
+          example: 'あなたの　せいかつが　うらやましいです。',
+          exampleNative: 'J\'envie votre style de vie (admiration).',
+          note: 'Contrairement au français où "envieux" sonne souvent '
+              'négatif, うらやましい est un compliment sincère porté à ce que '
+              'quelqu\'un d\'autre a ou vit.',
+        ),
+        VocabEntry(
+          id: 'ja-v-tanoshimi',
+          target: 'たのしみ',
+          native: 'hâte, quelque chose qu\'on attend avec plaisir',
+          pos: 'nom',
+          romanization: 'tanoshimi',
+          example: 'りょこうが　たのしみです。',
+          exampleNative: 'J\'ai hâte d\'être en voyage.',
+          note: 'Expression figée très fréquente : X が たのしみです ("j\'ai '
+              'hâte de/pour X"), jamais de verbe "avoir hâte" à proprement '
+              'parler en japonais.',
+        ),
+        VocabEntry(
+          id: 'ja-v-sabishii',
+          target: 'さびしい',
+          native: 'triste de l\'absence de qqn, seul(e) qui manque',
+          pos: 'adjectif',
+          romanization: 'sabishii',
+          example: 'あなたが　いなくて　さびしいです。',
+          exampleNative: 'Tu me manques, je me sens seul sans toi.',
+          note: 'Different de ひとりで (seul physiquement) : さびしい porte '
+              'sur le sentiment d\'un manque affectif, avec ou sans '
+              'solitude physique.',
+        ),
+      ],
+    ),
   ],
   phrases: [
     KeyPhrase(

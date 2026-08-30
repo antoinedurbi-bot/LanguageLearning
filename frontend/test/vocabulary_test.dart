@@ -79,6 +79,47 @@ void main() {
             reason: '$code has no colors entry');
       }
     });
+
+    test('every core language now covers family and emotions vocabulary',
+        () {
+      for (final code in ['en', 'es', 'zh', 'ja']) {
+        final pack = vocabularyFor(code)!;
+        final titles = pack.themes.map((t) => t.title).join(' | ');
+        expect(
+          titles.toLowerCase(),
+          anyOf(contains('famil'), contains('家'), contains('家族')),
+          reason: '$code has no family theme (themes: $titles)',
+        );
+        expect(
+          titles.toLowerCase(),
+          anyOf(contains('émotion'), contains('感觉'), contains('気持ち')),
+          reason: '$code has no emotions theme (themes: $titles)',
+        );
+      }
+    });
+
+    test('the new family/emotions packs meet the same depth bar as the '
+        'rest of the app: 8+ entries, each with a real example', () {
+      const newThemeIds = {
+        'en-t5', 'en-t6', // family, emotions
+        'es-t5', 'es-t6',
+        'zh-t4', 'zh-t5',
+        'ja-t4', 'ja-t5',
+      };
+      for (final pack in vocabularies.values) {
+        for (final theme in pack.themes) {
+          if (!newThemeIds.contains(theme.id)) continue;
+          expect(theme.entries.length, greaterThanOrEqualTo(8),
+              reason: '${theme.id} is too thin for a real theme');
+          for (final entry in theme.entries) {
+            expect(entry.example.trim(), isNotEmpty,
+                reason: '${entry.id} has no example sentence');
+            expect(entry.exampleNative.trim(), isNotEmpty,
+                reason: '${entry.id} has no French translation');
+          }
+        }
+      }
+    });
   });
 
   group('islands', () {
