@@ -211,7 +211,7 @@ final _zh2Grammar = GrammarLesson(
       ),
     ],
     walkthroughs: [
-      WorkedExample(
+      const WorkedExample(
         target: '我要一杯咖啡和一份米饭。',
         native: 'Je voudrais un café et un plat de riz.',
         romanization: 'Wǒ yào yì bēi kāfēi hé yí fèn mǐfàn.',
@@ -246,7 +246,7 @@ final _zh2Grammar = GrammarLesson(
           ),
         ],
       ),
-      WorkedExample(
+      const WorkedExample(
         target: '这个房间里有几个人？',
         native: 'Combien de personnes y a-t-il dans cette pièce ?',
         romanization: 'Zhège fángjiān lǐ yǒu jǐ ge rén?',
@@ -279,7 +279,7 @@ final _zh2Grammar = GrammarLesson(
     ],
   ),
   blocks: [
-    ExplanationBlock(
+    const ExplanationBlock(
       heading: 'Pourquoi un mot entre le nombre et le nom',
       body: 'La ou le français dit "un cafe", le chinois dit litteralement '
           '"un [classificateur] cafe" : 一杯咖啡 (yì bēi kāfēi), ou 杯 (bēi) '
@@ -287,7 +287,7 @@ final _zh2Grammar = GrammarLesson(
           'categorie d\'objet a son propre classificateur, un peu comme '
           'le français dit "une feuille de papier" plutôt que "un papier".',
     ),
-    MeasureWordBlock(
+    const MeasureWordBlock(
       heading: 'Classificateurs frequents',
       entries: [
         MeasureWordEntry(
@@ -321,14 +321,14 @@ final _zh2Grammar = GrammarLesson(
         ),
       ],
     ),
-    ExplanationBlock(
+    const ExplanationBlock(
       heading: 'Question sans 吗 : verbe-不/没-verbe',
       body: 'Une autre facon tres fréquente de poser une question est de '
           'repeter le verbe avec sa negation entre les deux : 有没有 (yǒu '
           'méiyǒu, litt. "avoir pas-avoir") demande "y en a-t-il ?" sans '
           'avoir besoin de 吗 à la fin.',
     ),
-    ExampleBlock(
+    const ExampleBlock(
       examples: [
         GrammarExample(
           target: '有没有素的？',
@@ -338,7 +338,7 @@ final _zh2Grammar = GrammarLesson(
         ),
       ],
     ),
-    MistakeBlock(
+    const MistakeBlock(
       wrong: '多少人在这儿？ (pour un petit nombre attendu)',
       right: '几个人在这儿？',
       why: '几 (jǐ) s\'utilise pour un nombre qu\'on imagine petit et '
@@ -521,7 +521,7 @@ final courseZh = Course(
       level: 'A1',
       grammarLesson: _zh1Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'zh-1-1',
           target: '你好，我叫马克。',
           native: 'Bonjour, je m\'appelle Marc.',
@@ -531,7 +531,7 @@ final courseZh = Course(
           distractors: ['是', '名字', '您'],
           focus: '叫 jiào sert directement a donner son nom',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-1-2',
           target: '很高兴认识你。',
           native: 'Enchante.',
@@ -541,7 +541,7 @@ final courseZh = Course(
           distractors: ['太', '知道', '见'],
           focus: '认识 = connaître une personne (pas 知道)',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-1-3',
           target: '你是哪国人？',
           native: 'De quel pays viens-tu ?',
@@ -551,7 +551,7 @@ final courseZh = Course(
           distractors: ['什么', '那', '从'],
           focus: '哪 nǎ = quel, 那 nà = ce/cela',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-1-4',
           target: '我是法国人。',
           native: 'Je suis français.',
@@ -561,7 +561,7 @@ final courseZh = Course(
           distractors: ['在', '的', '来'],
           focus: 'Pays + 人 forme la nationalite',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-1-5',
           target: '对不起，我听不懂。',
           native: 'Désolé, je ne comprends pas.',
@@ -571,7 +571,7 @@ final courseZh = Course(
           distractors: ['不听懂', '没有', '知道'],
           focus: '听不懂 = entendre sans arriver a comprendre',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-1-6',
           target: '你可以说慢一点吗？',
           native: 'Peux-tu parler un peu plus lentement ?',
@@ -659,7 +659,7 @@ final courseZh = Course(
       level: 'A1',
       grammarLesson: _zh3Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'zh-3-1',
           target: '请问，地铁站在哪儿？',
           native: 'Excusez-moi, ou est le metro ?',
@@ -669,7 +669,7 @@ final courseZh = Course(
           distractors: ['对不起', '是', '哪个'],
           focus: '在 localise, 是 identifie',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-3-2',
           target: '在左边。',
           native: 'C\'est a gauche.',
@@ -679,7 +679,7 @@ final courseZh = Course(
           distractors: ['右边', '是', '前面'],
           focus: '左边 / 右边 : le suffixe 边 marque le côté',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-3-3',
           target: '怎么去机场？',
           native: 'Comment aller a l\'aeroport ?',
@@ -689,7 +689,7 @@ final courseZh = Course(
           distractors: ['什么', '到', '车站'],
           focus: '怎么 + verbe = comment faire quelque chose',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-3-4',
           target: '离这儿远吗？',
           native: 'Est-ce loin d\'ici ?',
@@ -699,7 +699,7 @@ final courseZh = Course(
           distractors: ['从', '那儿', '近'],
           focus: '离 exprime la distance entre deux points',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-3-5',
           target: '我在找这个地址。',
           native: 'Je cherche cette adresse.',
@@ -709,7 +709,7 @@ final courseZh = Course(
           distractors: ['正', '看', '那个'],
           focus: '在 devant un verbe marque l\'action en cours',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-3-6',
           target: '火车六点半开。',
           native: 'Le train part a six heures et demie.',
@@ -728,7 +728,7 @@ final courseZh = Course(
       level: 'A2',
       grammarLesson: _zh4Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'zh-4-1',
           target: '我每天七点起床。',
           native: 'Je me leve a sept heures tous les jours.',
@@ -738,7 +738,7 @@ final courseZh = Course(
           distractors: ['天天的', '起来', '在七点'],
           focus: 'Pas de preposition devant l\'heure',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-4-2',
           target: '她在医院工作。',
           native: 'Elle travaille dans un hopital.',
@@ -748,7 +748,7 @@ final courseZh = Course(
           distractors: ['他', '工作在', '里面'],
           focus: 'Le lieu se place avant le verbe, pas après',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-4-3',
           target: '我们周末不上班。',
           native: 'Nous ne travaillons pas le week-end.',
@@ -758,7 +758,7 @@ final courseZh = Course(
           distractors: ['没', '工作不', '星期'],
           focus: '不 nie une habitude, 没 nie le passe',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-4-4',
           target: '你几点下班？',
           native: 'A quelle heure finis-tu le travail ?',
@@ -768,7 +768,7 @@ final courseZh = Course(
           distractors: ['多少点', '上班', '吗'],
           focus: '几点 suffit: pas besoin de 吗',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-4-5',
           target: '我很累，因为昨天没睡好。',
           native: 'Je suis fatigue parce que j\'ai mal dormi hier.',
@@ -778,7 +778,7 @@ final courseZh = Course(
           distractors: ['是累', '不', '所以'],
           focus: 'Un adjectif se passe de 是 mais prend 很',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-4-6',
           target: '他正在看电影。',
           native: 'Il est en train de regarder un film.',
@@ -797,7 +797,7 @@ final courseZh = Course(
       level: 'A2',
       grammarLesson: _zh5Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'zh-5-1',
           target: '我去年去了北京。',
           native: 'Je suis allé a Pekin l\'année dernière.',
@@ -807,7 +807,7 @@ final courseZh = Course(
           distractors: ['过', '明年', '在'],
           focus: '了 marque une action achevee',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-5-2',
           target: '我们在那儿待了一个星期。',
           native: 'Nous y sommes restes une semaine.',
@@ -817,7 +817,7 @@ final courseZh = Course(
           distractors: ['这儿', '过', '个一'],
           focus: 'La durée se place après le verbe',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-5-3',
           target: '你去过日本吗？',
           native: 'Es-tu deja allé au Japon ?',
@@ -827,7 +827,7 @@ final courseZh = Course(
           distractors: ['了', '中国', '呢'],
           focus: '过 marque une experience deja vecue',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-5-4',
           target: '我没吃过这个。',
           native: 'Je n\'ai jamais mange ca.',
@@ -837,7 +837,7 @@ final courseZh = Course(
           distractors: ['不', '了', '那个'],
           focus: 'La negation de 过 est 没, jamais 不',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-5-5',
           target: '比我想的好。',
           native: 'C\'est mieux que ce que je pensais.',
@@ -847,7 +847,7 @@ final courseZh = Course(
           distractors: ['更', '跟', '很好'],
           focus: 'Avec 比 on ne met jamais 很 devant l\'adjectif',
         ),
-        const CardItem(
+        CardItem(
           id: 'zh-5-6',
           target: '下雨下了一天。',
           native: 'Il a plu toute la journée.',

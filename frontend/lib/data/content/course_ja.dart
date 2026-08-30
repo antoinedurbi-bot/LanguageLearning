@@ -105,7 +105,7 @@ final courseJa = Course(
       level: 'A1',
       grammarLesson: _u2Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'ja-2-1',
           target: 'これはほんです。',
           native: 'Ceci est un livre.',
@@ -115,7 +115,7 @@ final courseJa = Course(
           distractors: ['それは', 'あれは', 'ほんでした。'],
           focus: 'これ = "ceci" (pres de moi)',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-2-2',
           target: 'それはわたしのかばんです。',
           native: 'Ça, c\'est mon sac.',
@@ -125,7 +125,7 @@ final courseJa = Course(
           distractors: ['あなたの', 'わたしは', 'かばんでした。'],
           focus: 'の relie un possesseur a ce qu\'il possede, comme "de"',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-2-3',
           target: 'テーブルのうえにねこがいます。',
           native: 'Il y a un chat sur la table.',
@@ -135,7 +135,7 @@ final courseJa = Course(
           distractors: ['あります。', 'ねこは', 'したに'],
           focus: 'います pour les etres anime (personnes, animaux)',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-2-4',
           target: 'つくえのうえにほんがあります。',
           native: 'Il y a un livre sur le bureau.',
@@ -145,7 +145,7 @@ final courseJa = Course(
           distractors: ['います。', 'ほんは', 'したに'],
           focus: 'あります pour les objets et plantes (inanimes)',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-2-5',
           target: 'トイレはどこですか。',
           native: 'Où sont les toilettes ?',
@@ -164,7 +164,7 @@ final courseJa = Course(
       level: 'A1',
       grammarLesson: _u3Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'ja-3-1',
           target: 'まいあさパンをたべます。',
           native: 'Je mange du pain tous les matins.',
@@ -174,7 +174,7 @@ final courseJa = Course(
           distractors: ['たべました。', 'パンが', 'たべません。'],
           focus: 'を marque l\'objet direct du verbe',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-3-2',
           target: 'きのうコーヒーをのみました。',
           native: 'Hier, j\'ai bu du café.',
@@ -184,7 +184,7 @@ final courseJa = Course(
           distractors: ['のみます。', 'コーヒーが', 'のみません。'],
           focus: 'ました = passe poli de ます',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-3-3',
           target: 'にちようびにがっこうへいきません。',
           native: 'Je ne vais pas à l\'école le dimanche.',
@@ -194,7 +194,7 @@ final courseJa = Course(
           distractors: ['いきます。', 'がっこうを', 'いきませんでした。'],
           focus: 'ません = negatif poli present ; に marque un point dans le temps',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-3-4',
           target: 'としょかんでほんをよみます。',
           native: 'Je lis un livre à la bibliothèque.',
@@ -204,7 +204,7 @@ final courseJa = Course(
           distractors: ['としょかんに', 'よみました。', 'ほんが'],
           focus: 'で marque le lieu ou une action se deroule (different de に)',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-3-5',
           target: 'ともだちとえいがをみました。',
           native: 'J\'ai vu un film avec un ami.',
@@ -214,7 +214,7 @@ final courseJa = Course(
           distractors: ['ともだちに', 'みます。', 'えいがが'],
           focus: 'と = "avec" entre deux personnes qui font l\'action ensemble',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-3-6',
           target: 'でんしゃでかいしゃにいきます。',
           native: 'Je vais au bureau en train.',
@@ -233,7 +233,7 @@ final courseJa = Course(
       level: 'A2',
       grammarLesson: _u4Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'ja-4-1',
           target: 'このみせはたかいです。',
           native: 'Ce magasin est cher.',
@@ -243,7 +243,7 @@ final courseJa = Course(
           distractors: ['たかいでした。', 'たかくないです。', 'たかいな'],
           focus: 'Adjectif en い : porte lui-meme le present, です n\'ajoute que la politesse',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-4-2',
           target: 'このみせはたかくないです。',
           native: 'Ce magasin n\'est pas cher.',
@@ -253,7 +253,7 @@ final courseJa = Course(
           distractors: ['たかいです。', 'たかいくない', 'たかくなかった'],
           focus: 'Negatif d\'un adjectif en い : い devient くない',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-4-3',
           target: 'きのうはあつかったです。',
           native: 'Hier, il faisait chaud.',
@@ -263,7 +263,7 @@ final courseJa = Course(
           distractors: ['あついです。', 'あつくないです。', 'あつかったでした。'],
           focus: 'Passe d\'un adjectif en い : い devient かった',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-4-4',
           target: 'このまちはきれいです。',
           native: 'Cette ville est belle/propre.',
@@ -273,7 +273,7 @@ final courseJa = Course(
           distractors: ['きれいいです。', 'きれいな', 'きれかったです。'],
           focus: 'きれい est un adjectif en な malgre son い final : ne pas le conjuguer comme un adjectif en い',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-4-5',
           target: 'しずかなへやがすきです。',
           native: 'J\'aime les chambres calmes.',
@@ -292,7 +292,7 @@ final courseJa = Course(
       level: 'A2',
       grammarLesson: _u5Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'ja-5-1',
           target: 'まいにちにほんごをべんきょうする。',
           native: 'J\'étudie le japonais tous les jours. (familier)',
@@ -302,7 +302,7 @@ final courseJa = Course(
           distractors: ['べんきょうします。', 'べんきょうした。', 'べんきょうしない。'],
           focus: 'する = forme neutre/dictionnaire, utilisee entre amis ou dans un journal',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-5-2',
           target: 'あした、ともだちにあう。',
           native: 'Demain, je vois un ami. (familier)',
@@ -312,7 +312,7 @@ final courseJa = Course(
           distractors: ['あいます。', 'あった。', 'あわない。'],
           focus: 'に marque la personne qu\'on rencontre',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-5-3',
           target: 'それ、しらない。',
           native: 'Ça, je (ne le) sais pas. (familier)',
@@ -322,7 +322,7 @@ final courseJa = Course(
           distractors: ['しりません。', 'しった。', 'しる。'],
           focus: 'Negatif neutre : る devient らない pour ce verbe irregulier de sens',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-5-4',
           target: 'せんせいはがっこうにいらっしゃいます。',
           native: 'Le professeur est à l\'école. (très poli)',
@@ -341,7 +341,7 @@ final courseJa = Course(
       level: 'A2',
       grammarLesson: _u6Grammar,
       cards: [
-        const CardItem(
+        CardItem(
           id: 'ja-6-1',
           target: 'あさおきて、シャワーをあびます。',
           native: 'Le matin, je me lève et je prends une douche.',
@@ -351,7 +351,7 @@ final courseJa = Course(
           distractors: ['おきます、', 'おきた、', 'あびて。'],
           focus: 'La forme て relie deux actions dans l\'ordre, sans repeter le sujet',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-6-2',
           target: 'ここでまってください。',
           native: 'Attendez ici, s\'il vous plaît.',
@@ -361,7 +361,7 @@ final courseJa = Course(
           distractors: ['まちます', 'まった', 'ください'],
           focus: 'て + ください = demande polie',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-6-3',
           target: 'いま、ばんごはんをたべています。',
           native: 'Je suis en train de dîner.',
@@ -371,7 +371,7 @@ final courseJa = Course(
           distractors: ['たべます。', 'たべました。', 'たべて。'],
           focus: 'て + います = action en cours, comme "etre en train de"',
         ),
-        const CardItem(
+        CardItem(
           id: 'ja-6-4',
           target: 'でんきをけして、ねました。',
           native: 'J\'ai éteint la lumière et je me suis couché.',
@@ -473,7 +473,7 @@ final _u1Grammar = GrammarLesson(
       ),
     ],
     walkthroughs: [
-      WorkedExample(
+      const WorkedExample(
         target: 'わたしはがくせいです。',
         native: 'Je suis étudiant.',
         romanization: 'Watashi wa gakusei desu.',
@@ -505,7 +505,7 @@ final _u1Grammar = GrammarLesson(
           ),
         ],
       ),
-      WorkedExample(
+      const WorkedExample(
         target: 'たなかさんはにほんじんですか。',
         native: 'Monsieur Tanaka est-il japonais ?',
         romanization: 'Tanaka-san wa nihonjin desu ka.',
@@ -544,14 +544,14 @@ final _u1Grammar = GrammarLesson(
     ],
   ),
   blocks: [
-    ExplanationBlock(
+    const ExplanationBlock(
       heading: 'は marque le sujet dont on parle',
       body: 'は (prononce "wa" dans ce role) ne se traduit pas : il annonce '
           'simplement "voici de quoi je parle". わたしは フランスじんです se '
           'decoupe en "moi (topic) / Français (attribut) / suis". Le verbe '
           '"etre" (です) vient toujours a la fin.',
     ),
-    ExampleBlock(
+    const ExampleBlock(
       heading: 'La meme structure, trois sujets',
       examples: [
         GrammarExample(
@@ -573,7 +573,7 @@ final _u1Grammar = GrammarLesson(
         ),
       ],
     ),
-    TableBlock(
+    const TableBlock(
       caption: 'Trois degres de politesse pour une meme idee',
       headers: ['Registre', 'Exemple', 'Usage'],
       rows: [
@@ -582,7 +582,7 @@ final _u1Grammar = GrammarLesson(
         ['Familier', 'いる', 'famille, amis proches, meme age'],
       ],
     ),
-    MistakeBlock(
+    const MistakeBlock(
       wrong: 'わたしは がくせいだ。 (dit a un inconnu)',
       right: 'わたしは がくせいです。',
       why: 'だ est la forme neutre de です : grammaticalement juste, mais '
