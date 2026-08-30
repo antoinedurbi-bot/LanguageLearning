@@ -285,14 +285,40 @@ class LearningController extends ChangeNotifier {
     );
   }
 
+  /// Cards in [unit] the learner has never met — the ones that should walk
+  /// through the guided/recognition/production ramp rather than dropping
+  /// straight into a flat review queue.
+  List<CardItem> newCardsInUnit(Unit unit) {
+    final progress = _progress;
+    if (progress == null) return const [];
+    return _builder.newCardsInUnit(unit, progress);
+  }
+
+  /// Cards in [unit] already met at least once, kept on the ordinary
+  /// FSRS-scheduled review queue.
+  List<CardItem> studiedCardsInUnit(Unit unit) {
+    final progress = _progress;
+    if (progress == null) return const [];
+    return _builder.studiedCardsInUnit(unit, progress);
+  }
+
   /// A session restricted to one unit, for deliberate practice of a theme.
-  List<SessionItem> buildUnitSession(Unit unit, {int maxItems = 12}) {
+  ///
+  /// Pass [cards] to restrict the queue to a subset of the unit (used to
+  /// resume the ordinary review queue for a unit's already-studied cards
+  /// after its brand-new cards have gone through the first-encounter ramp);
+  /// omitted, it covers every card in the unit as before.
+  List<SessionItem> buildUnitSession(
+    Unit unit, {
+    int maxItems = 12,
+    List<CardItem>? cards,
+  }) {
     final progress = _progress;
     if (progress == null) return const [];
     final now = DateTime.now();
 
     final items = [
-      for (final card in unit.cards)
+      for (final card in cards ?? unit.cards)
         SessionItem(
           card: card,
           mode: ExerciseMode.recognize,
@@ -301,6 +327,14 @@ class LearningController extends ChangeNotifier {
         ),
     ];
     return items.take(maxItems).toList();
+  }
+
+  /// The three-phase first-encounter walk for a unit's unstudied cards.
+  /// Empty when every card in the unit has already been met.
+  FirstEncounterSession buildFirstEncounterSession(Unit unit) {
+    final progress = _progress;
+    if (progress == null) return const FirstEncounterSession(cards: []);
+    return _builder.buildFirstEncounter(unit, progress);
   }
 
   /// The learner's weakest cards for the current course, ranked worst-first.
