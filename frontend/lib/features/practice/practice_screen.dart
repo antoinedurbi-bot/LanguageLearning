@@ -10,7 +10,9 @@ import 'package:learning_app/core/widgets/pressable.dart';
 import 'package:learning_app/core/widgets/progress_ring.dart';
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/entitlement.dart';
+import 'package:learning_app/data/srs/dictation.dart';
 import 'package:learning_app/data/srs/session.dart';
+import 'package:learning_app/features/dictation/dictation_screen.dart';
 import 'package:learning_app/features/fluency/sprint_screen.dart';
 import 'package:learning_app/features/premium/premium_screen.dart';
 import 'package:learning_app/features/vocabulary/library_section.dart';
@@ -333,11 +335,13 @@ class _PracticeScreenState extends State<PracticeScreen> {
           Reveal(child: _FeedbackCard(feedback: feedback, card: card)),
         ],
         const SizedBox(height: LL.s16),
-        Reveal(index: 2, child: _SprintCard(colors: ramp, premium: premium)),
+        const Reveal(index: 2, child: _DictationCard()),
         const SizedBox(height: LL.s16),
-        const Reveal(index: 3, child: _ShadowingCard()),
+        Reveal(index: 3, child: _SprintCard(colors: ramp, premium: premium)),
+        const SizedBox(height: LL.s16),
+        const Reveal(index: 4, child: _ShadowingCard()),
         const SizedBox(height: LL.s32),
-        const Reveal(index: 4, child: LibrarySection()),
+        const Reveal(index: 5, child: LibrarySection()),
       ],
     );
   }
@@ -443,6 +447,62 @@ class _FeedbackCard extends StatelessWidget {
               ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+/// Entry point to the dictation drill.
+///
+/// Free, unlike the other advanced drills: it reuses sentences already in the
+/// course rather than adding premium-exclusive content, and listening is the
+/// one skill the free tier's own review loop trains least — gating it behind
+/// Premium would mean the learners who most need ear training never get it.
+class _DictationCard extends StatelessWidget {
+  const _DictationCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = context.watch<LearningController>();
+    final course = controller.course;
+    final progress = controller.progress;
+    final c = context.ll;
+
+    final ready = course != null &&
+        progress != null &&
+        DictationPool(controller.scheduler)
+            .isReady(course.allCards, progress.states, DateTime.now());
+
+    return Pressable(
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const DictationScreen()),
+      ),
+      semanticLabel: 'Dictée, écoute et écris ce que tu entends',
+      child: GlassCard(
+        glow: c.accentAlt,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.headphones_rounded, size: 18, color: c.accentAlt),
+                const SizedBox(width: LL.s8),
+                Text('Dictée', style: context.type.labelLarge),
+                const Spacer(),
+                Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+              ],
+            ),
+            const SizedBox(height: LL.s12),
+            Text(
+              ready
+                  ? 'Écoute une phrase que tu connais, écris-la sans la voir. '
+                      'L\'exercice qui entraîne vraiment l\'oreille.'
+                  : 'Continue tes révisions : la dictée s\'ouvre dès que tu '
+                      'connais assez de phrases pour que ça ait un sens.',
+              style: context.type.bodyMedium,
+            ),
+          ],
+        ),
       ),
     );
   }
