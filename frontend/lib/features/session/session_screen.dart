@@ -250,7 +250,7 @@ class _SessionScreenState extends State<SessionScreen> {
         [context.ll.accent, context.ll.accentAlt];
 
     if (_finished) {
-      return _SummaryScreen(
+      return SessionSummaryScreen(
         answered: _answered,
         correct: _correct,
         colors: ramp,
@@ -667,8 +667,12 @@ class _GradeButton extends StatelessWidget {
   }
 }
 
-class _SummaryScreen extends StatelessWidget {
-  const _SummaryScreen({
+/// Session-complete screen: accuracy ring, Mimi's reaction, and a verdict on
+/// pace. Public so [UnitIntroSessionScreen]'s first-encounter flow can end on
+/// the exact same screen as an ordinary review session.
+class SessionSummaryScreen extends StatelessWidget {
+  const SessionSummaryScreen({
+    super.key,
     required this.answered,
     required this.correct,
     required this.colors,

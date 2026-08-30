@@ -9,6 +9,7 @@ import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
 import 'package:learning_app/features/lessons/grammar_lesson_screen.dart';
 import 'package:learning_app/features/session/session_screen.dart';
+import 'package:learning_app/features/session/unit_intro_session_screen.dart';
 import 'package:learning_app/services/tts_service.dart';
 import 'package:provider/provider.dart';
 
@@ -93,6 +94,36 @@ class UnitDetailScreen extends StatelessWidget {
                   icon: Icons.play_arrow_rounded,
                   colors: ramp,
                   onPressed: () {
+                    final newCards = controller.newCardsInUnit(unit);
+                    if (newCards.isNotEmpty) {
+                      // First encounter with this unit's material: walk the
+                      // guided -> recognition -> production ramp instead of
+                      // dropping straight into a flat review queue.
+                      Navigator.of(context).push(
+                        SharedAxisRoute<void>(
+                          builder: (_) => UnitIntroSessionScreen(
+                            cards: newCards,
+                            onDone: () {
+                              final studied =
+                                  controller.studiedCardsInUnit(unit);
+                              if (studied.isEmpty) return;
+                              final items = controller.buildUnitSession(
+                                unit,
+                                cards: studied,
+                              );
+                              if (items.isEmpty) return;
+                              Navigator.of(context).push(
+                                SharedAxisRoute<void>(
+                                  builder: (_) => SessionScreen(items: items),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+
                     final items = controller.buildUnitSession(unit);
                     if (items.isEmpty) return;
                     Navigator.of(context).push(

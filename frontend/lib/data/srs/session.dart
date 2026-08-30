@@ -45,6 +45,44 @@ class SessionItem {
   final bool isNew;
 }
 
+/// The three steps a unit's brand-new cards walk through before joining the
+/// normal FSRS review pool: exposure, then a light recognition check, then
+/// genuine free-production recall. See [SessionBuilder.buildFirstEncounter].
+enum SessionPhase {
+  /// Sentence + translation + pronunciation shown up front, grammar focus
+  /// highlighted. No quiz — just comprehensible exposure, matching what the
+  /// unit's grammar lesson already explained.
+  guided,
+
+  /// The same cards as a production-light exercise (multiple choice):
+  /// checks the pattern was noticed without demanding full recall.
+  recognition,
+
+  /// The same cards as free-text translation: unprompted recall. Completing
+  /// this phase is what actually enters the card into the FSRS pool.
+  production;
+
+  String get label => switch (this) {
+        SessionPhase.guided => 'Découverte',
+        SessionPhase.recognition => 'Reconnaissance',
+        SessionPhase.production => 'Production',
+      };
+}
+
+/// A first-encounter walk through one unit's brand-new cards, structured as
+/// three phases rather than one flat, mode-scrambled queue. Built once per
+/// "Travailler cette unité" tap when the unit still has unstudied cards;
+/// already-studied cards are unaffected and keep going through the ordinary
+/// FSRS-scheduled session.
+class FirstEncounterSession {
+  const FirstEncounterSession({required this.cards});
+
+  /// New cards, in curriculum order, shared by all three phases.
+  final List<CardItem> cards;
+
+  bool get isEmpty => cards.isEmpty;
+}
+
 /// Builds the study queue.
 class SessionBuilder {
   const SessionBuilder({this.scheduler = const Scheduler()});
@@ -131,6 +169,54 @@ class SessionBuilder {
     }
     // Well-consolidated: demand free production.
     return random.nextInt(3) == 0 ? ExerciseMode.cloze : ExerciseMode.produce;
+  }
+
+  /// Cards in [unit] the learner has never met, in curriculum order — the
+  /// ones that should walk through [FirstEncounterSession] rather than
+  /// dropping straight into the flat unit-review queue.
+  List<CardItem> newCardsInUnit(Unit unit, LanguageProgress progress) => [
+        for (final card in unit.cards)
+          if (!progress.states.containsKey(card.id)) card,
+      ];
+
+  /// Cards in [unit] already met at least once — these keep using the
+  /// ordinary review queue, unaffected by first-encounter sequencing.
+  List<CardItem> studiedCardsInUnit(Unit unit, LanguageProgress progress) => [
+        for (final card in unit.cards)
+          if (progress.states.containsKey(card.id)) card,
+      ];
+
+  /// Assembles the first-encounter walk for a unit's unstudied cards. Empty
+  /// when every card in the unit has already been met at least once.
+  FirstEncounterSession buildFirstEncounter(
+    Unit unit,
+    LanguageProgress progress,
+  ) =>
+      FirstEncounterSession(cards: newCardsInUnit(unit, progress));
+
+  /// One phase's queue for a first-encounter card set. Guided items carry no
+  /// exercise mode (they are pure exposure, rendered without a quiz); the
+  /// other two phases reuse the exact exercise modes already used by the
+  /// ordinary review queue, so no new exercise type is introduced.
+  List<SessionItem> phaseItems(
+    List<CardItem> cards,
+    SessionPhase phase,
+    DateTime now,
+  ) {
+    final mode = switch (phase) {
+      SessionPhase.guided => ExerciseMode.recognize,
+      SessionPhase.recognition => ExerciseMode.recognize,
+      SessionPhase.production => ExerciseMode.produce,
+    };
+    return [
+      for (final card in cards)
+        SessionItem(
+          card: card,
+          mode: mode,
+          state: MemoryState.fresh(now),
+          isNew: true,
+        ),
+    ];
   }
 
   /// Multiple-choice options for a recognition or listening item: the correct
