@@ -223,7 +223,10 @@ class _GrammarEntry extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Grammaire', style: context.type.labelSmall),
+                  Text(
+                    lesson.longForm != null ? 'Chapitre complet' : 'Grammaire',
+                    style: context.type.labelSmall,
+                  ),
                   const SizedBox(height: LL.s2),
                   Text(lesson.title, style: context.type.titleMedium),
                 ],

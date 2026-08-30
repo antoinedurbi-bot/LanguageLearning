@@ -1,11 +1,156 @@
 import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
+import 'package:learning_app/data/models/story.dart';
 
-const _es1Grammar = GrammarLesson(
+StoryLine _esLine(
+  String source, {
+  required String native,
+  String? speaker,
+  String? note,
+  String? romanization,
+}) =>
+    StoryLine.parse(source,
+        native: native,
+        speaker: speaker,
+        note: note,
+        romanization: romanization);
+
+final _es1Grammar = GrammarLesson(
   title: 'Ser et estar : deux verbes pour "etre"',
   hook: 'C\'est la première vraie difficulté de l\'espagnol pour un '
       'francophone : la ou le français dit toujours "être", l\'espagnol '
       'choisit entre deux verbes selon la nature de ce qu\'on décrit.',
+  longForm: LongFormContent(
+    narrative: [
+      'Un francophone qui apprend l\'espagnol traîne une habitude '
+          'invisible : en français, "être" ne se pose jamais de question. '
+          '"Je suis fatigué", "je suis français", "je suis à la gare" — un '
+          'seul verbe couvre l\'identité, l\'état et le lieu. L\'espagnol '
+          'refuse ce raccourci et force, à chaque phrase, une décision que '
+          'le français ne t\'a jamais demandé de faire.',
+      'La distinction n\'est pas arbitraire : elle porte sur la '
+          'permanence. Ser décrit ce qui définit une chose ou une personne '
+          'indépendamment du moment — d\'où elle vient, ce qu\'elle fait, ce '
+          'qu\'elle est fondamentalement. Estar décrit ce qui pourrait être '
+          'autrement une heure plus tard — un emplacement, une humeur, un '
+          'état de santé, un résultat provisoire.',
+      'Le piège classique est l\'adjectif qui change de sens selon le '
+          'verbe choisi : "ser aburrido" dit qu\'une personne est '
+          'ennuyeuse par nature, "estar aburrido" dit qu\'elle s\'ennuie '
+          'là, maintenant. Le même mot, la même traduction française '
+          'possible ("ennuyeux"/"je m\'ennuie"), mais un jugement définitif '
+          'contre un instantané. Ton instinct francophone ne fera jamais '
+          'spontanément cette différence, parce que ta langue maternelle '
+          'n\'a jamais eu besoin de la marquer.',
+      'La bonne question à te poser n\'est donc pas "est-ce que ça se dit '
+          'avec être ?" mais "est-ce que ça pourrait changer demain ?". Un '
+          'métier, une nationalité, l\'heure : ser. Une fatigue, une '
+          'position, une porte ouverte ou fermée : estar. Une fois ce '
+          'réflexe posé, la distinction devient presque automatique.',
+    ],
+    dialogue: [
+      _esLine(
+        '[¡Hola|Salut]! [¿Cómo|comment] [estás|vas-tu]?',
+        speaker: 'Marta',
+        native: 'Salut ! Comment vas-tu ?',
+        note: '"Estás" (estar) parce qu\'on demande un état du moment, pas '
+            'une identité.',
+      ),
+      _esLine(
+        '[Estoy|je vais] un [poco|peu] [cansado|fatigué], pero [bien|bien].',
+        speaker: 'Diego',
+        native: 'Je suis un peu fatigué, mais ça va.',
+        note: 'La fatigue est temporaire : estoy, jamais soy.',
+      ),
+      _esLine(
+        '¿[Eres|es-tu] [español|espagnol] o [de dónde|d\'où] [eres|es-tu]?',
+        speaker: 'Marta',
+        native: 'Tu es espagnol, ou tu viens d\'où ?',
+        note: 'L\'origine est permanente : eres (ser), pas estás.',
+      ),
+      _esLine(
+        '[Soy|je suis] [argentino|argentin], pero [estoy|je suis (situé)] [aquí|ici] por [trabajo|travail].',
+        speaker: 'Diego',
+        native: 'Je suis argentin, mais je suis ici pour le travail.',
+        note: 'Deux verbes dans la même phrase : soy pour la nationalité, '
+            'estoy pour la position actuelle.',
+      ),
+      _esLine(
+        '¿Y [dónde|où] [está|est] la [oficina|bureau]?',
+        speaker: 'Marta',
+        native: 'Et où est le bureau ?',
+        note: 'La localisation d\'un lieu prend toujours estar, même si le '
+            'lieu ne "bouge" jamais.',
+      ),
+      _esLine(
+        '[Está|il est] [cerca|proche] de la [estación|gare].',
+        speaker: 'Diego',
+        native: 'Il est près de la gare.',
+      ),
+    ],
+    walkthroughs: [
+      WorkedExample(
+        target: 'Soy profesora y estoy muy ocupada esta semana.',
+        native: 'Je suis professeure et je suis très occupée cette semaine.',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'Soy',
+            explanation:
+                'ser, 1re personne : identité professionnelle, vraie quel que '
+                'soit le jour.',
+          ),
+          WorkedExamplePart(
+            chunk: 'profesora',
+            explanation: 'métier — l\'un des usages centraux de ser.',
+          ),
+          WorkedExamplePart(
+            chunk: 'estoy',
+            explanation:
+                'estar, 1re personne : bascule vers un état qui ne vaut que '
+                'pour le moment présent.',
+          ),
+          WorkedExamplePart(
+            chunk: 'ocupada',
+            explanation:
+                'accord au féminin (la locutrice) ; "occupée" décrit une '
+                'semaine précise, pas un trait de caractère.',
+          ),
+          WorkedExamplePart(
+            chunk: 'esta semana',
+            explanation:
+                'le marqueur temporel confirme le choix d\'estar : sans lui, '
+                'la phrase pourrait presque basculer vers "ser ocupada" '
+                '(quelqu\'un d\'occupé de nature), ce qui sonnerait faux ici.',
+          ),
+        ],
+      ),
+      WorkedExample(
+        target: '¿Está abierta la tienda? — No, está cerrada los domingos.',
+        native: 'Le magasin est-il ouvert ? — Non, il est fermé le dimanche.',
+        parts: [
+          WorkedExamplePart(
+            chunk: 'Está',
+            explanation:
+                'estar : "ouvert/fermé" est le résultat d\'une action '
+                '(quelqu\'un a ouvert ou fermé la porte), jamais un trait '
+                'permanent du magasin.',
+          ),
+          WorkedExamplePart(
+            chunk: 'abierta',
+            explanation: 'participe utilisé comme adjectif, accordé au '
+                'féminin avec "la tienda".',
+          ),
+          WorkedExamplePart(
+            chunk: 'cerrada los domingos',
+            explanation:
+                'même si "fermé le dimanche" est une règle récurrente, '
+                'estar reste juste : c\'est l\'état de la porte à un moment '
+                'donné qui est décrit, pas l\'essence du magasin.',
+          ),
+        ],
+      ),
+    ],
+  ),
   blocks: [
     ExplanationBlock(
       heading: 'Ser : identite et caracteristiques durables',
@@ -293,7 +438,7 @@ const _es6Grammar = GrammarLesson(
 /// French and Spanish share enough vocabulary that the bottleneck is not words
 /// but grammar contrasts: ser/estar, the subjunctive, gustar-type verbs. The
 /// units are ordered around those contrasts rather than around themes alone.
-const courseEs = Course(
+final courseEs = Course(
   languageCode: 'es',
   ttsLocale: 'es-ES',
   units: [
@@ -304,7 +449,7 @@ const courseEs = Course(
       level: 'A1',
       grammarLesson: _es1Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-1-1',
           target: 'Hola, me llamo Marco.',
           native: 'Bonjour, je m\'appelle Marco.',
@@ -313,7 +458,7 @@ const courseEs = Course(
           distractors: ['mi', 'llama', 'soy llamado'],
           focus: 'llamarse est pronominal, comme en français',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-1-2',
           target: 'Mucho gusto.',
           native: 'Enchante.',
@@ -322,7 +467,7 @@ const courseEs = Course(
           distractors: ['Mucha', 'gusta', 'placer'],
           focus: 'Formule figee de presentation',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-1-3',
           target: 'Soy de Francia.',
           native: 'Je viens de France.',
@@ -331,7 +476,7 @@ const courseEs = Course(
           distractors: ['Estoy', 'desde', 'la Francia'],
           focus: 'Origine = ser, jamais estar',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-1-4',
           target: 'Estoy muy cansado hoy.',
           native: 'Je suis tres fatigue aujourd\'hui.',
@@ -340,7 +485,7 @@ const courseEs = Course(
           distractors: ['Soy', 'mucho', 'hoy dia'],
           focus: 'État passager = estar (contraste avec ser)',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-1-5',
           target: 'No entiendo, lo siento.',
           native: 'Je ne comprends pas, désolé.',
@@ -349,7 +494,7 @@ const courseEs = Course(
           distractors: ['entiendo no', 'me', 'siente'],
           focus: 'La negation est un simple "no" devant le verbe',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-1-6',
           target: '¿Puedes hablar más despacio, por favor?',
           native: 'Peux-tu parler plus lentement, s\'il te plait ?',
@@ -360,14 +505,14 @@ const courseEs = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'es-u2',
       title: 'En el bar',
       subtitle: 'Commander et payer',
       level: 'A1',
       grammarLesson: _es2Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-2-1',
           target: 'Quisiera un café con leche.',
           native: 'Je voudrais un cafe au lait.',
@@ -376,7 +521,7 @@ const courseEs = Course(
           distractors: ['Quiero', 'a', 'la leche'],
           focus: 'Quisiera = forme polie de quiero',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-2-2',
           target: '¿Cuánto cuesta?',
           native: 'Combien ca coûte ?',
@@ -385,7 +530,7 @@ const courseEs = Course(
           distractors: ['¿Cuántos', 'costa', 'es'],
           focus: 'costar diphtongue: o devient ue',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-2-3',
           target: 'La cuenta, por favor.',
           native: 'L\'addition, s\'il vous plait.',
@@ -394,7 +539,7 @@ const courseEs = Course(
           distractors: ['El', 'adicion', 'cuento'],
           focus: 'la cuenta = l\'addition',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-2-4',
           target: '¿Tienen algo sin gluten?',
           native: 'Avez-vous quelque chose sans gluten ?',
@@ -403,7 +548,7 @@ const courseEs = Course(
           distractors: ['¿Tienes', 'alguno', 'no'],
           focus: 'algo = quelque chose (invariable)',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-2-5',
           target: '¿Puedo pagar con tarjeta?',
           native: 'Puis-je payer par carte ?',
@@ -412,7 +557,7 @@ const courseEs = Course(
           distractors: ['¿Puede', 'por', 'la tarjeta'],
           focus: 'pagar con + moyen de paiement',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-2-6',
           target: 'Estaba todo muy rico, gracias.',
           native: 'Tout était tres bon, merci.',
@@ -423,14 +568,14 @@ const courseEs = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'es-u3',
       title: 'Me gusta',
       subtitle: 'Gouts et preferences',
       level: 'A1',
       grammarLesson: _es3Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-3-1',
           target: 'Me gusta mucho este barrio.',
           native: 'J\'aime beaucoup ce quartier.',
@@ -439,7 +584,7 @@ const courseEs = Course(
           distractors: ['Yo gusto', 'muy', 'esto'],
           focus: 'gustar se construit a l\'envers: la chose est sujet',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-3-2',
           target: 'Me gustan las películas antiguas.',
           native: 'J\'aime les vieux films.',
@@ -448,7 +593,7 @@ const courseEs = Course(
           distractors: ['gusta', 'los', 'antiguos'],
           focus: 'gustan au pluriel quand la chose aimee est plurielle',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-3-3',
           target: 'No me gusta nada el ruido.',
           native: 'Je n\'aime pas du tout le bruit.',
@@ -457,7 +602,7 @@ const courseEs = Course(
           distractors: ['nunca', 'la', 'ruida'],
           focus: 'La double negation est obligatoire en espagnol',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-3-4',
           target: 'A mi hermana le encanta bailar.',
           native: 'Ma soeur adore danser.',
@@ -466,7 +611,7 @@ const courseEs = Course(
           distractors: ['Mi', 'la', 'encantan'],
           focus: 'encantar suit la meme structure que gustar',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-3-5',
           target: 'Prefiero quedarme en casa.',
           native: 'Je préfère rester à la maison.',
@@ -475,7 +620,7 @@ const courseEs = Course(
           distractors: ['Prefero', 'quedar me', 'la casa'],
           focus: 'Le pronom se colle a l\'infinitif',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-3-6',
           target: '¿Qué te parece si vamos mañana?',
           native: 'Qu\'en penses-tu si on y va demain ?',
@@ -486,14 +631,14 @@ const courseEs = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'es-u4',
       title: 'La rutina',
       subtitle: 'Quotidien et verbes pronominaux',
       level: 'A2',
       grammarLesson: _es4Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-4-1',
           target: 'Me levanto a las siete.',
           native: 'Je me leve a sept heures.',
@@ -502,7 +647,7 @@ const courseEs = Course(
           distractors: ['Yo levanto', 'los', 'la siete'],
           focus: 'a las + heure (article feminin pluriel)',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-4-2',
           target: 'Siempre desayuno antes de salir.',
           native: 'Je prends toujours mon petit-dejeuner avant de sortir.',
@@ -511,7 +656,7 @@ const courseEs = Course(
           distractors: ['Todo el tiempo', 'que', 'saliendo'],
           focus: 'antes de + infinitif',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-4-3',
           target: 'Trabajo desde casa los lunes.',
           native: 'Je travaille de chez moi le lundi.',
@@ -520,7 +665,7 @@ const courseEs = Course(
           distractors: ['de', 'la casa', 'el lunes'],
           focus: 'los lunes = tous les lundis',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-4-4',
           target: 'Estoy aprendiendo español desde enero.',
           native: 'J\'apprends l\'espagnol depuis janvier.',
@@ -529,7 +674,7 @@ const courseEs = Course(
           distractors: ['Soy', 'aprendo', 'hace'],
           focus: 'estar + gerondif pour une action en cours',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-4-5',
           target: 'Hace dos años que vivo aquí.',
           native: 'Cela fait deux ans que j\'habite ici.',
@@ -538,7 +683,7 @@ const courseEs = Course(
           distractors: ['Hay', 'año', 'viví'],
           focus: 'hace + durée + que + présent',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-4-6',
           target: 'Tengo que irme, es tarde.',
           native: 'Je dois y aller, il est tard.',
@@ -549,14 +694,14 @@ const courseEs = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'es-u5',
       title: 'Contar el pasado',
       subtitle: 'Passé simple et imparfait',
       level: 'A2',
       grammarLesson: _es5Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-5-1',
           target: 'Ayer fui al mercado.',
           native: 'Hier je suis allé au marche.',
@@ -565,7 +710,7 @@ const courseEs = Course(
           distractors: ['iba', 'a el', 'he ido'],
           focus: 'fui = passé simple de ir (et de ser)',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-5-2',
           target: 'Cuando era pequeño vivía en Sevilla.',
           native: 'Quand j\'etais petit j\'habitais a Seville.',
@@ -574,7 +719,7 @@ const courseEs = Course(
           distractors: ['fui', 'viví', 'a'],
           focus: 'Imparfait pour le decor, passé simple pour l\'evenement',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-5-3',
           target: 'Hemos visto una película muy buena.',
           native: 'Nous avons vu un tres bon film.',
@@ -583,7 +728,7 @@ const courseEs = Course(
           distractors: ['Habemos', 'vido', 'mucho'],
           focus: 'ver donne le participe irregulier visto',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-5-4',
           target: 'No pude venir porque estaba enfermo.',
           native: 'Je n\'ai pas pu venir parce que j\'etais malade.',
@@ -592,7 +737,7 @@ const courseEs = Course(
           distractors: ['podía', 'por que', 'era'],
           focus: 'porque en un mot = parce que',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-5-5',
           target: 'Nos quedamos allí una semana.',
           native: 'Nous y sommes restes une semaine.',
@@ -601,7 +746,7 @@ const courseEs = Course(
           distractors: ['Se', 'quedábamos', 'ahí de'],
           focus: 'quedarse = rester quelque part',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-5-6',
           target: 'Fue mejor de lo que esperaba.',
           native: 'C\'était mieux que ce que j\'attendais.',
@@ -612,14 +757,14 @@ const courseEs = Course(
         ),
       ],
     ),
-    Unit(
+    const Unit(
       id: 'es-u6',
       title: 'Matizar',
       subtitle: 'Subjonctif et hypotheses',
       level: 'B1',
       grammarLesson: _es6Grammar,
       cards: [
-        CardItem(
+        const CardItem(
           id: 'es-6-1',
           target: 'Espero que puedas venir.',
           native: 'J\'espère que tu pourras venir.',
@@ -628,7 +773,7 @@ const courseEs = Course(
           distractors: ['puedes', 'podras', 'de'],
           focus: 'Souhait = subjonctif dans la subordonnee',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-6-2',
           target: 'No creo que sea buena idea.',
           native: 'Je ne crois pas que ce soit une bonne idée.',
@@ -637,7 +782,7 @@ const courseEs = Course(
           distractors: ['es', 'este', 'una buena'],
           focus: 'Doute ou negation declenchent le subjonctif',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-6-3',
           target: 'Cuando llegues, llamame.',
           native: 'Quand tu arriveras, appelle-moi.',
@@ -646,7 +791,7 @@ const courseEs = Course(
           distractors: ['llegas', 'llegaras', 'me llama'],
           focus: 'cuando + futur se dit au subjonctif',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-6-4',
           target: 'Si tuviera tiempo, viajaria mas.',
           native: 'Si j\'avais le temps, je voyagerais plus.',
@@ -655,7 +800,7 @@ const courseEs = Course(
           distractors: ['tengo', 'viajare', 'mucho'],
           focus: 'Hypothese irreelle: imparfait du subjonctif + conditionnel',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-6-5',
           target: 'Depende de lo que quieras hacer.',
           native: 'Ca depend de ce que tu veux faire.',
@@ -664,7 +809,7 @@ const courseEs = Course(
           distractors: ['Dependa', 'que', 'quieres'],
           focus: 'lo que = ce que',
         ),
-        CardItem(
+        const CardItem(
           id: 'es-6-6',
           target: 'Es justo lo que queria decir.',
           native: 'C\'est exactement ce que je voulais dire.',

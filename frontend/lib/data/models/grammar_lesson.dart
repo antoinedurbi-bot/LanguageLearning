@@ -13,11 +13,16 @@
 /// switches on the block type, so adding a new block kind for a future
 /// language (e.g. a Turkish vowel-harmony block) never requires touching the
 /// existing content.
+library;
+
+import 'story.dart';
+
 class GrammarLesson {
   const GrammarLesson({
     required this.title,
     required this.hook,
     required this.blocks,
+    this.longForm,
   });
 
   final String title;
@@ -27,6 +32,77 @@ class GrammarLesson {
   final String hook;
 
   final List<GrammarBlock> blocks;
+
+  /// Present only for the handful of units picked for a fuller, chapter-like
+  /// treatment. Extends the same lesson rather than living as a separate
+  /// content type: it is additive front matter — narrative, dialogue, worked
+  /// examples — read before the existing blocks, which stay exactly as they
+  /// were (rule, table, mistakes...). The practice cards at the end of the
+  /// unit are untouched too: the added depth is in the teaching, not in more
+  /// drills.
+  final LongFormContent? longForm;
+}
+
+/// The richer, "real course chapter" layer added on top of a [GrammarLesson]
+/// for a small number of foundational units per language.
+///
+/// Deliberately three parts, each covering something the standard blocks
+/// don't: [narrative] explains *why* the structure exists and where a
+/// francophone's instinct misleads them (the blocks below only ever state
+/// the rule), [dialogue] shows the point used in a natural, connected
+/// exchange rather than isolated example sentences, and [walkthroughs]
+/// annotate a handful of correct sentences piece by piece — the mirror image
+/// of a [MistakeBlock], which only ever shows what is wrong.
+class LongFormContent {
+  const LongFormContent({
+    required this.narrative,
+    required this.dialogue,
+    required this.walkthroughs,
+  });
+
+  /// Pedagogical prose in French, 2-4 paragraphs. Not a restatement of the
+  /// rule — the rule is already stated in the lesson's blocks — but the
+  /// reasoning behind it and the false-friend instinct it corrects.
+  final List<String> narrative;
+
+  /// A short commented passage or dialogue (3-6 lines) in the target
+  /// language. Lines are [StoryLine]s so authoring reuses the exact
+  /// bracket-markup/gloss convention already used for graded readings
+  /// (`[word|gloss|romanization]`), instead of a second annotation format.
+  final List<StoryLine> dialogue;
+
+  /// 2-3 fully correct example sentences, each broken down piece by piece.
+  final List<WorkedExample> walkthroughs;
+}
+
+/// One example sentence annotated word-by-word (or particle-by-particle):
+/// the "here is why each piece is here" companion to [MistakeBlock]'s
+/// "here is what was wrong".
+class WorkedExample {
+  const WorkedExample({
+    required this.target,
+    required this.native,
+    this.romanization,
+    required this.parts,
+  });
+
+  final String target;
+  final String native;
+  final String? romanization;
+
+  /// The sentence's pieces, in order, each with a short note on its role.
+  final List<WorkedExamplePart> parts;
+}
+
+class WorkedExamplePart {
+  const WorkedExamplePart({required this.chunk, required this.explanation});
+
+  /// The word, particle or conjugated form, exactly as it appears in
+  /// [WorkedExample.target].
+  final String chunk;
+
+  /// Why this piece is there — its grammatical role, not a translation.
+  final String explanation;
 }
 
 sealed class GrammarBlock {
