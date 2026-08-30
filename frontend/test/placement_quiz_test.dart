@@ -65,6 +65,24 @@ void main() {
     test('an empty course yields no questions', () {
       expect(builder.build(const []), isEmpty);
     });
+
+    test('distractors vary across generations with different seeds', () {
+      final units = [
+        for (var i = 0; i < 20; i++) _unit('u$i', ['meaning $i'])
+      ];
+
+      final seen = <String>{};
+      for (var seed = 0; seed < 8; seed++) {
+        final questions = builder.build(units, questionCount: 10, seed: seed);
+        final signature = questions
+            .map((q) => (q.options.toList()..sort()).join('|'))
+            .join('#');
+        seen.add(signature);
+      }
+
+      expect(seen.length, greaterThan(1),
+          reason: 'every seed produced the exact same set of quizzes');
+    });
   });
 
   group('PlacementQuizBuilder.score', () {

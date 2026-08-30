@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:learning_app/data/models/card_item.dart';
+import 'package:learning_app/data/srs/distractor_generator.dart';
 
 /// One placement question: recognise the meaning of a sentence drawn from a
 /// real unit of the course.
@@ -79,17 +80,16 @@ class PlacementQuizBuilder {
       if (unit.cards.isEmpty) continue;
       final card = unit.cards.first;
 
-      final distractorPool = <String>[
-        for (final other in units)
-          for (final otherCard in other.cards)
-            if (otherCard.id != card.id) otherCard.native,
-      ]..shuffle(random);
+      final distractorPool = <CardItem>[
+        for (final other in units) ...other.cards,
+      ];
 
-      final wrong = <String>{};
-      for (final candidate in distractorPool) {
-        if (wrong.length >= 3) break;
-        if (candidate != card.native) wrong.add(candidate);
-      }
+      final wrong = generateDistractors(
+        card: card,
+        pool: distractorPool,
+        random: random,
+        count: 3,
+      );
 
       final options = [card.native, ...wrong]..shuffle(random);
       questions.add(PlacementQuestion(

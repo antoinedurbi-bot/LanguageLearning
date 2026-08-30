@@ -2,7 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learning_app/data/content/courses.dart';
+import 'package:learning_app/data/models/card_item.dart';
 import 'package:learning_app/data/models/progress.dart';
+import 'package:learning_app/data/srs/distractor_generator.dart';
 import 'package:learning_app/data/srs/scheduler.dart';
 import 'package:learning_app/data/models/grammar_lesson.dart';
 import 'package:learning_app/data/srs/session.dart';
@@ -153,6 +155,93 @@ void main() {
         expect(options.length, 4);
         expect(options.toSet().length, 4,
             reason: 'duplicate option for ${card.id}');
+      }
+    });
+
+    test('distractors vary across generations with different seeds', () {
+      final card = course.allCards
+          .firstWhere((c) => course.unitOf(c.id)!.cards.length >= 6);
+
+      final seen = <String>{};
+      for (var seed = 0; seed < 12; seed++) {
+        final options = builder.choicesFor(
+          course: course,
+          card: card,
+          random: math.Random(seed),
+        );
+        seen.add((options.toList()..sort()).join('|'));
+      }
+
+      // Not every seed should reproduce the same three wrong answers - a
+      // static shuffle-of-random-cards would otherwise still often land on
+      // the exact same set purely by chance across only a few distractor
+      // candidates, so this is a coarse but real check for run-to-run
+      // variety rather than a fixed distractor set.
+      expect(seen.length, greaterThan(1),
+          reason: 'the same options were generated for every seed');
+    });
+
+    test('prefers distractors that share the card\'s grammar focus', () {
+      const cardA = CardItem(
+        id: 'a',
+        target: 'target a',
+        native: 'meaning a',
+        gloss: 'gloss',
+        tokens: ['target', 'a'],
+        distractors: [],
+        focus: 'shared-focus',
+      );
+      final sameFocus = [
+        for (var i = 0; i < 3; i++)
+          CardItem(
+            id: 'same-$i',
+            target: 'target same $i',
+            native: 'meaning same $i',
+            gloss: 'gloss',
+            tokens: const ['target', 'same'],
+            distractors: const [],
+            focus: 'shared-focus',
+          ),
+      ];
+      final otherFocus = [
+        for (var i = 0; i < 20; i++)
+          CardItem(
+            id: 'other-$i',
+            target: 'target other $i',
+            native: 'meaning other $i',
+            gloss: 'gloss',
+            tokens: const ['target', 'other'],
+            distractors: const [],
+            focus: 'unrelated-focus-$i',
+          ),
+      ];
+
+      final options = generateDistractors(
+        card: cardA,
+        pool: [cardA, ...sameFocus, ...otherFocus],
+        random: math.Random(1),
+        count: 3,
+      );
+
+      // All three same-focus cards should be picked before any of the
+      // twenty unrelated-focus ones, since they are the genuine grammar
+      // confusion for this card.
+      expect(options.toSet(),
+          sameFocus.map((c) => c.native).toSet());
+    });
+
+    test('distractors are never the correct answer and never repeat', () {
+      final random = math.Random(42);
+      for (final card in course.allCards) {
+        final options = generateDistractors(
+          card: card,
+          pool: course.allCards,
+          random: random,
+          count: 3,
+        );
+        expect(options, isNot(contains(card.native)));
+        expect(options.toSet().length, options.length,
+            reason: 'duplicate distractor for ${card.id}');
       }
     });
   });
